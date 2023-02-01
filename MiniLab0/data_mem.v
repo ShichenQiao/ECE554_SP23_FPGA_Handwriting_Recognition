@@ -1,4 +1,4 @@
-module DM(clk,addr,re,we,wrt_data,rd_data,SW,LEDR);
+module DM(clk,addr,re,we,wrt_data,rd_data);
 
 /////////////////////////////////////////////////////////
 // Data memory.  Single ported, can read or write but //
@@ -11,31 +11,22 @@ input re;				// asserted when instruction read desired
 input we;				// asserted when write desired
 input [15:0] wrt_data;	// data to be written
 
-input [9:0] SW;
-output reg [9:0] LEDR;
-
 output reg [15:0] rd_data;	//output of data memory
 
-reg [15:0]data_mem[0:8191];
+reg [15:0]data_mem[0:65535];
 
 ///////////////////////////////////////////////
 // Model read, data is latched on clock low //
 /////////////////////////////////////////////
 always @(addr,re,clk)
   if (~clk && re && ~we)
-	if (~|addr[15:13])
-      rd_data <= data_mem[addr];
-	else if (addr == 16'hC001)
-	  rd_data <= {6'b000000, SW};
+    rd_data <= data_mem[addr];
 	
 ////////////////////////////////////////////////
 // Model write, data is written on clock low //
 //////////////////////////////////////////////
 always @(addr,we,clk)
   if (~clk && we && ~re)
-	if (~|addr[15:13])
-      data_mem[addr] <= wrt_data;
-	else if (addr == 16'hC000)
-	  LEDR <= wrt_data[9:0];
+    data_mem[addr] <= wrt_data;
 
 endmodule

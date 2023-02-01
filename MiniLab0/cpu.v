@@ -1,9 +1,6 @@
-module cpu(clk,rst_n,LEDR,SW);
+module cpu(clk,rst_n);
 
 input clk,rst_n;
-
-input [9:0] SW;
-output [9:0] LEDR;
 
 wire [15:0] instr;				// instruction from IM
 wire [11:0] instr_ID_EX;		// immediate bus
@@ -75,7 +72,7 @@ alu iALU(.clk(clk), .src0(src0), .src1(src1), .shamt(instr_ID_EX[3:0]), .func(al
 // Instantiate data memory //
 ////////////////////////////
 DM iDM(.clk(clk),.addr(dst_EX_DM), .re(dm_re_EX_DM), .we(dm_we_EX_DM), .wrt_data(p0_EX_DM),
-       .rd_data(dm_rd_data_EX_DM), .SW(SW), .LEDR(LEDR));
+       .rd_data(dm_rd_data_EX_DM));
 
 //////////////////////////
 // Instantiate dst mux //
