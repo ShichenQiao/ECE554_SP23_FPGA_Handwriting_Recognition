@@ -1,9 +1,5 @@
 module rf(clk,p0_addr,p1_addr,p0,p1,re0,re1,dst_addr,dst,we,hlt);
-//////////////////////////////////////////////////////////////////
-// Triple ported register file.  Two read ports (p0 & p1), and //
-// one write port (dst).  Data is written on clock high, and  //
-// read on clock low //////////////////////////////////////////
-//////////////////////
+// This Reg File uses Block SRAM
 
 input clk;
 input [3:0] p0_addr, p1_addr;			// two read port addresses
