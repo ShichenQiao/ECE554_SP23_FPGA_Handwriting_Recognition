@@ -13,20 +13,20 @@ input [15:0] wrt_data;	// data to be written
 
 output reg [15:0] rd_data;	//output of data memory
 
-reg [15:0]data_mem[0:65535];
+reg [15:0]data_mem[0:8192];
 
-///////////////////////////////////////////////
-// Model read, data is latched on clock low //
-/////////////////////////////////////////////
-always @(addr,re,clk)
-  if (~clk && re && ~we)
+/////////////////////////////////////////
+// Read is synchronous on negedge clk //
+///////////////////////////////////////
+always @(negedge clk)
+  if (re && ~we)
     rd_data <= data_mem[addr];
 	
-////////////////////////////////////////////////
-// Model write, data is written on clock low //
-//////////////////////////////////////////////
-always @(addr,we,clk)
-  if (~clk && we && ~re)
+/////////////////////////////////////////////////
+// Model write, data is written on clock fall //
+///////////////////////////////////////////////
+always @(negedge clk)
+  if (we && ~re)
     data_mem[addr] <= wrt_data;
 
 endmodule

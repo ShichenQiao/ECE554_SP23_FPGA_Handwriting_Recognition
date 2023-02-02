@@ -1,11 +1,15 @@
-module cpu(clk,rst_n);
+module cpu(clk,rst_n,rdata,addr,re,we,wdata);
 
 input clk,rst_n;
+
+input [15:0] rdata;
+output [15:0] addr;		// result from ALU
+output re, we;
+output [15:0] wdata;
 
 wire [15:0] instr;				// instruction from IM
 wire [11:0] instr_ID_EX;		// immediate bus
 wire [15:0] src0,src1;			// operand busses into ALU
-wire [15:0] dst_EX_DM;			// result from ALU
 wire [15:0] dst_ID_EX;			// result from ALU for branch destination
 wire [15:0] pc_ID_EX;			// nxt_pc to source mux for JR
 wire [15:0] pc_EX_DM;			// nxt_pc to store in reg15 for JAL
@@ -21,6 +25,13 @@ wire [1:0] src0sel_ID_EX;		// select for src0 bus
 wire [1:0] src1sel_ID_EX;		// select for src1 bus
 wire [2:0] cc_ID_EX;			// condition code pipeline from instr[11:9]
 wire [15:0] p0_EX_DM;			// data to be stored for SW
+
+wire [15:0] dst_EX_DM;
+wire dm_re_EX_DM, dm_we_EX_DM;
+assign addr = dst_EX_DM;
+assign re = dm_re_EX_DM;
+assign we = dm_we_EX_DM;
+assign wdata = p0_EX_DM;
 
 //////////////////////////////////
 // Instantiate program counter //
@@ -77,7 +88,7 @@ DM iDM(.clk(clk),.addr(dst_EX_DM), .re(dm_re_EX_DM), .we(dm_we_EX_DM), .wrt_data
 //////////////////////////
 // Instantiate dst mux //
 ////////////////////////
-dst_mux iDSTMUX(.clk(clk), .dm_re_EX_DM(dm_re_EX_DM), .dm_rd_data_EX_DM(dm_rd_data_EX_DM),
+dst_mux iDSTMUX(.clk(clk), .dm_re_EX_DM(dm_re_EX_DM), .dm_rd_data_EX_DM(|addr[15:13] ? rdata : dm_rd_data_EX_DM),
                 .dst_EX_DM(dst_EX_DM), .pc_EX_DM(pc_EX_DM), .rf_w_data_DM_WB(rf_w_data_DM_WB),
 				.jmp_imm_EX_DM(jmp_imm_EX_DM));
 	

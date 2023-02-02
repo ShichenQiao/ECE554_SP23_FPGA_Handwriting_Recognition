@@ -6,7 +6,7 @@ input rd_en;			// asserted when instruction read desired
 
 output reg [15:0] instr;	//output of insturction memory
 
-reg [15:0]instr_mem[0:65535];
+reg [15:0]instr_mem[0:16383];
 
 /////////////////////////////////////
 // Memory is latched on clock low //
@@ -16,7 +16,7 @@ always @(addr,rd_en,clk)
     instr <= instr_mem[addr];
 
 initial begin
-  $readmemh("C:/Users/erichoffman/Documents/ECE_Classes/ECE552/EricStuff/Project/Tests/instr.hex",instr_mem);
+  $readmemh("C:/Users/13651/Desktop/ECE554/Minilab0/MiniLab0/demo.hex",instr_mem);
 end
 
 endmodule
