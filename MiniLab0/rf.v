@@ -45,8 +45,9 @@ module rf(clk,p0_addr,p1_addr,p0,p1,re0,re1,dst_addr,dst,we,hlt);
 	assign r0_bypass = ~|(p0_addr ^ dst_addr) & we & |dst_addr & re0;
 	assign r1_bypass = ~|(p1_addr ^ dst_addr) & we & |dst_addr & re1;
 
-	assign p0 = r0_bypass ? dst : p0_raw;
-	assign p1 = r1_bypass ? dst : p1_raw;
+	// R0 always stay at 16'h0000
+	assign p0 = ~|dst_addr ? 16'h0000 : (r0_bypass ? dst : p0_raw);
+	assign p1 = ~|dst_addr ? 16'h0000 : (r1_bypass ? dst : p1_raw);
 	
 endmodule
   

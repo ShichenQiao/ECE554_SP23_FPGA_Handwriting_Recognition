@@ -11,8 +11,8 @@ reg [15:0]instr_mem[0:16383];
 /////////////////////////////////////
 // Memory is latched on clock low //
 ///////////////////////////////////
-always @(addr,rd_en,clk)
-  if (~clk & rd_en)
+always @(posedge clk)
+  if (rd_en)
     instr <= instr_mem[addr];
 
 initial begin

@@ -13,15 +13,7 @@ module dualPort16x16(clk,we,re,waddr,raddr,wdata,rdata,hlt);
 	
 	integer indx;
 
-	//////////////////////////////////////////////////////////
-	// Register file will come up uninitialized except for //
-	// register zero which is hardwired to be zero.       //
-	///////////////////////////////////////////////////////
-	initial begin
-	  $readmemh("C:/Users/erichoffman/Documents/ECE_Classes/ECE552/EricStuff/Project/Tests/rfinit.txt",mem);
-	  mem[0] = 16'h0000;					// reg0 is always 0,
-	end
-
+	// negedge triggered memory
 	always @(negedge clk) begin
 		if(we)
 			mem[waddr] <= wdata;
