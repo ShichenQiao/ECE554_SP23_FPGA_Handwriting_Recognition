@@ -16,7 +16,7 @@ always @(negedge clk)
     instr <= instr_mem[addr];
 
 initial begin
-  $readmemh("C:\Users\12239\Desktop\ECE554\Erics552PipelinedProc\Erics552PipelinedProc\SourceCode\instr.hex",instr_mem);
+  $readmemh("C:/Users/12239/Desktop/ECE554/Erics552PipelinedProc/Erics552PipelinedProc/SourceCode/instr.hex",instr_mem);
 end
 
 endmodule

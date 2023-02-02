@@ -10,7 +10,10 @@ input we;								// write enable
 input hlt;								// not a functional input.  Used to dump register contents when
 										// test is halted.
 
-output reg [15:0] p0,p1;  				//output read ports
+output [15:0] p0,p1;  					//output read ports
+
+wire r0_bypass, r1_bypass;
+reg [15:0] p0_raw,p1_raw;
 
 integer indx;
 
@@ -28,23 +31,16 @@ always @(negedge clk)
 
 always @(negedge clk)
 	if (re0)
-		p0 <= mem0[p0_addr];
+		p0_raw <= mem0[p0_addr];
 		
 always @(negedge clk)
 	if (re1)
-		p1 <= mem1[p1_addr];
+		p1_raw <= mem1[p1_addr];
 
-
-//////////////////////////////////////////////////////////
-// Register file will come up uninitialized except for //
-// register zero which is hardwired to be zero.       //
-///////////////////////////////////////////////////////
-initial begin
-  //$readmemh("",mem0);
-  //$readmemh("",mem1);
-  mem0[0] = 16'h0000;					// reg0 is always 0
-  mem1[0] = 16'h0000;	
-end
+assign r0_bypass = ~|(p0_addr ^ dst_addr) & we & |dst_addr & re0;
+assign r1_bypass = ~|(p1_addr ^ dst_addr) & we & |dst_addr & re1;
+assign p0 = ~|dst_addr ? 16'h0000 : (r0_bypass ? dst : p0_raw);
+assign p1 = ~|dst_addr ? 16'h0000 : (r1_bypass ? dst : p1_raw);
 	
 ////////////////////////////////////////
 // Dump register contents at program //
