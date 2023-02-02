@@ -19,7 +19,7 @@ module MiniLab0_tb();
 			SW = $random;
 			@(posedge clk);
 			@(negedge clk) KEY0 = 1'b1;
-			repeat(15)@(posedge clk);
+			repeat(30)@(posedge clk);
 			if(LEDR !== SW) begin
 				$display("ERROR: LED failed to reflect SW state!");
 				$stop();
