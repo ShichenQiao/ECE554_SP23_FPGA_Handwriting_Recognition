@@ -16,11 +16,11 @@ module MiniLab0_tb();
 		clk = 1'b0;
 		for(int i = 0; i < 10; i++) begin
 			@(negedge clk) KEY0 = 1'b0;
-			SW = $random;
+			SW = $random;					// randomly choose a SW pattern
 			@(posedge clk);
 			@(negedge clk) KEY0 = 1'b1;
-			repeat(30)@(posedge clk);
-			if(LEDR !== SW) begin
+			repeat(15)@(posedge clk);
+			if(LEDR !== SW) begin			// should show up on LEDs after a few instructions
 				$display("ERROR: LED failed to reflect SW state!");
 				$stop();
 			end

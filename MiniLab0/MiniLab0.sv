@@ -26,12 +26,12 @@ cpu icpu(
 	.wdata(wdata)
 );
 
-assign rdata = ((addr == 16'hC001) & re) ? {6'b000000, SW} : 16'hDEAD;
+assign rdata = ((addr == 16'hC001) & re) ? {6'b000000, SW} : 16'hDEAD;			// If external addr invalid, put DEAD on data line
 
 always @(posedge clk, negedge rst_n)
 	if(!rst_n)
 		LEDR <= 10'h000;
 	else if ((addr == 16'hC000) & we)
-		LEDR <= wdata[9:0];
+		LEDR <= wdata[9:0];						// data is 16 bit, but only have 10 LEDs, use lower bits
 
 endmodule
