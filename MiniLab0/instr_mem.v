@@ -11,12 +11,12 @@ reg [15:0]instr_mem[0:16383];
 /////////////////////////////////////
 // Memory is latched on clock low //
 ///////////////////////////////////
-always @(posedge clk)
+always @(negedge clk)
   if (rd_en)
     instr <= instr_mem[addr];
 
 initial begin
-  $readmemh("C:/Users/13651/Desktop/ECE554/Minilab0/MiniLab0/demo.hex",instr_mem);
+  $readmemh("C:/Users/13651/Desktop/ECE554/Minilab0/MiniLab0/load_sw_to_led.hex",instr_mem);
 end
 
 endmodule

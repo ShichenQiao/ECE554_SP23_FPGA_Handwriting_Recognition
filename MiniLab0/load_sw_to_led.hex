@@ -1,0 +1,5 @@
+@0000 0100      // ADD R1, R0, R0
+@0001 A1C0      // LHB R1, 0xC0
+@0002 8211      // RDSW:                LW  R2, R1, 1
+@0003 9210      // SW  R2, R1, 0
+@0004 CFFD      // B UNCOND, RDSW
