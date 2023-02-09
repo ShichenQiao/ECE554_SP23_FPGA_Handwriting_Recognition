@@ -1,0 +1,34 @@
+Problem 1:
+	During conversion from latch based memory to FF based memory,
+	we encountered a problem where the initial rdata is 16'hxxxx 
+	and the rdata feeds back as the wdata. Therefore, it enters a
+	stage loop where the 16'hxxxx is fed back to rf.
+Solution:
+	We AND bypass logic with both read_enable and write_enable to
+	ensure that bypass does not happen during initialization stage.
+
+Problem 2:
+	The initial block to load memory does not synthesize properly,
+	so that we could not reset R0 to 0 through the given code.
+Solution:
+	Take out entire inital block and add logic in rf.v to force read
+	data to 16'h0000 if the corresponding addrss is 4'b0000 at a
+	rf read operation.
+
+Problem 3:
+	We originally have an asm code with a halt instrction in the end,
+	but we observed that sometimes our program actually looped back
+	to the beginning due to PC over flow. We were unsure about if the
+	halt function was broken with that weak asm test.
+Solution:
+	There was a bug in the code, and we fixed that easily. What more 
+	important is, in the asm code, we implemented conditional branches 
+	so that if all switches are ON, the system will halt forever, 
+	otherwise the program will keep looping. This is a good indicator 
+	that our processor handles conditional branch and halt instructions properly.
+	
+Problem 4:
+	We met a situation where quartus do not think the SRAM block usage
+	equals to 16K*16+8K*16+16*16*2=393728 bits.
+Solution:
+	We moved rf bypass logic out of the sram module, and quartus coorporated.
