@@ -2,14 +2,16 @@ module cpu(clk,rst_n,rdata,addr,re,we,wdata);
 
 input clk,rst_n;
 
-input [15:0] rdata;
-output [15:0] addr;		// result from ALU
-output re, we;
-output [15:0] wdata;
+input [15:0] rdata;				// exteral data input from the switches, 16'hDEAD if addr != 16'hC001
+output [15:0] addr;				// rename dst_EX_DM to addr as a top level port
+output re;						// rename dm_re_EX_DM to re as a top level port
+output we;						// rename dm_we_EX_DM to we as a top level port
+output [15:0] wdata;			// rename p0_EX_DM to wdata as a top level port
 
 wire [15:0] instr;				// instruction from IM
 wire [11:0] instr_ID_EX;		// immediate bus
 wire [15:0] src0,src1;			// operand busses into ALU
+wire [15:0] dst_EX_DM;			// result from ALU
 wire [15:0] dst_ID_EX;			// result from ALU for branch destination
 wire [15:0] pc_ID_EX;			// nxt_pc to source mux for JR
 wire [15:0] pc_EX_DM;			// nxt_pc to store in reg15 for JAL
@@ -26,12 +28,21 @@ wire [1:0] src1sel_ID_EX;		// select for src1 bus
 wire [2:0] cc_ID_EX;			// condition code pipeline from instr[11:9]
 wire [15:0] p0_EX_DM;			// data to be stored for SW
 
-wire [15:0] dst_EX_DM;
-wire dm_re_EX_DM, dm_we_EX_DM;
+wire dm_re_EX_DM, dm_we_EX_DM;	// DM enable signals from id
+wire [15:0] dst_mux_data_in;	// data selection mux output (between internal and external rdata)
+wire DM_we;						// DM write enable (only when address < 0x2000)
+
+// output some original logic as ports to MiniLab0 toplevel
 assign addr = dst_EX_DM;
 assign re = dm_re_EX_DM;
 assign we = dm_we_EX_DM;
 assign wdata = p0_EX_DM;
+
+// when addr < 0x2000, use internal data, otherwise, use external data
+assign dst_mux_data_in = |addr[15:13] ? rdata : dm_rd_data_EX_DM;
+
+// enable DM write only when addr < 0x2000 and dm_we_EX_DM is set
+assign DM_we = ~|addr[15:13] & dm_we_EX_DM;
 
 //////////////////////////////////
 // Instantiate program counter //
@@ -82,13 +93,13 @@ alu iALU(.clk(clk), .src0(src0), .src1(src1), .shamt(instr_ID_EX[3:0]), .func(al
 //////////////////////////////
 // Instantiate data memory //
 ////////////////////////////
-DM iDM(.clk(clk),.addr(dst_EX_DM), .re(dm_re_EX_DM), .we(dm_we_EX_DM), .wrt_data(p0_EX_DM),
+DM iDM(.clk(clk),.addr(dst_EX_DM), .re(dm_re_EX_DM), .we(DM_we), .wrt_data(p0_EX_DM),
        .rd_data(dm_rd_data_EX_DM));
 
 //////////////////////////
 // Instantiate dst mux //
 ////////////////////////
-dst_mux iDSTMUX(.clk(clk), .dm_re_EX_DM(dm_re_EX_DM), .dm_rd_data_EX_DM(|addr[15:13] ? rdata : dm_rd_data_EX_DM),
+dst_mux iDSTMUX(.clk(clk), .dm_re_EX_DM(dm_re_EX_DM), .dm_rd_data_EX_DM(dst_mux_data_in),
                 .dst_EX_DM(dst_EX_DM), .pc_EX_DM(pc_EX_DM), .rf_w_data_DM_WB(rf_w_data_DM_WB),
 				.jmp_imm_EX_DM(jmp_imm_EX_DM));
 	

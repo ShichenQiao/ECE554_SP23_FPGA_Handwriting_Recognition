@@ -7,13 +7,13 @@ module DM(clk,addr,re,we,wrt_data,rd_data);
 /////////////////////////////////////////////////////
 input clk;
 input [15:0] addr;
-input re;				// asserted when instruction read desired
-input we;				// asserted when write desired
-input [15:0] wrt_data;	// data to be written
+input re;						// asserted when instruction read desired
+input we;						// asserted when write desired
+input [15:0] wrt_data;			// data to be written
 
-output reg [15:0] rd_data;	//output of data memory
+output reg [15:0] rd_data;		//output of data memory
 
-reg [15:0]data_mem[0:8191];
+reg [15:0]data_mem[0:8191];		// 8K*16 data memory
 
 /////////////////////////////////////////
 // Read is synchronous on negedge clk //

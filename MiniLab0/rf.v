@@ -5,60 +5,49 @@ module rf(clk,p0_addr,p1_addr,p0,p1,re0,re1,dst_addr,dst,we,hlt);
 // read on clock low //////////////////////////////////////////
 //////////////////////
 
-input clk;
-input [3:0] p0_addr, p1_addr;			// two read port addresses
-input re0,re1;							// read enables (power not functionality)
-input [3:0] dst_addr;					// write address
-input [15:0] dst;						// dst bus
-input we;								// write enable
-input hlt;								// not a functional input.  Used to dump register contents when
-										// test is halted.
+	input clk;
+	input [3:0] p0_addr, p1_addr;			// two read port addresses
+	input re0,re1;							// read enables (power not functionality)
+	input [3:0] dst_addr;					// write address
+	input [15:0] dst;						// dst bus
+	input we;								// write enable
+	input hlt;								// not a functional input.  Used to dump register contents when
+											// test is halted. (No longer used)
 
-output reg [15:0] p0,p1;  				//output read ports
+	output [15:0] p0,p1;  					// output read ports
 
-integer indx;
+	wire r0_bypass, r1_bypass;				// RF bypass
+	wire [15:0] p0_raw, p1_raw;				// raw read output from SRAM
 
-reg [15:0]mem[0:15];					// 16 registers each 16-bit wide
+	/////////////////////////////////////////////////////////////////////
+	// Instantiate two dualport memory to create a tripple port rf	  //
+	// Always write same data to both sram instance at the same time //
+	//////////////////////////////////////////////////////////////////
+	dualPort16x16 sram0(
+		.clk(clk),
+		.we(we),
+		.re(re0),
+		.waddr(dst_addr),
+		.raddr(p0_addr),
+		.wdata(dst),			
+		.rdata(p0_raw)
+	);
+	dualPort16x16 sram1(
+		.clk(clk),
+		.we(we),
+		.re(re1),
+		.waddr(dst_addr),
+		.raddr(p1_addr),
+		.wdata(dst),
+		.rdata(p1_raw)
+	);
 
-//////////////////////////////////////////////////////////
-// Register file will come up uninitialized except for //
-// register zero which is hardwired to be zero.       //
-///////////////////////////////////////////////////////
-initial begin
-  $readmemh("C:/Users/erichoffman/Documents/ECE_Classes/ECE552/EricStuff/Project/Tests/rfinit.txt",mem);
-  mem[0] = 16'h0000;					// reg0 is always 0,
-end
+	// Bypass if any read register is the same as the write register and both re and we are high
+	assign r0_bypass = ~|(p0_addr ^ dst_addr) & re0 & we;
+	assign r1_bypass = ~|(p1_addr ^ dst_addr) & re1 & we;
 
+	// R0 always stay at 16'h0000
+	assign p0 = ~|p0_addr ? 16'h0000 : (r0_bypass ? dst : p0_raw);
+	assign p1 = ~|p1_addr ? 16'h0000 : (r1_bypass ? dst : p1_raw);
 
-//////////////////////////////////
-// RF is written on clock high //
-////////////////////////////////
-always @(clk,we,dst_addr,dst)
-  if (clk && we && |dst_addr)
-    mem[dst_addr] <= dst;
-	
-//////////////////////////////
-// RF is read on clock low //
-////////////////////////////
-always @(clk,re0,p0_addr)
-  if (~clk && re0)
-    p0 <= mem[p0_addr];
-	
-//////////////////////////////
-// RF is read on clock low //
-////////////////////////////
-always @(clk,re1,p1_addr)
-  if (~clk && re1)
-    p1 <= mem[p1_addr];
-	
-////////////////////////////////////////
-// Dump register contents at program //
-// halt for debug purposes          //
-/////////////////////////////////////
-always @(posedge hlt)
-  for(indx=1; indx<16; indx = indx+1)
-    $display("R%1h = %h",indx,mem[indx]);
-	
 endmodule
-  
-
