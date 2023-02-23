@@ -1,16 +1,18 @@
-module PlaceBMP(clk,rst_n,add_fnt,fnt_indx,add_img,rem_img,image_indx,
+module PlaceBMP(clk,rst_n,ctrl,
                 xloc,yloc,waddr,wdata,we);
-
-  
+  // [13:0] ctrl
+  // add_fnt - ctrl[13]     add a character
+  // fnt_indx - ctrl[12:7]  one of 42 characters // 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ =>,()
+  // add_img - ctrl[6]      pulse high for one clock to add image
+  // rem_img - ctrl[5]      pulse high for one clock to remove image
+  // image_indx - ctrl[4:0] index of image in image memory (32 possible)
+ 
+  // [9:0] xloc
+  // [8:0] yloc
   input clk,rst_n;
-  input add_fnt;			// add a character
-  input [5:0] fnt_indx;	// one of 42 characters
-  // 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ =>,()
-  input add_img;			// pulse high for one clock to add image
-  input rem_img;			// pulse high for one clock to remove image
-  input [4:0] image_indx; 	// index of image in image memory (32 possible)
-  input [9:0] xloc;			// x location of image to register
-  input [8:0] yloc;			// y location of image to register
+  input [13:0] ctrl;       // 14 bit control signal, see above mapping for detailed explanation 0xC008
+  input [9:0] xloc;			// x location of image to register                                   0xC009
+  input [8:0] yloc;			// y location of image to register                                   0xC00A
   output reg [18:0] waddr;		// write address to videoMem
   output logic [8:0] wdata;		// write 9-bit pixel to videoMem
   output reg we;
@@ -28,6 +30,22 @@ module PlaceBMP(clk,rst_n,add_fnt,fnt_indx,add_img,rem_img,image_indx,
   reg [4:0] indx;					// 
   reg [5:0] font_indx;				// 1 of 42
   reg rem;							// set if removing image
+  
+  ////////////////////////////
+  // Decode control signal //
+  //////////////////////////
+  wire add_fnt;
+  wire [5:0] fnt_indx;
+  wire add_img;
+  wire rem_img;
+  wire [4:0] image_indx;
+  
+  assign add_fnt = ctrl[13];
+  assign fnt_indx = ctrl[12:7];
+  assign add_img = ctrl[6];
+  assign rem_img = ctrl[5];
+  assign image_indx = ctrl[4:0];
+  
   
   typedef enum reg[2:0] {IDLE,ADV1,ADV2,XRD,YRD,WRT,WRT2} state_t;
   
