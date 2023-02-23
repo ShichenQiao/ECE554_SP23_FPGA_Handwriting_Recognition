@@ -1,0 +1,6 @@
+DATE = "18:01:00 December 06, 2022"
+QUARTUS_VERSION = "15.1.0"
+
+# Revisions
+
+PROJECT_REVISION = "BMP_display"
