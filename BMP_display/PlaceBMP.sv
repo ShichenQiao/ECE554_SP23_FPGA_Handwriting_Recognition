@@ -10,9 +10,9 @@ module PlaceBMP(clk,rst_n,ctrl,
   // [9:0] xloc
   // [8:0] yloc
   input clk,rst_n;
-  input [13:0] ctrl;       // 14 bit control signal, see above mapping for detailed explanation 0xC008
-  input [9:0] xloc;			// x location of image to register                                   0xC009
-  input [8:0] yloc;			// y location of image to register                                   0xC00A
+  input [13:0] ctrl;       		// 14 bit control signal, see above mapping for detailed explanation 0xC008
+  input [9:0] xloc;				// x location of image to register                                   0xC009
+  input [8:0] yloc;				// y location of image to register                                   0xC00A
   output reg [18:0] waddr;		// write address to videoMem
   output logic [8:0] wdata;		// write 9-bit pixel to videoMem
   output reg we;
