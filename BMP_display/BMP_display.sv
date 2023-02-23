@@ -16,7 +16,7 @@ module BMP_display(
 	input 						RST_n,	// this is KEY[0]
 
 	//////////// LED //////////
-	output		     [9:0]		LEDR,
+	output reg	     [9:0]		LEDR,
 
 	//////////// VGA //////////
 	output		          		VGA_BLANK_N,
@@ -59,6 +59,17 @@ module BMP_display(
 	// rem_img - ctrl[5]      pulse high for one clock to remove image
 	// image_indx - ctrl[4:0] index of image in image memory (32 possible)
 	wire [13:0] ctrl;
+
+	///////////////////////////////////////////////
+	// More definitions inherited from MiniLab1 //
+	/////////////////////////////////////////////
+    wire [15:0] addr;            	// dst_EX_DM, result from ALU
+    wire [15:0] rdata;            	// exteral data input from the switches, 16'hDEAD if addr != 16'hC001
+    wire [15:0] wdata;            	// data from cpu that will reflect on LEDs if addr == 16'hC000 during write
+    wire update_LED;            	// update LED status if addr == 16'hC000 and we is set
+    wire [7:0] spart_databus;       // databus for communcation with spart
+    wire re, we;					// read enable and write enable from proc
+	wire spart_cs_n;				// active low chip select signal for spart
 
 	////////////////////////////////////////////////////////
 	// Instantiate PLL to generate clk and 25MHz VGA_CLK //
@@ -120,17 +131,6 @@ module BMP_display(
 //=======================================================
 //  Code below are inherited from MiniLab1
 //=======================================================
-
-//=======================================================
-//  REG/WIRE declarations
-//=======================================================
-    wire [15:0] addr;            	// dst_EX_DM, result from ALU
-    wire [15:0] rdata;            	// exteral data input from the switches, 16'hDEAD if addr != 16'hC001
-    wire [15:0] wdata;            	// data from cpu that will reflect on LEDs if addr == 16'hC000 during write
-    wire update_LED;            	// update LED status if addr == 16'hC000 and we is set
-    wire [7:0] spart_databus;       // databus for communcation with spart
-    wire re, we;					// read enable and write enable from proc
-	wire spart_cs_n;				// active low chip select signal for spart
 
 //=======================================================
 //  Structural coding
