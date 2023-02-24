@@ -70,8 +70,8 @@ LHB	R3, 0x28
 SW	R3, R2, 0
 JAL wait
 
-# loc = 160,0
-LLB	R3, 0xA0
+# loc = 140,0
+LLB	R3, 0x8C
 LHB	R3, 0x00
 SW	R3, R2, 1
 SW	R0,	R2, 2
