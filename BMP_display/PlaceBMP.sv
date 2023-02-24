@@ -63,9 +63,9 @@ module PlaceBMP(clk,rst_n,ctrl,
   // Internal nets follow //
   /////////////////////////
   wire [8:0] bmp_read0;
-  wire [9:0] bmp_read1;
-  wire [9:0] bmp_read2;			// add more for more images
-  wire [9:0] bmp_read3;
+  wire [8:0] bmp_read1;
+  wire [8:0] bmp_read2;			// add more for more images
+  wire [8:0] bmp_read3;
   wire [8:0] bmp_read;			// muxed output from BMP ROM
   wire waddr_wrap_en;
   wire fnt_wrap;

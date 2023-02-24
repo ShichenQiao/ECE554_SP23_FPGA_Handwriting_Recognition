@@ -2,7 +2,7 @@
 LLB R1, 0x01
 
 #store 0xC000 in R3
-LLB R3, 0x00
+LLB R3, 0x08
 LHB R3, 0xC0
 
 # generate instruction:
@@ -15,4 +15,6 @@ LHB R3, 0xC0
 
 LLB R2, 0x40 # image 0, add image
 
-SW R2, R3, 0x8 #store the image
+SW R2, R3, 0x0 #store the image
+
+HLT
