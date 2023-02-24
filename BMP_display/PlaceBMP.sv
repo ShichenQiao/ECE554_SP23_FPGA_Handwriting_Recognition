@@ -63,8 +63,9 @@ module PlaceBMP(clk,rst_n,ctrl,
   // Internal nets follow //
   /////////////////////////
   wire [8:0] bmp_read0;
-  wire [9:0] bmp_read1;
-  wire [9:0] bmp_read2;			// add more for more images
+  wire [8:0] bmp_read1;
+  wire [8:0] bmp_read2;			// add more for more images
+  wire [8:0] bmp_read3;
   wire [8:0] bmp_read;			// muxed output from BMP ROM
   wire waddr_wrap_en;
   wire fnt_wrap;
@@ -238,8 +239,10 @@ module PlaceBMP(clk,rst_n,ctrl,
   BMP_ROM_Font  iROM0(.clk(clk),.addr(font_addr),.dout(bmp_read0));
   BMP_ROM_Mario iROM1(.clk(clk),.addr(bmp_addr),.dout(bmp_read1));
   BMP_ROM_Bucky iROM2(.clk(clk),.addr(bmp_addr),.dout(bmp_read2));
+  BMP_ROM_madisonCapitol iROM3(.clk(clk),.addr(bmp_addr),.dout(bmp_read3));
   assign bmp_read = (fnt_addr_inc) ? bmp_read0 :
                     (indx==5'd01) ? bmp_read1 :
-					bmp_read2;
+			  (indx==5'd02) ? bmp_read2 :
+					bmp_read3;
   
 endmodule
