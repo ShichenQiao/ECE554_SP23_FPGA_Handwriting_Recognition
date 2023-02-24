@@ -72,6 +72,7 @@ JAL wait
 
 # loc = 160,0
 LLB	R3, 0xA0
+LHB	R3, 0x00
 SW	R3, R2, 1
 SW	R0,	R2, 2
 # Q
@@ -82,6 +83,7 @@ JAL	wait
 
 # loc = 180,0
 LLB	R3, 0xB4
+LHB	R3, 0x00
 SW	R3, R2, 1
 SW	R0,	R2, 2
 # Q
@@ -92,6 +94,7 @@ JAL	wait
 
 # loc = 200,0
 LLB	R3, 0xC8
+LHB	R3, 0x00
 SW	R3, R2, 1
 SW	R0,	R2, 2
 # L
@@ -111,6 +114,7 @@ JAL	wait
 
 # loc = 200,50
 LLB	R3, 0xC8
+LHB	R3, 0x00
 SW	R3, R2, 1
 LLB	R3, 0x32
 SW	R3, R2, 2
