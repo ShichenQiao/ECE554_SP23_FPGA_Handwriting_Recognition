@@ -13,7 +13,7 @@ input [15:0] wrt_data;			// data to be written
 
 output reg [15:0] rd_data;		//output of data memory
 
-reg [15:0]data_mem[0:2047];		// 8K*16 data memory
+reg [15:0]data_mem[0:8192];		// 8K*16 data memory
 
 /////////////////////////////////////////
 // Read is synchronous on negedge clk //
