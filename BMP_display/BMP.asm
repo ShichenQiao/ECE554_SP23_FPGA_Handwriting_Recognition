@@ -128,7 +128,7 @@ SW	R3, R2, 2
 # image 2
 LLB	R3, 0x42
 SW	R3, R2, 0
-JAL	wait
+HLT
 
 
 
