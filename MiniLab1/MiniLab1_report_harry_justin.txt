@@ -1,0 +1,89 @@
+********MiniLab1 Report by Harry Zhao and Justin Qiao********
+
+****Record of experiments conducted and how the design was tested****
+1. The spart module is comprehensively tested by spart_tb.sv, in which the
+   DUT is only reset once at the beginning. A UART wrapper of our modified
+   UART_rx and UART_tx is used in the testbench to send/receive bytes to/
+   from the spart.
+
+   Major tests include:
+     testing default baud rate == 115200 by reading DB low and high registers
+	 testing status register after reset (reset to 8'h80)
+	 testing DUT put high-z on databus during writes to DUT
+	 testing chip-select
+	 testing 9 consecutitive writes to TX buffer (watching status reg)
+	 testing correct content and order of those 9 bytes are received by the TB UART
+	 changing baud rate to 921600 for the following tests
+	 testing filling RX buffer by sending 9 consecutive bytes from TB UART without reads
+	 testing first 8 bytes in the previous test are received in correct order,
+		and making sure the 9th byte is rejected by RX buffer by consecutitive
+		reads and watching status registers after each read
+	 testing random, interleaved reads and writes of random data and random baud
+		rates that we support (the 8 of them from the table)
+		*** This test is configurable from a parameter at the TB level, currently we
+			run 30 iterations and it's a good coverage of all baud rates and take less
+			than 3 seconds on my personal machine, user can run however many iterations
+			of random test cases by twicking this parameter
+
+2.  After the spart is verified through test bench. We deployed the toplevel module on the FPGA
+	baord and started with the simplies form of aseembly code test. We went through the following
+	steps to verify different functionalities of the spart:
+	1) Print simple characters by send a character to spart tx_queue
+	2) Verify our understanding on VT100 escape code by sending the command CLEAR SCREEN. Press the
+		RST_n key to make sure no additional character is printed. (Make sure the screen is cleared)
+	3) Design the code so that "Hello,world!\n" is printed and "centered". 
+	4) Then we shifted our focus to the rx_queue functionalities of the spart by receiving response 
+		from the keyboad. Each time the key is received, the character is stored at a pointer in data
+		memory, and the pointer will decrement after storing the data.
+	5) Added the ability to echo the typed character from the user to ensure that inputs are recorded
+	6) Checked the entered character to decide when to print the final response. 
+	7) Modified the baud rate through the processor. We ensured that all baud rate are supported
+		by mapping the switches on the board to different division buffer frequency.
+
+****Problems encountered and solutions employed****
+Problem 1:  In my random testcase, I noticed that free version of Modelsim is not expensive enough
+			to support randomize() call over a class of rand and randc typed variables. I attempted
+			to use these to make the TB look nicer
+Solution 1: Wrote my own task called get_random_test_case and used $random to generate testcases instead
+
+Problem 2:  When sending 10 consecutitive bytes from TB UART to spart, had troubles to define and test
+			the behavior of that 9th byte. We originally thought the 9th byte will just stuck in rx_data
+			of iRX of spart, and if a byte is taken out from RX buffer, that 9th byte will just enter
+			at whatever time that is. We thought if we do not clr_rdy, the 10th byte won't be received
+			by the UART inside spart at all, but that was not the case. We observed that byte 1 - 8 are
+			in the RX buffer after all sends but before any reads, the 9th byte is lost, and the 10th
+			byte actually stayed in rx_data and messed up the testbench.
+Solution 2: To prevent this undefined behavior from messing up the processor, we decide to set clr_rx_rdy
+			right in the next cycle of receing a byte (rdy is set). This way, if RX buffer have space,
+			it will take the byte on that exact cycle we set clr_rx_rdy. Otherwise, the byte will be
+			thrown away. Thus, the result now is: first 8 bytes in RX buffer, 9th byte is received by
+			UART in spart but is discarded and never will enter the RX queue because we do not give
+			RX buffer any space before that 9th rdy signal is cleared.
+
+Problem 3:	When a key is pressed and the processor tries to sample the response, some responses are lost.
+			It feels like the keyboard is not responsive. There is a random chance to record an input. 
+			
+Solution 3:	We used tap signal analyzer to capture the moment when a key is pressed, and we confirmed that
+			the UART receieves correctly. However, sometimes the chip enable turns on too early and empties the 
+			rx_buffer before the processor receive the input. We added more restrcit control for the chip
+			enable signal. The spart is only enabled if the address is correct and the we or re from the
+			processor is enabled.
+
+
+------------------------------- ASM code problems ------------------------------------------------------------
+Problem 4:	The TX_buffer gets full easily and some character can miss. We have to count the number of characters
+			sent and clear the buffer before it is fulll. It is tedious to manually check the number of characters sent.
+Solution 4:	Added a SEND function in aseembly code to check the queue every time before send. To send a chracter,
+			the chracter just need to be stored in a dedicated register and call the SEND fucntion.
+
+
+Problem 5: 	When entering the name, if the entered chracter has odd ASCII code value, then the terminal will be flooded with 
+			undefined chracters. Sometimes it correctly print the entered code without pressing enter(CR).
+Solution 5:	It happens because a register is reused and it causes the wrong chracter to be checked. Therefore, it can mistaken
+			an odd ASCII chracter with the CR key. It floods the screen because CR is not entered and the print-name loop cannot
+			stop until a CR is seen. Sometimes the name is printed correctly because data memory might still have a CR key somewhere
+			from previous experiments. This bug is fixed by using a different register. A detailed usage of each register is also
+			defined on top of the asm code page
+
+Problem 6:	The name-print loop does not stop. 
+Solution 6:	Wrong return character was checked. Changed the target chacter to 0x0D to stop the assembly code from memory leak.
