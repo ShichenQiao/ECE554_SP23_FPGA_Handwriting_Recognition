@@ -1,0 +1,6 @@
+TEAM CONTRIBUTIONS
+
+Justin Qiao:	Wrote top-level, reviewed all modifications with Qikun.
+Harry Zhao:		Packed and decoded control logic of PlaceBMP.sv, tested the asm code with Haining.
+Qikun Liu:		Generated 3rd image, integrated it into PlaceBMP.sv, wrote all comments with Harry.
+Haining Qiu:	Wrote assembly code, designd the control signal with Justin.
