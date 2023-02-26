@@ -4,7 +4,7 @@ input clk;
 input [13:0] addr;
 input rd_en;							// asserted when instruction read desired
 
-output reg [15:0] instr;				//output of insturction memory
+output reg [15:0] instr;				// output of insturction memory
 
 reg [15:0]instr_mem[0:16383];			// 16K*16 instruction memory
 

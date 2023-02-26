@@ -48,9 +48,9 @@ module BMP_display(
 	wire [8:0] vga_rdata;				// 9-bit color
 	wire [18:0] waddr;					// write address to videoMem
 	wire [8:0] vga_wdata;				// write data to videoMem
-	reg  [9:0] xloc;
-	reg  [8:0] yloc;
-	wire vga_we;
+	reg  [9:0] xloc;					// starting x location of VGA "cursor"
+	reg  [8:0] yloc;					// starting y location of VGA "cursor"
+	wire vmem_we;						// write enable for videoMem
 
 	// [13:0] ctrl
 	// add_fnt - ctrl[13]     add a character
@@ -93,7 +93,7 @@ module BMP_display(
 	/////////////////////////////////////
 	// Instantiate 9-bit video memory //
 	///////////////////////////////////
-	videoMem(.clk(clk),.we(vga_we),.waddr(waddr),.wdata(vga_wdata),.raddr(raddr),.rdata(vga_rdata));
+	videoMem(.clk(clk),.we(vmem_we),.waddr(waddr),.wdata(vga_wdata),.raddr(raddr),.rdata(vga_rdata));
 
 	assign VGA_R = {vga_rdata[8:6],5'b00000};
 	assign VGA_G = {vga_rdata[5:3],5'b00000};
@@ -104,7 +104,7 @@ module BMP_display(
 	// colors based on BMP placement          //
 	///////////////////////////////////////////					
 	PlaceBMP(.clk(clk),.rst_n(rst_n),.ctrl(ctrl),
-		   .xloc(xloc),.yloc(yloc),.waddr(waddr),.wdata(vga_wdata),.we(vga_we));
+		   .xloc(xloc),.yloc(yloc),.waddr(waddr),.wdata(vga_wdata),.we(vmem_we));
 
 	///////////////////////////////////////////////////////////
 	// Memory map control signals of PlaceBMP to processor  //
@@ -116,16 +116,18 @@ module BMP_display(
 	////////////////////////////////////////////////////
 	assign ctrl = (addr == 16'hC008 && we) ? wdata[13:0] : 14'h0000;
 
+	// flopping x location since PlaceBMP consume xloc, yloc and ctrl at the same cycle
 	always_ff @(posedge clk, negedge rst_n)
 	if(!rst_n)
 		xloc <= 10'h000;
-	else if(addr == 16'hC009 && we)
+	else if(addr == 16'hC009 && we)			// record xloc only when we is set and address is correct
 		xloc <= wdata[9:0];
 
+	// flopping y location since PlaceBMP consume xloc, yloc and ctrl at the same cycle
 	always_ff @(posedge clk, negedge rst_n)
 	if(!rst_n)
 		yloc <= 9'h000;
-	else if(addr == 16'hC00A && we)
+	else if(addr == 16'hC00A && we)			// record yloc only when we is set and address is correct
 		yloc <= wdata[8:0];
 
 //=======================================================

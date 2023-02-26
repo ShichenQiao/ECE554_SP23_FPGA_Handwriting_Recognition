@@ -1,16 +1,8 @@
 module PlaceBMP(clk,rst_n,ctrl,
                 xloc,yloc,waddr,wdata,we);
-  // [13:0] ctrl
-  // add_fnt - ctrl[13]     add a character
-  // fnt_indx - ctrl[12:7]  one of 42 characters // 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ =>,()
-  // add_img - ctrl[6]      pulse high for one clock to add image
-  // rem_img - ctrl[5]      pulse high for one clock to remove image
-  // image_indx - ctrl[4:0] index of image in image memory (32 possible)
- 
-  // [9:0] xloc
-  // [8:0] yloc
+
   input clk,rst_n;
-  input [13:0] ctrl;       		// 14 bit control signal, see above mapping for detailed explanation 0xC008
+  input [13:0] ctrl;       		// 14 bit control signal, see below mapping for detailed explanation 0xC008
   input [9:0] xloc;				// x location of image to register                                   0xC009
   input [8:0] yloc;				// y location of image to register                                   0xC00A
   output reg [18:0] waddr;		// write address to videoMem
@@ -34,21 +26,27 @@ module PlaceBMP(clk,rst_n,ctrl,
   ////////////////////////////
   // Decode control signal //
   //////////////////////////
+  // [13:0] ctrl
+  // add_fnt - ctrl[13]     add a character
+  // fnt_indx - ctrl[12:7]  one of 42 characters // 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ =>,()
+  // add_img - ctrl[6]      pulse high for one clock to add image
+  // rem_img - ctrl[5]      pulse high for one clock to remove image
+  // image_indx - ctrl[4:0] index of image in image memory (32 possible)
   wire add_fnt;
   wire [5:0] fnt_indx;
   wire add_img;
   wire rem_img;
   wire [4:0] image_indx;
-  
   assign add_fnt = ctrl[13];
   assign fnt_indx = ctrl[12:7];
   assign add_img = ctrl[6];
   assign rem_img = ctrl[5];
   assign image_indx = ctrl[4:0];
-  
-  
-  typedef enum reg[2:0] {IDLE,ADV1,ADV2,XRD,YRD,WRT,WRT2} state_t;
-  
+
+  //////////////////////////
+  // SM state definition //
+  ////////////////////////
+  typedef enum reg[2:0] {IDLE,ADV1,ADV2,XRD,YRD,WRT,WRT2} state_t;  
   state_t state, nxt_state;
   
   ///////////////////////////
@@ -62,10 +60,10 @@ module PlaceBMP(clk,rst_n,ctrl,
   ///////////////////////////
   // Internal nets follow //
   /////////////////////////
-  wire [8:0] bmp_read0;
-  wire [8:0] bmp_read1;
-  wire [8:0] bmp_read2;			// add more for more images
-  wire [8:0] bmp_read3;
+  wire [8:0] bmp_read0;			// Character
+  wire [8:0] bmp_read1;			// Mario
+  wire [8:0] bmp_read2;			// Bucky
+  wire [8:0] bmp_read3;			// Madison Capital
   wire [8:0] bmp_read;			// muxed output from BMP ROM
   wire waddr_wrap_en;
   wire fnt_wrap;
@@ -239,7 +237,7 @@ module PlaceBMP(clk,rst_n,ctrl,
   BMP_ROM_Font  iROM0(.clk(clk),.addr(font_addr),.dout(bmp_read0));
   BMP_ROM_Mario iROM1(.clk(clk),.addr(bmp_addr),.dout(bmp_read1));
   BMP_ROM_Bucky iROM2(.clk(clk),.addr(bmp_addr),.dout(bmp_read2));
-  BMP_ROM_madisonCapitol iROM3(.clk(clk),.addr(bmp_addr),.dout(bmp_read3));
+  BMP_ROM_madisonCapitol iROM3(.clk(clk),.addr(bmp_addr),.dout(bmp_read3));			// Image we added
   assign bmp_read = (fnt_addr_inc) ? bmp_read0 :
                     (indx==5'd01) ? bmp_read1 :
 					(indx==5'd02) ? bmp_read2 :
