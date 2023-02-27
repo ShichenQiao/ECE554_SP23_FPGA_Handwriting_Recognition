@@ -9,11 +9,11 @@ input clk;
 input [12:0] addr;
 input re;						// asserted when instruction read desired
 input we;						// asserted when write desired
-input [15:0] wrt_data;			// data to be written
+input [31:0] wrt_data;			// data to be written
 
-output reg [15:0] rd_data;		// output of data memory
+output reg [31:0] rd_data;		// output of data memory
 
-reg [15:0]data_mem[0:8192];		// 8K*16 data memory
+reg [31:0]data_mem[0:8192];		// 8K*32 data memory
 
 /////////////////////////////////////////
 // Read is synchronous on negedge clk //

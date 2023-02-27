@@ -11,7 +11,7 @@ input clk_nv_ID_EX;			// from ID, tells us to flop the overflow flag
 input br_instr_ID_EX;		// from ID, tell us if this is a branch instruction
 input jmp_imm_ID_EX;		// from ID, tell us this is jump immediate instruction
 input jmp_reg_ID_EX;		// from ID, tell us this is jump register instruction
-input [2:0] cc_ID_EX;		// condition code from instr[11:9]
+input [2:0] cc_ID_EX;		// condition code from instr[26:24]
 input zr,ov,neg;			// flag bits from ALU
 
 output reg flow_change_ID_EX;		// asserted if we should take branch or jumping
@@ -24,7 +24,7 @@ reg neg_EX_DM,ov_EX_DM;
 ///////////////////////
 always @(posedge clk, negedge rst_n)
   if (!rst_n)
-    zr_EX_DM  <= 0;
+    zr_EX_DM  <= 1'b0;
   else if (clk_z_ID_EX) 
     zr_EX_DM  <= zr;
 
@@ -35,8 +35,8 @@ always @(posedge clk, negedge rst_n)
 always @(posedge clk, negedge rst_n)
   if (!rst_n)
     begin
-      ov_EX_DM  <= 0;
-	  neg_EX_DM <= 0;
+      ov_EX_DM  <= 1'b0;
+	  neg_EX_DM <= 1'b0;
 	end
   else if (clk_nv_ID_EX)
     begin
@@ -57,7 +57,7 @@ always @(br_instr_ID_EX,cc_ID_EX,zr_EX_DM,ov_EX_DM,neg_EX_DM,jmp_reg_ID_EX,jmp_i
 	  3'b100 : flow_change_ID_EX = zr_EX_DM | (~zr_EX_DM & ~neg_EX_DM);
 	  3'b101 : flow_change_ID_EX = neg_EX_DM | zr_EX_DM;
 	  3'b110 : flow_change_ID_EX = ov_EX_DM;
-	  3'b111 : flow_change_ID_EX = 1;
+	  3'b111 : flow_change_ID_EX = 1'b1;
 	endcase
 end
 

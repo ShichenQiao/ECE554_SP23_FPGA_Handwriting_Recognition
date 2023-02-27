@@ -6,24 +6,24 @@ module rf(clk,p0_addr,p1_addr,p0,p1,re0,re1,dst_addr,dst,we,hlt);
 //////////////////////
 
 	input clk;
-	input [3:0] p0_addr, p1_addr;			// two read port addresses
+	input [4:0] p0_addr, p1_addr;			// two read port addresses
 	input re0,re1;							// read enables (power not functionality)
-	input [3:0] dst_addr;					// write address
-	input [15:0] dst;						// dst bus
+	input [4:0] dst_addr;					// write address
+	input [31:0] dst;						// dst bus
 	input we;								// write enable
 	input hlt;								// not a functional input.  Used to dump register contents when
 											// test is halted. (No longer used)
 
-	output [15:0] p0,p1;  					// output read ports
+	output [31:0] p0,p1;  					// output read ports
 
 	wire r0_bypass, r1_bypass;				// RF bypass
-	wire [15:0] p0_raw, p1_raw;				// raw read output from SRAM
+	wire [31:0] p0_raw, p1_raw;				// raw read output from SRAM
 
 	/////////////////////////////////////////////////////////////////////
 	// Instantiate two dualport memory to create a tripple port rf	  //
 	// Always write same data to both sram instance at the same time //
 	//////////////////////////////////////////////////////////////////
-	dualPort16x16 sram0(
+	dualPort32x32 sram0(
 		.clk(clk),
 		.we(we),
 		.re(re0),
@@ -32,7 +32,7 @@ module rf(clk,p0_addr,p1_addr,p0,p1,re0,re1,dst_addr,dst,we,hlt);
 		.wdata(dst),			
 		.rdata(p0_raw)
 	);
-	dualPort16x16 sram1(
+	dualPort32x32 sram1(
 		.clk(clk),
 		.we(we),
 		.re(re1),
@@ -46,8 +46,8 @@ module rf(clk,p0_addr,p1_addr,p0,p1,re0,re1,dst_addr,dst,we,hlt);
 	assign r0_bypass = ~|(p0_addr ^ dst_addr) & re0 & we;
 	assign r1_bypass = ~|(p1_addr ^ dst_addr) & re1 & we;
 
-	// R0 always stay at 16'h0000
-	assign p0 = ~|p0_addr ? 16'h0000 : (r0_bypass ? dst : p0_raw);
-	assign p1 = ~|p1_addr ? 16'h0000 : (r1_bypass ? dst : p1_raw);
+	// R0 always stay at 32'h0000_0000
+	assign p0 = ~|p0_addr ? 32'h0000_0000 : (r0_bypass ? dst : p0_raw);
+	assign p1 = ~|p1_addr ? 32'h0000_0000 : (r1_bypass ? dst : p1_raw);
 
 endmodule

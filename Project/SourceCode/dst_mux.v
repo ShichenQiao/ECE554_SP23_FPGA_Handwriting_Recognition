@@ -5,11 +5,11 @@ module dst_mux(clk,dm_re_EX_DM,dm_rd_data_EX_DM,pc_EX_DM,dst_EX_DM,rf_w_data_DM_
 input clk;
 input dm_re_EX_DM;
 input jmp_imm_EX_DM;
-input [15:0] dm_rd_data_EX_DM;		// input from DM
-input [15:0] pc_EX_DM;				// from PC for JAL saving to R15
-input [15:0] dst_EX_DM;				// input from ALU
+input [31:0] dm_rd_data_EX_DM;		// input from DM
+input [31:0] pc_EX_DM;				// from PC for JAL saving to R15
+input [31:0] dst_EX_DM;				// input from ALU
 
-output reg[15:0] rf_w_data_DM_WB;		// output to be written to RF
+output reg[31:0] rf_w_data_DM_WB;		// output to be written to RF
 
 always @(posedge clk)
   if (dm_re_EX_DM)
