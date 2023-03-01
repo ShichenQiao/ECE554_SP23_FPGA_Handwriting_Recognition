@@ -1,4 +1,7 @@
 module FP_mul_tb();
+
+	import FP_special_values::*;
+
 	logic [31:0] A;
 	logic [31:0] B;
 	logic [31:0] OUT;
@@ -17,10 +20,10 @@ module FP_mul_tb();
 		// test +0 and -0
 		a = 0;
 		b = $random();
-		A = $shortrealtobits(a);
+		A = FP_POS_ZERO;
 		B = $shortrealtobits(b);
 		#1;
-		if(OUT !== 32'h00000000) begin
+		if(OUT !== FP_POS_ZERO) begin
 			$display("wrong answer!");
 			$stop();
 		end
