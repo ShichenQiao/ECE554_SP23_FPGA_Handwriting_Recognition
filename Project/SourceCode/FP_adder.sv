@@ -9,11 +9,11 @@
 follow FP definitionFP Addition V1 + V2.
 1. Shift the smaller number to the right until the exponents of
 both numbers are the same. Increment the exponent of the smaller
-number after each shift. E’ represents the common E (the larger one)
+number after each shift. E' represents the common E (the larger one)
 2. Add M of each number as an integer calculation, 
 M’ is the result of this step
-3. S’ is determined by the number with larger abs
-4. Vout = normalize(S’, E’, M’) */
+3. S' is determined by the number with larger abs
+4. Vout = normalize(S', E', M') */
 
 ///////////////////////////////////////////////////////
 module FP_adder(A, B, out);
