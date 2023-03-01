@@ -53,8 +53,8 @@ assign EA = A[30:23];
 assign EB = B[30:23];
 assign MA = A[22:0];
 assign MB = B[22:0];
-assign A0 = |EA;
-assign B0 = |EB;
+assign A0 = |A[30:0];
+assign B0 = |B[30:0];
 
 // Compare EA and EB
 // 2's comp signed exponent diff
