@@ -28,7 +28,7 @@ output reg dm_we_EX_DM;				// asserted on stores
 output reg clk_z_ID_EX;				// asserted for instructions that should modify zero flag
 output reg clk_nv_ID_EX;			// asserted for instructions that should modify negative and ov flags
 output [15:0] instr_ID_EX;			// lower 16-bits needed for immediate based instructions
-output [2:0] cc_ID_EX;				// condition code bits for branch determination from instr[26:24]
+output reg [2:0] cc_ID_EX;			// condition code bits for branch determination from instr[26:24]
 output stall_IM_ID;					// asserted for hazards and halt instruction, stalls IM_ID flops
 output stall_ID_EX;					// asserted for hazards and halt instruction, stalls ID_EX flops
 output stall_EX_DM;					// asserted for hazards and halt instruction, stalls EX_DM flops
@@ -102,6 +102,7 @@ always @(posedge clk)
 	  clk_z_ID_EX		<= clk_z & !load_use_hazard & !flush;
 	  clk_nv_ID_EX		<= clk_nv & !load_use_hazard & !flush;
 	  instr_ID_EX		<= instr_IM_ID[15:0];
+	  cc_ID_EX          <= instr_IM_ID[26:24];
 	  cond_ex_ID_EX 	<= cond_ex;
 	end
 	
@@ -183,7 +184,6 @@ assign stall_IM_ID = hlt_ID_EX | load_use_hazard;
 assign stall_ID_EX = 1'b0; // hlt_EX_DM;
 assign stall_EX_DM = 1'b0; // hlt_EX_DM;
 
-assign cc_ID_EX = instr_ID_EX[26:24];
 
 //////////////////////////////////////////////////////////////
 // default to most common state and override base on instr //

@@ -25,10 +25,10 @@ module MiniLab1(
 //  REG/WIRE declarations
 //=======================================================
     wire rst_n;                		// synchronized active low reset
-    wire [15:0] addr;            	// dst_EX_DM, result from ALU
-    wire [15:0] rdata;            	// exteral data input from the switches, 16'hDEAD if addr != 16'hC001
-    wire [15:0] wdata;            	// data from cpu that will reflect on LEDs if addr == 16'hC000 during write
-    wire update_LED;            	// update LED status if addr == 16'hC000 and we is set
+    wire [31:0] addr;            	// dst_EX_DM, result from ALU
+    wire [31:0] rdata;            	// exteral data input from the switches, 16'hDEAD if addr != 32'hC001
+    wire [31:0] wdata;            	// data from cpu that will reflect on LEDs if addr == 32'hC000 during write
+    wire update_LED;            	// update LED status if addr == 32'hC000 and we is set
     wire [7:0] spart_databus;       // databus for communcation with spart
     wire re, we;					// read enable and write enable from proc
 	wire spart_cs_n;				// active low chip select signal for spart
@@ -36,16 +36,16 @@ module MiniLab1(
 //=======================================================
 //  Structural coding
 //=======================================================
-	// If no external memory mapped device is used, put 16'hDEAD on rdata
-    assign rdata = ((addr == 16'hC001) & re) ? {6'b000000, SW} :			// 16'hC001 maps to switches, only lower 10 bits are used since only 10 SWs
-                   (addr[15:2]==14'h3001 & re) ? {8'h00,spart_databus} :	// 16'hC004 - 16'hC007 maps to spart's bidirectional data bus
-				   16'hDEAD;        
+	// If no external memory mapped device is used, put 32'hDEAD on rdata
+    assign rdata = ((addr == 32'h0000C001) & re) ? {22'h000000, SW} :			// 32'hC001 maps to switches, only lower 10 bits are used since only 10 SWs
+                   (addr[31:2]==30'h00003001 & re) ? {24'h000000,spart_databus} :	// 16'hC004 - 16'hC007 maps to spart's bidirectional data bus
+				   32'h0000DEAD;        
  
-    assign spart_databus = (addr[15:2]==14'h3001 & we) ? wdata[7:0] : 8'hzz;		// spart databus traffic control
+    assign spart_databus = (addr[31:2]==32'h00003001 & we) ? wdata[7:0] : 8'hzz;		// spart databus traffic control
 
-	assign spart_cs_n = ~(addr[15:2]==14'h3001 & (we | re));				// enable spart only when addr is correct and either read or write is enabled
+	assign spart_cs_n = ~(addr[31:2]==32'h3001 & (we | re));				// enable spart only when addr is correct and either read or write is enabled
 
-    assign update_LED = (addr == 16'hC000) & we;            // make testbench more straight forward, LEDs map to 16'hC000
+    assign update_LED = (addr == 32'h0000C000) & we;            // make testbench more straight forward, LEDs map to 16'hC000
 
     // Considering LED as a "memory", so picked negedge trigged flops
     always @(negedge clk, negedge rst_n)
@@ -61,7 +61,8 @@ module MiniLab1(
     rst_synch irst_synch(
 		.RST_n(RST_n),
 		.clk(clk),
-		.rst_n(rst_n)
+		.rst_n(rst_n),
+        .pll_locked(1'b1)
 	);
 
     // iCPU
