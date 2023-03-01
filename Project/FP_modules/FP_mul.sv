@@ -10,20 +10,29 @@ module FP_mul(A, B, OUT);
 	output [31:0] OUT;		// the product of A*B
 
 	logic    	 SA, SB, SO;
-	logic [7:0] EA, EB, EO;
+	logic [7:0]  EA, EB, EO;
 	logic [23:0] MA, MB, MO;
 
+	logic [7:0]  EA_eff, EB_eff;
+
 	logic [47:0] prod_M;
+	logic have_zero;
+
+	assign have_zero = ~|A[30:0] || ~|B[30:0];
 
 	assign SA = A[31];
 	assign SB = B[31];
 	assign EA = A[30:23];
 	assign EB = B[30:23];
+
+	assign EA_eff = |EA ? EA - 8'd127 : 8'h00;
+	assign EB_eff = |EB ? EB - 8'd127 : 8'h00;
+
 	assign MA = {|EA ? 1'b1 : 1'b0, A[22:0]};
 	assign MB = {|EB ? 1'b1 : 1'b0, B[22:0]};
 
 	assign SO = SA ^ SB;
-	assign EO = (EA - 8'd127) + (EB - 8'd127) + (prod_M[47] ? 8'h01 : 8'h00) + 8'd127;
+	assign EO = have_zero ? 8'h00 : EA_eff + EB_eff + (prod_M[47] ? 8'h01 : 8'h00) + 8'd127;
 
 	assign prod_M = MA * MB;
 	assign MO = prod_M[47] ? prod_M[47:24] : prod_M[46:23];

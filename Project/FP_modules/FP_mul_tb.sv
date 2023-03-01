@@ -14,6 +14,18 @@ module FP_mul_tb();
 	);
 
 	initial begin
+		// test +0 and -0
+		a = 0;
+		b = $random();
+		A = $shortrealtobits(a);
+		B = $shortrealtobits(b);
+		#1;
+		if(OUT !== 32'h00000000) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// random tests
 		for(int i = 0; i < 100; i++) begin
 			a = $random();
 			b = $random();
