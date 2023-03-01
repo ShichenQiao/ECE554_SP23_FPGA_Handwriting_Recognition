@@ -29,7 +29,7 @@ localparam LLBi		= 5'b01011;
 localparam BRi		= 5'b01100;
 localparam JALi		= 5'b01101;
 localparam JRi		= 5'b01110;
-localparam HLTi		= 5'b01111;
+localparam HLTi		= 5'b11111;
 
 ////////////////////////////////
 // Encodings for src0 select //
