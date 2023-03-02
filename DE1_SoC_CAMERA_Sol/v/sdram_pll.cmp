@@ -1,0 +1,11 @@
+	component sdram_pll is
+		port (
+			refclk   : in  std_logic := 'X'; -- clk
+			rst      : in  std_logic := 'X'; -- reset
+			outclk_0 : out std_logic;        -- clk
+			outclk_1 : out std_logic;        -- clk
+			outclk_2 : out std_logic;        -- clk
+			outclk_3 : out std_logic         -- clk
+		);
+	end component sdram_pll;
+
