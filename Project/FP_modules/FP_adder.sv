@@ -32,13 +32,15 @@ logic [8:0] diff;		// abs(EA - EB), remains non-negative
 logic [4:0] shamt;		// shift amount
 logic A_shft;			// set when A is to be shifted, otherwise B
 
-logic [22:0] M_shft;	// shifted mantissa
+logic [23:0] M_shft;	// shifted mantissa
 logic [7:0] common_E;	// common exponent
 
 logic [23:0] cA, cB;	// 2's comp conversion intermediates
 logic [24:0] A2c, B2c;	// 2's complement of A and B
 
 logic [24:0] pre_sum;	// 25-bit sum = A2c + B2c
+logic [24:0] shft_sum;	// 25-bit shifted pre_sum
+logic [24:0] shft_temp;	// 25-bit shifted inverted temp
 logic [23:0] sum_man;	// mantissa of sum, converted back to unsigned
 logic [23:0] norm_sum;	// normalized sum {1,mantissa}
 logic [22:0] norm_man;	// normalized mantissa
@@ -69,33 +71,40 @@ assign shamt = diff[4:0];
 
 // Shift M with smaller E to the right
 // This can cause precision loss
-// when diff_raw[15] == 1, EB > EA, so right shift MA
+// when diff_raw[8] == 1, EB > EA, so right shift MA
 // otherwise, EA > EB, so right shift MB
-right_shifter rsht(.In(A_shft ? {1'b1,MA} : {1'b1,MB}),
+right_shifter rsht(.In(A_shft ? {|EA,MA} : {|EB,MB}),
 				   .ShAmt(shamt),
 				   .Out(M_shft));
 assign common_E = A_shft ? EB : EA;
 
 // 2's comp conversion
-assign cA = A_shft ? (A[31] ? ~M_shft + 24'b1 : M_shft)
-					 (A[31] ? {1'b0,~MA} + 24'b1 : {1'b1,MA});
-assign cB = A_shft ? (B[31] ? {1'b0,~MB} + 24'b1 : {1'b1,MB}) :
+assign cA = A_shft ? (A[31] ? ~M_shft + 24'b1 : M_shft) :
+					 (A[31] ? ~{1'b1,MA} + 24'b1 : {1'b1,MA});
+assign cB = A_shft ? (B[31] ? ~{1'b1,MB} + 24'b1 : {1'b1,MB}) :
 					 (B[31] ? ~M_shft + 24'b1 : M_shft);
-					 
+// 25-bit 2's comp values with common exponent		 
 assign A2c = {A[31],cA};
 assign B2c = {B[31],cB};
 
 // 25-bit adder
 assign pre_sum = A2c + B2c;
-assign sum_man = pre_sum[24] ? ~(pre_sum - 25'b1)[23:0] : pre_sum[23:0];
 // two positive number addition results in negative OR
 // two negative number addition results in positive
 // increment common exponent
 assign exp_inc = (~A2c[24] & ~B2c[24] & pre_sum[24]) |
 				 (A2c[24] & B2c[24] & ~pre_sum[24]);
+assign shft_sum = exp_inc ?	// overflowed?
+			{~pre_sum[24],pre_sum[24:1]} : pre_sum;
+// Convert 25-bit 2's comp back into 25-bit signed number
+// {sign,24-bit unsigned}
+// sum_man holds the 24-bit unsigned value
+assign shft_temp = ~(shft_sum - 25'b1);
+assign sum_man = shft_sum[24] ?	// is this sum negative?
+			shft_temp[23:0] : shft_sum[23:0];
 
-// normalization 
-always begin
+// big case to determine the number of leading zero(s)
+always_comb begin
 	casex(sum_man)
 		24'b1xxx_xxxx_xxxx_xxxx_xxxx_xxxx: sum_shft = 5'h00;
 		24'b01xx_xxxx_xxxx_xxxx_xxxx_xxxx: sum_shft = 5'h01;
@@ -124,12 +133,17 @@ always begin
 		default:	sum_shft = 5'h18;		// should never happen
 	endcase
 end
-
+// if the 25-bit sum overflows, increment the exponent
+// otherwise decrement exponent by the number of leading zero(s)
+// of the 24-bit unsigned number sum_man (could be 0 and no change)
 assign norm_exp = exp_inc ? common_E + 8'b1 : common_E - {3'b0,sum_shft};
 left_shifter lsht(.In(sum_man),
 				  .ShAmt(sum_shft),
 				  .Out(norm_sum));
-assign norm_man = exp_inc ? {1'b1,sum_man[22:1]} : norm_sum[22:0];
+// normalized mantissa is lower 23-bit of the unsigned number
+// note that these two number should be the same, but just to be safe
+assign norm_man = exp_inc ? sum_man[23:1] : norm_sum[22:0];
+// final output concatination
 assign out = {pre_sum[24],norm_exp,norm_man};
 
 endmodule
