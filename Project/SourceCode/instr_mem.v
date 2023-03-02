@@ -16,7 +16,7 @@ always @(negedge clk)
     instr <= instr_mem[addr];
 
 initial begin
-  $readmemh("BMP.hex",instr_mem);
+  $readmemh("../instr.hex",instr_mem);
 end
 
 endmodule

@@ -20,7 +20,7 @@ module alu(clk,src0,src1,shamt,func,dst,dst_EX_DM,ov,zr,neg);
 `include "common_params.inc"
 
 input clk;
-input [32:0] src0,src1;
+input [31:0] src0,src1;
 input [2:0] func;			// selects function to perform
 input [4:0] shamt;			// shift amount
 

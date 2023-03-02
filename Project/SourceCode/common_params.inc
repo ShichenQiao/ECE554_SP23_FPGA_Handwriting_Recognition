@@ -11,6 +11,17 @@ localparam SRL	= 3'b101;
 localparam SRA	= 3'b110;
 localparam LHB  = 3'b111;
 
+////////////////////////////////////////////////
+// Create defines for advanced ALU functions //
+//////////////////////////////////////////////
+localparam MUL  = 3'b000;
+localparam UMUL = 3'b001;
+localparam ADDF = 3'b010;
+localparam SUBF = 3'b011;
+localparam MULF = 3'b100;
+localparam ITF  = 3'b100;
+localparam FTI  = 3'b100;
+
 //////////////////////////////////////////
 // Create defines for Opcode encodings //
 ////////////////////////////////////////
@@ -29,7 +40,17 @@ localparam LLBi		= 5'b01011;
 localparam BRi		= 5'b01100;
 localparam JALi		= 5'b01101;
 localparam JRi		= 5'b01110;
-localparam HLTi		= 5'b01111;
+localparam LWIi		= 5'b10000;
+localparam PUSHi	= 5'b10010;
+localparam POPi		= 5'b10011;
+localparam MULi		= 5'b11000;
+localparam UMULi	= 5'b11001;
+localparam ADDFi	= 5'b11010;
+localparam SUBFi	= 5'b11011;
+localparam MULFi	= 5'b11100;
+localparam ITFi		= 5'b11101;
+localparam FTIi		= 5'b11110;
+localparam HLTi		= 5'b11111;
 
 ////////////////////////////////
 // Encodings for src0 select //
