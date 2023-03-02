@@ -1,0 +1,10 @@
+
+
+F:/de1_soc_device/device/DE1_SoC_CAMERA/v/sdram_pll.v
+
+Dec 04 10AM:00:47>: Error in CNX file format.
+
+Error messages are listed in file
+F:/de1_soc_device/device/DE1_SoC_CAMERA/v/sdram_pll.cnxerr.
+
+Can't create the custom megafunction variation file(s)
