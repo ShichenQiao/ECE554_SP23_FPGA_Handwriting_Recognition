@@ -28,8 +28,8 @@ module FP_mul(A, B, OUT);
 	assign EA = A[30:23];
 	assign EB = B[30:23];
 
-	assign ZERO = ~|A[30:0] || ~|B[30:0];
-	assign INF = (&EA && ~|A[22:0]) || (&EB && ~|B[22:0]);
+	assign ZERO = ~|A[30:0] || ~|B[30:0] || ({1'b0, EA} + {1'b0, EB} < 9'h080);
+	assign INF = (&EA && ~|A[22:0]) || (&EB && ~|B[22:0]) || ({1'b0, EA} + {1'b0, EB} > 9'h17D);
 	assign NaN = (&EA && |A[22:0]) || (&EB && |B[22:0]);
 
 	assign MA = {|EA, A[22:0]};			// FP value is denormalized when E = 0
