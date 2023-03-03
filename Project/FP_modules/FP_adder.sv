@@ -1,20 +1,18 @@
 ////////////////////////////////////////////////////////
 //
-// 24-bit single-cycle floating-point adder
+// 32-bit single-cycle floating-point adder
 // 
-// format: 1-bit sign, 8-bit exponent, 23-bit mantissa
-// seee_eeee_emmm_mmmm_mmmm_mmmm_mmmm_mmmm
+// Designer: Haining QIU
 //
-/* normalize(S, E, M) function - using shifters to ensure S, E, M
-follow FP definitionFP Addition V1 + V2.
-1. Shift the smaller number to the right until the exponents of
-both numbers are the same. Increment the exponent of the smaller
-number after each shift. E' represents the common E (the larger one)
-2. Add M of each number as an integer calculation, 
-M’ is the result of this step
-3. S' is determined by the number with larger abs
-4. Vout = normalize(S', E', M') */
-
+// The floating point format follows IEEE 754 Standard
+// Format: 1-bit sign, 8-bit exponent, 23-bit mantissa
+// seee_eeee_emmm_mmmm_mmmm_mmmm_mmmm_mmmm
+// FP num = (-1)^S * 2^(E-127) * {|E.M}
+// When |E = 0, the exponent is denormalized to -126
+//
+// For details of how this module works, please
+// refer to FP_adder_doc or visit our Google Drive
+//
 ///////////////////////////////////////////////////////
 module FP_adder(A, B, out);
 
@@ -25,12 +23,15 @@ output [31:0] out;	// FP sum = A + B
 logic [7:0] EA, EB;		// 8-bit exponent of A and B
 logic [22:0] MA, MB;	// 23-bit mantissa of A and B
 logic SA, SB;			// sign of A and B
-logic A0, B0;			// set when A is 0 / B is 0
+logic A0, B0;			// set when A/B represents 0
+						// note 0x00000000 and 0x80000000
+						// are both +0 and -0
 
-logic [8:0] diff_raw;	// EA - EB, one bit longer for 2's comp result
+logic [8:0] diff_raw;	// EA - EB, one bit longer for 2's comp
 logic [8:0] diff;		// abs(EA - EB), remains non-negative
 logic [4:0] shamt;		// shift amount
-logic A_shft;			// set when A is to be shifted, otherwise B
+logic A_shft;			// set when A is to be shifted
+						// otherwise B is to be shifted
 
 logic [23:0] M_shft;	// shifted mantissa
 logic [7:0] common_E;	// common exponent
@@ -41,7 +42,7 @@ logic [24:0] A2c, B2c;	// 2's complement of A and B
 logic [24:0] pre_sum;	// 25-bit sum = A2c + B2c
 logic [24:0] shft_sum;	// 25-bit shifted pre_sum
 logic [24:0] shft_temp;	// 25-bit shifted inverted temp
-logic [23:0] sum_man;	// mantissa of sum, converted back to unsigned
+logic [23:0] sum_man;	// mantissa of sum, back to unsigned
 logic [23:0] norm_sum;	// normalized sum {1,mantissa}
 logic [22:0] norm_man;	// normalized mantissa
 logic [7:0] norm_exp;	// normalized exponent
@@ -69,7 +70,8 @@ assign diff = A_shft ?
 // shift amount
 assign shamt = diff[4:0];
 
-// Shift M with smaller E to the right
+// Append |E in front of M and then
+// shift M with smaller E to the right
 // This can cause precision loss
 // when diff_raw[8] == 1, EB > EA, so right shift MA
 // otherwise, EA > EB, so right shift MB
@@ -130,18 +132,20 @@ always_comb begin
 		24'b0000_0000_0000_0000_0000_01xx: sum_shft = 5'h15;
 		24'b0000_0000_0000_0000_0000_001x: sum_shft = 5'h16;
 		24'b0000_0000_0000_0000_0000_0001: sum_shft = 5'h17;
-		default:	sum_shft = 5'h18;		// should never happen
+		default:	sum_shft = 5'h18;	// should never happen
 	endcase
 end
 // if the 25-bit sum overflows, increment the exponent
-// otherwise decrement exponent by the number of leading zero(s)
-// of the 24-bit unsigned number sum_man (could be 0 and no change)
-assign norm_exp = exp_inc ? common_E + 8'b1 : common_E - {3'b0,sum_shft};
+// otherwise decrement exponent by the number of
+// leading zero(s) of the 24-bit unsigned number sum_man
+assign norm_exp = exp_inc ? // increment exponent?
+			common_E + 8'b1 : common_E - {3'b0,sum_shft};
 left_shifter lsht(.In(sum_man),
 				  .ShAmt(sum_shft),
 				  .Out(norm_sum));
 // normalized mantissa is lower 23-bit of the unsigned number
-// note that these two number should be the same, but just to be safe
+// note that these two number should be the same
+// but just to be safe...
 assign norm_man = exp_inc ? sum_man[23:1] : norm_sum[22:0];
 // final output concatination
 assign out = {pre_sum[24],norm_exp,norm_man};

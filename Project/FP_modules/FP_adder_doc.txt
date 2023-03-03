@@ -1,0 +1,17 @@
+The addition of two floating-point numbers is complex, since their exponents could differ by a great amount and their mantissas are unsigned representations. The following steps describe how the FP Adder works in detail.
+
+1. Compare two exponents, determine the smaller one, and calculate the absolute difference between them. The larger E will be the common E (for now).
+
+2. Append |E (reduction OR of exponent) in front of both mantissas. Now both numbers of interest are of 24-bit.
+
+3. Shift the mantissa (including the appended digit) with a smaller exponent to the right, where the shift amount is the lower 5 bits of the difference between exponents. The maximum shift amount should be 22-bit, or the shifted number is too small to be considered.
+
+4. Convert both appended then shifted mantissa into 2’s complement format by looking at the sign bit. Now both numbers are in 25-bit 2’s complement.
+
+5. Add two 25-bit numbers and get a 25-bit result. If the result overflows either positively or negatively, an increment in the common exponent is needed. Note that this overflow is NOT an external value overflow (the FP number cannot be represented) but an internal overflow (the result can be correctly represented).
+
+6. Convert the 25-bit 2’s complement back to a 25-bit signed number with the MSB being the final sign and the rest 24-bit being the unsigned value. This step should have no loss of precision. Now, the MSB is the sign, and the rest 24-bit is to be further processed.
+
+7. If an overflow occurs, shift the lower 24-bit to the right, appending 1 in MSB and discarding the LSB; if the lower 24-bit has leading zeros, a left shift is needed, where the shift amount is determined by the number of leading zero(s), and the common exponent is decremented by the shift amount. This 24-bit result should have a MSB of 1 now.
+
+8. The resulting mantissa will be the lower 23-bit of the final 24-bit result. The exponent is the final common exponent. The sign is the MSB of is the final sign.
