@@ -4,7 +4,7 @@
 Group: Project Proposal, ISA <br />
 HQ: <br />
 HZ: <br />
-JQ: Fully implemented and validated fp_mul.sv, supporting any FP, denormalized FP, or combined operations with minimal error on LSB cause by convertions between shortread and logic <br />
+JQ: Fully implemented and validated fp_mul.sv, supporting any FP, denormalized FP, or combined operations with minimal error on LSB cause by convertions between shortread and logic. 8 extreme value tests, 1000 random tests, and 256 corner case tests PASSED. <br />
 QL: <br />
 
 **Week 3/6 - 3/12** <br />
