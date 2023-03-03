@@ -7,6 +7,7 @@ module FP_mul_tb();
 	logic [31:0] OUT;
 
 	shortreal a, b, o;
+	int temp;
 
 	logic [31:0] product;
 
@@ -108,7 +109,7 @@ module FP_mul_tb();
 		///////////////////////////////////////////////////////////////////////////////////////////////
 		// random tests, note that the chance of a random number being a special value is very low  //
 		/////////////////////////////////////////////////////////////////////////////////////////////
-		for(int i = 0; i < 100; i++) begin
+		for(int i = 0; i < 1000; i++) begin
 			a = $random();
 			b = $random();
 			o = a * b;
@@ -123,9 +124,9 @@ module FP_mul_tb();
 			end
 		end
 
-		/////////////////////////////////////////////////////////////
-		// test all combinations of special value multiplication  //
-		///////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////
+		// test all 256 combinations of special value multiplication  //
+		///////////////////////////////////////////////////////////////
 		for(int i = 0; i < 16; i++) begin
 			for(int j = 0; j < 16; j++) begin
 				A = SPECIAL_VALS_ARR[i];
@@ -144,8 +145,11 @@ module FP_mul_tb();
 				else begin
 					// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
 					if(OUT[31:23] !== product[31:23] || (OUT[22:0] <= product[22:0] - 2 && OUT[22:0] >= product[22:0] + 2)) begin
-						$display("wrong answer! %b * %b = %b, not %b", A, B, product, OUT);
-						//$stop();
+						// also allow the difference between FP_POS_MIN(1.1754943508 × 10^−38) and 0, same for their negative counterpart, because of shortreal rounding
+						if(OUT[31] !== product[31] || (~((product[30:0] === FP_POS_MIN[30:0]) && ~|OUT[30:0]) && ~((OUT[30:0] === FP_POS_MIN[30:0]) && ~|product[30:0]))) begin
+							$display("wrong answer! %b * %b = %b, not %b", A, B, product, OUT);
+							$stop();
+						end
 					end
 				end
 			end

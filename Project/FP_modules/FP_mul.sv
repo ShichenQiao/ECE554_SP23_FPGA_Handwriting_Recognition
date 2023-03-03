@@ -41,7 +41,9 @@ module FP_mul(A, B, OUT);
 	assign REPRESENTABLE = DENORMALIZED && (EA > 8'd126 || EB > 8'd126);
 	assign NORMALIZABLE = (~|EA && ((EB - shift_amount) > 8'd127)) || (~|EB && ((EA - shift_amount) > 8'd127));
 
-	assign EO = DENORMALIZED ? (REPRESENTABLE ? (|EA ? EA - shift_amount : EB - shift_amount) : 8'h00) : NORMALIZABLE ? (EA + EB + (prod_M_shifted[47] ? 8'h01 : 8'h00) - 8'd126 - shift_amount) : (EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);
+	assign EO = DENORMALIZED ? (REPRESENTABLE ? (|EA ? EA - shift_amount : EB - shift_amount) : 8'h00) :
+				NORMALIZABLE ? (EA + EB + (prod_M_shifted[47] ? 8'h01 : 8'h00) - 8'd126 - shift_amount) :
+				(EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);
 
 	assign prod_M = MA * MB;
 	assign MO = DENORMALIZED ? (REPRESENTABLE ? prod_M[47:24] : 23'h000000) :
