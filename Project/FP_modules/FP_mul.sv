@@ -14,13 +14,13 @@ module FP_mul(A, B, OUT);
 	logic [7:0]  EA, EB, EO;
 	logic [23:0] MA, MB, MO;
 
-	logic [47:0] prod_M;
+	logic [47:0] prod_M, prod_M_shifted;
 	logic ZERO;
 	logic INF;
 	logic NaN;
 	logic DENORMALIZED;		// a denormalized number times any number <= 1 is denormalized, same when sign is involved
+	logic NORMALIZABLE;
 	logic REPRESENTABLE;
-	logic [4:0] product_trailing_zeros;
 	logic [4:0] shift_amount;
 
 	assign SA = A[31];
@@ -39,43 +39,45 @@ module FP_mul(A, B, OUT);
 
 	assign DENORMALIZED = (~|EA && (EB < 8'd127 || (EB == 8'd127 && ~|B[22:0]))) || (~|EB && (EA < 8'd127 || (EA == 8'd127 && ~|A[22:0])));
 	assign REPRESENTABLE = DENORMALIZED && (EA > 8'd126 || EB > 8'd126);
-	assign shift_amount = product_trailing_zeros + 5'h01;
+	assign NORMALIZABLE = (~|EA && ((EB - shift_amount) > 8'd127)) || (~|EB && ((EA - shift_amount) > 8'd127));
 
-	assign EO = DENORMALIZED ? (REPRESENTABLE ? (|EA ? EA - shift_amount : EB - shift_amount) : 8'h00) : (EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);
+	assign EO = DENORMALIZED ? (REPRESENTABLE ? (|EA ? EA - shift_amount : EB - shift_amount) : 8'h00) : NORMALIZABLE ? (EA + EB + (prod_M_shifted[47] ? 8'h01 : 8'h00) - 8'd126 - shift_amount) : (EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);
 
 	assign prod_M = MA * MB;
 	assign MO = DENORMALIZED ? (REPRESENTABLE ? prod_M[47:24] : 23'h000000) :
+				NORMALIZABLE ? prod_M_shifted[47:24] :
 				prod_M[47] ? prod_M[47:24] : prod_M[46:23];
 
 	always_comb begin
 		casex(prod_M[47:24])
-			24'b1xxx_xxxx_xxxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h00;
-			24'b01xx_xxxx_xxxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h01;
-			24'b001x_xxxx_xxxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h02;
-			24'b0001_xxxx_xxxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h03;
-			24'b0000_1xxx_xxxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h04;
-			24'b0000_01xx_xxxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h05;
-			24'b0000_001x_xxxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h06;
-			24'b0000_0001_xxxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h07;
-			24'b0000_0000_1xxx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h08;
-			24'b0000_0000_01xx_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h09;
-			24'b0000_0000_001x_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h0A;
-			24'b0000_0000_0001_xxxx_xxxx_xxxx: product_trailing_zeros = 5'h0B;
-			24'b0000_0000_0000_1xxx_xxxx_xxxx: product_trailing_zeros = 5'h0C;
-			24'b0000_0000_0000_01xx_xxxx_xxxx: product_trailing_zeros = 5'h0D;
-			24'b0000_0000_0000_001x_xxxx_xxxx: product_trailing_zeros = 5'h0E;
-			24'b0000_0000_0000_0001_xxxx_xxxx: product_trailing_zeros = 5'h0F;
-			24'b0000_0000_0000_0000_1xxx_xxxx: product_trailing_zeros = 5'h10;
-			24'b0000_0000_0000_0000_01xx_xxxx: product_trailing_zeros = 5'h11;
-			24'b0000_0000_0000_0000_001x_xxxx: product_trailing_zeros = 5'h12;
-			24'b0000_0000_0000_0000_0001_xxxx: product_trailing_zeros = 5'h13;
-			24'b0000_0000_0000_0000_0000_1xxx: product_trailing_zeros = 5'h14;
-			24'b0000_0000_0000_0000_0000_01xx: product_trailing_zeros = 5'h15;
-			24'b0000_0000_0000_0000_0000_001x: product_trailing_zeros = 5'h16;
-			24'b0000_0000_0000_0000_0000_0001: product_trailing_zeros = 5'h17;
-			default:	product_trailing_zeros = 5'h18;		// should never happen
+			24'b1xxx_xxxx_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h00;
+			24'b01xx_xxxx_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h01;
+			24'b001x_xxxx_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h02;
+			24'b0001_xxxx_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h03;
+			24'b0000_1xxx_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h04;
+			24'b0000_01xx_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h05;
+			24'b0000_001x_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h06;
+			24'b0000_0001_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h07;
+			24'b0000_0000_1xxx_xxxx_xxxx_xxxx: shift_amount = 5'h08;
+			24'b0000_0000_01xx_xxxx_xxxx_xxxx: shift_amount = 5'h09;
+			24'b0000_0000_001x_xxxx_xxxx_xxxx: shift_amount = 5'h0A;
+			24'b0000_0000_0001_xxxx_xxxx_xxxx: shift_amount = 5'h0B;
+			24'b0000_0000_0000_1xxx_xxxx_xxxx: shift_amount = 5'h0C;
+			24'b0000_0000_0000_01xx_xxxx_xxxx: shift_amount = 5'h0D;
+			24'b0000_0000_0000_001x_xxxx_xxxx: shift_amount = 5'h0E;
+			24'b0000_0000_0000_0001_xxxx_xxxx: shift_amount = 5'h0F;
+			24'b0000_0000_0000_0000_1xxx_xxxx: shift_amount = 5'h10;
+			24'b0000_0000_0000_0000_01xx_xxxx: shift_amount = 5'h11;
+			24'b0000_0000_0000_0000_001x_xxxx: shift_amount = 5'h12;
+			24'b0000_0000_0000_0000_0001_xxxx: shift_amount = 5'h13;
+			24'b0000_0000_0000_0000_0000_1xxx: shift_amount = 5'h14;
+			24'b0000_0000_0000_0000_0000_01xx: shift_amount = 5'h15;
+			24'b0000_0000_0000_0000_0000_001x: shift_amount = 5'h16;
+			24'b0000_0000_0000_0000_0000_0001: shift_amount = 5'h17;
+			default:	shift_amount = 5'h18;
 		endcase
 	end
+	assign prod_M_shifted = prod_M << shift_amount;
 
 	assign OUT = (NaN || (ZERO && INF)) ? {SO, 8'hFF, 23'hFFFFFF} :		// if any of the lower 23 bits is set, value is NaN, so we just pick this one
 				 ZERO ? {SO, 8'h00, 23'h000000} :
