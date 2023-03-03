@@ -14,30 +14,35 @@ module FP_mul(A, B, OUT);
 	logic [7:0]  EA, EB, EO;
 	logic [23:0] MA, MB, MO;
 
-	logic [7:0]  EA_eff, EB_eff;
-
 	logic [47:0] prod_M;
-	logic have_zero;
-
-	assign have_zero = ~|A[30:0] || ~|B[30:0];
+	logic ZERO;
+	logic INF;
+	logic NaN;
+	logic DENORMALIZED;		// a denormalized number times any number <= 1 is denormalized, same when sign is involved
 
 	assign SA = A[31];
 	assign SB = B[31];
 	assign EA = A[30:23];
 	assign EB = B[30:23];
 
-	assign EA_eff = |EA ? EA - 8'd127 : 8'h00;
-	assign EB_eff = |EB ? EB - 8'd127 : 8'h00;
+	assign ZERO = ~|A[30:0] || ~|B[30:0];
+	assign INF = (&EA && ~|A[22:0]) || (&EB && ~|B[22:0]);
+	assign NaN = (&EA && |A[22:0]) || (&EB && |B[22:0]);
 
-	assign MA = {|EA ? 1'b1 : 1'b0, A[22:0]};
-	assign MB = {|EB ? 1'b1 : 1'b0, B[22:0]};
+	assign MA = {|EA, A[22:0]};			// FP value is denormalized when E = 0
+	assign MB = {|EB, B[22:0]};			// FP value is denormalized when E = 0
 
 	assign SO = SA ^ SB;
-	assign EO = have_zero ? 8'h00 : EA_eff + EB_eff + (prod_M[47] ? 8'h01 : 8'h00) + 8'd127;
+
+	assign DENORMALIZED = (|EA && (EA < 8'd127 || (EA == 8'd127 && |A[22:0]))) || (|EB && (EB < 8'd127 || (EB == 8'd127 && |B[22:0])));
+	assign EO = DENORMALIZED ? (EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127) : 8'h00;
 
 	assign prod_M = MA * MB;
 	assign MO = prod_M[47] ? prod_M[47:24] : prod_M[46:23];
 
-	assign OUT = {SO, EO, MO[22:0]};
+	assign OUT = (NaN || (ZERO && INF)) ? {SO, 8'hFF, 23'hFFFFFF} :		// if any of the lower 23 bits is set, value is NaN, so we just pick this one
+				 ZERO ? {SO, 8'h00, 23'h000000} :
+				 INF ? {SO, 8'hFF, 23'h000000} :
+				 {SO, EO, MO[22:0]};
 
 endmodule
