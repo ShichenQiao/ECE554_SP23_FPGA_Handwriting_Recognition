@@ -117,7 +117,7 @@ module FP_mul_tb();
 			B = $shortrealtobits(b);
 			#1;
 			// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
-			if(OUT <= product - 2 && OUT >= product + 2) begin
+			if(OUT[31:23] !== product[31:23] || (OUT[22:0] <= product[22:0] - 2 && OUT[22:0] >= product[22:0] + 2)) begin
 				$display("wrong answer!");
 				$stop();
 			end
@@ -142,7 +142,8 @@ module FP_mul_tb();
 					end
 				end
 				else begin
-					if(OUT !== product) begin
+					// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
+					if(OUT[31:23] !== product[31:23] || (OUT[22:0] <= product[22:0] - 2 && OUT[22:0] >= product[22:0] + 2)) begin
 						$display("wrong answer! %b * %b = %b, not %b", A, B, product, OUT);
 						//$stop();
 					end
