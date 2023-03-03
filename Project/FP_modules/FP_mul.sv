@@ -34,8 +34,8 @@ module FP_mul(A, B, OUT);
 
 	assign SO = SA ^ SB;
 
-	assign DENORMALIZED = (|EA && (EA < 8'd127 || (EA == 8'd127 && |A[22:0]))) || (|EB && (EB < 8'd127 || (EB == 8'd127 && |B[22:0])));
-	assign EO = DENORMALIZED ? (EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127) : 8'h00;
+	assign DENORMALIZED = (~|EA && (EB < 8'd127 || (EB == 8'd127 && ~|B[22:0]))) || (~|EB && (EA < 8'd127 || (EA == 8'd127 && ~|A[22:0])));
+	assign EO = DENORMALIZED ? 8'h00 : (EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);
 
 	assign prod_M = MA * MB;
 	assign MO = prod_M[47] ? prod_M[47:24] : prod_M[46:23];
