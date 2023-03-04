@@ -124,6 +124,91 @@ module FP_mul_tb();
 			end
 		end
 
+		///////////////////////////////////////////////////////////////////////////
+		// test overflow (E too large, so that product is around +INF or -INF)  //
+		/////////////////////////////////////////////////////////////////////////
+
+		// (+2^64) * (+2^64) = +INF
+		A = {1'b0, 8'hBF, 23'h000000};		// +2^64
+		B = {1'b0, 8'hBF, 23'h000000};		// +2^64
+		#1;
+		if(OUT !== FP_POS_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// (+2^127) * (-2) = -INF
+		A = {1'b0, 8'hFE, 23'h000000};		// +2^127
+		B = {1'b1, 8'hBF, 23'h000000};		// -2
+		#1;
+		if(OUT !== FP_NEG_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// (-2^100) * (-2^28) = +INF
+		A = {1'b1, 8'hE3, 23'h000000};		// -2^100
+		B = {1'b1, 8'h9B, 23'h000000};		// -2^28
+		#1;
+		if(OUT !== FP_POS_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// (1.99999988079) * (+2^127) should not reach +INF
+		A = {1'b0, 8'h7F, 23'hFFFFFF};		// largest representable number below 2
+		B = {1'b0, 8'hFE, 23'h000000};		// +2^127
+		#1;
+		if(OUT === FP_POS_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// (-1.99999988079) * (+2^127) should not reach -INF
+		A = {1'b1, 8'h7F, 23'hFFFFFF};		// largest representable number (abs value) below 2
+		B = {1'b0, 8'hFE, 23'h000000};		// +2^127
+		#1;
+		if(OUT === FP_NEG_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// when reach +INF, M of out put should be all zero
+		A = {1'b0, 8'hBF, 23'h123456};		// +2^64 * 1.<something on zero>
+		B = {1'b0, 8'hBF, 23'h789ABC};		// +2^64 * 1.<something on zero>
+		#1;
+		if(OUT !== FP_POS_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// when reach +INF, M of out put should be all zero, even if <something on zero> is tiny
+		A = {1'b0, 8'hBF, 23'h000000};		// +2^64
+		B = {1'b0, 8'hBF, 23'h000001};		// +2^64 * 1.00000000000000000000001
+		#1;
+		if(OUT !== FP_POS_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// when reach -INF, M of out put should be all zero
+		A = {1'b0, 8'hBF, 23'hFEDCBA};		// +2^64 * 1.<something on zero>
+		B = {1'b1, 8'hBF, 23'h987654};		// -2^64 * 1.<something on zero>
+		#1;
+		if(OUT !== FP_NEG_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// when reach -INF, M of out put should be all zero, even if <something on zero> is tiny
+		A = {1'b1, 8'hBF, 23'h000001};		// -2^64 * 1.00000000000000000000001
+		B = {1'b0, 8'hBF, 23'h000000};		// +2^64
+		#1;
+		if(OUT !== FP_NEG_INF) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
 		/////////////////////////////////////////////////////////////////
 		// test all 256 combinations of special value multiplication  //
 		///////////////////////////////////////////////////////////////
