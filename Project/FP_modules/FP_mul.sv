@@ -6,9 +6,9 @@ module FP_mul(A, B, OUT);
 	// +0 = 32'h0000_0000, -0 = 32'h8000_0000
 	// +INF = 32'h7F80_0000, -INF = 32'hFF80_0000
 
-	input [31:0] A;			// FP value input
-	input [31:0] B;			// FP value input
-	output [31:0] OUT;		// the product of A*B
+	input [31:0] A;					// FP value input
+	input [31:0] B;					// FP value input
+	output [31:0] OUT;				// the product of A*B
 
 	logic    	 SA, SB, SO;		// sign bit
 	logic [7:0]  EA, EB, EO;		// exponent bits
@@ -18,12 +18,12 @@ module FP_mul(A, B, OUT);
 	logic [4:0] shift_amount;		// essentially, this is the count of trailing zeros for prod_M[47:24]
 	logic [47:0] prod_M_shifted;	// left shift prod_M tring to make the MSB set. Shift amount <= 24
 
-	logic ZERO;				// result is +0 or -0
-	logic INF;				// result is +INF or -INF
-	logic NaN;				// result is NaN
+	logic ZERO;						// result is +0 or -0
+	logic INF;						// result is +INF or -INF
+	logic NaN;						// result is NaN
 
-	logic DENORMALIZED;		// set when product is denormalized
-	logic NORMALIZABLE;
+	logic DENORMALIZED;				// set when product is denormalized
+	logic NORMALIZABLE;				// when only one input is denormalized, there is a chance that the produt could be normalized
 	logic [4:0] room_for_denormalization;		// when product is smaller than 2^(-126), this indicate the capability of going further down from -126
 	logic [4:0] need_for_denormalization;		// when product is smaller than 2^(-126), this indicate the need of going further down from -126
 	logic [22:0] denormalized_MO;				// denormalized mantissa output
@@ -63,17 +63,21 @@ module FP_mul(A, B, OUT);
 	// product is denormalized when smaller than 2^(-126)
 	assign DENORMALIZED = {1'b0, EA} + {1'b0, EB} < 9'h07F || (({1'b0, EA} + {1'b0, EB} == 9'h07F) && ~prod_M[47]);
 
+	// when only one input is denormalized, check if the product could be normalized (>= 2^(-126))
 	assign NORMALIZABLE = (~|EA && ((EB - shift_amount) > 8'd127)) || (~|EB && ((EA - shift_amount) > 8'd127));
 
-	assign EO = DENORMALIZED ? 8'h00 :	// there is a chance that two denormalized parts can be normalized after multiplied
-				NORMALIZABLE ? (EA + EB + (prod_M_shifted[47] ? 8'h01 : 8'h00) - 8'd126 - shift_amount) :
-				(EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);
+	// generate EO according to if the product is denormalized
+	assign EO = DENORMALIZED ? 8'h00 :		// if product is denormalized, just let EO = 0
+				NORMALIZABLE ? (EA + EB + (prod_M_shifted[47] ? 8'h01 : 8'h00) - 8'd126 - shift_amount) :		// if only one input is denormalized, but product is not denormalized, normalize raw product by left shifts
+				(EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);			// if denormalization is out of the table, handle simple exponent addition
 
-	assign prod_M = MA * MB;		// unsigned product of mantissas
+	// unsigned raw product of mantissas
+	assign prod_M = MA * MB;
 
-	assign MO = DENORMALIZED ? (!ZERO ? denormalized_MO : 23'h000000) :
-				NORMALIZABLE ? prod_M_shifted[47:24] :
-				prod_M[47] ? prod_M[47:24] : prod_M[46:23];
+	// generate MO according to if the product is denormalized
+	assign MO = DENORMALIZED ? (!ZERO ? denormalized_MO : 23'h000000) :		// when product is denormalized, pick MO according to if the product is ZERO
+				NORMALIZABLE ? prod_M_shifted[47:24] :						// when product is nomalizable, pick left-shifted prodM
+				prod_M[47] ? prod_M[47:24] : prod_M[46:23];					// if denormalization is out of the table, handle simple mantissa prodM
 
 
 	// find the count of trailing zeros for prod_M[47:24]
@@ -113,6 +117,6 @@ module FP_mul(A, B, OUT);
 	assign OUT = NaN ? {SO, 8'hFF, 23'hFFFFFF} :		// if any of the lower 23 bits is set while E = 8'hFF, value is NaN, so we just pick this one
 				 ZERO ? {SO, 8'h00, 23'h000000} :
 				 INF ? {SO, 8'hFF, 23'h000000} :
-				 {SO, EO, MO[22:0]};
+				 {SO, EO, MO[22:0]};					// if result is not a special value above, do simple concatenation
 
 endmodule
