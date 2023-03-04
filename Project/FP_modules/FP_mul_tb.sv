@@ -118,7 +118,7 @@ module FP_mul_tb();
 			B = $shortrealtobits(b);
 			#1;
 			// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
-			if(OUT[31:23] !== product[31:23] || (OUT[22:0] <= product[22:0] - 2 && OUT[22:0] >= product[22:0] + 2)) begin
+			if(OUT[31:23] !== product[31:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
 				$display("wrong answer!");
 				$stop();
 			end
@@ -174,15 +174,15 @@ module FP_mul_tb();
 		end
 
 		// when reach +INF, M of out put should be all zero
-		A = {1'b0, 8'hBF, 23'h123456};		// +2^64 * 1.<something on zero>
-		B = {1'b0, 8'hBF, 23'h789ABC};		// +2^64 * 1.<something on zero>
+		A = {1'b0, 8'hBF, 23'h123456};		// +2^64 * 1.<something nonzero>
+		B = {1'b0, 8'hBF, 23'h789ABC};		// +2^64 * 1.<something nonzero>
 		#1;
 		if(OUT !== FP_POS_INF) begin
 			$display("wrong answer!");
 			$stop();
 		end
 
-		// when reach +INF, M of out put should be all zero, even if <something on zero> is tiny
+		// when reach +INF, M of out put should be all zero, even if <something nonzero> is tiny
 		A = {1'b0, 8'hBF, 23'h000000};		// +2^64
 		B = {1'b0, 8'hBF, 23'h000001};		// +2^64 * 1.00000000000000000000001
 		#1;
@@ -192,15 +192,15 @@ module FP_mul_tb();
 		end
 
 		// when reach -INF, M of out put should be all zero
-		A = {1'b0, 8'hBF, 23'hFEDCBA};		// +2^64 * 1.<something on zero>
-		B = {1'b1, 8'hBF, 23'h987654};		// -2^64 * 1.<something on zero>
+		A = {1'b0, 8'hBF, 23'hFEDCBA};		// +2^64 * 1.<something nonzero>
+		B = {1'b1, 8'hBF, 23'h987654};		// -2^64 * 1.<something nonzero>
 		#1;
 		if(OUT !== FP_NEG_INF) begin
 			$display("wrong answer!");
 			$stop();
 		end
 
-		// when reach -INF, M of out put should be all zero, even if <something on zero> is tiny
+		// when reach -INF, M of out put should be all zero, even if <something nonzero> is tiny
 		A = {1'b1, 8'hBF, 23'h000001};		// -2^64 * 1.00000000000000000000001
 		B = {1'b0, 8'hBF, 23'h000000};		// +2^64
 		#1;
@@ -210,23 +210,32 @@ module FP_mul_tb();
 		end
 
 		///////////////////////////////////////////////////////////////////////////
-		// test underflow (E too small, so that product is around +/- 2^(-126)  //
+		// test underflow (E too small, so that product is around +/- 2^(-149)  //
 		/////////////////////////////////////////////////////////////////////////
 
-		// (+2^(-64)) * (+2^(-63)) = +0 because not representable with 32 bit float
+		// (+2^(-64)) * (+2^(-86)) = +0 because not representable with 32 bit float
 		A = {1'b0, 8'h3F, 23'h000001};		// +2^(-64) * 1.<smallest nonzero M>
-		B = {1'b0, 8'h40, 23'h000000};		// +2^(-63)
+		B = {1'b0, 8'h29, 23'h000000};		// +2^(-86)
 		#1;
 		if(OUT !== FP_POS_ZERO) begin
 			$display("wrong answer!");
 			$stop();
 		end
 
-		// (+2^(-38)) * (-2^(-89)) = -0 because not representable with 32 bit float
+		// (+2^(-38)) * (-2^(-112)) = -0 because not representable with 32 bit float
 		A = {1'b0, 8'h59, 23'hFFFFFF};		// +2^(-38) * 1.<largest M>
-		B = {1'b1, 8'h26, 23'hFFFFFF};		// -2^(-89) * 1.<largest M>
+		B = {1'b1, 8'h0F, 23'hFFFFFF};		// -2^(-112) * 1.<largest M>
 		#1;
 		if(OUT !== FP_NEG_ZERO) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// however, 2^(-149), which is FP_NEG_SUB_MAX, is representable with denormalized format
+		A = {1'b0, 8'h59, 23'h000000};		// +2^(-38)
+		B = {1'b1, 8'h10, 23'h000000};		// -2^(-111)
+		#1;
+		if(OUT !== FP_NEG_SUB_MAX) begin
 			$display("wrong answer!");
 			$stop();
 		end
@@ -241,12 +250,26 @@ module FP_mul_tb();
 		#1;
 		if(OUT !== product) begin
 			$display("wrong answer!");
-			//$stop();
+			$stop();
 		end
 
-		// sometimes... the product of two normalized numbers can be denormalized
-		A = {1'b1, 8'h01, 23'h123456};		// -2^(-126) * 1.<something on zero>
-		B = {1'b0, 8'h7E, 23'h765432};		// +2^(-1) * 1.<something on zero>
+		// but M does make a difference on this edge case, here answer is denormalized
+		A = {1'b1, 8'h01, 23'h123456};		// -2^(-126) * 1.<something nonzero>
+		B = {1'b0, 8'h7E, 23'h123456};		// +2^(-1) * 1.<something nonzero>
+		a = $bitstoshortreal(A);
+		b = $bitstoshortreal(B);
+		o = a * b;
+		product = $shortrealtobits(o);
+		#1;
+		// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
+		if(OUT[31:23] !== product[31:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// but with this M, should not denormalize (square root of 2 is the edge)
+		A = {1'b1, 8'h01, 23'h123456};		// -2^(-126) * 1.<something nonzero>
+		B = {1'b0, 8'h7E, 23'h765432};		// +2^(-1) * 1.<something nonzero>
 		a = $bitstoshortreal(A);
 		b = $bitstoshortreal(B);
 		o = a * b;
@@ -254,10 +277,8 @@ module FP_mul_tb();
 		#1;
 		if(OUT !== product) begin
 			$display("wrong answer!");
-			//$stop();
+			$stop();
 		end
-
-		//$stop();
 
 		/////////////////////////////////////////////////////////////////
 		// test all 256 combinations of special value multiplication  //
@@ -278,12 +299,26 @@ module FP_mul_tb();
 					end
 				end
 				else begin
-					// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
-					if(OUT[31:23] !== product[31:23] || (OUT[22:0] <= product[22:0] - 2 && OUT[22:0] >= product[22:0] + 2)) begin
-						// also allow the difference between FP_POS_MIN(1.1754943508 × 10^−38) and 0, same for their negative counterpart, because of shortreal rounding
-						if(OUT[31] !== product[31] || (~((product[30:0] === FP_POS_MIN[30:0]) && ~|OUT[30:0]) && ~((OUT[30:0] === FP_POS_MIN[30:0]) && ~|product[30:0]))) begin
-							$display("wrong answer! %b * %b = %b, not %b", A, B, product, OUT);
-							$stop();
+					if(OUT[31] !== product[31]) begin
+						$display("wrong answer! %b * %b = %b, not %b", A, B, product, OUT);
+						$stop();
+					end
+					else begin
+						// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
+						if(OUT[31:23] !== product[31:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
+							// also allow the difference between 2^(-126) and 2^−126 × (1 − 2^−23) due to same conversion error
+							if(~((OUT[30:0] === FP_POS_MIN[30:0]) && (product[30:0] === FP_POS_SUB_MAX[30:0]))
+								&& ~((product[30:0] === FP_POS_MIN[30:0]) && (OUT[30:0] === FP_POS_SUB_MAX[30:0]))) begin
+								// again, we also have to let 00000000011111111111111111111111 * 00111111100000000000000000000001 and other 7 similar combinations PASS
+								// because modelsim round the former value to 00000000100000000000000000000000 and the later to perfect 1, which introduced a new 100% error
+								// our answer to the above example, 00000000001111111111111111111111, is more precise per the IEEE definition
+								if(OUT[31] !== product[31]		// sign must match
+									|| ~(((A[30:0] === FP_POS_SUB_MAX[30:0]) && (B[30:0] === FP_SLT_ONE[30:0])) 
+										|| ((B[30:0] === FP_POS_SUB_MAX[30:0]) && (A[30:0] === FP_SLT_ONE[30:0])))) begin
+									$display("wrong answer! %b * %b = %b, not %b", A, B, product, OUT);
+									$stop();
+								end
+							end
 						end
 					end
 				end

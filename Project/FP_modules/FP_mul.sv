@@ -6,50 +6,70 @@ module FP_mul(A, B, OUT);
 	// +0 = 32'h0000_0000, -0 = 32'h8000_0000
 	// +INF = 32'h7F80_0000, -INF = 32'hFF80_0000
 
-	input [31:0] A;			// 16 bit input
-	input [31:0] B;			// 4 bit input
+	input [31:0] A;			// FP value input
+	input [31:0] B;			// FP value input
 	output [31:0] OUT;		// the product of A*B
 
-	logic    	 SA, SB, SO;
-	logic [7:0]  EA, EB, EO;
-	logic [23:0] MA, MB, MO;
+	logic    	 SA, SB, SO;		// sign bit
+	logic [7:0]  EA, EB, EO;		// exponent bits
+	logic [23:0] MA, MB, MO;		// mantissa bits
 
-	logic [47:0] prod_M, prod_M_shifted;
-	logic ZERO;
-	logic INF;
-	logic NaN;
+	logic [47:0] prod_M;			// product of mantissas (after 0 or 1 expansion)
+	logic [4:0] shift_amount;		// essentially, this is the count of trailing zeros for prod_M[47:24]
+	logic [47:0] prod_M_shifted;	// left shift prod_M tring to make the MSB set. Shift amount <= 24
+
+	logic ZERO;				// result is +0 or -0
+	logic INF;				// result is +INF or -INF
+	logic NaN;				// result is NaN
+
 	logic DENORMALIZED;		// a denormalized number times any number <= 1 is denormalized, same when sign is involved
 	logic NORMALIZABLE;
-	logic REPRESENTABLE;
-	logic [4:0] shift_amount;
+	logic [4:0] room_for_denormalization, need_for_denormalization;
+	logic [22:0] denormalized_MO;
 
+	// extract parts from input FP number
 	assign SA = A[31];
 	assign SB = B[31];
 	assign EA = A[30:23];
 	assign EB = B[30:23];
 
-	assign ZERO = ~|A[30:0] || ~|B[30:0] || ({1'b0, EA} + {1'b0, EB} < 9'h080);
-	assign INF = (&EA && ~|A[22:0]) || (&EB && ~|B[22:0]) || ({1'b0, EA} + {1'b0, EB} > 9'h17D);
-	assign NaN = (&EA && |A[22:0]) || (&EB && |B[22:0]);
-
+	// appending mantissa with 1 when input is normalized, 0 when input is denormalized
 	assign MA = {|EA, A[22:0]};			// FP value is denormalized when E = 0
 	assign MB = {|EB, B[22:0]};			// FP value is denormalized when E = 0
 
+	// result is a ZERO if any input is a ZERO, or if result's exponent is too small
+	assign ZERO = ~|A[30:0] || ~|B[30:0] || ({1'b0, EA} + {1'b0, EB} < 9'h080 - room_for_denormalization);
+
+	assign need_for_denormalization = 9'h080 - {1'b0, EA} - {1'b0, EB};
+	assign room_for_denormalization = 5'h18 - shift_amount;
+	assign denormalized_MO = prod_M[46:24] >> (need_for_denormalization - 1);
+
+	// result is a INF is any input is a INF, or if result's exponent value is larger than 127
+	// this happens when (EA - 127) + (EB - 127) > 127, which is equivalent to EA + EB > 381
+	assign INF = (&EA && ~|A[22:0]) || (&EB && ~|B[22:0]) || ({1'b0, EA} + {1'b0, EB} > 9'h17D);
+
+	// result is NaN if any input is NaN or ZERO and INF are multiplied together
+	assign NaN = (&EA && |A[22:0]) || (&EB && |B[22:0]) || (ZERO && INF);
+
+	// generate sign of result
 	assign SO = SA ^ SB;
 
-	assign DENORMALIZED = (~|EA && (EB < 8'd127 || (EB == 8'd127 && ~|B[22:0]))) || (~|EB && (EA < 8'd127 || (EA == 8'd127 && ~|A[22:0])));
-	assign REPRESENTABLE = DENORMALIZED && (EA > 8'd126 || EB > 8'd126);
+	assign DENORMALIZED = {1'b0, EA} + {1'b0, EB} < 9'h07F || (({1'b0, EA} + {1'b0, EB} == 9'h07F) && ~prod_M[47]);
+
 	assign NORMALIZABLE = (~|EA && ((EB - shift_amount) > 8'd127)) || (~|EB && ((EA - shift_amount) > 8'd127));
 
-	assign EO = DENORMALIZED ? (REPRESENTABLE ? (|EA ? EA - shift_amount : EB - shift_amount) : 8'h00) :
+	assign EO = DENORMALIZED ? 8'h00 :	// there is a chance that two denormalized parts can be normalized after multiplied
 				NORMALIZABLE ? (EA + EB + (prod_M_shifted[47] ? 8'h01 : 8'h00) - 8'd126 - shift_amount) :
 				(EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);
 
 	assign prod_M = MA * MB;
-	assign MO = DENORMALIZED ? (REPRESENTABLE ? prod_M[47:24] : 23'h000000) :
+
+	assign MO = DENORMALIZED ? (!ZERO ? denormalized_MO : 23'h000000) :
 				NORMALIZABLE ? prod_M_shifted[47:24] :
 				prod_M[47] ? prod_M[47:24] : prod_M[46:23];
 
+
+	// find the count of trailing zeros for prod_M[47:24]
 	always_comb begin
 		casex(prod_M[47:24])
 			24'b1xxx_xxxx_xxxx_xxxx_xxxx_xxxx: shift_amount = 5'h00;
@@ -79,9 +99,11 @@ module FP_mul(A, B, OUT);
 			default:	shift_amount = 5'h18;
 		endcase
 	end
+	// shift accordingly
 	assign prod_M_shifted = prod_M << shift_amount;
 
-	assign OUT = (NaN || (ZERO && INF)) ? {SO, 8'hFF, 23'hFFFFFF} :		// if any of the lower 23 bits is set, value is NaN, so we just pick this one
+	// generate output, if it's not a special value, concatenate SO, EO, and MO (MSB of MO is inplicit)
+	assign OUT = NaN ? {SO, 8'hFF, 23'hFFFFFF} :		// if any of the lower 23 bits is set while E = 8'hFF, value is NaN, so we just pick this one
 				 ZERO ? {SO, 8'h00, 23'h000000} :
 				 INF ? {SO, 8'hFF, 23'h000000} :
 				 {SO, EO, MO[22:0]};
