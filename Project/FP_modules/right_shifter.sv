@@ -1,3 +1,4 @@
+// A self-explaining module
 module right_shifter(In, ShAmt, Out);
 
 input  [23:0] In; 	// Input operand

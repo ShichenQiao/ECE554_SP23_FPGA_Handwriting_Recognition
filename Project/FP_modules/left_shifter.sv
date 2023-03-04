@@ -1,3 +1,4 @@
+// Another self-explaining module
 module left_shifter(In, ShAmt, Out);
 
 input  [23:0] In; 	// Input operand
