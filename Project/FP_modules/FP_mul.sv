@@ -22,10 +22,11 @@ module FP_mul(A, B, OUT);
 	logic INF;				// result is +INF or -INF
 	logic NaN;				// result is NaN
 
-	logic DENORMALIZED;		// a denormalized number times any number <= 1 is denormalized, same when sign is involved
+	logic DENORMALIZED;		// set when product is denormalized
 	logic NORMALIZABLE;
-	logic [4:0] room_for_denormalization, need_for_denormalization;
-	logic [22:0] denormalized_MO;
+	logic [4:0] room_for_denormalization;		// when product is smaller than 2^(-126), this indicate the capability of going further down from -126
+	logic [4:0] need_for_denormalization;		// when product is smaller than 2^(-126), this indicate the need of going further down from -126
+	logic [22:0] denormalized_MO;				// denormalized mantissa output
 
 	// extract parts from input FP number
 	assign SA = A[31];
@@ -40,8 +41,13 @@ module FP_mul(A, B, OUT);
 	// result is a ZERO if any input is a ZERO, or if result's exponent is too small
 	assign ZERO = ~|A[30:0] || ~|B[30:0] || ({1'b0, EA} + {1'b0, EB} < 9'h080 - room_for_denormalization);
 
+	// need for denormalization is how far the product's exponent below -126
 	assign need_for_denormalization = 9'h080 - {1'b0, EA} - {1'b0, EB};
+
+	// room for denormalization is how much can prod_M be shifted to the right before becoming ZERO
 	assign room_for_denormalization = 5'h18 - shift_amount;
+
+	// get denormalized MO according to the needed amount
 	assign denormalized_MO = prod_M[46:24] >> (need_for_denormalization - 1);
 
 	// result is a INF is any input is a INF, or if result's exponent value is larger than 127
@@ -54,6 +60,7 @@ module FP_mul(A, B, OUT);
 	// generate sign of result
 	assign SO = SA ^ SB;
 
+	// product is denormalized when smaller than 2^(-126)
 	assign DENORMALIZED = {1'b0, EA} + {1'b0, EB} < 9'h07F || (({1'b0, EA} + {1'b0, EB} == 9'h07F) && ~prod_M[47]);
 
 	assign NORMALIZABLE = (~|EA && ((EB - shift_amount) > 8'd127)) || (~|EB && ((EA - shift_amount) > 8'd127));
@@ -62,7 +69,7 @@ module FP_mul(A, B, OUT);
 				NORMALIZABLE ? (EA + EB + (prod_M_shifted[47] ? 8'h01 : 8'h00) - 8'd126 - shift_amount) :
 				(EA + EB + (prod_M[47] ? 8'h01 : 8'h00) - 8'd127);
 
-	assign prod_M = MA * MB;
+	assign prod_M = MA * MB;		// unsigned product of mantissas
 
 	assign MO = DENORMALIZED ? (!ZERO ? denormalized_MO : 23'h000000) :
 				NORMALIZABLE ? prod_M_shifted[47:24] :

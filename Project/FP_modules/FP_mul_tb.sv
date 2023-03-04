@@ -7,9 +7,8 @@ module FP_mul_tb();
 	logic [31:0] OUT;
 
 	shortreal a, b, o;
-	int temp;
 
-	logic [31:0] product;
+	logic [31:0] product;		// expected product of A*B, converted from o
 
 	FP_mul iDUT(
 		.A(A),
@@ -27,16 +26,16 @@ module FP_mul_tb();
 		B = $shortrealtobits(b);
 		#1;
 		if(OUT !== FP_POS_ZERO) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! FP_POS_ZERO times any positive non-INF should be FP_POS_ZERO");
 			$stop();
 		end
 		a = -5.4321;				// test arbitrary, non-special negative value
-		A = $shortrealtobits(b);
+		A = $shortrealtobits(a);
 		b = $bitstoshortreal(FP_POS_ZERO);
 		B = FP_POS_ZERO;
 		#1;
-		if(OUT !== FP_POS_ZERO) begin
-			$display("wrong answer!");
+		if(OUT !== FP_NEG_ZERO) begin
+			$display("WRONG ANSWER! FP_POS_ZERO times any negative non-INF should be FP_NEG_ZERO");
 			$stop();
 		end
 
@@ -49,16 +48,16 @@ module FP_mul_tb();
 		B = $shortrealtobits(b);
 		#1;
 		if(OUT !== FP_NEG_ZERO) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! FP_NEG_ZERO times any positive non-INF should be FP_NEG_ZERO");
 			$stop();
 		end
 		a = -0.9876;				// test arbitrary, non-special negative value
-		A = $shortrealtobits(b);
+		A = $shortrealtobits(a);
 		b = $bitstoshortreal(FP_NEG_ZERO);
 		B = FP_NEG_ZERO;
 		#1;
-		if(OUT !== FP_NEG_ZERO) begin
-			$display("wrong answer!");
+		if(OUT !== FP_POS_ZERO) begin
+			$display("WRONG ANSWER! FP_NEG_ZERO times any negative non-INF should be FP_POS_ZERO");
 			$stop();
 		end
 
@@ -71,16 +70,16 @@ module FP_mul_tb();
 		B = $shortrealtobits(b);
 		#1;
 		if(OUT !== FP_POS_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! FP_POS_INF times any positive non-ZERO should be FP_POS_INF");
 			$stop();
 		end
 		a = -1.4413;				// test arbitrary, non-special negative value
-		A = $shortrealtobits(b);
+		A = $shortrealtobits(a);
 		b = $bitstoshortreal(FP_POS_INF);
 		B = FP_POS_INF;
 		#1;
-		if(OUT !== FP_POS_INF) begin
-			$display("wrong answer!");
+		if(OUT !== FP_NEG_INF) begin
+			$display("WRONG ANSWER! FP_POS_INF times any negative non-ZERO should be FP_NEG_INF");
 			$stop();
 		end
 
@@ -93,16 +92,16 @@ module FP_mul_tb();
 		B = $shortrealtobits(b);
 		#1;
 		if(OUT !== FP_NEG_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! FP_NEG_INF times any positive non-ZERO should be FP_NEG_INF");
 			$stop();
 		end
 		a = -8.4633;			// test arbitrary, non-special negative value
-		A = $shortrealtobits(b);
+		A = $shortrealtobits(a);
 		b = $bitstoshortreal(FP_NEG_INF);
 		B = FP_NEG_INF;
 		#1;
-		if(OUT !== FP_NEG_INF) begin
-			$display("wrong answer!");
+		if(OUT !== FP_POS_INF) begin
+			$display("WRONG ANSWER! FP_NEG_INF times any negative non-ZERO should be FP_POS_INF");
 			$stop();
 		end
 
@@ -119,7 +118,7 @@ module FP_mul_tb();
 			#1;
 			// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
 			if(OUT[31:23] !== product[31:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
-				$display("wrong answer!");
+				$display("WRONG ANSWER! %b * %b = %b, not %b", A, B, product, OUT);
 				$stop();
 			end
 		end
@@ -133,7 +132,7 @@ module FP_mul_tb();
 		B = {1'b0, 8'hBF, 23'h000000};		// +2^64
 		#1;
 		if(OUT !== FP_POS_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! (+2^64) * (+2^64) = +INF");
 			$stop();
 		end
 
@@ -142,7 +141,7 @@ module FP_mul_tb();
 		B = {1'b1, 8'hBF, 23'h000000};		// -2
 		#1;
 		if(OUT !== FP_NEG_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! (+2^127) * (-2) = -INF");
 			$stop();
 		end
 
@@ -151,7 +150,7 @@ module FP_mul_tb();
 		B = {1'b1, 8'h9B, 23'h000000};		// -2^28
 		#1;
 		if(OUT !== FP_POS_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! (-2^100) * (-2^28) = +INF");
 			$stop();
 		end
 
@@ -160,7 +159,7 @@ module FP_mul_tb();
 		B = {1'b0, 8'hFE, 23'h000000};		// +2^127
 		#1;
 		if(OUT === FP_POS_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! 1.99999988079) * (+2^127) should not reach +INF");
 			$stop();
 		end
 
@@ -169,7 +168,7 @@ module FP_mul_tb();
 		B = {1'b0, 8'hFE, 23'h000000};		// +2^127
 		#1;
 		if(OUT === FP_NEG_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! (-1.99999988079) * (+2^127) should not reach -INF");
 			$stop();
 		end
 
@@ -178,7 +177,7 @@ module FP_mul_tb();
 		B = {1'b0, 8'hBF, 23'h789ABC};		// +2^64 * 1.<something nonzero>
 		#1;
 		if(OUT !== FP_POS_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! when reach +INF, M of out put should be all zero");
 			$stop();
 		end
 
@@ -187,7 +186,7 @@ module FP_mul_tb();
 		B = {1'b0, 8'hBF, 23'h000001};		// +2^64 * 1.00000000000000000000001
 		#1;
 		if(OUT !== FP_POS_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! when reach +INF, M of out put should be all zero");
 			$stop();
 		end
 
@@ -196,7 +195,7 @@ module FP_mul_tb();
 		B = {1'b1, 8'hBF, 23'h987654};		// -2^64 * 1.<something nonzero>
 		#1;
 		if(OUT !== FP_NEG_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! when reach -INF, M of out put should be all zero");
 			$stop();
 		end
 
@@ -205,7 +204,7 @@ module FP_mul_tb();
 		B = {1'b0, 8'hBF, 23'h000000};		// +2^64
 		#1;
 		if(OUT !== FP_NEG_INF) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! when reach -INF, M of out put should be all zero");
 			$stop();
 		end
 
@@ -218,7 +217,7 @@ module FP_mul_tb();
 		B = {1'b0, 8'h29, 23'h000000};		// +2^(-86)
 		#1;
 		if(OUT !== FP_POS_ZERO) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! (+2^(-64)) * (+2^(-86)) = +0 because not representable with 32 bit float");
 			$stop();
 		end
 
@@ -227,7 +226,7 @@ module FP_mul_tb();
 		B = {1'b1, 8'h0F, 23'hFFFFFF};		// -2^(-112) * 1.<largest M>
 		#1;
 		if(OUT !== FP_NEG_ZERO) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! (+2^(-38)) * (-2^(-112)) = -0 because not representable with 32 bit float");
 			$stop();
 		end
 
@@ -236,11 +235,12 @@ module FP_mul_tb();
 		B = {1'b1, 8'h10, 23'h000000};		// -2^(-111)
 		#1;
 		if(OUT !== FP_NEG_SUB_MAX) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! 2^(-149), which is FP_NEG_SUB_MAX, is representable with denormalized format");
 			$stop();
 		end
 
-		// sometimes... the product of two normalized numbers can be denormalized
+		// when the precise product is greater than or equal to 2^(-149), but smaller than 2^(−126),
+		// the product of two normalized numbers can be denormalized
 		A = {1'b0, 8'h01, 23'h000000};		// +2^(-126)
 		B = {1'b0, 8'h72, 23'h000000};		// +2^(-13)
 		a = $bitstoshortreal(A);
@@ -249,11 +249,11 @@ module FP_mul_tb();
 		product = $shortrealtobits(o);
 		#1;
 		if(OUT !== product) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! the product of two normalized numbers can be denormalized");
 			$stop();
 		end
 
-		// but M does make a difference on this edge case, here answer is denormalized
+		// but M does make a difference on this edge cases, here the answer is denormalized
 		A = {1'b1, 8'h01, 23'h123456};		// -2^(-126) * 1.<something nonzero>
 		B = {1'b0, 8'h7E, 23'h123456};		// +2^(-1) * 1.<something nonzero>
 		a = $bitstoshortreal(A);
@@ -263,7 +263,7 @@ module FP_mul_tb();
 		#1;
 		// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
 		if(OUT[31:23] !== product[31:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! the product of two normalized numbers can be denormalized");
 			$stop();
 		end
 
@@ -276,7 +276,7 @@ module FP_mul_tb();
 		product = $shortrealtobits(o);
 		#1;
 		if(OUT !== product) begin
-			$display("wrong answer!");
+			$display("WRONG ANSWER! this produt should not be denormalized");
 			$stop();
 		end
 
@@ -294,28 +294,28 @@ module FP_mul_tb();
 				#1;
 				if(is_NaN(product)) begin
 					if(!is_NaN(OUT)) begin
-						$display("wrong answer! %b * %b = NaN, not %b", A, B, OUT);
+						$display("WRONG ANSWER! %b * %b = NaN, not %b", A, B, OUT);
 						$stop();
 					end
 				end
-				else begin
+				else begin		// expected product is not NaN
+					// check Sign
 					if(OUT[31] !== product[31]) begin
-						$display("wrong answer! %b * %b = %b, not %b", A, B, product, OUT);
+						$display("WRONG ANSWER! %b * %b = %b, not %b", A, B, product, OUT);
 						$stop();
 					end
-					else begin
+					else begin		// S in product is correct
 						// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
-						if(OUT[31:23] !== product[31:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
+						if(OUT[30:23] !== product[30:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
 							// also allow the difference between 2^(-126) and 2^−126 × (1 − 2^−23) due to same conversion error
 							if(~((OUT[30:0] === FP_POS_MIN[30:0]) && (product[30:0] === FP_POS_SUB_MAX[30:0]))
 								&& ~((product[30:0] === FP_POS_MIN[30:0]) && (OUT[30:0] === FP_POS_SUB_MAX[30:0]))) begin
 								// again, we also have to let 00000000011111111111111111111111 * 00111111100000000000000000000001 and other 7 similar combinations PASS
 								// because modelsim round the former value to 00000000100000000000000000000000 and the later to perfect 1, which introduced a new 100% error
 								// our answer to the above example, 00000000001111111111111111111111, is more precise per the IEEE definition
-								if(OUT[31] !== product[31]		// sign must match
-									|| ~(((A[30:0] === FP_POS_SUB_MAX[30:0]) && (B[30:0] === FP_SLT_ONE[30:0])) 
-										|| ((B[30:0] === FP_POS_SUB_MAX[30:0]) && (A[30:0] === FP_SLT_ONE[30:0])))) begin
-									$display("wrong answer! %b * %b = %b, not %b", A, B, product, OUT);
+								if(~((A[30:0] === FP_POS_SUB_MAX[30:0]) && (B[30:0] === FP_SLT_ONE[30:0])) 
+									&& ~((B[30:0] === FP_POS_SUB_MAX[30:0]) && (A[30:0] === FP_SLT_ONE[30:0]))) begin
+									$display("WRONG ANSWER! %b * %b = %b, not %b", A, B, product, OUT);
 									$stop();
 								end
 							end
