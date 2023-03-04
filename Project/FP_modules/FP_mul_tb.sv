@@ -209,6 +209,56 @@ module FP_mul_tb();
 			$stop();
 		end
 
+		///////////////////////////////////////////////////////////////////////////
+		// test underflow (E too small, so that product is around +/- 2^(-126)  //
+		/////////////////////////////////////////////////////////////////////////
+
+		// (+2^(-64)) * (+2^(-63)) = +0 because not representable with 32 bit float
+		A = {1'b0, 8'h3F, 23'h000001};		// +2^(-64) * 1.<smallest nonzero M>
+		B = {1'b0, 8'h40, 23'h000000};		// +2^(-63)
+		#1;
+		if(OUT !== FP_POS_ZERO) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// (+2^(-38)) * (-2^(-89)) = -0 because not representable with 32 bit float
+		A = {1'b0, 8'h59, 23'hFFFFFF};		// +2^(-38) * 1.<largest M>
+		B = {1'b1, 8'h26, 23'hFFFFFF};		// -2^(-89) * 1.<largest M>
+		#1;
+		if(OUT !== FP_NEG_ZERO) begin
+			$display("wrong answer!");
+			$stop();
+		end
+
+		// sometimes... the product of two normalized numbers can be denormalized
+		A = {1'b0, 8'h01, 23'h000000};		// +2^(-126)
+		B = {1'b0, 8'h72, 23'h000000};		// +2^(-13)
+		a = $bitstoshortreal(A);
+		b = $bitstoshortreal(B);
+		o = a * b;
+		product = $shortrealtobits(o);
+		#1;
+		if(OUT !== product) begin
+			$display("wrong answer!");
+			//$stop();
+		end
+
+		// sometimes... the product of two normalized numbers can be denormalized
+		A = {1'b1, 8'h01, 23'h123456};		// -2^(-126) * 1.<something on zero>
+		B = {1'b0, 8'h7E, 23'h765432};		// +2^(-1) * 1.<something on zero>
+		a = $bitstoshortreal(A);
+		b = $bitstoshortreal(B);
+		o = a * b;
+		product = $shortrealtobits(o);
+		#1;
+		if(OUT !== product) begin
+			$display("wrong answer!");
+			//$stop();
+		end
+
+		//$stop();
+
 		/////////////////////////////////////////////////////////////////
 		// test all 256 combinations of special value multiplication  //
 		///////////////////////////////////////////////////////////////
