@@ -88,6 +88,7 @@ assign diff = A_shft ?
 	 (~diff_raw + 9'b1) : diff_raw;
 // shift amount
 // DO NOT shift when EA and EB are both 0000000X
+// since they represent the same exponent -126
 assign shamt = EA_min&EB_min ? 5'h00 : diff[4:0];
 
 // Append |E in front of M and then
@@ -106,7 +107,8 @@ assign cA = A_shft ? (A[31] ? ~M_shft + 24'b1 : M_shft) :
 assign cB = A_shft ? (B[31] ? ~{|EB,MB} + 24'b1 : {|EB,MB}) :
 					 (B[31] ? ~M_shft + 24'b1 : M_shft);
 // 25-bit 2's comp values with common exponent
-// if shift amount is larger than 0x18 (d24) set to 0	 
+// if shift amount is larger than 0x18 (d24) set one operand to 0
+// as it is relatively too small to be considered
 assign A2c = A_shft & ((|diff[8:5]) | (&diff[4:3])) ? 25'b0 : {A[31],cA};
 assign B2c = ~A_shft & ((|diff[8:5]) | (&diff[4:3])) ? 25'b0 : {B[31],cB};
 
@@ -119,9 +121,11 @@ assign internal_ofl = (~A2c[24] & ~B2c[24] & pre_sum[24]) |
 // OR denormalized exponent needs increment
 // increment common exponent
 assign exp_inc = internal_ofl | (EA0&EB0 & sum_man[23]);
-// decrement exponent by 1 when 
+// decrement exponent by 1 when one of the exponent is
+// 00000001, no internal overflow, but new mantissa starts
+// with 0, this means a denormalized exponent is needed
 assign exp_dec = ~internal_ofl & ((EA1|EB1) & ~sum_man[23]);
-assign shft_sum = internal_ofl ?	// overflowed?
+assign shft_sum = internal_ofl ?	// internal overflowed?
 			{~pre_sum[24],pre_sum[24:1]} : pre_sum;
 // Convert 25-bit 2's comp back into 25-bit signed number
 // {sign,24-bit unsigned}
@@ -157,16 +161,18 @@ always_comb begin
 		24'b0000_0000_0000_0000_0000_01xx: sum_shft = 5'h15;
 		24'b0000_0000_0000_0000_0000_001x: sum_shft = 5'h16;
 		24'b0000_0000_0000_0000_0000_0001: sum_shft = 5'h17;
-		default:	sum_shft = 5'h18;	// should never happen
+		// default case means unfortunately the result is 0
+		default:	sum_shft = 5'h18;
 	endcase
 end
-// if common E is 0000000X, then don't shift
+// if common E is 0000000X, then don't shift, since E is at minimum
 assign sum_shft2 = ~|common_E[7:1] ? 5'h00 : sum_shft;
-// if the 25-bit sum overflows, increment the exponent
+// IF left shifting MORE than 24 bits, zero the exponent
+// IF common exponent is 00000001 and an underflow occurs
+// decrement exponent to 00000000
+// IF the 25-bit sum overflows, increment the exponent
 // otherwise decrement exponent by the number of
 // leading zero(s) of the 24-bit unsigned number sum_man
-// |norm_exp is to determine denormalization
-///////////////////////// below line needs redesign
 assign norm_exp = &sum_shft2[4:3] ? 8'h00 :
 			(exp_dec ? 8'h00 :
 			(exp_inc ? common_E + 8'b1 :
@@ -176,7 +182,7 @@ left_shifter lsht(.In(sum_man),
 				  .Out(norm_sum));
 // normalized mantissa is lower 23-bit of the unsigned number
 assign norm_man = norm_sum[22:0];
-// final output concatination
+// final sign
 assign sign_out = internal_ofl ? ~pre_sum[24] : pre_sum[24];
 
 // pos & neg infinity, and NaN
@@ -186,6 +192,7 @@ assign neg_ifnt = ~sign_out & (&common_E) & ~(|norm_man);
 assign NaN = ((&common_E) & (|norm_man)) |
 			 (A == FP_POS_INF & B == FP_NEG_INF) |
 			 (B == FP_POS_INF & A == FP_NEG_INF);
+// final output concatination
 assign out = NaN ? {sign_out,8'hFF,23'h00DEAD} :
 			(A0 ? B : 
 			(B0 ? A :
