@@ -13,7 +13,7 @@ module signed_int_to_float_tb();
 
 	task automatic test_signed_int_to_float(int test_val);
 		signed_int_val = test_val;
-		temp = $itor(signed_int_val);
+		temp = $itor(test_val);
 		exp_val = $shortrealtobits(temp);
 		#1;
 		// if signs do not match, doom to fail!
