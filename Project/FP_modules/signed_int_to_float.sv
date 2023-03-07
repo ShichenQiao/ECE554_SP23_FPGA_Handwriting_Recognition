@@ -10,7 +10,7 @@ module signed_int_to_float(signed_int_val, FP_val);
 	logic [4:0] cnt_trailing_zero;
 
     // get the absolute value of the input integer
-    assign abs_int = signed_int_val[31] ? (~signed_int_val[30:0] + 1) : signed_int_val[30:0];
+    assign abs_int = signed_int_val[31] ? (~signed_int_val[30:0] + 31'h00000001) : signed_int_val[30:0];
 
     // calculate the exponent based on the number of leading zeros in the absolute value
     assign E = ~|abs_int ? 8'h00 : 8'd127 + (5'h1E - cnt_trailing_zero);
@@ -19,7 +19,8 @@ module signed_int_to_float(signed_int_val, FP_val);
     assign M = abs_int_shifted[29:7];
 
     // concatenate S, E, M to form output FP value
-    assign FP_val = {signed_int_val[31], E, M};
+    assign FP_val = signed_int_val == 32'h80000000 ? {1'b1, 8'd158, 23'h000000} :	// handle -2147483648, which is -2^31 seperately, since (~signed_int_val[30:0] + 31'h00000001) overflows
+					{signed_int_val[31], E, M};
 
 	// find how much abs_int needed to be shifted to the right for FP normalization
 	always_comb begin
