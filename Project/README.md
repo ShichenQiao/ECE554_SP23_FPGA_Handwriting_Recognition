@@ -3,7 +3,7 @@
 **Week 2/27 - 3/5** <br />
 **Group:** Project Proposal, ISA <br />
 **HQ:** Fully implemented and validated FP_adder.sv. Still working on fixing bugs. 256 edge case tests PASSED. <br />
-**HZ:** <br />
+**HZ:** Expanded 16-bit ISA CPU to 32 bit CPU and verified that previous operations still work as expected. Rewrite assembler to translate Assembly language to our defined 32 bit machine language.<br />
 **JQ:** Fully implemented and validated fp_mul.sv, supporting any FP, denormalized FP, or combined operations with minimal error on LSB cause by convertions between shortread and logic. 23 extreme value tests, 1000 random tests, and 256 corner case tests PASSED. <br />
 &emsp;Decided to loosen test constraints in the following 3 cases: <br />
 1. allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error <br />
