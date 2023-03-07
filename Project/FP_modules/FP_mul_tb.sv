@@ -117,7 +117,9 @@ module FP_mul_tb();
 			B = $shortrealtobits(b);
 			#1;
 			// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
-			if(OUT[31:23] !== product[31:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
+			if((OUT[30:23] !== product[30:23]) ||
+			   (signed'({2'b00, OUT[22:0]}) < signed'({2'b00, product[22:0]}) - signed'(25'h000002)) ||
+			   (signed'({2'b00, OUT[22:0]}) > signed'({2'b00, product[22:0]}) + signed'(25'h000002))) begin
 				$display("WRONG ANSWER! %b * %b = %b, not %b", A, B, product, OUT);
 				$stop();
 			end
@@ -262,8 +264,10 @@ module FP_mul_tb();
 		product = $shortrealtobits(o);
 		#1;
 		// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
-		if(OUT[31:23] !== product[31:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
-			$display("WRONG ANSWER! the product of two normalized numbers can be denormalized");
+		if((OUT[30:23] !== product[30:23]) ||
+		   (signed'({2'b00, OUT[22:0]}) < signed'({2'b00, product[22:0]}) - signed'(25'h000002)) ||
+		   (signed'({2'b00, OUT[22:0]}) > signed'({2'b00, product[22:0]}) + signed'(25'h000002))) begin
+    		$display("WRONG ANSWER! the product of two normalized numbers can be denormalized");
 			$stop();
 		end
 
@@ -306,20 +310,27 @@ module FP_mul_tb();
 					end
 					else begin		// S in product is correct
 						// allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error
-						if(OUT[30:23] !== product[30:23] || ((OUT[22:0] <= product[22:0] - 2) && (OUT[22:0] >= product[22:0] + 2))) begin
-							// also allow the difference between 2^(-126) and 2^−126 × (1 − 2^−23) due to same conversion error
-							if(~((OUT[30:0] === FP_POS_MIN[30:0]) && (product[30:0] === FP_POS_SUB_MAX[30:0]))
-								&& ~((product[30:0] === FP_POS_MIN[30:0]) && (OUT[30:0] === FP_POS_SUB_MAX[30:0]))) begin
-								// again, we also have to let 00000000011111111111111111111111 * 00111111100000000000000000000001 and other 7 similar combinations PASS
-								// because modelsim round the former value to 00000000100000000000000000000000 and the later to perfect 1, which introduced a new 100% error
-								// our answer to the above example, 00000000001111111111111111111111, is more precise per the IEEE definition
-								if(~((A[30:0] === FP_POS_SUB_MAX[30:0]) && (B[30:0] === FP_SLT_ONE[30:0])) 
-									&& ~((B[30:0] === FP_POS_SUB_MAX[30:0]) && (A[30:0] === FP_SLT_ONE[30:0]))) begin
-									$display("WRONG ANSWER! %b * %b = %b, not %b", A, B, product, OUT);
-									$stop();
-								end
-							end
+						if((OUT[30:23] === product[30:23]) &&
+						   (signed'({2'b00, OUT[22:0]}) >= signed'({2'b00, product[22:0]}) - signed'(25'h000002)) &&
+						   (signed'({2'b00, OUT[22:0]}) <= signed'({2'b00, product[22:0]}) + signed'(25'h000002))) begin
+							continue;
 						end
+						// also allow the difference between 2^(-126) and 2^−126 × (1 − 2^−23) due to same conversion error
+						if(((OUT[30:0] === FP_POS_MIN[30:0]) && (product[30:0] === FP_POS_SUB_MAX[30:0])) ||
+						   ((product[30:0] === FP_POS_MIN[30:0]) && (OUT[30:0] === FP_POS_SUB_MAX[30:0]))) begin
+							continue;
+						end
+						// again, we also have to let 00000000011111111111111111111111 * 00111111100000000000000000000001 and other 7 similar combinations PASS
+						// because modelsim round the former value to 00000000100000000000000000000000 and the later to perfect 1, which introduced a new 100% error
+						// our answer to the above example, 00000000001111111111111111111111, is more precise per the IEEE definition
+						if(((A[30:0] === FP_POS_SUB_MAX[30:0]) && (B[30:0] === FP_SLT_ONE[30:0])) ||
+						   ((B[30:0] === FP_POS_SUB_MAX[30:0]) && (A[30:0] === FP_SLT_ONE[30:0]))) begin
+							continue;
+						end
+
+						// if not fall into any of the 3 categories above, testcase FAILED
+						$display("WRONG ANSWER! %b * %b = %b, not %b", A, B, product, OUT);
+						$stop();
 					end
 				end
 			end

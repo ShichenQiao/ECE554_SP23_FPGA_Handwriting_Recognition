@@ -18,7 +18,9 @@ module signed_int_to_float_tb();
 			a = $itor(signed_int_val);
 			exp_val = $shortrealtobits(a);
 			#1;
-			if((FP_val[31:23] !== exp_val[31:23]) || (FP_val[22:0] < exp_val[22:0] - 1) || (FP_val[22:0] > exp_val[22:0] + 1)) begin
+			if((FP_val[30:23] !== exp_val[30:23]) ||
+			   (signed'({2'b00, FP_val[22:0]}) < signed'({2'b00, exp_val[22:0]}) - signed'(25'h000001)) ||
+		       (signed'({2'b00, FP_val[22:0]}) > signed'({2'b00, exp_val[22:0]}) + signed'(25'h000001))) begin
 				$display("WRONG ANSWER!");
 				$stop();
 			end

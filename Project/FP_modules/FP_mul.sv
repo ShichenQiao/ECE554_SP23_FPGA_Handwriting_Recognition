@@ -41,14 +41,14 @@ module FP_mul(A, B, OUT);
 	// result is a ZERO if any input is a ZERO, or if result's exponent is too small
 	assign ZERO = ~|A[30:0] || ~|B[30:0] || ({1'b0, EA} + {1'b0, EB} < 9'h080 - room_for_denormalization);
 
-	// need for denormalization is how far the product's exponent below -126
-	assign need_for_denormalization = 9'h080 - {1'b0, EA} - {1'b0, EB};
+	// need for denormalization is how far the product's exponent below -126, if one of EA and EB is already denormalized, restore 1 due to -127 is essentially -126 for E
+	assign need_for_denormalization = 9'h07F - {1'b0, EA} - {1'b0, EB} - ((~|EA) ^ (~|EB));
 
 	// room for denormalization is how much can prod_M be shifted to the right before becoming ZERO
 	assign room_for_denormalization = 5'h18 - shift_amount;
 
 	// get denormalized MO according to the needed amount
-	assign denormalized_MO = prod_M[46:24] >> (need_for_denormalization - 1);
+	assign denormalized_MO = prod_M[46:24] >> need_for_denormalization;
 
 	// result is a INF is any input is a INF, or if result's exponent value is larger than 127
 	// this happens when (EA - 127) + (EB - 127) > 127, which is equivalent to EA + EB > 381
