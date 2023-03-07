@@ -2,7 +2,7 @@
 
 **Week 2/27 - 3/5** <br />
 Group: Project Proposal, ISA <br />
-HQ: <br />
+HQ: Fully implemented and validated FP_adder.sv. Still working on fixing bugs. 256 edge case tests PASSED. <br />
 HZ: <br />
 JQ: Fully implemented and validated fp_mul.sv, supporting any FP, denormalized FP, or combined operations with minimal error on LSB cause by convertions between shortread and logic. 8 extreme value tests, 1000 random tests, and 256 corner case tests PASSED. <br />
 QL: <br />
