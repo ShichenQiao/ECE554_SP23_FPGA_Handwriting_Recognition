@@ -9,6 +9,7 @@
 1. allow -2 ~ +2 difference (on the LSBs of M) due to shortrealtobits and bitstoshortreal error <br />
 2. also allow the difference between 2^(-126) and 2^−126 × (1 − 2^−23) due to same conversion error <br />
 3. also have to let 00000000011111111111111111111111 * 00111111100000000000000000000001 and other 7 similar combinations PASS, because modelsim round the former value to 00000000100000000000000000000000 and the later to perfect 1, which introduced a new 100% error - our answer to the above example, 00000000001111111111111111111111, is more precise per the IEEE definition <br />
+
 **QL:** Explored with the camera utility. Understood how cameras could zoom in, zoom out, adjust explosures to capture from computer screens, white boards, or plain paper.<br />
 
 **Week 3/6 - 3/12** <br />
