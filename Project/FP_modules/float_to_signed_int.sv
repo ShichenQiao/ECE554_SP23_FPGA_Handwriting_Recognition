@@ -12,7 +12,7 @@ module float_to_signed_int(FP_val, signed_int_val);
 	assign E = FP_val[30:23];
 
     // calculate the absolute value of the integer
-    assign abs_int = {|E, M} << (E - 8'd127);
+    assign abs_int = {8'h00, |E, M} << (E - 8'd127);
 
     // set the sign of the integer based on the sign bit of the floating-point value
     assign signed_int_val = (FP_val[31]) ? {1'b1, (~abs_int + 31'd00000001)} : {1'b0, abs_int};
