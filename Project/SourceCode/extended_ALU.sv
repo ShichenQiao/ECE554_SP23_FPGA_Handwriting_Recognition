@@ -26,8 +26,8 @@ module extended_ALU(clk, src0, src1, func, dst_EX_DM, ov, zr, neg);
     /////////////////////
 
     FP_adder ifadd(
-        .A(src0),
-        .B(func==SUBF ? {~src1[31], src1[30:0]} : src1),    // flip second operand if doing A - B
+        .A(src1),
+        .B(func==SUBF ? {~src0[31], src0[30:0]} : src0),    // flip second operand if doing A - B
         .out(ifadd_OUT)
     );
 
@@ -38,18 +38,18 @@ module extended_ALU(clk, src0, src1, func, dst_EX_DM, ov, zr, neg);
     );
 
     float_to_signed_int iftoi(
-        .FP_val(src0),
+        .FP_val(src1),
         .signed_int_val(iftoi_OUT)
     );
 
     signed_int_to_float iitof(
-        .signed_int_val(src0),
+        .signed_int_val(src1),
         .FP_val(iitof_OUT)
     );
 
     int_mul_16by16 iimul(
-        .A(src0),
-        .B(src1),
+        .A(src0[15:0]),
+        .B(src1[15:0]),
         .sign(~func[0]),            // 0 ==> MUL 1 ==> UMUL
         .OUT(iimul_OUT)
     );

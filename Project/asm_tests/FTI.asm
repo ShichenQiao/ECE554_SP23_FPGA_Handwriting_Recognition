@@ -1,0 +1,5 @@
+LLB R30, 0x4d20
+LHB R30, 0x4705   # 34125.125
+FTI R31, R30
+
+# The result should be 0x854D 34125

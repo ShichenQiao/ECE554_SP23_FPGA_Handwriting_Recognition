@@ -1,0 +1,5 @@
+LLB R1, 0xABCD  #-21555
+LLB R2, 0x78EF  #30959
+UMUL R3, R1, R2
+
+# The result should be 0x51287c63 1,361,607,779
