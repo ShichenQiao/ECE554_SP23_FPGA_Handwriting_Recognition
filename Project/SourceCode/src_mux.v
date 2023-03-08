@@ -11,9 +11,11 @@ input [31:0] pc_ID_EX;                          // Next PC for JAL instruction
 input [15:0] imm_ID_EX;                         // immediate from instruction stream goes on src0
 input [31:0] dst_EX_DM;                         // EX_DM results for bypassing RF reads
 input [31:0] dst_ext_EX_DM;                     // ext_EX_DM results for bypassing RF reads
+input [31:0] stack_EX_DM;                       // stack pop results for bypassing RF reads
 input [31:0] dst_DM_WB;                         // DM_WB results for bypassing RF reads
 input byp0_EX,byp1_EX;                          // From ID, selects EX results to bypass RF sources
 input byp0_ext_EX, byp1_ext_EX;                 // From ID, selects ext_EX results to bypass RF sources
+input byp0_stack_pop, byp1_stack_pop;           // From ID, selects stack results to bypass RF sources
 input byp0_DM,byp1_DM;                          // From ID, selects DM results to bypass RF sources
 output reg [31:0] p0_EX_DM;                     // need to output this as data for SW instructions
 output [31:0] src0,src1;                        // source busses
@@ -44,6 +46,7 @@ always @(posedge clk)
 ///////////////////////////
 assign RF_p0 = (byp0_EX) ? dst_EX_DM :        // EX gets priority because it represents more recent data
                (byp0_ext_EX) ? dst_ext_EX_DM :
+               (byp0_stack_pop) ? stack_EX_DM :
                (byp0_DM) ? dst_DM_WB :
                p0_ID_EX;
 
@@ -52,6 +55,7 @@ assign RF_p0 = (byp0_EX) ? dst_EX_DM :        // EX gets priority because it rep
 ///////////////////////////
 assign RF_p1 = (byp1_EX) ? dst_EX_DM :        // EX gets priority because it represents more recent data
                (byp1_ext_EX) ? dst_ext_EX_DM :
+               (byp1_stack_pop) ? stack_EX_DM :
                (byp1_DM) ? dst_DM_WB :
                p1_ID_EX;    
 

@@ -29,6 +29,7 @@ wire [1:0] src0sel_ID_EX;          // select for src0 bus
 wire [1:0] src1sel_ID_EX;          // select for src1 bus
 wire [2:0] cc_ID_EX;               // condition code pipeline from instr[11:9]
 wire [31:0] p0_EX_DM;              // data to be stored for SW
+wire [31:0] stack_EX_DM;           // stack output from stack module
 
 wire dm_re_EX_DM, dm_we_EX_DM;    // DM enable signals from id
 wire [31:0] dst_mux_data_in;    // data selection mux output (between internal and external rdata)
@@ -63,15 +64,15 @@ IM iIM(.clk(clk), .addr(iaddr[13:0]), .rd_en(1'b1), .instr(instr));
 ////////////////////////////////////////////
 id iID(.clk(clk), .rst_n(rst_n), .instr(instr), .zr_EX_DM(zr_EX_DM), .br_instr_ID_EX(br_instr_ID_EX),
        .jmp_imm_ID_EX(jmp_imm_ID_EX), .jmp_reg_ID_EX(jmp_reg_ID_EX), .jmp_imm_EX_DM(jmp_imm_EX_DM), 
-       .ext_alu_EX_DM(ext_alu_EX_DM), .rf_re0(rf_re0),
+       .ext_alu_EX_DM(ext_alu_EX_DM), .stack_pop_EX_DM(stack_pop_EX_DM), .rf_re0(rf_re0),
        .rf_re1(rf_re1), .rf_we_DM_WB(rf_we_DM_WB), .rf_p0_addr(rf_p0_addr), .rf_p1_addr(rf_p1_addr),
-       .rf_dst_addr_DM_WB(rf_dst_addr_DM_WB), .alu_func_ID_EX(alu_func_ID_EX),
+       .rf_dst_addr_DM_WB(rf_dst_addr_DM_WB), .alu_func_ID_EX(alu_func_ID_EX), .stack_push_ID_EX(stack_push_ID_EX), .stack_pop_ID_EX(stack_pop_ID_EX),
        .src0sel_ID_EX(src0sel_ID_EX), .src1sel_ID_EX(src1sel_ID_EX), .dm_re_EX_DM(dm_re_EX_DM),
        .dm_we_EX_DM(dm_we_EX_DM), .im_re_EX_DM(im_re_EX_DM), .clk_z_ID_EX(clk_z_ID_EX), .clk_nv_ID_EX(clk_nv_ID_EX),
        .clk_z_ID_ext_EX(clk_z_ID_ext_EX), .clk_nv_ID_ext_EX(clk_nv_ID_ext_EX),
        .instr_ID_EX(instr_ID_EX), .cc_ID_EX(cc_ID_EX), .stall_IM_ID(stall_IM_ID),
        .stall_ID_EX(stall_ID_EX), .stall_EX_DM(stall_EX_DM), .hlt_DM_WB(hlt_DM_WB),
-       .byp0_EX(byp0_EX), .byp0_DM(byp0_DM), .byp1_EX(byp1_EX), .byp1_DM(byp1_DM),
+       .byp0_EX(byp0_EX), .byp0_DM(byp0_DM), .byp1_EX(byp1_EX), .byp1_DM(byp1_DM), .byp0_stack_pop(byp0_stack_pop), .byp1_stack_pop(byp1_stack_pop),
        .byp0_ext_EX(byp0_ext_EX), .byp1_ext_EX(byp1_ext_EX),
        .flow_change_ID_EX(flow_change_ID_EX));
 
@@ -90,7 +91,7 @@ src_mux ISRCMUX(.clk(clk), .stall_ID_EX(stall_ID_EX), .stall_EX_DM(stall_EX_DM),
                 .src0sel_ID_EX(src0sel_ID_EX), .src1sel_ID_EX(src1sel_ID_EX), .p0(p0), .p1(p1),
                 .imm_ID_EX(instr_ID_EX), .pc_ID_EX(pc_ID_EX), .p0_EX_DM(p0_EX_DM),
                 .src0(src0), .src1(src1), .dst_EX_DM(dst_EX_DM), .dst_ext_EX_DM(dst_ext_EX_DM), .dst_DM_WB(rf_w_data_DM_WB),
-                .byp0_EX(byp0_EX), .byp0_DM(byp0_DM), .byp1_EX(byp1_EX), .byp1_DM(byp1_DM), .byp0_ext_EX(byp0_ext_EX), .byp1_ext_EX(byp1_ext_EX));
+                .byp0_EX(byp0_EX), .byp0_DM(byp0_DM), .byp1_EX(byp1_EX), .byp1_DM(byp1_DM), .byp0_ext_EX(byp0_ext_EX), .byp1_ext_EX(byp1_ext_EX), .byp0_stack_pop(byp0_stack_pop), .byp1_stack_pop(byp1_stack_pop),);
        
 //////////////////////
 // Instantiate ALU //
@@ -102,7 +103,12 @@ alu iALU(.clk(clk), .src0(src0), .src1(src1), .shamt(instr_ID_EX[4:0]), .func(al
 // Instantiate extended_ALU, including FP operations and multipliers //
 //////////////////////////////////////////////////////////////////////
 extended_ALU iEXT_ALU(.clk(clk), .src0(src0), .src1(src1), .func(alu_func_ID_EX),
-                     .dst_EX_DM(dst_ext_EX_DM), .ov(ext_ov), .zr(ext_zr), .neg(ext_neg));        
+                     .dst_EX_DM(dst_ext_EX_DM), .ov(ext_ov), .zr(ext_zr), .neg(ext_neg)); 
+
+/////////////////////////////////////
+// Instantiate STACK for PUSH/POP //
+///////////////////////////////////
+stack iSTACK(.clk(clk), .rst_n(rst_n), .push(stack_push_ID_EX), .pop(stack_pop_ID_EX), .wdata(src1), .rdata(stack_EX_DM));       
 
 //////////////////////////////
 // Instantiate data memory //
@@ -122,7 +128,7 @@ IM iIM_LWI(.clk(clk), .addr(dst_EX_DM[13:0]), .rd_en(im_re_EX_DM), .instr(im_rd_
 ////////////////////////
 dst_mux iDSTMUX(.clk(clk), .dm_re_EX_DM(dm_re_EX_DM), .im_re_EX_DM(im_re_EX_DM), .dm_rd_data_EX_DM(dst_mux_data_in), .im_rd_data_EX_DM(im_rd_data_EX_DM),
                 .dst_EX_DM(dst_EX_DM), .pc_EX_DM(pc_EX_DM), .rf_w_data_DM_WB(rf_w_data_DM_WB),
-                .dst_ext_EX_DM(dst_ext_EX_DM), .jmp_imm_EX_DM(jmp_imm_EX_DM), .ext_alu_EX_DM(ext_alu_EX_DM));
+                .dst_ext_EX_DM(dst_ext_EX_DM), .stack_EX_DM(stack_EX_DM), .jmp_imm_EX_DM(jmp_imm_EX_DM), .ext_alu_EX_DM(ext_alu_EX_DM), .stack_pop_EX_DM(stack_pop_EX_DM));
     
 /////////////////////////////////////////////
 // Instantiate branch determination logic //

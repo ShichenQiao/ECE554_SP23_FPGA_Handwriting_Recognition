@@ -1,8 +1,8 @@
 module id(clk,rst_n,instr,zr_EX_DM,br_instr_ID_EX,jmp_imm_ID_EX,jmp_reg_ID_EX,
-          jmp_imm_EX_DM,ext_alu_EX_DM,rf_re0,rf_re1,
-          rf_we_DM_WB,rf_p0_addr,rf_p1_addr,rf_dst_addr_DM_WB,alu_func_ID_EX,src0sel_ID_EX,
+          jmp_imm_EX_DM,ext_alu_EX_DM,stack_pop_EX_DM, rf_re0,rf_re1,
+          rf_we_DM_WB,rf_p0_addr,rf_p1_addr,rf_dst_addr_DM_WB,alu_func_ID_EX, stack_push_ID_EX, stack_pop_ID_EX, src0sel_ID_EX,
           src1sel_ID_EX,dm_re_EX_DM,dm_we_EX_DM,im_re_EX_DM, clk_z_ID_EX,clk_nv_ID_EX,clk_z_ID_ext_EX, clk_nv_ID_ext_EX, instr_ID_EX,
-          cc_ID_EX, stall_IM_ID,stall_ID_EX,stall_EX_DM,hlt_DM_WB,byp0_EX,byp0_DM,
+          cc_ID_EX, stall_IM_ID,stall_ID_EX,stall_EX_DM,hlt_DM_WB,byp0_EX,byp0_DM, byp0_stack_pop, byp1_stack_pop,
           byp1_EX,byp1_DM, byp0_ext_EX, byp1_ext_EX, flow_change_ID_EX);
 
 input clk,rst_n;
@@ -15,6 +15,7 @@ output reg jmp_reg_ID_EX;
 output reg br_instr_ID_EX;              // set if instruction is branch instruction
 output reg jmp_imm_EX_DM;               // needed for JAL in dst_mux
 output reg ext_alu_EX_DM;               // needed for ext_ALU in dst_mux
+output reg stack_pop_EX_DM;             // needed for stack in dst_mux
 output reg rf_re0;                      // asserted if instruction needs to read operand 0 from RF
 output reg rf_re1;                      // asserted if instruction needs to read operand 1 from RF
 output reg rf_we_DM_WB;                 // set if instruction is writing back to RF
@@ -22,6 +23,8 @@ output reg [4:0] rf_p0_addr;            // normally instr[4:0] but for LHB and S
 output reg [4:0] rf_p1_addr;            // normally instr[12:8]
 output reg [4:0] rf_dst_addr_DM_WB;     // normally instr[20:16] but for JAL it is forced to 31
 output reg [2:0] alu_func_ID_EX;        // select ALU operation to be performed
+output reg stack_push_ID_EX;            // stack_push to be performed
+output reg stack_pop_ID_EX;             // stack_pop to be performed
 output reg [1:0] src0sel_ID_EX;         // select source for src0 bus
 output reg [1:0] src1sel_ID_EX;         // select source for src1 bus
 output reg dm_re_EX_DM;                 // asserted on loads
@@ -40,6 +43,7 @@ output reg hlt_DM_WB;                   // needed for register dump
 output reg byp0_EX,byp0_DM;             // bypasing controls for RF_p0
 output reg byp1_EX,byp1_DM;             // bypassing controls for RF_p1
 output reg byp0_ext_EX, byp1_ext_EX;    // bypassing controls for ext_ALU
+output reg byp0_stack_pop, byp1_stack_pop; //bypassing controls for stack
 ////////////////////////////////////////////////////////////////
 // Register type needed for assignment in combinational case //
 //////////////////////////////////////////////////////////////
@@ -54,6 +58,8 @@ reg [1:0] src0sel,src1sel;
 reg dm_re;
 reg dm_we;
 reg im_re;
+reg stack_push;
+reg stack_pop;
 reg clk_z;
 reg clk_nv;
 reg clk_ext_z;
@@ -104,6 +110,8 @@ always @(posedge clk)
       rf_we_ID_EX       <= rf_we & !load_use_hazard & !flush;
       rf_dst_addr_ID_EX <= rf_dst_addr;
       alu_func_ID_EX    <= alu_func;
+      stack_push_ID_EX  <= stack_push;
+      stack_pop_ID_EX   <= stack_pop;
       src0sel_ID_EX     <= src0sel;
       src1sel_ID_EX     <= src1sel;
       dm_re_ID_EX       <= dm_re & !load_use_hazard & !flush;
@@ -149,18 +157,22 @@ always @(posedge clk, negedge rst_n)
     begin
       byp0_EX <= 1'b0;
       byp0_ext_EX <= 1'b0;
+      byp0_stack_pop <= 1'b0;
       byp0_DM <= 1'b0;
       byp1_EX <= 1'b0;
       byp1_ext_EX <= 1'b0;
+      byp1_stack_pop <= 1'b0;
       byp1_DM <= 1'b0;
     end
   else
     begin
       byp0_EX <= (rf_dst_addr_ID_EX==rf_p0_addr) ? (rf_we_ID_EX & |rf_p0_addr & !ext_alu_ID_EX) : 1'b0;
       byp0_ext_EX <= (rf_dst_addr_ID_EX==rf_p0_addr) ? (rf_we_ID_EX & |rf_p0_addr & ext_alu_ID_EX) : 1'b0;
+      byp0_stack_pop <= (rf_dst_addr_ID_EX==rf_p0_addr) ? (rf_we_ID_EX & |rf_p0_addr & stack_pop_ID_EX) : 1'b0;
       byp0_DM <= (rf_dst_addr_EX_DM==rf_p0_addr) ? (rf_we_EX_DM & |rf_p0_addr) : 1'b0;
       byp1_EX <= (rf_dst_addr_ID_EX==rf_p1_addr) ? (rf_we_ID_EX & |rf_p1_addr & !ext_alu_ID_EX) : 1'b0;
       byp1_ext_EX <= (rf_dst_addr_ID_EX==rf_p1_addr) ? (rf_we_ID_EX & |rf_p1_addr & ext_alu_ID_EX) : 1'b0;
+      byp1_stack_pop <= (rf_dst_addr_ID_EX==rf_p1_addr) ? (rf_we_ID_EX & |rf_p1_addr & stack_pop_ID_EX) : 1'b0;
       byp1_DM <= (rf_dst_addr_EX_DM==rf_p1_addr) ? (rf_we_EX_DM & |rf_p1_addr) : 1'b0;
     end
     
@@ -230,6 +242,8 @@ always @(instr_IM_ID) begin
   hlt = 0;
   cond_ex = 0;
   ext_alu = 0;
+  stack_pop = 0;
+  stack_push = 0;
 
   case (instr_IM_ID[31:27])
     ADDi : begin
@@ -337,11 +351,13 @@ always @(instr_IM_ID) begin
       rf_we = 1;
       im_re = 1;
     end
-    PUSHi : begin         // not implemented
-      hlt = 1;
+    PUSHi : begin
+      stack_push = 1;
+      rf_re1 = 1;
     end
-    POPi : begin          // not implemented
-      hlt = 1;
+    POPi : begin
+      stack_pop = 1;
+      rf_we = 1;
     end
     MULi : begin
       rf_re0 = 1;
