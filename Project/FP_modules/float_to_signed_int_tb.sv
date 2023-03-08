@@ -34,7 +34,7 @@ module float_to_signed_int_tb();
 		// if E in FP input is too large or too small, this if check will automatically let it PASS, since the converted int is meaningless anyways
 		if((signed_int_val >>> precision_right_shift) > (exp_val >>> precision_right_shift) + 1 ||
 		   (signed_int_val >>> precision_right_shift) < (exp_val >>> precision_right_shift) - 1) begin
-			$display("WRONG ANSWER! %b  %b", signed_int_val >>> precision_right_shift, exp_val >>> precision_right_shift);
+			$display("WRONG ANSWER! after precision_right_shift %d bits, expecting %b got %b", precision_right_shift, signed_int_val >>> precision_right_shift, exp_val >>> precision_right_shift);
 			$stop();
 		end
 	endtask
