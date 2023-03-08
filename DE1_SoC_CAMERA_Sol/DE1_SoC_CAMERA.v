@@ -36,28 +36,8 @@
 
 module DE1_SoC_CAMERA(
 
-      ///////// ADC /////////
-      inout              ADC_CS_N,
-      output             ADC_DIN,
-      input              ADC_DOUT,
-      output             ADC_SCLK,
-
-      ///////// AUD /////////
-      input              AUD_ADCDAT,
-      inout              AUD_ADCLRCK,
-      inout              AUD_BCLK,
-      output             AUD_DACDAT,
-      inout              AUD_DACLRCK,
-      output             AUD_XCK,
-
       ///////// CLOCK2 /////////
       input              CLOCK2_50,
-
-      ///////// CLOCK3 /////////
-      input              CLOCK3_50,
-
-      ///////// CLOCK4 /////////
-      input              CLOCK4_50,
 
       ///////// CLOCK /////////
       input              CLOCK_50,
@@ -75,38 +55,6 @@ module DE1_SoC_CAMERA(
       output             DRAM_UDQM,
       output             DRAM_WE_N,
 
-      ///////// FAN /////////
-      output             FAN_CTRL,
-
-      ///////// FPGA /////////
-      output             FPGA_I2C_SCLK,
-      inout              FPGA_I2C_SDAT,
-
-      ///////// GPIO /////////
-      inout     [35:0]   GPIO_0,
-	
-      ///////// HEX0 /////////
-      output      [6:0]  HEX0,
-
-      ///////// HEX1 /////////
-      output      [6:0]  HEX1,
-
-      ///////// HEX2 /////////
-      output      [6:0]  HEX2,
-
-      ///////// HEX3 /////////
-      output      [6:0]  HEX3,
-
-      ///////// HEX4 /////////
-      output      [6:0]  HEX4,
-
-      ///////// HEX5 /////////
-      output      [6:0]  HEX5,
-
-
-      ///////// IRDA /////////
-      input              IRDA_RXD,
-      output             IRDA_TXD,
 
       ///////// KEY /////////
       input       [3:0]  KEY,
@@ -114,21 +62,8 @@ module DE1_SoC_CAMERA(
       ///////// LEDR /////////
       output      [9:0]  LEDR,
 
-      ///////// PS2 /////////
-      inout              PS2_CLK,
-      inout              PS2_CLK2,
-      inout              PS2_DAT,
-      inout              PS2_DAT2,
-
       ///////// SW /////////
       input       [9:0]  SW,
-
-      ///////// TD /////////
-      input              TD_CLK27,
-      input      [7:0]   TD_DATA,
-      input              TD_HS,
-      output             TD_RESET_N,
-      input              TD_VS,
 
       ///////// VGA /////////
       output      [7:0]  VGA_B,
@@ -182,11 +117,6 @@ wire	       [11:0]			dCCD_G;
 wire	       [11:0]			dCCD_B;
 wire							dCCD_DVAL;
 
-wire	       [11:0]			pCCD_R;
-wire	       [11:0]			pCCD_G;
-wire	       [11:0]			pCCD_B;
-wire							pCCD_DVAL;
-
 wire	       [11:0]			sCCD_R;
 wire	       [11:0]			sCCD_G;
 wire	       [11:0]			sCCD_B;
@@ -208,12 +138,11 @@ assign	D5M_RESET_N	=	DLY_RST_1;
 
 assign   VGA_CTRL_CLK = VGA_CLK;
 
-assign	LEDR		=	Y_Cont;
 
 //fetch the high 8 bits
-assign  VGA_R = SW[1]?(|oVGA_R[9:8]?8'hff:oVGA_R[7:0]):oVGA_R[9:2];
-assign  VGA_G = SW[1]?(|oVGA_G[9:8]?8'hff:oVGA_G[7:0]):oVGA_G[9:2];
-assign  VGA_B = SW[1]?(|oVGA_B[9:8]?8'hff:oVGA_B[7:0]):oVGA_B[9:2];
+assign  VGA_R = oVGA_R[9:2];
+assign  VGA_G = oVGA_G[9:2];
+assign  VGA_B = oVGA_B[9:2];
 
 //D5M read 
 always@(posedge D5M_PIXLCLK)
@@ -268,33 +197,10 @@ RAW2GRAY				u4	(
 
 						   assign	dCCD_R = dCCD_G;
 						   assign	dCCD_B = dCCD_G;
-						   
-imgproc				u4a	(
-							.iCLK(D5M_PIXLCLK),
-							.iRST(DLY_RST_1),
-							.iDATA(mCCD_DATA),
-							.iDVAL(mCCD_DVAL),
-							.oRed(pCCD_R),
-							.oGreen(pCCD_G),
-							.oBlue(pCCD_B),
-							.oDVAL(pCCD_DVAL),
-							.iX_Cont(X_Cont),
-							.iY_Cont(Y_Cont),
-							.iSW(SW[3])
-							);
 
-assign {sCCD_R,sCCD_G,sCCD_B,sCCD_DVAL}=SW[2]?{dCCD_R,dCCD_G,dCCD_B,dCCD_DVAL}:{pCCD_R,pCCD_G,pCCD_B,pCCD_DVAL};
-							
-//assign {sCCD_R,sCCD_G,sCCD_B,sCCD_DVAL}={dCCD_R,dCCD_G,dCCD_B,dCCD_DVAL};
+assign {sCCD_R,sCCD_G,sCCD_B,sCCD_DVAL}={dCCD_R,dCCD_G,dCCD_B,dCCD_DVAL};
 							
 
-//Frame count display
-SEG7_LUT_6 			u5	(
-							.oSEG0(HEX0),.oSEG1(HEX1),
-							.oSEG2(HEX2),.oSEG3(HEX3),
-							.oSEG4(HEX4),.oSEG5(HEX5),
-							.iDIG(Frame_Cont[23:0])
-						   );
 												
 sdram_pll 			u6	(
 							.refclk(CLOCK_50),

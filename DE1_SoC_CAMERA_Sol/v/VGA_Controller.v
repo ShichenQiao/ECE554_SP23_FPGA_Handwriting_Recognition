@@ -140,11 +140,31 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_H_SYNC <= 0;
 				oVGA_V_SYNC <= 0; 
 			end
-		else
-			begin
+		else if ((H_Cont >= 192 + X_START) & (H_Cont < 448 + X_START) & (V_Cont >= 112 + Y_START) & (V_Cont < 368 + Y_START))
+		   begin 
 				oVGA_R <= mVGA_R;
 				oVGA_G <= mVGA_G;
                 oVGA_B <= mVGA_B;
+				oVGA_BLANK <= mVGA_BLANK;
+				oVGA_SYNC <= mVGA_SYNC;
+				oVGA_H_SYNC <= mVGA_H_SYNC;
+				oVGA_V_SYNC <= mVGA_V_SYNC;		
+		   end
+		else if ((H_Cont < 182 + X_START) | (H_Cont > 458 + X_START) | (V_Cont < 102 + Y_START) | (V_Cont > 378 + Y_START))
+		   begin 
+				oVGA_R <= mVGA_R;
+				oVGA_G <= mVGA_G;
+                oVGA_B <= mVGA_B;
+				oVGA_BLANK <= mVGA_BLANK;
+				oVGA_SYNC <= mVGA_SYNC;
+				oVGA_H_SYNC <= mVGA_H_SYNC;
+				oVGA_V_SYNC <= mVGA_V_SYNC;		
+		   end
+		else
+			begin
+				oVGA_R <= 0;
+				oVGA_G <= 0;
+                oVGA_B <= 0;
 				oVGA_BLANK <= mVGA_BLANK;
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;

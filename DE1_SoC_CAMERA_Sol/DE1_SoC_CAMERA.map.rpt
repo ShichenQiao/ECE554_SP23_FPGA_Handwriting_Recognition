@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE1_SoC_CAMERA
-Thu Mar  2 17:21:03 2023
+Tue Mar  7 19:17:51 2023
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -21,93 +21,78 @@ Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
  13. Removed Registers Triggering Further Register Optimizations
  14. General Register Statistics
  15. Inverted Register Statistics
- 16. Registers Packed Into Inferred Megafunctions
- 17. Multiplexer Restructuring Statistics (Restructuring Performed)
- 18. Source assignments for RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|altsyncram_jug1:altsyncram2
- 19. Source assignments for imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|altsyncram_jug1:altsyncram2
- 20. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated
- 21. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_nv6:rdptr_g1p
- 22. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p
- 23. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|altsyncram_86d1:fifo_ram
- 24. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_brp
- 25. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_bwp
- 26. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp
- 27. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp|dffpipe_pe9:dffpipe13
- 28. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_9pl:ws_dgrp
- 29. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_9pl:ws_dgrp|dffpipe_qe9:dffpipe16
- 30. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated
- 31. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_nv6:rdptr_g1p
- 32. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p
- 33. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|altsyncram_86d1:fifo_ram
- 34. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_brp
- 35. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_bwp
- 36. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp
- 37. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp|dffpipe_pe9:dffpipe13
- 38. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_9pl:ws_dgrp
- 39. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_9pl:ws_dgrp|dffpipe_qe9:dffpipe16
- 40. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated
- 41. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_nv6:rdptr_g1p
- 42. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_jdc:wrptr_g1p
- 43. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram
- 44. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp
- 45. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp|dffpipe_re9:dffpipe5
- 46. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_brp
- 47. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_bwp
- 48. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp
- 49. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp|dffpipe_se9:dffpipe8
- 50. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated
- 51. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_nv6:rdptr_g1p
- 52. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_jdc:wrptr_g1p
- 53. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram
- 54. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp
- 55. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp|dffpipe_re9:dffpipe5
- 56. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_brp
- 57. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_bwp
- 58. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp
- 59. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp|dffpipe_se9:dffpipe8
- 60. Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|altsyncram_7pc1:altsyncram5
- 61. Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6
- 62. Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|altsyncram_loc1:altsyncram5
- 63. Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6
- 64. Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|altsyncram_1pc1:altsyncram5
- 65. Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6
- 66. Parameter Settings for User Entity Instance: CCD_Capture:u3
- 67. Parameter Settings for User Entity Instance: RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component
- 68. Parameter Settings for User Entity Instance: imgproc:u4a
- 69. Parameter Settings for User Entity Instance: imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component
- 70. Parameter Settings for User Entity Instance: imgproc:u4a|grey_buffer:GB
- 71. Parameter Settings for User Entity Instance: imgproc:u4a|conv3x3:CONV
- 72. Parameter Settings for User Entity Instance: sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i
- 73. Parameter Settings for User Entity Instance: Sdram_Control:u7
- 74. Parameter Settings for User Entity Instance: Sdram_Control:u7|control_interface:u_control_interface
- 75. Parameter Settings for User Entity Instance: Sdram_Control:u7|command:u_command
- 76. Parameter Settings for User Entity Instance: Sdram_Control:u7|sdr_data_path:u_sdr_data_path
- 77. Parameter Settings for User Entity Instance: Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component
- 78. Parameter Settings for User Entity Instance: Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component
- 79. Parameter Settings for User Entity Instance: Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component
- 80. Parameter Settings for User Entity Instance: Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component
- 81. Parameter Settings for User Entity Instance: I2C_CCD_Config:u8
- 82. Parameter Settings for User Entity Instance: VGA_Controller:u1
- 83. Parameter Settings for Inferred Entity Instance: imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0
- 84. Parameter Settings for Inferred Entity Instance: imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1
- 85. Parameter Settings for Inferred Entity Instance: imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2
- 86. altshift_taps Parameter Settings by Entity Instance
- 87. Port Connectivity Checks: "I2C_CCD_Config:u8|I2C_Controller:u0"
- 88. Port Connectivity Checks: "Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo"
- 89. Port Connectivity Checks: "Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo"
- 90. Port Connectivity Checks: "Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo"
- 91. Port Connectivity Checks: "Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo"
- 92. Port Connectivity Checks: "Sdram_Control:u7|sdr_data_path:u_sdr_data_path"
- 93. Port Connectivity Checks: "Sdram_Control:u7|control_interface:u_control_interface"
- 94. Port Connectivity Checks: "Sdram_Control:u7"
- 95. Port Connectivity Checks: "sdram_pll:u6"
- 96. Port Connectivity Checks: "imgproc:u4a"
- 97. Port Connectivity Checks: "RAW2GRAY:u4|Line_Buffer1:u0"
- 98. Port Connectivity Checks: "RAW2GRAY:u4"
- 99. Port Connectivity Checks: "CCD_Capture:u3"
-100. Post-Synthesis Netlist Statistics for Top Partition
-101. Elapsed Time Per Partition
-102. Analysis & Synthesis Messages
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Source assignments for RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|altsyncram_jug1:altsyncram2
+ 18. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated
+ 19. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_nv6:rdptr_g1p
+ 20. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p
+ 21. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|altsyncram_86d1:fifo_ram
+ 22. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_brp
+ 23. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_bwp
+ 24. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp
+ 25. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp|dffpipe_pe9:dffpipe13
+ 26. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_9pl:ws_dgrp
+ 27. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_9pl:ws_dgrp|dffpipe_qe9:dffpipe16
+ 28. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated
+ 29. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_nv6:rdptr_g1p
+ 30. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p
+ 31. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|altsyncram_86d1:fifo_ram
+ 32. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_brp
+ 33. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_bwp
+ 34. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp
+ 35. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp|dffpipe_pe9:dffpipe13
+ 36. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_9pl:ws_dgrp
+ 37. Source assignments for Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_9pl:ws_dgrp|dffpipe_qe9:dffpipe16
+ 38. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated
+ 39. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_nv6:rdptr_g1p
+ 40. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_jdc:wrptr_g1p
+ 41. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram
+ 42. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp
+ 43. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp|dffpipe_re9:dffpipe5
+ 44. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_brp
+ 45. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_bwp
+ 46. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp
+ 47. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp|dffpipe_se9:dffpipe8
+ 48. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated
+ 49. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_nv6:rdptr_g1p
+ 50. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_jdc:wrptr_g1p
+ 51. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram
+ 52. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp
+ 53. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp|dffpipe_re9:dffpipe5
+ 54. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_brp
+ 55. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_bwp
+ 56. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp
+ 57. Source assignments for Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp|dffpipe_se9:dffpipe8
+ 58. Parameter Settings for User Entity Instance: CCD_Capture:u3
+ 59. Parameter Settings for User Entity Instance: RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component
+ 60. Parameter Settings for User Entity Instance: sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i
+ 61. Parameter Settings for User Entity Instance: Sdram_Control:u7
+ 62. Parameter Settings for User Entity Instance: Sdram_Control:u7|control_interface:u_control_interface
+ 63. Parameter Settings for User Entity Instance: Sdram_Control:u7|command:u_command
+ 64. Parameter Settings for User Entity Instance: Sdram_Control:u7|sdr_data_path:u_sdr_data_path
+ 65. Parameter Settings for User Entity Instance: Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component
+ 66. Parameter Settings for User Entity Instance: Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component
+ 67. Parameter Settings for User Entity Instance: Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component
+ 68. Parameter Settings for User Entity Instance: Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component
+ 69. Parameter Settings for User Entity Instance: I2C_CCD_Config:u8
+ 70. Parameter Settings for User Entity Instance: VGA_Controller:u1
+ 71. altshift_taps Parameter Settings by Entity Instance
+ 72. Port Connectivity Checks: "VGA_Controller:u1"
+ 73. Port Connectivity Checks: "I2C_CCD_Config:u8|I2C_Controller:u0"
+ 74. Port Connectivity Checks: "Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo"
+ 75. Port Connectivity Checks: "Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo"
+ 76. Port Connectivity Checks: "Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo"
+ 77. Port Connectivity Checks: "Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo"
+ 78. Port Connectivity Checks: "Sdram_Control:u7|sdr_data_path:u_sdr_data_path"
+ 79. Port Connectivity Checks: "Sdram_Control:u7|control_interface:u_control_interface"
+ 80. Port Connectivity Checks: "Sdram_Control:u7"
+ 81. Port Connectivity Checks: "sdram_pll:u6"
+ 82. Port Connectivity Checks: "RAW2GRAY:u4|Line_Buffer1:u0"
+ 83. Port Connectivity Checks: "RAW2GRAY:u4"
+ 84. Port Connectivity Checks: "CCD_Capture:u3"
+ 85. Post-Synthesis Netlist Statistics for Top Partition
+ 86. Elapsed Time Per Partition
+ 87. Analysis & Synthesis Messages
 
 
 
@@ -134,16 +119,16 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Mar  2 17:21:03 2023       ;
+; Analysis & Synthesis Status     ; Successful - Tue Mar  7 19:17:50 2023       ;
 ; Quartus Prime Version           ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                   ; DE1_SoC_CAMERA                              ;
 ; Top-level Entity Name           ; DE1_SoC_CAMERA                              ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 1309                                        ;
-; Total pins                      ; 226                                         ;
+; Total registers                 ; 1019                                        ;
+; Total pins                      ; 115                                         ;
 ; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 119,327                                     ;
+; Total block memory bits         ; 59,344                                      ;
 ; Total DSP Blocks                ; 0                                           ;
 ; Total HSSI RX PCSs              ; 0                                           ;
 ; Total HSSI PMA RX Deserializers ; 0                                           ;
@@ -267,13 +252,9 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------+-----------+
 ; File Name with User-Entered Path  ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                   ; Library   ;
 +-----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------+-----------+
-; v/imgproc.v                       ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/imgproc.v                           ;           ;
-; v/grey_buffer.v                   ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/grey_buffer.v                       ;           ;
-; v/CONV3x3.v                       ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CONV3x3.v                           ;           ;
 ; RAW2GRAY.v                        ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/RAW2GRAY.v                            ;           ;
 ; DE1_SoC_CAMERA.v                  ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v                      ;           ;
 ; v/VGA_Controller.v                ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v                    ;           ;
-; v/SEG7_LUT.v                      ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/SEG7_LUT.v                          ;           ;
 ; v/Reset_Delay.v                   ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/Reset_Delay.v                       ;           ;
 ; v/I2C_Controller.v                ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/I2C_Controller.v                    ;           ;
 ; v/I2C_CCD_Config.v                ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/I2C_CCD_Config.v                    ;           ;
@@ -283,7 +264,6 @@ https://fpgasoftware.intel.com/eula.
 ; Sdram_Control/sdr_data_path.v     ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/sdr_data_path.v         ;           ;
 ; Sdram_Control/control_interface.v ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/control_interface.v     ;           ;
 ; Sdram_Control/command.v           ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/command.v               ;           ;
-; v/SEG7_LUT_6.v                    ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/SEG7_LUT_6.v                        ;           ;
 ; v/sdram_pll.v                     ; yes             ; User Wizard-Generated File   ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/sdram_pll.v                         ; sdram_pll ;
 ; v/sdram_pll/sdram_pll_0002.v      ; yes             ; User Verilog HDL File        ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/sdram_pll/sdram_pll_0002.v          ; sdram_pll ;
 ; v/Line_Buffer1.v                  ; yes             ; User Wizard-Generated File   ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/Line_Buffer1.v                      ;           ;
@@ -316,19 +296,6 @@ https://fpgasoftware.intel.com/eula.
 ; db/dffpipe_re9.tdf                ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/dffpipe_re9.tdf                    ;           ;
 ; db/alt_synch_pipe_bpl.tdf         ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/alt_synch_pipe_bpl.tdf             ;           ;
 ; db/dffpipe_se9.tdf                ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/dffpipe_se9.tdf                    ;           ;
-; db/shift_taps_n101.tdf            ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/shift_taps_n101.tdf                ;           ;
-; db/altsyncram_7pc1.tdf            ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_7pc1.tdf                ;           ;
-; db/cntr_9of.tdf                   ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_9of.tdf                       ;           ;
-; db/cntr_t7h.tdf                   ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_t7h.tdf                       ;           ;
-; db/shift_taps_e101.tdf            ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/shift_taps_e101.tdf                ;           ;
-; db/altsyncram_loc1.tdf            ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_loc1.tdf                ;           ;
-; db/cntr_0of.tdf                   ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_0of.tdf                       ;           ;
-; db/cntr_u7h.tdf                   ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_u7h.tdf                       ;           ;
-; db/shift_taps_h101.tdf            ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/shift_taps_h101.tdf                ;           ;
-; db/altsyncram_1pc1.tdf            ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_1pc1.tdf                ;           ;
-; db/cntr_emf.tdf                   ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_emf.tdf                       ;           ;
-; db/cmpr_pac.tdf                   ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cmpr_pac.tdf                       ;           ;
-; db/cntr_b6h.tdf                   ; yes             ; Auto-Generated Megafunction  ; I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_b6h.tdf                       ;           ;
 +-----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------+-----------+
 
 
@@ -337,20 +304,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                             ;
 +---------------------------------------------+-----------------------------------------------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 899                                                                               ;
+; Estimate of Logic utilization (ALMs needed) ; 635                                                                               ;
 ;                                             ;                                                                                   ;
-; Combinational ALUT usage for logic          ; 1454                                                                              ;
-;     -- 7 input functions                    ; 22                                                                                ;
-;     -- 6 input functions                    ; 217                                                                               ;
-;     -- 5 input functions                    ; 142                                                                               ;
-;     -- 4 input functions                    ; 164                                                                               ;
-;     -- <=3 input functions                  ; 909                                                                               ;
+; Combinational ALUT usage for logic          ; 1001                                                                              ;
+;     -- 7 input functions                    ; 12                                                                                ;
+;     -- 6 input functions                    ; 179                                                                               ;
+;     -- 5 input functions                    ; 115                                                                               ;
+;     -- 4 input functions                    ; 126                                                                               ;
+;     -- <=3 input functions                  ; 569                                                                               ;
 ;                                             ;                                                                                   ;
-; Dedicated logic registers                   ; 1309                                                                              ;
+; Dedicated logic registers                   ; 1019                                                                              ;
 ;                                             ;                                                                                   ;
-; I/O pins                                    ; 226                                                                               ;
+; I/O pins                                    ; 115                                                                               ;
 ; Total MLAB memory bits                      ; 0                                                                                 ;
-; Total block memory bits                     ; 119327                                                                            ;
+; Total block memory bits                     ; 59344                                                                             ;
 ;                                             ;                                                                                   ;
 ; Total DSP Blocks                            ; 0                                                                                 ;
 ;                                             ;                                                                                   ;
@@ -358,9 +325,9 @@ https://fpgasoftware.intel.com/eula.
 ;     -- PLLs                                 ; 4                                                                                 ;
 ;                                             ;                                                                                   ;
 ; Maximum fan-out node                        ; sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i|outclk_wire[0] ;
-; Maximum fan-out                             ; 589                                                                               ;
-; Total fan-out                               ; 12984                                                                             ;
-; Average fan-out                             ; 3.79                                                                              ;
+; Maximum fan-out                             ; 581                                                                               ;
+; Total fan-out                               ; 8991                                                                              ;
+; Average fan-out                             ; 3.82                                                                              ;
 +---------------------------------------------+-----------------------------------------------------------------------------------+
 
 
@@ -369,11 +336,11 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                                        ; Entity Name         ; Library Name ;
 +--------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |DE1_SoC_CAMERA                                              ; 1454 (65)           ; 1309 (14)                 ; 119327            ; 0          ; 226  ; 0            ; |DE1_SoC_CAMERA                                                                                                                                                                            ; DE1_SoC_CAMERA      ; work         ;
-;    |CCD_Capture:u3|                                          ; 62 (62)             ; 67 (67)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|CCD_Capture:u3                                                                                                                                                             ; CCD_Capture         ; work         ;
+; |DE1_SoC_CAMERA                                              ; 1001 (1)            ; 1019 (14)                 ; 59344             ; 0          ; 115  ; 0            ; |DE1_SoC_CAMERA                                                                                                                                                                            ; DE1_SoC_CAMERA      ; work         ;
+;    |CCD_Capture:u3|                                          ; 28 (28)             ; 33 (33)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|CCD_Capture:u3                                                                                                                                                             ; CCD_Capture         ; work         ;
 ;    |I2C_CCD_Config:u8|                                       ; 191 (135)           ; 131 (93)                  ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8                                                                                                                                                          ; I2C_CCD_Config      ; work         ;
 ;       |I2C_Controller:u0|                                    ; 56 (56)             ; 38 (38)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8|I2C_Controller:u0                                                                                                                                        ; I2C_Controller      ; work         ;
-;    |RAW2GRAY:u4|                                             ; 43 (28)             ; 34 (23)                   ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|RAW2GRAY:u4                                                                                                                                                                ; RAW2GRAY            ; work         ;
+;    |RAW2GRAY:u4|                                             ; 44 (29)             ; 35 (24)                   ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|RAW2GRAY:u4                                                                                                                                                                ; RAW2GRAY            ; work         ;
 ;       |Line_Buffer1:u0|                                      ; 15 (0)              ; 11 (0)                    ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|RAW2GRAY:u4|Line_Buffer1:u0                                                                                                                                                ; Line_Buffer1        ; work         ;
 ;          |altshift_taps:ALTSHIFT_TAPS_component|             ; 15 (0)              ; 11 (0)                    ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component                                                                                                          ; altshift_taps       ; work         ;
 ;             |shift_taps_lv51:auto_generated|                 ; 15 (0)              ; 11 (0)                    ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated                                                                           ; shift_taps_lv51     ; work         ;
@@ -381,17 +348,10 @@ https://fpgasoftware.intel.com/eula.
 ;                |cntr_7of:cntr1|                              ; 15 (13)             ; 11 (11)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|cntr_7of:cntr1                                                            ; cntr_7of            ; work         ;
 ;                   |cmpr_qac:cmpr4|                           ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|cntr_7of:cntr1|cmpr_qac:cmpr4                                             ; cmpr_qac            ; work         ;
 ;    |Reset_Delay:u2|                                          ; 49 (49)             ; 37 (37)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Reset_Delay:u2                                                                                                                                                             ; Reset_Delay         ; work         ;
-;    |SEG7_LUT_6:u5|                                           ; 42 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|SEG7_LUT_6:u5                                                                                                                                                              ; SEG7_LUT_6          ; work         ;
-;       |SEG7_LUT:u0|                                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|SEG7_LUT_6:u5|SEG7_LUT:u0                                                                                                                                                  ; SEG7_LUT            ; work         ;
-;       |SEG7_LUT:u1|                                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|SEG7_LUT_6:u5|SEG7_LUT:u1                                                                                                                                                  ; SEG7_LUT            ; work         ;
-;       |SEG7_LUT:u2|                                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|SEG7_LUT_6:u5|SEG7_LUT:u2                                                                                                                                                  ; SEG7_LUT            ; work         ;
-;       |SEG7_LUT:u3|                                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|SEG7_LUT_6:u5|SEG7_LUT:u3                                                                                                                                                  ; SEG7_LUT            ; work         ;
-;       |SEG7_LUT:u4|                                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|SEG7_LUT_6:u5|SEG7_LUT:u4                                                                                                                                                  ; SEG7_LUT            ; work         ;
-;       |SEG7_LUT:u5|                                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|SEG7_LUT_6:u5|SEG7_LUT:u5                                                                                                                                                  ; SEG7_LUT            ; work         ;
-;    |Sdram_Control:u7|                                        ; 625 (210)           ; 715 (159)                 ; 31744             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7                                                                                                                                                           ; Sdram_Control       ; work         ;
-;       |Sdram_RD_FIFO:u_read1_fifo|                           ; 71 (0)              ; 112 (0)                   ; 7680              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo                                                                                                                                ; Sdram_RD_FIFO       ; work         ;
-;          |dcfifo_mixed_widths:dcfifo_mixed_widths_component| ; 71 (0)              ; 112 (0)                   ; 7680              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                              ; dcfifo_mixed_widths ; work         ;
-;             |dcfifo_ahp1:auto_generated|                     ; 71 (13)             ; 112 (30)                  ; 7680              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated                                                   ; dcfifo_ahp1         ; work         ;
+;    |Sdram_Control:u7|                                        ; 627 (214)           ; 713 (157)                 ; 28672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7                                                                                                                                                           ; Sdram_Control       ; work         ;
+;       |Sdram_RD_FIFO:u_read1_fifo|                           ; 71 (0)              ; 112 (0)                   ; 6656              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo                                                                                                                                ; Sdram_RD_FIFO       ; work         ;
+;          |dcfifo_mixed_widths:dcfifo_mixed_widths_component| ; 71 (0)              ; 112 (0)                   ; 6656              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                              ; dcfifo_mixed_widths ; work         ;
+;             |dcfifo_ahp1:auto_generated|                     ; 71 (13)             ; 112 (30)                  ; 6656              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated                                                   ; dcfifo_ahp1         ; work         ;
 ;                |a_gray2bin_oab:wrptr_g_gray2bin|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_gray2bin_oab:wrptr_g_gray2bin                   ; a_gray2bin_oab      ; work         ;
 ;                |a_gray2bin_oab:ws_dgrp_gray2bin|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_gray2bin_oab:ws_dgrp_gray2bin                   ; a_gray2bin_oab      ; work         ;
 ;                |a_graycounter_jdc:wrptr_g1p|                 ; 15 (15)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_jdc:wrptr_g1p                       ; a_graycounter_jdc   ; work         ;
@@ -400,14 +360,14 @@ https://fpgasoftware.intel.com/eula.
 ;                   |dffpipe_re9:dffpipe5|                     ; 0 (0)               ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp|dffpipe_re9:dffpipe5   ; dffpipe_re9         ; work         ;
 ;                |alt_synch_pipe_bpl:ws_dgrp|                  ; 0 (0)               ; 20 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp                        ; alt_synch_pipe_bpl  ; work         ;
 ;                   |dffpipe_se9:dffpipe8|                     ; 0 (0)               ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp|dffpipe_se9:dffpipe8   ; dffpipe_se9         ; work         ;
-;                |altsyncram_86d1:fifo_ram|                    ; 0 (0)               ; 0 (0)                     ; 7680              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram                          ; altsyncram_86d1     ; work         ;
+;                |altsyncram_86d1:fifo_ram|                    ; 0 (0)               ; 0 (0)                     ; 6656              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram                          ; altsyncram_86d1     ; work         ;
 ;                |cmpr_906:rdempty_eq_comp|                    ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|cmpr_906:rdempty_eq_comp                          ; cmpr_906            ; work         ;
 ;                |cmpr_906:wrfull_eq_comp|                     ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|cmpr_906:wrfull_eq_comp                           ; cmpr_906            ; work         ;
 ;                |dffpipe_oe9:ws_brp|                          ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_brp                                ; dffpipe_oe9         ; work         ;
 ;                |dffpipe_oe9:ws_bwp|                          ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_bwp                                ; dffpipe_oe9         ; work         ;
-;       |Sdram_RD_FIFO:u_read2_fifo|                           ; 71 (0)              ; 112 (0)                   ; 7680              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo                                                                                                                                ; Sdram_RD_FIFO       ; work         ;
-;          |dcfifo_mixed_widths:dcfifo_mixed_widths_component| ; 71 (0)              ; 112 (0)                   ; 7680              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                              ; dcfifo_mixed_widths ; work         ;
-;             |dcfifo_ahp1:auto_generated|                     ; 71 (13)             ; 112 (30)                  ; 7680              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated                                                   ; dcfifo_ahp1         ; work         ;
+;       |Sdram_RD_FIFO:u_read2_fifo|                           ; 71 (0)              ; 112 (0)                   ; 5632              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo                                                                                                                                ; Sdram_RD_FIFO       ; work         ;
+;          |dcfifo_mixed_widths:dcfifo_mixed_widths_component| ; 71 (0)              ; 112 (0)                   ; 5632              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                              ; dcfifo_mixed_widths ; work         ;
+;             |dcfifo_ahp1:auto_generated|                     ; 71 (13)             ; 112 (30)                  ; 5632              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated                                                   ; dcfifo_ahp1         ; work         ;
 ;                |a_gray2bin_oab:wrptr_g_gray2bin|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_gray2bin_oab:wrptr_g_gray2bin                   ; a_gray2bin_oab      ; work         ;
 ;                |a_gray2bin_oab:ws_dgrp_gray2bin|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_gray2bin_oab:ws_dgrp_gray2bin                   ; a_gray2bin_oab      ; work         ;
 ;                |a_graycounter_jdc:wrptr_g1p|                 ; 15 (15)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_jdc:wrptr_g1p                       ; a_graycounter_jdc   ; work         ;
@@ -416,17 +376,17 @@ https://fpgasoftware.intel.com/eula.
 ;                   |dffpipe_re9:dffpipe5|                     ; 0 (0)               ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_apl:rs_dgwp|dffpipe_re9:dffpipe5   ; dffpipe_re9         ; work         ;
 ;                |alt_synch_pipe_bpl:ws_dgrp|                  ; 0 (0)               ; 20 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp                        ; alt_synch_pipe_bpl  ; work         ;
 ;                   |dffpipe_se9:dffpipe8|                     ; 0 (0)               ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp|dffpipe_se9:dffpipe8   ; dffpipe_se9         ; work         ;
-;                |altsyncram_86d1:fifo_ram|                    ; 0 (0)               ; 0 (0)                     ; 7680              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram                          ; altsyncram_86d1     ; work         ;
+;                |altsyncram_86d1:fifo_ram|                    ; 0 (0)               ; 0 (0)                     ; 5632              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram                          ; altsyncram_86d1     ; work         ;
 ;                |cmpr_906:rdempty_eq_comp|                    ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|cmpr_906:rdempty_eq_comp                          ; cmpr_906            ; work         ;
 ;                |cmpr_906:wrfull_eq_comp|                     ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|cmpr_906:wrfull_eq_comp                           ; cmpr_906            ; work         ;
 ;                |dffpipe_oe9:ws_brp|                          ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_brp                                ; dffpipe_oe9         ; work         ;
 ;                |dffpipe_oe9:ws_bwp|                          ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|dffpipe_oe9:ws_bwp                                ; dffpipe_oe9         ; work         ;
-;       |Sdram_WR_FIFO:u_write1_fifo|                          ; 72 (0)              ; 112 (0)                   ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo                                                                                                                               ; Sdram_WR_FIFO       ; work         ;
-;          |dcfifo_mixed_widths:dcfifo_mixed_widths_component| ; 72 (0)              ; 112 (0)                   ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                             ; dcfifo_mixed_widths ; work         ;
-;             |dcfifo_ngp1:auto_generated|                     ; 72 (13)             ; 112 (30)                  ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated                                                  ; dcfifo_ngp1         ; work         ;
+;       |Sdram_WR_FIFO:u_write1_fifo|                          ; 71 (0)              ; 112 (0)                   ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo                                                                                                                               ; Sdram_WR_FIFO       ; work         ;
+;          |dcfifo_mixed_widths:dcfifo_mixed_widths_component| ; 71 (0)              ; 112 (0)                   ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                             ; dcfifo_mixed_widths ; work         ;
+;             |dcfifo_ngp1:auto_generated|                     ; 71 (13)             ; 112 (30)                  ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated                                                  ; dcfifo_ngp1         ; work         ;
 ;                |a_gray2bin_oab:rdptr_g_gray2bin|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_gray2bin_oab:rdptr_g_gray2bin                  ; a_gray2bin_oab      ; work         ;
 ;                |a_gray2bin_oab:rs_dgwp_gray2bin|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_gray2bin_oab:rs_dgwp_gray2bin                  ; a_gray2bin_oab      ; work         ;
-;                |a_graycounter_jdc:wrptr_g1p|                 ; 17 (17)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p                      ; a_graycounter_jdc   ; work         ;
+;                |a_graycounter_jdc:wrptr_g1p|                 ; 16 (16)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p                      ; a_graycounter_jdc   ; work         ;
 ;                |a_graycounter_nv6:rdptr_g1p|                 ; 17 (17)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_nv6:rdptr_g1p                      ; a_graycounter_nv6   ; work         ;
 ;                |alt_synch_pipe_8pl:rs_dgwp|                  ; 0 (0)               ; 20 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp                       ; alt_synch_pipe_8pl  ; work         ;
 ;                   |dffpipe_pe9:dffpipe13|                    ; 0 (0)               ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp|dffpipe_pe9:dffpipe13 ; dffpipe_pe9         ; work         ;
@@ -437,12 +397,12 @@ https://fpgasoftware.intel.com/eula.
 ;                |cmpr_906:wrfull_eq_comp|                     ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|cmpr_906:wrfull_eq_comp                          ; cmpr_906            ; work         ;
 ;                |dffpipe_oe9:rs_brp|                          ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_brp                               ; dffpipe_oe9         ; work         ;
 ;                |dffpipe_oe9:rs_bwp|                          ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_bwp                               ; dffpipe_oe9         ; work         ;
-;       |Sdram_WR_FIFO:u_write2_fifo|                          ; 72 (0)              ; 112 (0)                   ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo                                                                                                                               ; Sdram_WR_FIFO       ; work         ;
-;          |dcfifo_mixed_widths:dcfifo_mixed_widths_component| ; 72 (0)              ; 112 (0)                   ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                             ; dcfifo_mixed_widths ; work         ;
-;             |dcfifo_ngp1:auto_generated|                     ; 72 (13)             ; 112 (30)                  ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated                                                  ; dcfifo_ngp1         ; work         ;
+;       |Sdram_WR_FIFO:u_write2_fifo|                          ; 71 (0)              ; 112 (0)                   ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo                                                                                                                               ; Sdram_WR_FIFO       ; work         ;
+;          |dcfifo_mixed_widths:dcfifo_mixed_widths_component| ; 71 (0)              ; 112 (0)                   ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                             ; dcfifo_mixed_widths ; work         ;
+;             |dcfifo_ngp1:auto_generated|                     ; 71 (13)             ; 112 (30)                  ; 8192              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated                                                  ; dcfifo_ngp1         ; work         ;
 ;                |a_gray2bin_oab:rdptr_g_gray2bin|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_gray2bin_oab:rdptr_g_gray2bin                  ; a_gray2bin_oab      ; work         ;
 ;                |a_gray2bin_oab:rs_dgwp_gray2bin|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_gray2bin_oab:rs_dgwp_gray2bin                  ; a_gray2bin_oab      ; work         ;
-;                |a_graycounter_jdc:wrptr_g1p|                 ; 17 (17)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p                      ; a_graycounter_jdc   ; work         ;
+;                |a_graycounter_jdc:wrptr_g1p|                 ; 16 (16)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p                      ; a_graycounter_jdc   ; work         ;
 ;                |a_graycounter_nv6:rdptr_g1p|                 ; 17 (17)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_nv6:rdptr_g1p                      ; a_graycounter_nv6   ; work         ;
 ;                |alt_synch_pipe_8pl:rs_dgwp|                  ; 0 (0)               ; 20 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp                       ; alt_synch_pipe_8pl  ; work         ;
 ;                   |dffpipe_pe9:dffpipe13|                    ; 0 (0)               ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|alt_synch_pipe_8pl:rs_dgwp|dffpipe_pe9:dffpipe13 ; dffpipe_pe9         ; work         ;
@@ -455,32 +415,7 @@ https://fpgasoftware.intel.com/eula.
 ;                |dffpipe_oe9:rs_bwp|                          ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|dffpipe_oe9:rs_bwp                               ; dffpipe_oe9         ; work         ;
 ;       |command:u_command|                                    ; 54 (54)             ; 49 (49)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command                                                                                                                                         ; command             ; work         ;
 ;       |control_interface:u_control_interface|                ; 75 (75)             ; 59 (59)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|Sdram_Control:u7|control_interface:u_control_interface                                                                                                                     ; control_interface   ; work         ;
-;    |VGA_Controller:u1|                                       ; 44 (44)             ; 62 (62)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|VGA_Controller:u1                                                                                                                                                          ; VGA_Controller      ; work         ;
-;    |imgproc:u4a|                                             ; 333 (1)             ; 249 (0)                   ; 56911             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a                                                                                                                                                                ; imgproc             ; work         ;
-;       |RAW2GRAY:R2G|                                         ; 52 (37)             ; 38 (27)                   ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|RAW2GRAY:R2G                                                                                                                                                   ; RAW2GRAY            ; work         ;
-;          |Line_Buffer1:u0|                                   ; 15 (0)              ; 11 (0)                    ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0                                                                                                                                   ; Line_Buffer1        ; work         ;
-;             |altshift_taps:ALTSHIFT_TAPS_component|          ; 15 (0)              ; 11 (0)                    ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component                                                                                             ; altshift_taps       ; work         ;
-;                |shift_taps_lv51:auto_generated|              ; 15 (0)              ; 11 (0)                    ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated                                                              ; shift_taps_lv51     ; work         ;
-;                   |altsyncram_jug1:altsyncram2|              ; 0 (0)               ; 0 (0)                     ; 30672             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|altsyncram_jug1:altsyncram2                                  ; altsyncram_jug1     ; work         ;
-;                   |cntr_7of:cntr1|                           ; 15 (13)             ; 11 (11)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|cntr_7of:cntr1                                               ; cntr_7of            ; work         ;
-;                      |cmpr_qac:cmpr4|                        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|cntr_7of:cntr1|cmpr_qac:cmpr4                                ; cmpr_qac            ; work         ;
-;       |conv3x3:CONV|                                         ; 126 (126)           ; 111 (111)                 ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|conv3x3:CONV                                                                                                                                                   ; conv3x3             ; work         ;
-;       |grey_buffer:GB|                                       ; 154 (1)             ; 100 (1)                   ; 26239             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB                                                                                                                                                 ; grey_buffer         ; work         ;
-;          |altshift_taps:sr_rtl_0|                            ; 53 (0)              ; 34 (0)                    ; 1919              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0                                                                                                                          ; altshift_taps       ; work         ;
-;             |shift_taps_n101:auto_generated|                 ; 53 (18)             ; 34 (12)                   ; 1919              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated                                                                                           ; shift_taps_n101     ; work         ;
-;                |altsyncram_7pc1:altsyncram5|                 ; 0 (0)               ; 0 (0)                     ; 1919              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|altsyncram_7pc1:altsyncram5                                                               ; altsyncram_7pc1     ; work         ;
-;                |cntr_9of:cntr1|                              ; 13 (13)             ; 11 (11)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_9of:cntr1                                                                            ; cntr_9of            ; work         ;
-;                |cntr_t7h:cntr6|                              ; 22 (22)             ; 11 (11)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6                                                                            ; cntr_t7h            ; work         ;
-;          |altshift_taps:sr_rtl_1|                            ; 52 (0)              ; 34 (0)                    ; 1280              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1                                                                                                                          ; altshift_taps       ; work         ;
-;             |shift_taps_e101:auto_generated|                 ; 52 (18)             ; 34 (12)                   ; 1280              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated                                                                                           ; shift_taps_e101     ; work         ;
-;                |altsyncram_loc1:altsyncram5|                 ; 0 (0)               ; 0 (0)                     ; 1280              ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|altsyncram_loc1:altsyncram5                                                               ; altsyncram_loc1     ; work         ;
-;                |cntr_0of:cntr1|                              ; 13 (13)             ; 11 (11)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_0of:cntr1                                                                            ; cntr_0of            ; work         ;
-;                |cntr_u7h:cntr6|                              ; 21 (21)             ; 11 (11)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6                                                                            ; cntr_u7h            ; work         ;
-;          |altshift_taps:sr_rtl_2|                            ; 48 (0)              ; 31 (0)                    ; 23040             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2                                                                                                                          ; altshift_taps       ; work         ;
-;             |shift_taps_h101:auto_generated|                 ; 48 (17)             ; 31 (11)                   ; 23040             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated                                                                                           ; shift_taps_h101     ; work         ;
-;                |altsyncram_1pc1:altsyncram5|                 ; 0 (0)               ; 0 (0)                     ; 23040             ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|altsyncram_1pc1:altsyncram5                                                               ; altsyncram_1pc1     ; work         ;
-;                |cntr_b6h:cntr6|                              ; 19 (19)             ; 10 (10)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6                                                                            ; cntr_b6h            ; work         ;
-;                |cntr_emf:cntr1|                              ; 12 (12)             ; 10 (10)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_emf:cntr1                                                                            ; cntr_emf            ; work         ;
+;    |VGA_Controller:u1|                                       ; 61 (61)             ; 56 (56)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|VGA_Controller:u1                                                                                                                                                          ; VGA_Controller      ; work         ;
 ;    |sdram_pll:u6|                                            ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|sdram_pll:u6                                                                                                                                                               ; sdram_pll           ; sdram_pll    ;
 ;       |sdram_pll_0002:sdram_pll_inst|                        ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|sdram_pll:u6|sdram_pll_0002:sdram_pll_inst                                                                                                                                 ; sdram_pll_0002      ; sdram_pll    ;
 ;          |altera_pll:altera_pll_i|                           ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC_CAMERA|sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i                                                                                                         ; altera_pll          ; work         ;
@@ -498,10 +433,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|ALTSYNCRAM  ; AUTO       ; Simple Dual Port ; 512          ; 16           ; 512          ; 16           ; 8192  ; None ;
 ; Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|altsyncram_86d1:fifo_ram|ALTSYNCRAM ; AUTO       ; Simple Dual Port ; 512          ; 16           ; 512          ; 16           ; 8192  ; None ;
 ; Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|altsyncram_86d1:fifo_ram|ALTSYNCRAM ; AUTO       ; Simple Dual Port ; 512          ; 16           ; 512          ; 16           ; 8192  ; None ;
-; imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|altsyncram_jug1:altsyncram2|ALTSYNCRAM          ; M10K block ; Simple Dual Port ; 1278         ; 24           ; 1278         ; 24           ; 30672 ; None ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|altsyncram_7pc1:altsyncram5|ALTSYNCRAM                                       ; AUTO       ; Simple Dual Port ; 1919         ; 1            ; 1919         ; 1            ; 1919  ; None ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|altsyncram_loc1:altsyncram5|ALTSYNCRAM                                       ; AUTO       ; Simple Dual Port ; 1280         ; 1            ; 1280         ; 1            ; 1280  ; None ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|altsyncram_1pc1:altsyncram5|ALTSYNCRAM                                       ; AUTO       ; Simple Dual Port ; 640          ; 36           ; 640          ; 36           ; 23040 ; None ;
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------------+--------------+--------------+--------------+--------------+-------+------+
 
 
@@ -511,7 +442,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Vendor ; IP Core Name               ; Version ; Release Date ; License Type ; Entity Instance                                              ; IP Include File               ;
 +--------+----------------------------+---------+--------------+--------------+--------------------------------------------------------------+-------------------------------+
 ; Altera ; Shift register (RAM-based) ; 18.1    ; N/A          ; N/A          ; |DE1_SoC_CAMERA|RAW2GRAY:u4|Line_Buffer1:u0                  ; v/Line_Buffer1.v              ;
-; Altera ; Shift register (RAM-based) ; 18.1    ; N/A          ; N/A          ; |DE1_SoC_CAMERA|imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0     ; v/Line_Buffer1.v              ;
 ; Altera ; altera_pll                 ; 18.1    ; N/A          ; N/A          ; |DE1_SoC_CAMERA|sdram_pll:u6                                 ; v/sdram_pll.v                 ;
 ; Altera ; FIFO                       ; 18.1    ; N/A          ; N/A          ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo  ; Sdram_Control/Sdram_RD_FIFO.v ;
 ; Altera ; FIFO                       ; 18.1    ; N/A          ; N/A          ; |DE1_SoC_CAMERA|Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo  ; Sdram_Control/Sdram_RD_FIFO.v ;
@@ -707,7 +637,7 @@ Encoding Type:  One-Hot
 ; Register name                                                                                                                                             ; Reason for Removal                                                          ;
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
 ; VGA_Controller:u1|oVGA_SYNC                                                                                                                               ; Stuck at GND due to stuck port data_in                                      ;
-; Sdram_Control:u7|mDATAOUT[15]                                                                                                                             ; Lost fanout                                                                 ;
+; Sdram_Control:u7|mDATAOUT[0,1,15]                                                                                                                         ; Lost fanout                                                                 ;
 ; I2C_CCD_Config:u8|mI2C_DATA[31]                                                                                                                           ; Stuck at VCC due to stuck port data_in                                      ;
 ; I2C_CCD_Config:u8|mI2C_DATA[30]                                                                                                                           ; Stuck at GND due to stuck port data_in                                      ;
 ; I2C_CCD_Config:u8|mI2C_DATA[27..29]                                                                                                                       ; Stuck at VCC due to stuck port data_in                                      ;
@@ -744,13 +674,11 @@ Encoding Type:  One-Hot
 ; Sdram_Control:u7|mLENGTH[7]                                                                                                                               ; Stuck at GND due to stuck port data_in                                      ;
 ; Sdram_Control:u7|mADDR[3]                                                                                                                                 ; Stuck at GND due to stuck port data_in                                      ;
 ; Sdram_Control:u7|control_interface:u_control_interface|SADDR[3]                                                                                           ; Stuck at GND due to stuck port data_in                                      ;
-; RAW2GRAY:u4|mDVAL                                                                                                                                         ; Merged with imgproc:u4a|RAW2GRAY:R2G|mDVAL                                  ;
 ; I2C_CCD_Config:u8|mSetup_ST~9                                                                                                                             ; Lost fanout                                                                 ;
 ; I2C_CCD_Config:u8|mSetup_ST~10                                                                                                                            ; Lost fanout                                                                 ;
-; CCD_Capture:u3|Frame_Cont[24..31]                                                                                                                         ; Lost fanout                                                                 ;
-; CCD_Capture:u3|Y_Cont[11..15]                                                                                                                             ; Lost fanout                                                                 ;
+; CCD_Capture:u3|Y_Cont[1..15]                                                                                                                              ; Lost fanout                                                                 ;
 ; I2C_CCD_Config:u8|LUT_INDEX[5]                                                                                                                            ; Stuck at GND due to stuck port data_in                                      ;
-; Total Number of Removed Registers = 84                                                                                                                    ;                                                                             ;
+; Total Number of Removed Registers = 87                                                                                                                    ;                                                                             ;
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
 
 
@@ -760,7 +688,10 @@ Encoding Type:  One-Hot
 ; Register name                   ; Reason for Removal        ; Registers Removed due to This Register                                           ;
 +---------------------------------+---------------------------+----------------------------------------------------------------------------------+
 ; CCD_Capture:u3|Y_Cont[15]       ; Lost Fanouts              ; CCD_Capture:u3|Y_Cont[14], CCD_Capture:u3|Y_Cont[13], CCD_Capture:u3|Y_Cont[12], ;
-;                                 ;                           ; CCD_Capture:u3|Y_Cont[11]                                                        ;
+;                                 ;                           ; CCD_Capture:u3|Y_Cont[11], CCD_Capture:u3|Y_Cont[10], CCD_Capture:u3|Y_Cont[9],  ;
+;                                 ;                           ; CCD_Capture:u3|Y_Cont[8], CCD_Capture:u3|Y_Cont[7], CCD_Capture:u3|Y_Cont[6],    ;
+;                                 ;                           ; CCD_Capture:u3|Y_Cont[5], CCD_Capture:u3|Y_Cont[4], CCD_Capture:u3|Y_Cont[3],    ;
+;                                 ;                           ; CCD_Capture:u3|Y_Cont[2], CCD_Capture:u3|Y_Cont[1]                               ;
 ; Sdram_Control:u7|rWR1_ADDR[3]   ; Stuck at GND              ; Sdram_Control:u7|mADDR[3],                                                       ;
 ;                                 ; due to stuck port data_in ; Sdram_Control:u7|control_interface:u_control_interface|SADDR[3]                  ;
 ; I2C_CCD_Config:u8|mI2C_DATA[31] ; Stuck at VCC              ; I2C_CCD_Config:u8|I2C_Controller:u0|SD[31]                                       ;
@@ -787,12 +718,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1309  ;
-; Number of registers using Synchronous Clear  ; 309   ;
-; Number of registers using Synchronous Load   ; 27    ;
-; Number of registers using Asynchronous Clear ; 1101  ;
+; Total registers                              ; 1019  ;
+; Number of registers using Synchronous Clear  ; 261   ;
+; Number of registers using Synchronous Load   ; 16    ;
+; Number of registers using Asynchronous Clear ; 891   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 529   ;
+; Number of registers using Clock Enable       ; 382   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -823,57 +754,19 @@ Encoding Type:  One-Hot
 ; Sdram_Control:u7|rWR2_ADDR[20]                                                                                                                                   ; 4       ;
 ; Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_jdc:wrptr_g1p|parity9     ; 5       ;
 ; Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|a_graycounter_jdc:wrptr_g1p|parity9     ; 5       ;
-; Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p|counter8a0 ; 10      ;
+; Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p|counter8a0 ; 9       ;
 ; Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_nv6:rdptr_g1p|parity6    ; 5       ;
-; Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p|counter8a0 ; 10      ;
+; Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p|counter8a0 ; 9       ;
 ; Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_nv6:rdptr_g1p|parity6    ; 5       ;
-; Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p|parity9    ; 6       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|dffe7                                                                           ; 1       ;
-; Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p|parity9    ; 6       ;
+; Sdram_Control:u7|Sdram_WR_FIFO:u_write1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p|parity9    ; 5       ;
+; Sdram_Control:u7|Sdram_WR_FIFO:u_write2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ngp1:auto_generated|a_graycounter_jdc:wrptr_g1p|parity9    ; 5       ;
 ; I2C_CCD_Config:u8|senosr_exposure[10]                                                                                                                            ; 3       ;
 ; I2C_CCD_Config:u8|senosr_exposure[9]                                                                                                                             ; 3       ;
 ; I2C_CCD_Config:u8|senosr_exposure[8]                                                                                                                             ; 3       ;
 ; I2C_CCD_Config:u8|senosr_exposure[7]                                                                                                                             ; 3       ;
 ; I2C_CCD_Config:u8|senosr_exposure[6]                                                                                                                             ; 3       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|dffe7                                                                           ; 36      ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|dffe7                                                                           ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit10                                                ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit9                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6|counter_reg_bit9                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6|counter_reg_bit10                                                ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit8                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit6                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6|counter_reg_bit6                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6|counter_reg_bit7                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit5                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6|counter_reg_bit5                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6|counter_reg_bit6                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit4                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6|counter_reg_bit4                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6|counter_reg_bit5                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit3                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6|counter_reg_bit3                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6|counter_reg_bit4                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit2                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6|counter_reg_bit2                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6|counter_reg_bit3                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6|counter_reg_bit1                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6|counter_reg_bit2                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6|counter_reg_bit0                                                 ; 1       ;
-; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6|counter_reg_bit1                                                 ; 1       ;
-; Total number of inverted registers = 59                                                                                                                          ;         ;
+; Total number of inverted registers = 32                                                                                                                          ;         ;
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
-
-
-+--------------------------------------------------------------------------------------------------+
-; Registers Packed Into Inferred Megafunctions                                                     ;
-+-----------------------------------------------+-------------------------------------+------------+
-; Register Name                                 ; Megafunction                        ; Type       ;
-+-----------------------------------------------+-------------------------------------+------------+
-; imgproc:u4a|grey_buffer:GB|sr[1..1919][13]    ; imgproc:u4a|grey_buffer:GB|sr_rtl_0 ; SHIFT_TAPS ;
-; imgproc:u4a|grey_buffer:GB|sr[0..1279][12]    ; imgproc:u4a|grey_buffer:GB|sr_rtl_1 ; SHIFT_TAPS ;
-; imgproc:u4a|grey_buffer:GB|sr[0..1919][0..11] ; imgproc:u4a|grey_buffer:GB|sr_rtl_2 ; SHIFT_TAPS ;
-+-----------------------------------------------+-------------------------------------+------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -881,27 +774,24 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |DE1_SoC_CAMERA|CCD_Capture:u3|Y_Cont[2]                                        ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|BA[0]                        ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|control_interface:u_control_interface|timer[9] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|command_done                 ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8|senosr_exposure[13]                           ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |DE1_SoC_CAMERA|CCD_Capture:u3|X_Cont[5]                                        ;
-; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|SA[2]                        ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE1_SoC_CAMERA|VGA_Controller:u1|oVGA_B[9]                                     ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|BA[1]                        ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|control_interface:u_control_interface|timer[1] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|command_delay[3]             ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |DE1_SoC_CAMERA|CCD_Capture:u3|Y_Cont[6]                                        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8|senosr_exposure[11]                           ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|SA[8]                        ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|SA[5]                        ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|rp_shift[0]                  ;
-; 5:1                ; 19 bits   ; 57 LEs        ; 38 LEs               ; 19 LEs                 ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|mADDR[4]                                       ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|command:u_command|rp_done                      ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |DE1_SoC_CAMERA|CCD_Capture:u3|X_Cont[12]                                       ;
+; 5:1                ; 19 bits   ; 57 LEs        ; 38 LEs               ; 19 LEs                 ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|mADDR[14]                                      ;
 ; 64:1               ; 4 bits    ; 168 LEs       ; 56 LEs               ; 112 LEs                ; Yes        ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8|mI2C_DATA[15]                                 ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|CMD[1]                                         ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|CMD[0]                                         ;
 ; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|WR_MASK[1]                                     ;
 ; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|RD_MASK[0]                                     ;
-; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|ST[0]                                          ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8|I2C_Controller:u0|SD_COUNTER[0]               ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8|senosr_exposure[6]                            ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |DE1_SoC_CAMERA|VGA_B                                                           ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |DE1_SoC_CAMERA|VGA_G                                                           ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |DE1_SoC_CAMERA|VGA_R                                                           ;
-; 6:1                ; 10 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |DE1_SoC_CAMERA|sCCD_R[6]                                                       ;
+; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |DE1_SoC_CAMERA|Sdram_Control:u7|ST[9]                                          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8|I2C_Controller:u0|SD_COUNTER[3]               ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |DE1_SoC_CAMERA|I2C_CCD_Config:u8|senosr_exposure[8]                            ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------+
 
 
@@ -912,15 +802,6 @@ Encoding Type:  One-Hot
 +---------------------------------+--------------------+------+---------------------------------------------------------------------------------------+
 ; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                     ;
 +---------------------------------+--------------------+------+---------------------------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|altsyncram_jug1:altsyncram2 ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                                                 ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                                  ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1339,81 +1220,6 @@ Encoding Type:  One-Hot
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|altsyncram_7pc1:altsyncram5 ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                    ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                     ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0|shift_taps_n101:auto_generated|cntr_t7h:cntr6 ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-; Assignment     ; Value ; From ; To                                                                                     ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit0                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit2                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit3                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit4                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit5                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit6                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit8                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit9                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit10                                                                      ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|altsyncram_loc1:altsyncram5 ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                    ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                     ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1|shift_taps_e101:auto_generated|cntr_u7h:cntr6 ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-; Assignment     ; Value ; From ; To                                                                                     ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit1                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit2                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit3                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit4                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit5                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit6                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit7                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit10                                                                      ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|altsyncram_1pc1:altsyncram5 ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                    ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                     ;
-+---------------------------------+--------------------+------+-----------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2|shift_taps_h101:auto_generated|cntr_b6h:cntr6 ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-; Assignment     ; Value ; From ; To                                                                                     ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit1                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit2                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit3                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit4                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit5                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit6                                                                       ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter_reg_bit9                                                                       ;
-+----------------+-------+------+----------------------------------------------------------------------------------------+
-
-
 +-------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: CCD_Capture:u3 ;
 +----------------+-------+------------------------------------+
@@ -1436,54 +1242,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; POWER_UP_STATE ; CLEARED         ; Untyped                                                                     ;
 ; CBXI_PARAMETER ; shift_taps_lv51 ; Untyped                                                                     ;
 +----------------+-----------------+-----------------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------+
-; Parameter Settings for User Entity Instance: imgproc:u4a ;
-+----------------+-------+---------------------------------+
-; Parameter Name ; Value ; Type                            ;
-+----------------+-------+---------------------------------+
-; GWIDTH         ; 12    ; Signed Integer                  ;
-+----------------+-------+---------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component ;
-+----------------+-----------------+------------------------------------------------------------------------------------------+
-; Parameter Name ; Value           ; Type                                                                                     ;
-+----------------+-----------------+------------------------------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1               ; Untyped                                                                                  ;
-; NUMBER_OF_TAPS ; 2               ; Signed Integer                                                                           ;
-; TAP_DISTANCE   ; 1280            ; Signed Integer                                                                           ;
-; WIDTH          ; 12              ; Signed Integer                                                                           ;
-; POWER_UP_STATE ; CLEARED         ; Untyped                                                                                  ;
-; CBXI_PARAMETER ; shift_taps_lv51 ; Untyped                                                                                  ;
-+----------------+-----------------+------------------------------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: imgproc:u4a|grey_buffer:GB ;
-+----------------+-------+------------------------------------------------+
-; Parameter Name ; Value ; Type                                           ;
-+----------------+-------+------------------------------------------------+
-; WIDTH          ; 12    ; Signed Integer                                 ;
-; TAPDIST        ; 640   ; Signed Integer                                 ;
-; LENGTH         ; 1920  ; Signed Integer                                 ;
-+----------------+-------+------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: imgproc:u4a|conv3x3:CONV ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; XWIDTH         ; 12    ; Signed Integer                               ;
-; YWIDTH         ; 12    ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1981,78 +1739,28 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0 ;
-+----------------+-----------------+-----------------------------------------------------------------+
-; Parameter Name ; Value           ; Type                                                            ;
-+----------------+-----------------+-----------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1               ; Untyped                                                         ;
-; NUMBER_OF_TAPS ; 1               ; Untyped                                                         ;
-; TAP_DISTANCE   ; 1919            ; Untyped                                                         ;
-; WIDTH          ; 1               ; Untyped                                                         ;
-; POWER_UP_STATE ; DONT_CARE       ; Untyped                                                         ;
-; CBXI_PARAMETER ; shift_taps_n101 ; Untyped                                                         ;
-+----------------+-----------------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
++------------------------------------------------------------------------------------------------+
+; altshift_taps Parameter Settings by Entity Instance                                            ;
++----------------------------+-------------------------------------------------------------------+
+; Name                       ; Value                                                             ;
++----------------------------+-------------------------------------------------------------------+
+; Number of entity instances ; 1                                                                 ;
+; Entity Instance            ; RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component ;
+;     -- NUMBER_OF_TAPS      ; 2                                                                 ;
+;     -- TAP_DISTANCE        ; 1280                                                              ;
+;     -- WIDTH               ; 12                                                                ;
++----------------------------+-------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1 ;
-+----------------+-----------------+-----------------------------------------------------------------+
-; Parameter Name ; Value           ; Type                                                            ;
-+----------------+-----------------+-----------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1               ; Untyped                                                         ;
-; NUMBER_OF_TAPS ; 1               ; Untyped                                                         ;
-; TAP_DISTANCE   ; 1280            ; Untyped                                                         ;
-; WIDTH          ; 1               ; Untyped                                                         ;
-; POWER_UP_STATE ; DONT_CARE       ; Untyped                                                         ;
-; CBXI_PARAMETER ; shift_taps_e101 ; Untyped                                                         ;
-+----------------+-----------------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2 ;
-+----------------+-----------------+-----------------------------------------------------------------+
-; Parameter Name ; Value           ; Type                                                            ;
-+----------------+-----------------+-----------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1               ; Untyped                                                         ;
-; NUMBER_OF_TAPS ; 3               ; Untyped                                                         ;
-; TAP_DISTANCE   ; 640             ; Untyped                                                         ;
-; WIDTH          ; 12              ; Untyped                                                         ;
-; POWER_UP_STATE ; DONT_CARE       ; Untyped                                                         ;
-; CBXI_PARAMETER ; shift_taps_h101 ; Untyped                                                         ;
-+----------------+-----------------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------------------------------------------------------+
-; altshift_taps Parameter Settings by Entity Instance                                                         ;
-+----------------------------+--------------------------------------------------------------------------------+
-; Name                       ; Value                                                                          ;
-+----------------------------+--------------------------------------------------------------------------------+
-; Number of entity instances ; 5                                                                              ;
-; Entity Instance            ; RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component              ;
-;     -- NUMBER_OF_TAPS      ; 2                                                                              ;
-;     -- TAP_DISTANCE        ; 1280                                                                           ;
-;     -- WIDTH               ; 12                                                                             ;
-; Entity Instance            ; imgproc:u4a|RAW2GRAY:R2G|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component ;
-;     -- NUMBER_OF_TAPS      ; 2                                                                              ;
-;     -- TAP_DISTANCE        ; 1280                                                                           ;
-;     -- WIDTH               ; 12                                                                             ;
-; Entity Instance            ; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0                              ;
-;     -- NUMBER_OF_TAPS      ; 1                                                                              ;
-;     -- TAP_DISTANCE        ; 1919                                                                           ;
-;     -- WIDTH               ; 1                                                                              ;
-; Entity Instance            ; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1                              ;
-;     -- NUMBER_OF_TAPS      ; 1                                                                              ;
-;     -- TAP_DISTANCE        ; 1280                                                                           ;
-;     -- WIDTH               ; 1                                                                              ;
-; Entity Instance            ; imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2                              ;
-;     -- NUMBER_OF_TAPS      ; 3                                                                              ;
-;     -- TAP_DISTANCE        ; 640                                                                            ;
-;     -- WIDTH               ; 12                                                                             ;
-+----------------------------+--------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "VGA_Controller:u1"                                                                          ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; oVGA_R[1..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; oVGA_G[1..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; oVGA_B[1..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -2209,19 +1917,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+-------+----------+----------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "imgproc:u4a"                                                                                                                                                                               ;
-+--------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                                                                                                                            ;
-+--------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; oRed[1..0]   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                ;
-; oGreen[1..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                ;
-; oBlue[1..0]  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                ;
-; iX_Cont      ; Input  ; Warning  ; Input port expression (16 bits) is wider than the input port (11 bits) it drives.  The 5 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
-; iY_Cont      ; Input  ; Warning  ; Input port expression (16 bits) is wider than the input port (11 bits) it drives.  The 5 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
-+--------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
 +-----------------------------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "RAW2GRAY:u4|Line_Buffer1:u0"                                                                                 ;
 +----------+--------+----------+----------------------------------------------------------------------------------------------------------+
@@ -2243,15 +1938,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "CCD_Capture:u3"                                                                                    ;
-+---------------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port                ; Type   ; Severity ; Details                                                                             ;
-+---------------------+--------+----------+-------------------------------------------------------------------------------------+
-; oX_Cont[15..11]     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; oY_Cont[15..11]     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; oFrame_Cont[31..24] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+---------------------+--------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "CCD_Capture:u3"                                                                                ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port            ; Type   ; Severity ; Details                                                                             ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+; oX_Cont[15..11] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; oY_Cont[15..11] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; oFrame_Cont     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -2259,46 +1954,42 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 1309                        ;
-;     CLR               ; 583                         ;
-;     CLR SCLR          ; 126                         ;
+; arriav_ff             ; 1019                        ;
+;     CLR               ; 448                         ;
+;     CLR SCLR          ; 120                         ;
 ;     CLR SLD           ; 1                           ;
-;     ENA               ; 82                          ;
-;     ENA CLR           ; 259                         ;
-;     ENA CLR SCLR      ; 132                         ;
-;     ENA SCLR          ; 34                          ;
-;     ENA SLD           ; 22                          ;
+;     ENA               ; 47                          ;
+;     ENA CLR           ; 200                         ;
+;     ENA CLR SCLR      ; 122                         ;
+;     ENA SCLR          ; 2                           ;
+;     ENA SLD           ; 11                          ;
 ;     SCLR              ; 17                          ;
 ;     SLD               ; 4                           ;
-;     plain             ; 49                          ;
-; arriav_io_obuf        ; 62                          ;
-; arriav_lcell_comb     ; 1461                        ;
-;     arith             ; 482                         ;
-;         0 data inputs ; 13                          ;
-;         1 data inputs ; 396                         ;
-;         2 data inputs ; 65                          ;
-;         3 data inputs ; 8                           ;
-;     extend            ; 22                          ;
-;         7 data inputs ; 22                          ;
-;     normal            ; 821                         ;
-;         0 data inputs ; 2                           ;
-;         1 data inputs ; 56                          ;
-;         2 data inputs ; 151                         ;
-;         3 data inputs ; 89                          ;
-;         4 data inputs ; 164                         ;
-;         5 data inputs ; 142                         ;
-;         6 data inputs ; 217                         ;
-;     shared            ; 136                         ;
+;     plain             ; 47                          ;
+; arriav_io_obuf        ; 17                          ;
+; arriav_lcell_comb     ; 1002                        ;
+;     arith             ; 306                         ;
 ;         0 data inputs ; 4                           ;
-;         1 data inputs ; 4                           ;
-;         2 data inputs ; 84                          ;
-;         3 data inputs ; 44                          ;
-; boundary_port         ; 226                         ;
+;         1 data inputs ; 263                         ;
+;         2 data inputs ; 39                          ;
+;     extend            ; 12                          ;
+;         7 data inputs ; 12                          ;
+;     normal            ; 652                         ;
+;         0 data inputs ; 2                           ;
+;         1 data inputs ; 16                          ;
+;         2 data inputs ; 129                         ;
+;         3 data inputs ; 85                          ;
+;         4 data inputs ; 126                         ;
+;         5 data inputs ; 115                         ;
+;         6 data inputs ; 179                         ;
+;     shared            ; 32                          ;
+;         2 data inputs ; 32                          ;
+; boundary_port         ; 115                         ;
 ; generic_pll           ; 4                           ;
-; stratixv_ram_block    ; 148                         ;
+; stratixv_ram_block    ; 80                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 7.30                        ;
-; Average LUT depth     ; 2.82                        ;
+; Max LUT depth         ; 5.00                        ;
+; Average LUT depth     ; 2.48                        ;
 +-----------------------+-----------------------------+
 
 
@@ -2307,7 +1998,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:06     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -2317,24 +2008,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Thu Mar  2 17:20:37 2023
+    Info: Processing started: Tue Mar  7 19:17:35 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE1_SoC_CAMERA -c DE1_SoC_CAMERA
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
-Info (12021): Found 1 design units, including 1 entities, in source file v/imgproc.v
-    Info (12023): Found entity 1: imgproc File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/imgproc.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file v/grey_buffer.v
-    Info (12023): Found entity 1: grey_buffer File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/grey_buffer.v Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file v/conv3x3.v
-    Info (12023): Found entity 1: conv3x3 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CONV3x3.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file raw2gray.v
     Info (12023): Found entity 1: RAW2GRAY File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/RAW2GRAY.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file de1_soc_camera.v
     Info (12023): Found entity 1: DE1_SoC_CAMERA File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 37
 Info (12021): Found 1 design units, including 1 entities, in source file v/vga_controller.v
     Info (12023): Found entity 1: VGA_Controller File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v Line: 43
-Info (12021): Found 1 design units, including 1 entities, in source file v/seg7_lut.v
-    Info (12023): Found entity 1: SEG7_LUT File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/SEG7_LUT.v Line: 43
 Info (12021): Found 1 design units, including 1 entities, in source file v/reset_delay.v
     Info (12023): Found entity 1: Reset_Delay File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/Reset_Delay.v Line: 43
 Info (12021): Found 1 design units, including 1 entities, in source file v/i2c_controller.v
@@ -2352,8 +2035,6 @@ Info (12021): Found 1 design units, including 1 entities, in source file sdram_c
     Info (12023): Found entity 1: control_interface File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/control_interface.v Line: 43
 Info (12021): Found 1 design units, including 1 entities, in source file sdram_control/command.v
     Info (12023): Found entity 1: command File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/command.v Line: 43
-Info (12021): Found 1 design units, including 1 entities, in source file v/seg7_lut_6.v
-    Info (12023): Found entity 1: SEG7_LUT_6 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/SEG7_LUT_6.v Line: 43
 Info (12021): Found 1 design units, including 1 entities, in source file v/sdram_pll.v
     Info (12023): Found entity 1: sdram_pll File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/sdram_pll.v Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file v/sdram_pll/sdram_pll_0002.v
@@ -2364,25 +2045,17 @@ Info (12021): Found 1 design units, including 1 entities, in source file sdram_c
     Info (12023): Found entity 1: Sdram_RD_FIFO File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/Sdram_RD_FIFO.v Line: 39
 Info (12021): Found 1 design units, including 1 entities, in source file sdram_control/sdram_wr_fifo.v
     Info (12023): Found entity 1: Sdram_WR_FIFO File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/Sdram_WR_FIFO.v Line: 39
-Warning (10236): Verilog HDL Implicit Net warning at DE1_SoC_CAMERA.v(209): created implicit net for "VGA_CTRL_CLK" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 209
+Warning (10236): Verilog HDL Implicit Net warning at DE1_SoC_CAMERA.v(139): created implicit net for "VGA_CTRL_CLK" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 139
 Info (12127): Elaborating entity "DE1_SoC_CAMERA" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at DE1_SoC_CAMERA.v(211): truncated value with size 16 to match size of target (10) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 211
-Warning (10034): Output port "ADC_DIN" at DE1_SoC_CAMERA.v(41) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 41
-Warning (10034): Output port "ADC_SCLK" at DE1_SoC_CAMERA.v(43) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 43
-Warning (10034): Output port "AUD_DACDAT" at DE1_SoC_CAMERA.v(49) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 49
-Warning (10034): Output port "AUD_XCK" at DE1_SoC_CAMERA.v(51) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 51
-Warning (10034): Output port "FAN_CTRL" at DE1_SoC_CAMERA.v(79) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 79
-Warning (10034): Output port "FPGA_I2C_SCLK" at DE1_SoC_CAMERA.v(82) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 82
-Warning (10034): Output port "IRDA_TXD" at DE1_SoC_CAMERA.v(109) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 109
-Warning (10034): Output port "TD_RESET_N" at DE1_SoC_CAMERA.v(130) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 130
-Info (12128): Elaborating entity "Reset_Delay" for hierarchy "Reset_Delay:u2" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 238
-Info (12128): Elaborating entity "CCD_Capture" for hierarchy "CCD_Capture:u3" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 253
+Warning (10034): Output port "LEDR" at DE1_SoC_CAMERA.v(63) has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+Info (12128): Elaborating entity "Reset_Delay" for hierarchy "Reset_Delay:u2" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 167
+Info (12128): Elaborating entity "CCD_Capture" for hierarchy "CCD_Capture:u3" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 182
 Warning (10036): Verilog HDL or VHDL warning at CCD_Capture.v(164): object "ifval_fedge" assigned a value but never read File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CCD_Capture.v Line: 164
 Warning (10036): Verilog HDL or VHDL warning at CCD_Capture.v(165): object "y_cnt_d" assigned a value but never read File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CCD_Capture.v Line: 165
 Warning (10230): Verilog HDL assignment warning at CCD_Capture.v(125): truncated value with size 32 to match size of target (16) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CCD_Capture.v Line: 125
 Warning (10230): Verilog HDL assignment warning at CCD_Capture.v(129): truncated value with size 32 to match size of target (16) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CCD_Capture.v Line: 129
 Warning (10230): Verilog HDL assignment warning at CCD_Capture.v(185): truncated value with size 32 to match size of target (1) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CCD_Capture.v Line: 185
-Info (12128): Elaborating entity "RAW2GRAY" for hierarchy "RAW2GRAY:u4" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 267
+Info (12128): Elaborating entity "RAW2GRAY" for hierarchy "RAW2GRAY:u4" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 196
 Info (12128): Elaborating entity "Line_Buffer1" for hierarchy "RAW2GRAY:u4|Line_Buffer1:u0" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/RAW2GRAY.v Line: 39
 Info (12128): Elaborating entity "altshift_taps" for hierarchy "RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/Line_Buffer1.v Line: 80
 Info (12130): Elaborated megafunction instantiation "RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/Line_Buffer1.v Line: 80
@@ -2405,17 +2078,7 @@ Info (12128): Elaborating entity "cntr_7of" for hierarchy "RAW2GRAY:u4|Line_Buff
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_qac.tdf
     Info (12023): Found entity 1: cmpr_qac File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cmpr_qac.tdf Line: 23
 Info (12128): Elaborating entity "cmpr_qac" for hierarchy "RAW2GRAY:u4|Line_Buffer1:u0|altshift_taps:ALTSHIFT_TAPS_component|shift_taps_lv51:auto_generated|cntr_7of:cntr1|cmpr_qac:cmpr4" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_7of.tdf Line: 36
-Info (12128): Elaborating entity "imgproc" for hierarchy "imgproc:u4a" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 284
-Info (12128): Elaborating entity "grey_buffer" for hierarchy "imgproc:u4a|grey_buffer:GB" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/imgproc.v Line: 61
-Info (12128): Elaborating entity "conv3x3" for hierarchy "imgproc:u4a|conv3x3:CONV" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/imgproc.v Line: 74
-Warning (10230): Verilog HDL assignment warning at CONV3x3.v(20): truncated value with size 15 to match size of target (12) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CONV3x3.v Line: 20
-Warning (10230): Verilog HDL assignment warning at CONV3x3.v(25): truncated value with size 15 to match size of target (12) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CONV3x3.v Line: 25
-Warning (10230): Verilog HDL assignment warning at CONV3x3.v(27): truncated value with size 32 to match size of target (12) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CONV3x3.v Line: 27
-Warning (10240): Verilog HDL Always Construct warning at CONV3x3.v(35): inferring latch(es) for variable "j", which holds its previous value in one or more paths through the always construct File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/CONV3x3.v Line: 35
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "fin" into its bus
-Info (12128): Elaborating entity "SEG7_LUT_6" for hierarchy "SEG7_LUT_6:u5" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 297
-Info (12128): Elaborating entity "SEG7_LUT" for hierarchy "SEG7_LUT_6:u5|SEG7_LUT:u0" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/SEG7_LUT_6.v Line: 47
-Info (12128): Elaborating entity "sdram_pll" for hierarchy "sdram_pll:u6" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 307
+Info (12128): Elaborating entity "sdram_pll" for hierarchy "sdram_pll:u6" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 213
 Info (12128): Elaborating entity "sdram_pll_0002" for hierarchy "sdram_pll:u6|sdram_pll_0002:sdram_pll_inst" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/sdram_pll.v Line: 25
 Info (12128): Elaborating entity "altera_pll" for hierarchy "sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/sdram_pll/sdram_pll_0002.v Line: 94
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
@@ -2481,7 +2144,7 @@ Info (12133): Instantiated megafunction "sdram_pll:u6|sdram_pll_0002:sdram_pll_i
     Info (12134): Parameter "duty_cycle17" = "50"
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
-Info (12128): Elaborating entity "Sdram_Control" for hierarchy "Sdram_Control:u7" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 362
+Info (12128): Elaborating entity "Sdram_Control" for hierarchy "Sdram_Control:u7" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 268
 Warning (10230): Verilog HDL assignment warning at Sdram_Control.v(385): truncated value with size 32 to match size of target (10) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/Sdram_Control.v Line: 385
 Warning (10240): Verilog HDL Always Construct warning at Sdram_Control.v(423): inferring latch(es) for variable "rWR1_MAX_ADDR", which holds its previous value in one or more paths through the always construct File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/Sdram_Control.v Line: 423
 Warning (10240): Verilog HDL Always Construct warning at Sdram_Control.v(423): inferring latch(es) for variable "rWR2_MAX_ADDR", which holds its previous value in one or more paths through the always construct File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/Sdram_Control.v Line: 423
@@ -2711,7 +2374,7 @@ Info (12128): Elaborating entity "alt_synch_pipe_bpl" for hierarchy "Sdram_Contr
 Info (12021): Found 1 design units, including 1 entities, in source file db/dffpipe_se9.tdf
     Info (12023): Found entity 1: dffpipe_se9 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/dffpipe_se9.tdf Line: 25
 Info (12128): Elaborating entity "dffpipe_se9" for hierarchy "Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|alt_synch_pipe_bpl:ws_dgrp|dffpipe_se9:dffpipe8" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/alt_synch_pipe_bpl.tdf Line: 35
-Info (12128): Elaborating entity "I2C_CCD_Config" for hierarchy "I2C_CCD_Config:u8" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 375
+Info (12128): Elaborating entity "I2C_CCD_Config" for hierarchy "I2C_CCD_Config:u8" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 281
 Warning (10230): Verilog HDL assignment warning at I2C_CCD_Config.v(126): truncated value with size 32 to match size of target (1) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/I2C_CCD_Config.v Line: 126
 Warning (10230): Verilog HDL assignment warning at I2C_CCD_Config.v(127): truncated value with size 32 to match size of target (1) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/I2C_CCD_Config.v Line: 127
 Warning (10230): Verilog HDL assignment warning at I2C_CCD_Config.v(149): truncated value with size 32 to match size of target (25) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/I2C_CCD_Config.v Line: 149
@@ -2722,139 +2385,41 @@ Info (12128): Elaborating entity "I2C_Controller" for hierarchy "I2C_CCD_Config:
 Warning (10230): Verilog HDL assignment warning at I2C_Controller.v(71): truncated value with size 32 to match size of target (1) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/I2C_Controller.v Line: 71
 Warning (10230): Verilog HDL assignment warning at I2C_Controller.v(70): truncated value with size 32 to match size of target (1) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/I2C_Controller.v Line: 70
 Warning (10230): Verilog HDL assignment warning at I2C_Controller.v(83): truncated value with size 32 to match size of target (7) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/I2C_Controller.v Line: 83
-Info (12128): Elaborating entity "VGA_Controller" for hierarchy "VGA_Controller:u1" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 395
+Info (12128): Elaborating entity "VGA_Controller" for hierarchy "VGA_Controller:u1" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 301
 Warning (10230): Verilog HDL assignment warning at VGA_Controller.v(121): truncated value with size 32 to match size of target (10) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v Line: 121
 Warning (10230): Verilog HDL assignment warning at VGA_Controller.v(124): truncated value with size 32 to match size of target (10) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v Line: 124
 Warning (10230): Verilog HDL assignment warning at VGA_Controller.v(127): truncated value with size 32 to match size of target (10) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v Line: 127
-Warning (10230): Verilog HDL assignment warning at VGA_Controller.v(184): truncated value with size 32 to match size of target (13) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v Line: 184
-Warning (10230): Verilog HDL assignment warning at VGA_Controller.v(210): truncated value with size 32 to match size of target (13) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v Line: 210
+Warning (10230): Verilog HDL assignment warning at VGA_Controller.v(204): truncated value with size 32 to match size of target (13) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v Line: 204
+Warning (10230): Verilog HDL assignment warning at VGA_Controller.v(230): truncated value with size 32 to match size of target (13) File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/v/VGA_Controller.v Line: 230
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following RAM node(s):
+        Warning (14320): Synthesized away node "Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|q_b[0]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_86d1.tdf Line: 42
+        Warning (14320): Synthesized away node "Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|q_b[1]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_86d1.tdf Line: 74
+        Warning (14320): Synthesized away node "Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|q_b[10]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_86d1.tdf Line: 362
+        Warning (14320): Synthesized away node "Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|q_b[11]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_86d1.tdf Line: 394
         Warning (14320): Synthesized away node "Sdram_Control:u7|Sdram_RD_FIFO:u_read2_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|q_b[15]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_86d1.tdf Line: 522
+        Warning (14320): Synthesized away node "Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|q_b[0]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_86d1.tdf Line: 42
+        Warning (14320): Synthesized away node "Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|q_b[1]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_86d1.tdf Line: 74
         Warning (14320): Synthesized away node "Sdram_Control:u7|Sdram_RD_FIFO:u_read1_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_ahp1:auto_generated|altsyncram_86d1:fifo_ram|q_b[15]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_86d1.tdf Line: 522
-Info (286030): Timing-Driven Synthesis is running
-Info (19000): Inferred 3 megafunctions from design logic
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "imgproc:u4a|grey_buffer:GB|sr_rtl_0"
-        Info (286033): Parameter NUMBER_OF_TAPS set to 1
-        Info (286033): Parameter TAP_DISTANCE set to 1919
-        Info (286033): Parameter WIDTH set to 1
-        Info (286033): Parameter POWER_UP_STATE set to DONT_CARE
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "imgproc:u4a|grey_buffer:GB|sr_rtl_1"
-        Info (286033): Parameter NUMBER_OF_TAPS set to 1
-        Info (286033): Parameter TAP_DISTANCE set to 1280
-        Info (286033): Parameter WIDTH set to 1
-        Info (286033): Parameter POWER_UP_STATE set to DONT_CARE
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "imgproc:u4a|grey_buffer:GB|sr_rtl_2"
-        Info (286033): Parameter NUMBER_OF_TAPS set to 3
-        Info (286033): Parameter TAP_DISTANCE set to 640
-        Info (286033): Parameter WIDTH set to 12
-        Info (286033): Parameter POWER_UP_STATE set to DONT_CARE
-Info (12130): Elaborated megafunction instantiation "imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0"
-Info (12133): Instantiated megafunction "imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_0" with the following parameter:
-    Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
-    Info (12134): Parameter "TAP_DISTANCE" = "1919"
-    Info (12134): Parameter "WIDTH" = "1"
-    Info (12134): Parameter "POWER_UP_STATE" = "DONT_CARE"
-Info (12021): Found 1 design units, including 1 entities, in source file db/shift_taps_n101.tdf
-    Info (12023): Found entity 1: shift_taps_n101 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/shift_taps_n101.tdf Line: 29
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_7pc1.tdf
-    Info (12023): Found entity 1: altsyncram_7pc1 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_7pc1.tdf Line: 28
-Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_9of.tdf
-    Info (12023): Found entity 1: cntr_9of File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_9of.tdf Line: 28
-Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_t7h.tdf
-    Info (12023): Found entity 1: cntr_t7h File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_t7h.tdf Line: 28
-Info (12130): Elaborated megafunction instantiation "imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1"
-Info (12133): Instantiated megafunction "imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_1" with the following parameter:
-    Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
-    Info (12134): Parameter "TAP_DISTANCE" = "1280"
-    Info (12134): Parameter "WIDTH" = "1"
-    Info (12134): Parameter "POWER_UP_STATE" = "DONT_CARE"
-Info (12021): Found 1 design units, including 1 entities, in source file db/shift_taps_e101.tdf
-    Info (12023): Found entity 1: shift_taps_e101 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/shift_taps_e101.tdf Line: 29
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_loc1.tdf
-    Info (12023): Found entity 1: altsyncram_loc1 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_loc1.tdf Line: 28
-Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_0of.tdf
-    Info (12023): Found entity 1: cntr_0of File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_0of.tdf Line: 28
-Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_u7h.tdf
-    Info (12023): Found entity 1: cntr_u7h File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_u7h.tdf Line: 28
-Info (12130): Elaborated megafunction instantiation "imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2"
-Info (12133): Instantiated megafunction "imgproc:u4a|grey_buffer:GB|altshift_taps:sr_rtl_2" with the following parameter:
-    Info (12134): Parameter "NUMBER_OF_TAPS" = "3"
-    Info (12134): Parameter "TAP_DISTANCE" = "640"
-    Info (12134): Parameter "WIDTH" = "12"
-    Info (12134): Parameter "POWER_UP_STATE" = "DONT_CARE"
-Info (12021): Found 1 design units, including 1 entities, in source file db/shift_taps_h101.tdf
-    Info (12023): Found entity 1: shift_taps_h101 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/shift_taps_h101.tdf Line: 29
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_1pc1.tdf
-    Info (12023): Found entity 1: altsyncram_1pc1 File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/altsyncram_1pc1.tdf Line: 28
-Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_emf.tdf
-    Info (12023): Found entity 1: cntr_emf File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_emf.tdf Line: 28
-Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_pac.tdf
-    Info (12023): Found entity 1: cmpr_pac File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cmpr_pac.tdf Line: 23
-Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_b6h.tdf
-    Info (12023): Found entity 1: cntr_b6h File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/db/cntr_b6h.tdf Line: 28
-Warning (12241): 10 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Warning (13039): The following bidirectional pins have no drivers
-    Warning (13040): bidirectional pin "ADC_CS_N" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 40
-    Warning (13040): bidirectional pin "AUD_ADCLRCK" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 47
-    Warning (13040): bidirectional pin "AUD_BCLK" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 48
-    Warning (13040): bidirectional pin "AUD_DACLRCK" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 50
-    Warning (13040): bidirectional pin "FPGA_I2C_SDAT" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 83
-    Warning (13040): bidirectional pin "GPIO_0[0]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[1]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[2]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[3]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[4]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[5]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[6]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[7]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[8]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[9]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[10]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[11]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[12]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[13]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[14]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[15]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[16]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[17]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[18]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[19]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[20]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[21]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[22]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[23]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[24]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[25]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[26]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[27]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[28]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[29]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[30]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[31]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[32]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[33]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[34]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "GPIO_0[35]" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
-    Warning (13040): bidirectional pin "PS2_CLK" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 118
-    Warning (13040): bidirectional pin "PS2_CLK2" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 119
-    Warning (13040): bidirectional pin "PS2_DAT" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 120
-    Warning (13040): bidirectional pin "PS2_DAT2" has no driver File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 121
+Warning (12241): 9 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (13000): Registers with preset signals will power-up high File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/Sdram_Control/Sdram_Control.v Line: 443
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "ADC_DIN" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 41
-    Warning (13410): Pin "ADC_SCLK" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 43
-    Warning (13410): Pin "AUD_DACDAT" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 49
-    Warning (13410): Pin "AUD_XCK" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 51
-    Warning (13410): Pin "DRAM_ADDR[12]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
-    Warning (13410): Pin "FAN_CTRL" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 79
-    Warning (13410): Pin "FPGA_I2C_SCLK" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 82
-    Warning (13410): Pin "IRDA_TXD" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 109
-    Warning (13410): Pin "TD_RESET_N" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 130
-    Warning (13410): Pin "VGA_SYNC_N" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 140
-    Warning (13410): Pin "D5M_TRIGGER" is stuck at VCC File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 152
-Info (17049): 32 registers lost all their fanouts during netlist optimizations.
+    Warning (13410): Pin "DRAM_ADDR[12]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 46
+    Warning (13410): Pin "LEDR[0]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[1]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[2]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[3]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[4]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[5]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[6]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[7]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[8]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "LEDR[9]" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 63
+    Warning (13410): Pin "VGA_SYNC_N" is stuck at GND File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 75
+    Warning (13410): Pin "D5M_TRIGGER" is stuck at VCC File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 87
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 36 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 12 node(s), including 0 DDIO, 4 PLL, 0 transceiver and 0 LCELL
 Warning: RST port on the PLL is not properly connected on instance sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i|general[1].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: c:/intelfpga_lite/21.1/quartus/libraries/megafunctions/altera_pll.v Line: 749
@@ -2865,40 +2430,27 @@ Warning: RST port on the PLL is not properly connected on instance sdram_pll:u6|
     Info: Must be connected
 Warning: RST port on the PLL is not properly connected on instance sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: c:/intelfpga_lite/21.1/quartus/libraries/megafunctions/altera_pll.v Line: 749
     Info: Must be connected
-Warning (21074): Design contains 22 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "ADC_DOUT" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 42
-    Warning (15610): No output dependent on input pin "AUD_ADCDAT" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 46
-    Warning (15610): No output dependent on input pin "CLOCK3_50" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 57
-    Warning (15610): No output dependent on input pin "CLOCK4_50" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 60
-    Warning (15610): No output dependent on input pin "IRDA_RXD" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 108
-    Warning (15610): No output dependent on input pin "SW[4]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 124
-    Warning (15610): No output dependent on input pin "SW[5]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 124
-    Warning (15610): No output dependent on input pin "SW[6]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 124
-    Warning (15610): No output dependent on input pin "SW[7]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 124
-    Warning (15610): No output dependent on input pin "SW[8]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 124
-    Warning (15610): No output dependent on input pin "TD_CLK27" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 127
-    Warning (15610): No output dependent on input pin "TD_DATA[0]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 128
-    Warning (15610): No output dependent on input pin "TD_DATA[1]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 128
-    Warning (15610): No output dependent on input pin "TD_DATA[2]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 128
-    Warning (15610): No output dependent on input pin "TD_DATA[3]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 128
-    Warning (15610): No output dependent on input pin "TD_DATA[4]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 128
-    Warning (15610): No output dependent on input pin "TD_DATA[5]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 128
-    Warning (15610): No output dependent on input pin "TD_DATA[6]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 128
-    Warning (15610): No output dependent on input pin "TD_DATA[7]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 128
-    Warning (15610): No output dependent on input pin "TD_HS" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 129
-    Warning (15610): No output dependent on input pin "TD_VS" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 131
-    Warning (15610): No output dependent on input pin "D5M_STROBE" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 151
-Info (21057): Implemented 2419 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 48 input pins
-    Info (21059): Implemented 116 output pins
-    Info (21060): Implemented 62 bidirectional pins
-    Info (21061): Implemented 2041 logic cells
-    Info (21064): Implemented 148 RAM segments
+Warning (21074): Design contains 9 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "SW[1]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
+    Warning (15610): No output dependent on input pin "SW[2]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
+    Warning (15610): No output dependent on input pin "SW[3]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
+    Warning (15610): No output dependent on input pin "SW[4]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
+    Warning (15610): No output dependent on input pin "SW[5]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
+    Warning (15610): No output dependent on input pin "SW[6]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
+    Warning (15610): No output dependent on input pin "SW[7]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
+    Warning (15610): No output dependent on input pin "SW[8]" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 66
+    Warning (15610): No output dependent on input pin "D5M_STROBE" File: I:/ece554/ECE554_SP23/DE1_SoC_CAMERA_Sol/DE1_SoC_CAMERA.v Line: 86
+Info (21057): Implemented 1656 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 32 input pins
+    Info (21059): Implemented 66 output pins
+    Info (21060): Implemented 17 bidirectional pins
+    Info (21061): Implemented 1457 logic cells
+    Info (21064): Implemented 80 RAM segments
     Info (21065): Implemented 4 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 141 warnings
-    Info: Peak virtual memory: 5036 megabytes
-    Info: Processing ended: Thu Mar  2 17:21:03 2023
-    Info: Elapsed time: 00:00:26
-    Info: Total CPU time (on all processors): 00:00:26
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 78 warnings
+    Info: Peak virtual memory: 4894 megabytes
+    Info: Processing ended: Tue Mar  7 19:17:51 2023
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:19
 
 

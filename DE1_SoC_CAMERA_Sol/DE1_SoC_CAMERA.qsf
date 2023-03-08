@@ -753,13 +753,9 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name VERILOG_FILE v/imgproc.v
-set_global_assignment -name VERILOG_FILE v/grey_buffer.v
-set_global_assignment -name VERILOG_FILE v/CONV3x3.v
 set_global_assignment -name VERILOG_FILE RAW2GRAY.v
 set_global_assignment -name VERILOG_FILE DE1_SoC_CAMERA.v
 set_global_assignment -name VERILOG_FILE v/VGA_Controller.v
-set_global_assignment -name VERILOG_FILE v/SEG7_LUT.v
 set_global_assignment -name VERILOG_FILE v/Reset_Delay.v
 set_global_assignment -name VERILOG_FILE v/I2C_Controller.v
 set_global_assignment -name VERILOG_FILE v/I2C_CCD_Config.v
@@ -770,7 +766,6 @@ set_global_assignment -name VERILOG_FILE Sdram_Control/sdr_data_path.v
 set_global_assignment -name VERILOG_FILE Sdram_Control/control_interface.v
 set_global_assignment -name VERILOG_FILE Sdram_Control/command.v
 set_global_assignment -name SDC_FILE DE1_SoC_CAMERA.sdc
-set_global_assignment -name VERILOG_FILE v/SEG7_LUT_6.v
 set_global_assignment -name QIP_FILE v/sdram_pll.qip
 set_global_assignment -name SIP_FILE v/sdram_pll.sip
 set_global_assignment -name QIP_FILE v/Line_Buffer1.qip
