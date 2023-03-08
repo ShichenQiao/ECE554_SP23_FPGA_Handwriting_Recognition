@@ -2,11 +2,11 @@ module IM(clk,addr,rd_en,instr);
 
 input clk;
 input [13:0] addr;
-input rd_en;							// asserted when instruction read desired
+input rd_en;                            // asserted when instruction read desired
 
-output reg [31:0] instr;				// output of insturction memory
+output reg [31:0] instr;                // output of insturction memory
 
-reg [31:0]instr_mem[0:16383];			// 16K*32 instruction memory
+reg [31:0]instr_mem[0:16383];           // 16K*32 instruction memory
 
 ///////////////////////////////////
 // Memory is flopped on negedge //

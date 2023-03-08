@@ -11,7 +11,7 @@ input [31:0] pc_EX_DM;                  // from PC for JAL saving to R15
 input [31:0] dst_EX_DM;                 // input from ALU
 input [31:0] dst_ext_EX_DM;             // input from ext ALU
 
-output reg[31:0] rf_w_data_DM_WB;		// output to be written to RF
+output reg[31:0] rf_w_data_DM_WB;       // output to be written to RF
 
 always @(posedge clk)
   if (dm_re_EX_DM)

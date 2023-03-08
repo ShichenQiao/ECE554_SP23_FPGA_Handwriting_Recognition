@@ -21,9 +21,9 @@ output [31:0] src0,src1;                        // source busses
 /////////////////////////////////
 // registers needed for flops //
 ///////////////////////////////
-reg [31:0] p0_ID_EX,p1_ID_EX;		// need to flop register file outputs to form _ID_EX versions
+reg [31:0] p0_ID_EX,p1_ID_EX;          // need to flop register file outputs to form _ID_EX versions
 
-wire[31:0] RF_p0,RF_p1;				// output of bypass muxes for RF sources
+wire[31:0] RF_p0,RF_p1;                // output of bypass muxes for RF sources
 /////////////////////
 // include params //
 ///////////////////
@@ -38,38 +38,38 @@ always @(posedge clk)
       p0_ID_EX <= p0;
       p1_ID_EX <= p1;
     end
-	
+
 /////////////////////////////
 // Bypass Muxes for port0 //
 ///////////////////////////
-assign RF_p0 = (byp0_EX) ? dst_EX_DM :		// EX gets priority because it represents more recent data
+assign RF_p0 = (byp0_EX) ? dst_EX_DM :        // EX gets priority because it represents more recent data
                (byp0_ext_EX) ? dst_ext_EX_DM :
                (byp0_DM) ? dst_DM_WB :
-			   p0_ID_EX;
-	
+               p0_ID_EX;
+
 /////////////////////////////
 // Bypass Muxes for port1 //
 ///////////////////////////
-assign RF_p1 = (byp1_EX) ? dst_EX_DM :		// EX gets priority because it represents more recent data
+assign RF_p1 = (byp1_EX) ? dst_EX_DM :        // EX gets priority because it represents more recent data
                (byp1_ext_EX) ? dst_ext_EX_DM :
                (byp1_DM) ? dst_DM_WB :
-			   p1_ID_EX;	
-			   
+               p1_ID_EX;    
+
 ////////////////////////////////////////////////////
 // Need to pipeline the data to be stored for SW //
 //////////////////////////////////////////////////
 always @(posedge clk)
   if (!stall_EX_DM)
     p0_EX_DM <= RF_p0;
-	
+
 assign src0 = (src0sel_ID_EX == RF2SRC0) ? RF_p0 : 
-              (src0sel_ID_EX == IMM_BR2SRC0) ? {{20{imm_ID_EX[11]}},imm_ID_EX[11:0]} :		// branch immediates
-              (src0sel_ID_EX == IMM_JMP2SRC0) ? {{20{imm_ID_EX[11]}},imm_ID_EX[11:0]} :	// JMP immediates
-              {{24{imm_ID_EX[7]}},imm_ID_EX[7:0]};		// for address immediates for DM operations
+              (src0sel_ID_EX == IMM_BR2SRC0) ? {{20{imm_ID_EX[11]}},imm_ID_EX[11:0]} :        // branch immediates
+              (src0sel_ID_EX == IMM_JMP2SRC0) ? {{20{imm_ID_EX[11]}},imm_ID_EX[11:0]} :    // JMP immediates
+              {{24{imm_ID_EX[7]}},imm_ID_EX[7:0]};        // for address immediates for DM operations
 
 assign src1 = (src1sel_ID_EX == RF2SRC1) ? RF_p1 : 
-              (src1sel_ID_EX == NPC2SRC1) ? pc_ID_EX :	// for JAL
+              (src1sel_ID_EX == NPC2SRC1) ? pc_ID_EX :    // for JAL
               {{16{imm_ID_EX[15]}},imm_ID_EX[15:0]};    // for LHB/LLB (sign extended 16-bit immediate
-			  
+
 endmodule
 

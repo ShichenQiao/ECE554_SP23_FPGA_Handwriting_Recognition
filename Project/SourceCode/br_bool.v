@@ -34,7 +34,7 @@ always @(posedge clk, negedge rst_n)
   else if (clk_z_ID_ext_EX)    //If the instruction is from ext_ALU, then it needs to be floped
     zr_EX_DM  <= ext_zr;
 
-	
+    
 /////////////////////////////////////
 // Flops for negative and ov flag //
 ///////////////////////////////////
@@ -57,19 +57,19 @@ always @(posedge clk, negedge rst_n)
 
 always @(br_instr_ID_EX,cc_ID_EX,zr_EX_DM,ov_EX_DM,neg_EX_DM,jmp_reg_ID_EX,jmp_imm_ID_EX) begin
 
-  flow_change_ID_EX = jmp_imm_ID_EX | jmp_reg_ID_EX;	// jumps always change the flow
+  flow_change_ID_EX = jmp_imm_ID_EX | jmp_reg_ID_EX;    // jumps always change the flow
   
   if (br_instr_ID_EX)
     case (cc_ID_EX)
-	  3'b000 : flow_change_ID_EX = ~zr_EX_DM;
-	  3'b001 : flow_change_ID_EX = zr_EX_DM;
-	  3'b010 : flow_change_ID_EX = ~zr_EX_DM & ~neg_EX_DM;
-	  3'b011 : flow_change_ID_EX = neg_EX_DM;
-	  3'b100 : flow_change_ID_EX = zr_EX_DM | (~zr_EX_DM & ~neg_EX_DM);
-	  3'b101 : flow_change_ID_EX = neg_EX_DM | zr_EX_DM;
-	  3'b110 : flow_change_ID_EX = ov_EX_DM;
-	  3'b111 : flow_change_ID_EX = 1'b1;
-	endcase
+      3'b000 : flow_change_ID_EX = ~zr_EX_DM;
+      3'b001 : flow_change_ID_EX = zr_EX_DM;
+      3'b010 : flow_change_ID_EX = ~zr_EX_DM & ~neg_EX_DM;
+      3'b011 : flow_change_ID_EX = neg_EX_DM;
+      3'b100 : flow_change_ID_EX = zr_EX_DM | (~zr_EX_DM & ~neg_EX_DM);
+      3'b101 : flow_change_ID_EX = neg_EX_DM | zr_EX_DM;
+      3'b110 : flow_change_ID_EX = ov_EX_DM;
+      3'b111 : flow_change_ID_EX = 1'b1;
+    endcase
 end
 
 endmodule

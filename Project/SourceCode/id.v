@@ -68,10 +68,10 @@ reg [4:0] rf_dst_addr_ID_EX,rf_dst_addr_EX_DM;
 reg dm_re_ID_EX;
 reg dm_we_ID_EX;
 reg hlt_ID_EX,hlt_EX_DM;
-reg [15:0] instr_ID_EX;		// only need lower 16-bits for immediate values
-reg flow_change_EX_DM;		// needed to pipeline flow_change_ID_EX
-reg cond_ex_ID_EX;              // needed for ADDZ knock down of rf_we
-reg ext_alu_ID_EX;              // flop one cycle for ext_alu dst_mux
+reg [15:0] instr_ID_EX;        // only need lower 16-bits for immediate values
+reg flow_change_EX_DM;         // needed to pipeline flow_change_ID_EX
+reg cond_ex_ID_EX;             // needed for ADDZ knock down of rf_we
+reg ext_alu_ID_EX;             // flop one cycle for ext_alu dst_mux
 
 wire load_use_hazard,flush;
 
@@ -79,8 +79,7 @@ wire load_use_hazard,flush;
 // include params //
 ///////////////////
 `include "common_params.inc"
-	
-	
+
 ///////////////////////////////////
 // Flop the instruction from IM //
 /////////////////////////////////
@@ -89,7 +88,7 @@ always @(posedge clk, negedge rst_n)
     instr_IM_ID <= 32'h5800_0000;     // LLB R0, #0000
   else if (!stall_IM_ID)
     instr_IM_ID <= instr;        // flop raw instruction from IM
-	
+
 /////////////////////////////////////////////////////////////
 // Pipeline control signals needed in EX stage and beyond //
 ///////////////////////////////////////////////////////////
@@ -97,10 +96,10 @@ always @(posedge clk)
   if (!stall_ID_EX)
     begin
       br_instr_ID_EX    <= br_instr & !flush;
-      jmp_imm_ID_EX   	<= jmp_imm & !flush;
-      jmp_reg_ID_EX   	<= jmp_reg & !flush;
-      rf_we_ID_EX     	<= rf_we & !load_use_hazard & !flush;
-      rf_dst_addr_ID_EX	<= rf_dst_addr;
+      jmp_imm_ID_EX     <= jmp_imm & !flush;
+      jmp_reg_ID_EX     <= jmp_reg & !flush;
+      rf_we_ID_EX       <= rf_we & !load_use_hazard & !flush;
+      rf_dst_addr_ID_EX <= rf_dst_addr;
       alu_func_ID_EX    <= alu_func;
       src0sel_ID_EX     <= src0sel;
       src1sel_ID_EX     <= src1sel;
@@ -115,24 +114,24 @@ always @(posedge clk)
       cond_ex_ID_EX     <= cond_ex;
       ext_alu_ID_EX     <= ext_alu & !load_use_hazard & !flush; //TODO: is the load_use_hazard and flush needed?
     end
-	
+
 //////////////////////////////////////////////////////////////
 // Pipeline control signals needed in MEM stage and beyond //
 ////////////////////////////////////////////////////////////
 always @(posedge clk)
   if (!stall_EX_DM)
     begin
-      rf_we_EX_DM       <= rf_we_ID_EX & (!(cond_ex_ID_EX & !zr_EX_DM));	// ADDZ
+      rf_we_EX_DM       <= rf_we_ID_EX & (!(cond_ex_ID_EX & !zr_EX_DM));    // ADDZ
       rf_dst_addr_EX_DM <= rf_dst_addr_ID_EX;
       dm_re_EX_DM       <= dm_re_ID_EX;
       dm_we_EX_DM       <= dm_we_ID_EX;
       jmp_imm_EX_DM     <= jmp_imm_ID_EX;
       ext_alu_EX_DM     <= ext_alu_ID_EX;
     end
-	
-	
+
+
 always @(posedge clk) begin
-  rf_we_DM_WB 		<= rf_we_EX_DM;
+  rf_we_DM_WB       <= rf_we_EX_DM;
   rf_dst_addr_DM_WB <= rf_dst_addr_EX_DM;
 end
 
@@ -159,7 +158,7 @@ always @(posedge clk, negedge rst_n)
       byp1_ext_EX <= (rf_dst_addr_ID_EX==rf_p1_addr) ? (rf_we_ID_EX & |rf_p1_addr & ext_alu_ID_EX) : 1'b0;
       byp1_DM <= (rf_dst_addr_EX_DM==rf_p1_addr) ? (rf_we_EX_DM & |rf_p1_addr) : 1'b0;
     end
-	
+    
 ///////////////////////////////////////////
 // Flops for pipelining HLT instruction //
 /////////////////////////////////////////
@@ -172,15 +171,15 @@ always @(posedge clk, negedge rst_n)
     end
   else
     begin
-      hlt_ID_EX <= hlt & !flush | hlt_ID_EX;	// once set stays set
+      hlt_ID_EX <= hlt & !flush | hlt_ID_EX;    // once set stays set
       hlt_EX_DM <= hlt_ID_EX;
       hlt_DM_WB <= hlt_EX_DM;
     end
-	
+
 //////////////////////////////////////////
 // Have to pipeline flow_change so can //
 // flush the 2 following instructions //
-///////////////////////////////////////	
+///////////////////////////////////////
 always @(posedge clk, negedge rst_n)
   if (!rst_n)
     flow_change_EX_DM <= 1'b0;
@@ -191,10 +190,10 @@ assign flush = flow_change_ID_EX | flow_change_EX_DM | hlt_ID_EX | hlt_EX_DM;
 
 ////////////////////////////////
 // Load Use Hazard Detection //
-//////////////////////////////	
+//////////////////////////////
 assign load_use_hazard = (((rf_dst_addr_ID_EX==rf_p0_addr) && rf_re0) || 
                           ((rf_dst_addr_ID_EX==rf_p1_addr) && rf_re1)) ? dm_re_ID_EX : 1'b0;
-						  
+
 assign stall_IM_ID = hlt_ID_EX | load_use_hazard;
 assign stall_ID_EX = 1'b0; // hlt_EX_DM;
 assign stall_EX_DM = 1'b0; // hlt_EX_DM;
@@ -237,18 +236,18 @@ always @(instr_IM_ID) begin
     ADDZi : begin
       rf_re0 = 1;
       rf_re1 = 1;
-      rf_we = 1;	// potentially knocked down in next pipe reg
+      rf_we = 1;    // potentially knocked down in next pipe reg
       clk_z = 1;
       clk_nv = 1;
-      cond_ex = 1;	// this is a conditionally executing instruction
+      cond_ex = 1;    // this is a conditionally executing instruction
     end
     SUBi : begin
       rf_re0 = 1;
       rf_re1 = 1;
       rf_we = 1;
-      alu_func = SUB;	
+      alu_func = SUB;    
       clk_z = 1;
-      clk_nv = 1;	  
+      clk_nv = 1;      
     end
     ANDi : begin
       rf_re0 = 1;
@@ -263,19 +262,19 @@ always @(instr_IM_ID) begin
       rf_we = 1;
       alu_func = NOR;
       clk_z = 1;
-    end	
+    end    
     SLLi : begin
       rf_re1 = 1;
       rf_we = 1;
       alu_func = SLL;
       clk_z = 1;
-    end	
+    end    
     SRLi : begin
       rf_re1 = 1;
       rf_we = 1;
       alu_func = SRL;
       clk_z = 1;
-    end	
+    end    
     SRAi : begin
       rf_re1 = 1;
       rf_we = 1;
@@ -283,47 +282,47 @@ always @(instr_IM_ID) begin
       clk_z = 1;
     end
     LWi : begin
-      src0sel = IMM2SRC0;		// sign extended address offset
+      src0sel = IMM2SRC0;        // sign extended address offset
       rf_re1 = 1;
       rf_we = 1;
       dm_re = 1;
     end
     SWi : begin
-      src0sel = IMM2SRC0;					// sign extended address offset
-      rf_re1 = 1;							// read register that contains address base
-      rf_re0 = 1;							// read register to be stored
-      rf_p0_addr = instr_IM_ID[20:16];		// register to be stored is encoded in [20:16]
+      src0sel = IMM2SRC0;                    // sign extended address offset
+      rf_re1 = 1;                            // read register that contains address base
+      rf_re0 = 1;                            // read register to be stored
+      rf_p0_addr = instr_IM_ID[20:16];        // register to be stored is encoded in [20:16]
       dm_we = 1;
     end
     LHBi : begin
       rf_re0 = 1;
-      rf_p0_addr = instr_IM_ID[20:16];		// need to preserve lower byte, access it so can be recycled
-      src1sel = IMM2SRC1;					// access 16-bit immediate.
+      rf_p0_addr = instr_IM_ID[20:16];        // need to preserve lower byte, access it so can be recycled
+      src1sel = IMM2SRC1;                    // access 16-bit immediate.
       rf_we = 1;
       alu_func = LHB;
     end
     LLBi : begin
-      rf_re0 = 1;					// access zero from reg0 and ADD
-      rf_p0_addr = 5'h00;			// reg0 contains zero
-      src1sel = IMM2SRC1;			// access 16-bit immediate
+      rf_re0 = 1;                    // access zero from reg0 and ADD
+      rf_p0_addr = 5'h00;            // reg0 contains zero
+      src1sel = IMM2SRC1;            // access 16-bit immediate
       rf_we = 1;
     end
     BRi : begin
-      src0sel = IMM_BR2SRC0;		// 12-bit SE immediate
-      src1sel = NPC2SRC1;			// nxt_pc is routed to source 1
+      src0sel = IMM_BR2SRC0;         // 12-bit SE immediate
+      src1sel = NPC2SRC1;            // nxt_pc is routed to source 1
       br_instr = 1;
     end
     JALi : begin
-      src0sel = IMM_JMP2SRC0;		// 12-bit SE immediate
-      src1sel = NPC2SRC1;			// nxt_pc is routed to source 1
+      src0sel = IMM_JMP2SRC0;        // 12-bit SE immediate
+      src1sel = NPC2SRC1;            // nxt_pc is routed to source 1
       rf_we = 1;
-      rf_dst_addr = 5'h1F;			// for JAL we write nxt_pc to reg31
+      rf_dst_addr = 5'h1F;            // for JAL we write nxt_pc to reg31
       jmp_imm = 1;
     end
     JRi : begin
-      rf_re0 = 1;					// access zero from reg0 and ADD
+      rf_re0 = 1;                    // access zero from reg0 and ADD
       rf_p0_addr = 5'h00;
-      rf_re1 = 1;					// read register to jump to on src1
+      rf_re1 = 1;                    // read register to jump to on src1
       jmp_reg = 1;
     end
     PUSHi : begin         // not implemented
@@ -392,7 +391,7 @@ always @(instr_IM_ID) begin
     HLTi : begin
       hlt = 1;
     end
-	
+    
   endcase
 end
 

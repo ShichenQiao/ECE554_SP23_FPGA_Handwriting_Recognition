@@ -1,9 +1,9 @@
 // A self-explaining module
 module right_shifter(In, ShAmt, Out);
 
-input  [23:0] In; 	// Input operand
-input  [4:0] ShAmt;	// Amount to shift/rotate
-output [23:0] Out; 	// Result of shift/rotate
+input  [23:0] In;      // Input operand
+input  [4:0] ShAmt;    // Amount to shift/rotate
+output [23:0] Out;     // Result of shift/rotate
 
 wire [23:0] shft_stg1, shft_stg2, shft_stg3, shft_stg4;
 

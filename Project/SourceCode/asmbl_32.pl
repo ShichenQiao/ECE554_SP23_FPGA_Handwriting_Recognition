@@ -50,19 +50,19 @@ if(@ARGV < 1) { print "Usage: asmbl.pl <input assembly file> > outputFile\n"; ex
 
 my %regs = ("R0" => "00000", "R1" => "00001", "R2" => "00010", "R3" => "00011",
 
-	    "R4" => "00100", "R5" => "00101", "R6" => "00110", "R7" => "00111",
+        "R4" => "00100", "R5" => "00101", "R6" => "00110", "R7" => "00111",
 
-	    "R8" => "01000", "R9" => "01001", "R10"=> "01010", "R11"=> "01011",
+        "R8" => "01000", "R9" => "01001", "R10"=> "01010", "R11"=> "01011",
 
-	    "R12"=> "01100", "R13"=> "01101", "R14"=> "01110", "R15"=> "01111",
+        "R12"=> "01100", "R13"=> "01101", "R14"=> "01110", "R15"=> "01111",
 
-	    "R16"=> "10000", "R17"=> "10001", "R18"=> "10010", "R19"=> "10011",
+        "R16"=> "10000", "R17"=> "10001", "R18"=> "10010", "R19"=> "10011",
 
-	    "R20"=> "10100", "R21"=> "10101", "R22"=> "10110", "R23"=> "10111",
+        "R20"=> "10100", "R21"=> "10101", "R22"=> "10110", "R23"=> "10111",
 
-	    "R24"=> "11000", "R25"=> "11001", "R26"=> "11010", "R27"=> "11011",
+        "R24"=> "11000", "R25"=> "11001", "R26"=> "11010", "R27"=> "11011",
 
-	    "R28"=> "11100", "R29"=> "11101", "R30"=> "11110", "R31"=> "11111");
+        "R28"=> "11100", "R29"=> "11101", "R30"=> "11110", "R31"=> "11111");
 
 
 
@@ -122,23 +122,23 @@ while(<IN>) {
 
     if(/MEM\s+(\S*)/) {
 
-	$addr = hex($1);
+    $addr = hex($1);
 
-	next;
+    next;
 
     }
 
     if(/DATA\s+(.*)/) {
 
-	my $data = $1;
+    my $data = $1;
 
-	$data =~ s/\s*(\S+)\s*/$1/;
+    $data =~ s/\s*(\S+)\s*/$1/;
 
-	while(length($data) < 4) { $data = "0" . $data }
+    while(length($data) < 4) { $data = "0" . $data }
 
-	$mem[$addr++] = hexToBin($data, 32);
+    $mem[$addr++] = hexToBin($data, 32);
 
-	next;
+    next;
 
     }
 
@@ -174,9 +174,9 @@ while(<IN>) {
 
       if($numArgs{$instr} != @args) { 
 
-	  die("Error:\n$_\nWrong number of arguments (need $numArgs{$instr} args)\n") 
+      die("Error:\n$_\nWrong number of arguments (need $numArgs{$instr} args)\n") 
 
-	  }
+      }
 
       
 
@@ -188,7 +188,7 @@ while(<IN>) {
 
       for(my $c=0; $c<@args; $c++) { 
 
-	  $args[$c] =~ s/^\s*(\S+)\s*$/$1/ ;
+      $args[$c] =~ s/^\s*(\S+)\s*$/$1/ ;
 
       }
 
@@ -196,85 +196,85 @@ while(<IN>) {
 
       if($instr =~ /^(AND|NOR|ADD|ADDZ|SUB|MUL|UMUL|ADDF|SUBF|MULF)$/) {
 
-	  $bits .= "000";
+      $bits .= "000";
 
-	  foreach my $reg ($args[0], $args[1], $args[2]) {
+      foreach my $reg ($args[0], $args[1], $args[2]) {
 
-	      if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
+          if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
 
-	      $bits .= "000".$regs{$reg};
+          $bits .= "000".$regs{$reg};
 
-	  }
+      }
 
       }
 
       elsif($instr =~ /^(SRA|SLL|SRL)$/) {
 
-	  $bits .= "000";
+      $bits .= "000";
 
-	  foreach my $reg ($args[0], $args[1]) {
+      foreach my $reg ($args[0], $args[1]) {
 
-	      if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
+          if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
 
-	      $bits .= "000".$regs{$reg};
+          $bits .= "000".$regs{$reg};
 
-	  }
+      }
 
-	  $bits .= "000".parseImmediate($args[2], 5);
+      $bits .= "000".parseImmediate($args[2], 5);
 
       }
 
       elsif($instr =~ /^(LW|SW|LWI)$/) {
 
-	  $bits .= "000";
+      $bits .= "000";
 
-	  foreach my $reg ($args[0], $args[1]) {
+      foreach my $reg ($args[0], $args[1]) {
 
-	      if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
+          if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
 
-	      $bits .= "000".$regs{$reg};
+          $bits .= "000".$regs{$reg};
 
-	  }
+      }
 
-	  $bits .= parseImmediate($args[2], 8);
+      $bits .= parseImmediate($args[2], 8);
 
       }
 
       elsif($instr =~ /^(LHB|LLB)$/) {
 
-	  $bits .= "000";
+      $bits .= "000";
 
-	  foreach my $reg ($args[0]) {
+      foreach my $reg ($args[0]) {
 
-	      if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
+          if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
 
-	      $bits .= "000".$regs{$reg};
+          $bits .= "000".$regs{$reg};
 
-	  }
+      }
 
-	  $bits .= parseImmediate($args[1], 16);
+      $bits .= parseImmediate($args[1], 16);
 
       }
 
       elsif($instr =~ /^(B)$/) {
 
-	  if(!$conds{$args[0]}) { die("Invalid condition code ($args[0])\n$_\nUse only from {NEQ, EQ, GT, LT, GTE, LTE, OVFL, UNCOND}") }
+      if(!$conds{$args[0]}) { die("Invalid condition code ($args[0])\n$_\nUse only from {NEQ, EQ, GT, LT, GTE, LTE, OVFL, UNCOND}") }
 
-	  else { $bits .= $conds{$args[0]}; }
+      else { $bits .= $conds{$args[0]}; }
 
 
 
-	  if($args[1] !~ /[a-zA-Z]/) { print STDERR "Error: Invalid label name: \"$args[1]\" in line:\n$_"; exit; }
+      if($args[1] !~ /[a-zA-Z]/) { print STDERR "Error: Invalid label name: \"$args[1]\" in line:\n$_"; exit; }
 
-	  $bits .= "000000000000" .  "|" . $args[1] . "|12|B|";
+      $bits .= "000000000000" .  "|" . $args[1] . "|12|B|";
 
       }
 
       elsif($instr =~ /^(JAL)$/) {
 
-	  if($args[0] !~ /[a-zA-Z]/) { print STDERR "Error: Invalid label name: \"$args[0]\" in line:\n$_"; exit; }
+      if($args[0] !~ /[a-zA-Z]/) { print STDERR "Error: Invalid label name: \"$args[0]\" in line:\n$_"; exit; }
 
-	  $bits .= "000000000000000" . "|" . $args[0] . "|12|J|";
+      $bits .= "000000000000000" . "|" . $args[0] . "|12|J|";
 
       }
 
@@ -304,17 +304,17 @@ while(<IN>) {
 
       elsif($instr =~ /^(ITF|FTI)$/) {
 
-	  $bits .= "000";
+      $bits .= "000";
 
-	  foreach my $reg ($args[0], $args[1]) {
+      foreach my $reg ($args[0], $args[1]) {
 
-	      if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
+          if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
 
-	      $bits .= "000".$regs{$reg};
+          $bits .= "000".$regs{$reg};
 
-	  }
+      }
 
-	  $bits .= "00000000";
+      $bits .= "00000000";
 
       }
 
@@ -377,7 +377,7 @@ for(my $i=0; $i<scalar(@mem); $i++) {
   #my $j = $i / 2;  #shift from a byte address to a word address
 
   # print decToHex($i) . "  :  " . binToHex($addr) . "  ;\n";
-	
+    
   print "\@" . decToHex($i, 4) . " " . binToHex($addr) . "\t// " . $source_lines[$i] . "\n";
 
   #if($code[$i]) { print $code[$i] }

@@ -7,13 +7,13 @@ module DM(clk,addr,re,we,wrt_data,rd_data);
 /////////////////////////////////////////////////////
 input clk;
 input [12:0] addr;
-input re;						// asserted when instruction read desired
-input we;						// asserted when write desired
-input [31:0] wrt_data;			// data to be written
+input re;                        // asserted when instruction read desired
+input we;                        // asserted when write desired
+input [31:0] wrt_data;           // data to be written
 
-output reg [31:0] rd_data;		// output of data memory
+output reg [31:0] rd_data;       // output of data memory
 
-reg [31:0]data_mem[0:8192];		// 8K*32 data memory
+reg [31:0]data_mem[0:8192];      // 8K*32 data memory
 
 /////////////////////////////////////////
 // Read is synchronous on negedge clk //
@@ -21,7 +21,7 @@ reg [31:0]data_mem[0:8192];		// 8K*32 data memory
 always @(negedge clk)
   if (re && ~we)
     rd_data <= data_mem[addr];
-	
+
 /////////////////////////////////////////////////
 // Model write, data is written on clock fall //
 ///////////////////////////////////////////////
