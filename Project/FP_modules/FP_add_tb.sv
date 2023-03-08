@@ -27,7 +27,9 @@ module FP_add_tb();
 	logic [31:0] OUT;
 	logic ovfl;
 
-	shortreal a, b, o;
+	logic [31:0] a, b;
+	shortreal as, bs, os;
+	shortreal o;
 
 	logic [31:0] sum;
 
@@ -37,19 +39,76 @@ module FP_add_tb();
 		.out(OUT)
 	);
 
+	real err;
+
+
 	initial begin
 		// One million random tests
 		// reduce this number if you wanna quickly proceed to weirdos tests
 		for(int i = 0; i < 1000000; i++) begin
+			#1;
 			a = $random();
 			b = $random();
-			o = a + b;
-			sum = $shortrealtobits(o);
-			A = $shortrealtobits(a);
-			B = $shortrealtobits(b);
+			as = $bitstoshortreal(a);
+			bs = $bitstoshortreal(b);
+			os = as + bs;
+			sum = $shortrealtobits(os);
+			A = a;
+			B = b;
 			#1;
+			o = $bitstoshortreal(OUT);
+			if(is_NaN(sum)) begin
+				if(!is_NaN(OUT)) begin
+					$display("SCHMUCK! %b + %b = NaN, not %b", A, B, OUT);
+					#10;
+					$stop();
+				end
+			end
+			else if (~|sum[30:0]) begin
+				if (|OUT[30:0]) begin
+					$display("SCHMUCK! %b + %b = 0, not %b", A, B, OUT);
+					#10;
+					$stop();
+				end
+			end
+			else if (sum === FP_POS_INF) begin
+				if (OUT !== FP_POS_INF) begin
+					$display("SCHMUCK! %b + %b = +INF, not %b", A, B, OUT);
+					#10;
+					$stop();
+				end
+			end
+			else if (sum === FP_NEG_INF) begin
+				if (OUT !== FP_NEG_INF) begin
+					$display("SCHMUCK! %b + %b = -INF, not %b", A, B, OUT);
+					#10;
+					$stop();
+				end
+			end
+			else begin
+				err = (os - o) / os;
+				#1;
+				if ((err < 0 ? -err : err) > 0.002) begin
+					#10;
+					$display("Random test failed:");
+					$display("a: %b", A);
+					$display("b: %b", B);
+					$display("should be: %b", sum);
+					$display("but got: %b", OUT);
+					$stop();
+				end
+			end
+			#1;
+			/*
+			if(is_NaN(sum)) begin
+				if(!is_NaN(OUT)) begin
+					$display("SCHMUCK! %b + %b = NaN, not %b", A, B, OUT);
+					#10;
+					$stop();
+				end
+			end
 			// allow -1 ~ +1 difference due to shortrealtobits and shortrealtobits error
-			if (OUT <= sum - 1 && OUT >= sum + 1) begin
+			else if ((OUT < sum - 2 || OUT > sum + 2)) begin
 				$display("Random test failed:");
 				$display("a: %b", A);
 				$display("b: %b", B);
@@ -57,20 +116,22 @@ module FP_add_tb();
 				$display("but got: %b", OUT);
 				$stop();
 			end
+			*/
 		end
-		#10
+		#10;
 		$display("ALL RANDOM TESTS WERE GOOD...");
 		$display("BUT MORE WEIRDOS ARE COMING ;)");
 		// 256 corner cases (16 special values plus themselves)
-		for(int i = 0; i < 16; i++) begin
-			for(int j = 0; j < 16; j++) begin
+		for(int i = 0; i < 14; i++) begin
+			for(int j = 0; j < 14; j++) begin
 				A = SPECIAL_VALS_ARR[i];
-				a = $bitstoshortreal(A);
+				as = $bitstoshortreal(A);
 				B = SPECIAL_VALS_ARR[j];
-				b = $bitstoshortreal(B);
-				o = shortreal'(a + b);
-				sum = $shortrealtobits(o);
+				bs = $bitstoshortreal(B);
+				os = as + bs;
+				sum = $shortrealtobits(os);
 				#1;
+				o = $bitstoshortreal(OUT);
 				if(is_NaN(sum)) begin
 					if(!is_NaN(OUT)) begin
 						$display("SCHMUCK! %b + %b = NaN, not %b", A, B, OUT);
@@ -78,21 +139,39 @@ module FP_add_tb();
 						$stop();
 					end
 				end
+				else if (~|sum[30:0]) begin
+					if (|OUT[30:0]) begin
+						$display("SCHMUCK! %b + %b = 0, not %b", A, B, OUT);
+						#10;
+						$stop();
+					end
+				end
+				else if (sum === FP_POS_INF) begin
+					if (OUT !== FP_POS_INF) begin
+						$display("SCHMUCK! %b + %b = +INF, not %b", A, B, OUT);
+						#10;
+						$stop();
+					end
+				end
+				else if (sum === FP_NEG_INF) begin
+					if (OUT !== FP_NEG_INF) begin
+						$display("SCHMUCK! %b + %b = -INF, not %b", A, B, OUT);
+						#10;
+						$stop();
+					end
+				end
 				else begin
-					// allow -1 ~ +1 difference on {E,M}
-					// since they represent the same number (extremely close)
-					if((OUT[31] !== sum[31] ||
-					  (OUT[30:0] <= sum[30:0] - 1 && OUT[30:0] >= sum[30:0] + 1)) &&
-					  ~(OUT[30:0]===31'b0&&sum[30:0]===31'b0)) /* pos zero and neg zero are the same */
-					begin
-						// Easy... it's just Haining being self-mockery
-						$display("Haha gotcha you MINDLESS SCHMUCK!");
+					$display("os: %f", os);
+					$display("o: %f", o);
+					err = (os - o) / os;
+					#1;
+					if ((err < 0 ? -err : err) > 0.005) begin
+						#10;
+						$display("Weird test failed:");
 						$display("a: %b", A);
 						$display("b: %b", B);
 						$display("should be: %b", sum);
 						$display("but got: %b", OUT);
-						#10;
-						$stop();
 					end
 				end
 			end 

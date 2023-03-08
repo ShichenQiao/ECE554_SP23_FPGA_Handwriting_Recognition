@@ -17,7 +17,9 @@
 module FP_adder(A, B, out);
 
 localparam [31:0] FP_POS_INF = 32'h7F80_0000;
+localparam [31:0] FP_POS_MAX = 32'h7F7F_FFFF;
 localparam [31:0] FP_NEG_INF = 32'hFF80_0000;
+localparam [31:0] FP_NEG_MIN = 32'hFF7F_FFFF;
 
 input [31:0] A;		// FP number A
 input [31:0] B;		// FP number B
@@ -58,6 +60,7 @@ logic exp_inc;			// signal for exponent increment
 logic exp_dec;			// signal for exponent decrement
 logic [4:0] sum_shft;	// normalization shift amount
 logic [4:0] sum_shft2;	// corner case considered
+logic [8:0] exp_diff;	// {1'b0,common_E} - {4'b0,sum_shft2}
 
 logic NaN;				// Not a Number signal
 logic pos_ifnt;			// positive infinity
@@ -89,7 +92,9 @@ assign diff = A_shft ?
 // shift amount
 // DO NOT shift when EA and EB are both 0000000X
 // since they represent the same exponent -126
-assign shamt = EA_min&EB_min ? 5'h00 : diff[4:0];
+assign shamt = EA_min&EB_min ? 5'h00 : 
+					 EA0|EB0 ? diff[4:0] - 5'b1 :
+							   diff[4:0];
 
 // Append |E in front of M and then
 // shift M with smaller E to the right
@@ -107,10 +112,12 @@ assign cA = A_shft ? (A[31] ? ~M_shft + 24'b1 : M_shft) :
 assign cB = A_shft ? (B[31] ? ~{|EB,MB} + 24'b1 : {|EB,MB}) :
 					 (B[31] ? ~M_shft + 24'b1 : M_shft);
 // 25-bit 2's comp values with common exponent
-// if shift amount is larger than 0x18 (d24) set one operand to 0
+// if shift amount is larger than 0x17 (d23) set one operand to 0
 // as it is relatively too small to be considered
-assign A2c = A_shft & ((|diff[8:5]) | (&diff[4:3])) ? 25'b0 : {A[31],cA};
-assign B2c = ~A_shft & ((|diff[8:5]) | (&diff[4:3])) ? 25'b0 : {B[31],cB};
+assign A2c = A_shft & (~|M_shft | (((|diff[8:5]) | (&diff[4:3])) | &{diff[4],diff[2:0]}))
+			? 25'b0 : {A[31],cA};
+assign B2c = ~A_shft & (~|M_shft | (((|diff[8:5]) | (&diff[4:3])) | &{diff[4],diff[2:0]}))
+			? 25'b0 : {B[31],cB};
 
 // 25-bit adder
 assign pre_sum = A2c + B2c;
@@ -120,11 +127,12 @@ assign internal_ofl = (~A2c[24] & ~B2c[24] & pre_sum[24]) |
 					  (A2c[24] & B2c[24] & ~pre_sum[24]);
 // OR denormalized exponent needs increment
 // increment common exponent
-assign exp_inc = internal_ofl | (EA0&EB0 & sum_man[23]);
-// decrement exponent by 1 when one of the exponent is
+assign exp_inc = internal_ofl | (EA0&EB0 & sum_man[23]) |
+				 ~(A2c[24]^B2c[24])&A2c[23]&B2c[23]&~pre_sum[23]&(~|pre_sum[22:0]);
+// decrement exponent by 1 when the common exponent
 // 00000001, no internal overflow, but new mantissa starts
 // with 0, this means a denormalized exponent is needed
-assign exp_dec = ~internal_ofl & ((EA1|EB1) & ~sum_man[23]);
+assign exp_dec = ~internal_ofl & ((~|common_E[7:1]&common_E[0]) & ~sum_man[23]);
 assign shft_sum = internal_ofl ?	// internal overflowed?
 			{~pre_sum[24],pre_sum[24:1]} : pre_sum;
 // Convert 25-bit 2's comp back into 25-bit signed number
@@ -167,6 +175,10 @@ always_comb begin
 end
 // if common E is 0000000X, then don't shift, since E is at minimum
 assign sum_shft2 = ~|common_E[7:1] ? 5'h00 : sum_shft;
+// if exp_diff is not positive, then the result is so small that
+// it should be denormalized, and the shift amount should be
+// common_E since it is the smaller one, and the norm_exp is 0
+assign exp_diff = {1'b0,common_E} - {4'b0,sum_shft2};
 // IF left shifting MORE than 24 bits, zero the exponent
 // IF common exponent is 00000001 and an underflow occurs
 // decrement exponent to 00000000
@@ -174,28 +186,40 @@ assign sum_shft2 = ~|common_E[7:1] ? 5'h00 : sum_shft;
 // otherwise decrement exponent by the number of
 // leading zero(s) of the 24-bit unsigned number sum_man
 assign norm_exp = &sum_shft2[4:3] ? 8'h00 :
-			(exp_dec ? 8'h00 :
 			(exp_inc ? common_E + 8'b1 :
-			(common_E - {3'b0,sum_shft2})));
+			(exp_dec ? 8'h00 :
+			(exp_diff[8]|(~|exp_diff) ? 8'h00 :
+			(common_E - {3'b0,sum_shft2}))));
 left_shifter lsht(.In(sum_man),
-				  .ShAmt(sum_shft2),
+				  .ShAmt(exp_diff[8]|(~|exp_diff) ?
+						common_E[4:0] : sum_shft2),
 				  .Out(norm_sum));
 // normalized mantissa is lower 23-bit of the unsigned number
-assign norm_man = norm_sum[22:0];
+assign norm_man = (exp_diff[8]|(~|exp_diff)) & |sum_shft2 ?
+					norm_sum[23:1] : norm_sum[22:0];
 // final sign
 assign sign_out = internal_ofl ? ~pre_sum[24] : pre_sum[24];
 
 // pos & neg infinity, and NaN
-assign pos_ifnt = sign_out & (&common_E) & ~(|norm_man);
-assign neg_ifnt = ~sign_out & (&common_E) & ~(|norm_man);
+assign pos_ifnt = (A == FP_POS_INF & B != FP_NEG_INF) |
+				  (B == FP_POS_INF & A != FP_NEG_INF) |
+				  (A == FP_POS_MAX & B == FP_POS_MAX) |
+				  (~sign_out & (&norm_exp));
+assign neg_ifnt = (A == FP_NEG_INF & B != FP_POS_INF) |
+				  (B == FP_NEG_INF & A != FP_POS_INF) |
+				  (A == FP_NEG_MIN & B == FP_NEG_MIN) |
+				  (sign_out & (&norm_exp));;
 // when pos_inf + neg_inf, the answer is undefined and results in NaN
-assign NaN = ((&common_E) & (|norm_man)) |
-			 (A == FP_POS_INF & B == FP_NEG_INF) |
-			 (B == FP_POS_INF & A == FP_NEG_INF);
+assign NaN = (A == FP_POS_INF & B == FP_NEG_INF) |
+			 (B == FP_POS_INF & A == FP_NEG_INF) |
+			 (&EA & |MA) |
+			 (&EB & |MB);
 // final output concatination
 assign out = NaN ? {sign_out,8'hFF,23'h00DEAD} :
+			(neg_ifnt ? FP_NEG_INF :
+			(pos_ifnt ? FP_POS_INF :
 			(A0 ? B : 
 			(B0 ? A :
-			({sign_out,norm_exp,norm_man})));
+			({sign_out,norm_exp,norm_man})))));
 
 endmodule
