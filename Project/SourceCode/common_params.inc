@@ -19,8 +19,8 @@ localparam UMUL = 3'b001;
 localparam ADDF = 3'b010;
 localparam SUBF = 3'b011;
 localparam MULF = 3'b100;
-localparam ITF  = 3'b100;
-localparam FTI  = 3'b100;
+localparam ITF  = 3'b101;
+localparam FTI  = 3'b110;
 
 //////////////////////////////////////////
 // Create defines for Opcode encodings //

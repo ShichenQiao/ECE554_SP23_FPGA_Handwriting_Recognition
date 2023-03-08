@@ -6,7 +6,7 @@ module rf(clk,p0_addr,p1_addr,p0,p1,re0,re1,dst_addr,dst,we,hlt);
 //////////////////////
 
 	input clk;
-	input [4:0] p0_addr, p1_addr;			// two read port addresses
+	input [4:0] p0_addr, p1_addr;                   // two read port addresses
 	input re0,re1;							// read enables (power not functionality)
 	input [4:0] dst_addr;					// write address
 	input [31:0] dst;						// dst bus

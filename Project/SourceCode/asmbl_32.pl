@@ -194,7 +194,7 @@ while(<IN>) {
 
       
 
-      if($instr =~ /^(AND|NOR|ADD|ADDZ|SUB)$/) {
+      if($instr =~ /^(AND|NOR|ADD|ADDZ|SUB|MUL|UMUL|ADDF|SUBF|MULF)$/) {
 
 	  $bits .= "000";
 
@@ -224,7 +224,7 @@ while(<IN>) {
 
       }
 
-      elsif($instr =~ /^(LW|SW)$/) {
+      elsif($instr =~ /^(LW|SW|LWI)$/) {
 
 	  $bits .= "000";
 
@@ -278,14 +278,43 @@ while(<IN>) {
 
       }
 
-      elsif($instr =~ /^(JR)$/) {
-    foreach my $reg ($args[0]) {
+      elsif($instr =~ /^(JR|PUSH)$/) {
 
-        if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
+        foreach my $reg ($args[0]) {
 
-        $bits .= "00000000000000" . $regs{$reg} . "00000000";
+          if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
 
-    }
+          $bits .= "00000000000000" . $regs{$reg} . "00000000";
+
+        }
+
+      }
+
+      elsif($instr =~ /^(POP)$/) {
+
+        foreach my $reg ($args[0]) {
+
+          if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
+
+          $bits .= "000000" . $regs{$reg} . "0000000000000000";
+
+        }
+
+      }
+
+      elsif($instr =~ /^(ITF|FTI)$/) {
+
+	  $bits .= "000";
+
+	  foreach my $reg ($args[0], $args[1]) {
+
+	      if(!$regs{$reg}) { die("Bad register ($reg)\n$_") }
+
+	      $bits .= "000".$regs{$reg};
+
+	  }
+
+	  $bits .= "00000000";
 
       }
 
