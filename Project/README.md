@@ -16,7 +16,7 @@
 **Group:** <br />
 **HQ:** <br />
 **HZ:** <br />
-**JQ:** <br />
+**JQ:** Implemented extended ALU with MUL, UMUL, ADDF, SUBF, MULF, ITF, and FTI. Top level needs to be validated with asm and pipeline processor, FP_adder needs to pass HQ's unit tests. Every other compute modules are validated. <br />
 **QL:** <br />
 
 **Week 3/13 - 3/19** <br />
