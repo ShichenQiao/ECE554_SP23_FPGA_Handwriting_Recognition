@@ -18,6 +18,7 @@ wire [31:0] pc_ID_EX;              // nxt_pc to source mux for JR
 wire [31:0] pc_EX_DM;              // nxt_pc to store in reg15 for JAL
 wire [31:0] iaddr;                 // instruction address
 wire [31:0] dm_rd_data_EX_DM;      // data memory read data
+wire [31:0] im_rd_data_EX_DM;      // instruction memory read data
 wire [31:0] rf_w_data_DM_WB;       // register file write data
 wire [31:0] p0,p1;                 // read ports from RF
 wire [4:0] rf_p0_addr;             // address for port 0 reads
@@ -66,7 +67,7 @@ id iID(.clk(clk), .rst_n(rst_n), .instr(instr), .zr_EX_DM(zr_EX_DM), .br_instr_I
        .rf_re1(rf_re1), .rf_we_DM_WB(rf_we_DM_WB), .rf_p0_addr(rf_p0_addr), .rf_p1_addr(rf_p1_addr),
        .rf_dst_addr_DM_WB(rf_dst_addr_DM_WB), .alu_func_ID_EX(alu_func_ID_EX),
        .src0sel_ID_EX(src0sel_ID_EX), .src1sel_ID_EX(src1sel_ID_EX), .dm_re_EX_DM(dm_re_EX_DM),
-       .dm_we_EX_DM(dm_we_EX_DM), .clk_z_ID_EX(clk_z_ID_EX), .clk_nv_ID_EX(clk_nv_ID_EX),
+       .dm_we_EX_DM(dm_we_EX_DM), .im_re_EX_DM(im_re_EX_DM), .clk_z_ID_EX(clk_z_ID_EX), .clk_nv_ID_EX(clk_nv_ID_EX),
        .clk_z_ID_ext_EX(clk_z_ID_ext_EX), .clk_nv_ID_ext_EX(clk_nv_ID_ext_EX),
        .instr_ID_EX(instr_ID_EX), .cc_ID_EX(cc_ID_EX), .stall_IM_ID(stall_IM_ID),
        .stall_ID_EX(stall_ID_EX), .stall_EX_DM(stall_EX_DM), .hlt_DM_WB(hlt_DM_WB),
@@ -110,10 +111,16 @@ extended_ALU iEXT_ALU(.clk(clk), .src0(src0), .src1(src1), .func(alu_func_ID_EX)
 DM iDM(.clk(clk),.addr(dst_EX_DM[12:0]), .re(dm_re_EX_DM), .we(DM_we), .wrt_data(p0_EX_DM),
        .rd_data(dm_rd_data_EX_DM));
 
+///////////////////////////////////////////////
+// Instantiate instruction memory for movec //
+/////////////////////////////////////////////
+// iaddr only use lower 14 bits because it's a 16KB IM
+IM iIM_LWI(.clk(clk), .addr(dst_EX_DM[13:0]), .rd_en(im_re_EX_DM), .instr(im_rd_data_EX_DM));
+
 //////////////////////////
 // Instantiate dst mux //
 ////////////////////////
-dst_mux iDSTMUX(.clk(clk), .dm_re_EX_DM(dm_re_EX_DM), .dm_rd_data_EX_DM(dst_mux_data_in),
+dst_mux iDSTMUX(.clk(clk), .dm_re_EX_DM(dm_re_EX_DM), .im_re_EX_DM(im_re_EX_DM), .dm_rd_data_EX_DM(dst_mux_data_in), .im_rd_data_EX_DM(im_rd_data_EX_DM),
                 .dst_EX_DM(dst_EX_DM), .pc_EX_DM(pc_EX_DM), .rf_w_data_DM_WB(rf_w_data_DM_WB),
                 .dst_ext_EX_DM(dst_ext_EX_DM), .jmp_imm_EX_DM(jmp_imm_EX_DM), .ext_alu_EX_DM(ext_alu_EX_DM));
     

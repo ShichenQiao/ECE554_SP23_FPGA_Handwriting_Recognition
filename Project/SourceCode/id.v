@@ -1,7 +1,7 @@
 module id(clk,rst_n,instr,zr_EX_DM,br_instr_ID_EX,jmp_imm_ID_EX,jmp_reg_ID_EX,
           jmp_imm_EX_DM,ext_alu_EX_DM,rf_re0,rf_re1,
           rf_we_DM_WB,rf_p0_addr,rf_p1_addr,rf_dst_addr_DM_WB,alu_func_ID_EX,src0sel_ID_EX,
-          src1sel_ID_EX,dm_re_EX_DM,dm_we_EX_DM,clk_z_ID_EX,clk_nv_ID_EX,clk_z_ID_ext_EX, clk_nv_ID_ext_EX, instr_ID_EX,
+          src1sel_ID_EX,dm_re_EX_DM,dm_we_EX_DM,im_re_EX_DM, clk_z_ID_EX,clk_nv_ID_EX,clk_z_ID_ext_EX, clk_nv_ID_ext_EX, instr_ID_EX,
           cc_ID_EX, stall_IM_ID,stall_ID_EX,stall_EX_DM,hlt_DM_WB,byp0_EX,byp0_DM,
           byp1_EX,byp1_DM, byp0_ext_EX, byp1_ext_EX, flow_change_ID_EX);
 
@@ -26,6 +26,7 @@ output reg [1:0] src0sel_ID_EX;         // select source for src0 bus
 output reg [1:0] src1sel_ID_EX;         // select source for src1 bus
 output reg dm_re_EX_DM;                 // asserted on loads
 output reg dm_we_EX_DM;                 // asserted on stores
+output reg im_re_EX_DM;                 // asserted on load from instruction memory
 output reg clk_z_ID_EX;                 // asserted for instructions that should modify zero flag
 output reg clk_nv_ID_EX;                // asserted for instructions that should modify negative and ov flags
 output reg clk_z_ID_ext_EX;             // asserted for instructions that should modify zero flag from ext_alu
@@ -52,6 +53,7 @@ reg [2:0] alu_func;
 reg [1:0] src0sel,src1sel;
 reg dm_re;
 reg dm_we;
+reg im_re;
 reg clk_z;
 reg clk_nv;
 reg clk_ext_z;
@@ -67,6 +69,7 @@ reg rf_we_ID_EX,rf_we_EX_DM;
 reg [4:0] rf_dst_addr_ID_EX,rf_dst_addr_EX_DM;
 reg dm_re_ID_EX;
 reg dm_we_ID_EX;
+reg im_re_ID_EX;
 reg hlt_ID_EX,hlt_EX_DM;
 reg [15:0] instr_ID_EX;        // only need lower 16-bits for immediate values
 reg flow_change_EX_DM;         // needed to pipeline flow_change_ID_EX
@@ -105,6 +108,7 @@ always @(posedge clk)
       src1sel_ID_EX     <= src1sel;
       dm_re_ID_EX       <= dm_re & !load_use_hazard & !flush;
       dm_we_ID_EX       <= dm_we & !load_use_hazard & !flush;
+      im_re_ID_EX       <= im_re & !load_use_hazard & !flush;
       clk_z_ID_EX       <= clk_z & !load_use_hazard & !flush;
       clk_nv_ID_EX      <= clk_nv & !load_use_hazard & !flush;
       clk_z_ID_ext_EX   <= clk_ext_z & !load_use_hazard & !flush;
@@ -125,6 +129,7 @@ always @(posedge clk)
       rf_dst_addr_EX_DM <= rf_dst_addr_ID_EX;
       dm_re_EX_DM       <= dm_re_ID_EX;
       dm_we_EX_DM       <= dm_we_ID_EX;
+      im_re_EX_DM       <= im_re_ID_EX;
       jmp_imm_EX_DM     <= jmp_imm_ID_EX;
       ext_alu_EX_DM     <= ext_alu_ID_EX;
     end
@@ -192,7 +197,7 @@ assign flush = flow_change_ID_EX | flow_change_EX_DM | hlt_ID_EX | hlt_EX_DM;
 // Load Use Hazard Detection //
 //////////////////////////////
 assign load_use_hazard = (((rf_dst_addr_ID_EX==rf_p0_addr) && rf_re0) || 
-                          ((rf_dst_addr_ID_EX==rf_p1_addr) && rf_re1)) ? dm_re_ID_EX : 1'b0;
+                          ((rf_dst_addr_ID_EX==rf_p1_addr) && rf_re1)) ? (dm_re_ID_EX | im_re_ID_EX) : 1'b0;
 
 assign stall_IM_ID = hlt_ID_EX | load_use_hazard;
 assign stall_ID_EX = 1'b0; // hlt_EX_DM;
@@ -217,6 +222,7 @@ always @(instr_IM_ID) begin
   src1sel = RF2SRC1;
   dm_re = 0;
   dm_we = 0;
+  im_re = 0;
   clk_z = 0;
   clk_nv = 0;
   clk_ext_z = 0;
@@ -324,6 +330,12 @@ always @(instr_IM_ID) begin
       rf_p0_addr = 5'h00;
       rf_re1 = 1;                    // read register to jump to on src1
       jmp_reg = 1;
+    end
+    LWIi : begin
+      src0sel = IMM2SRC0;        // sign extended address offset
+      rf_re1 = 1;
+      rf_we = 1;
+      im_re = 1;
     end
     PUSHi : begin         // not implemented
       hlt = 1;
