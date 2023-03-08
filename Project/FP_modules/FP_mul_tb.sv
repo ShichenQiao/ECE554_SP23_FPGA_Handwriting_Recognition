@@ -109,8 +109,8 @@ module FP_mul_tb();
 		// random tests, note that the chance of a random number being a special value is very low  //
 		/////////////////////////////////////////////////////////////////////////////////////////////
 		for(int i = 0; i < 1000; i++) begin
-			a = $random();
-			b = $random();
+			a = $random();						// intentionally not casting to use the 32 random bits as shortreal
+			b = $random();						// intentionally not casting to use the 32 random bits as shortreal
 			o = a * b;
 			product = $shortrealtobits(o);
 			A = $shortrealtobits(a);
