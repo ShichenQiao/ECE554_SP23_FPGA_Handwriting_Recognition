@@ -90,8 +90,8 @@ rf iRF(.clk(clk), .p0_addr(rf_p0_addr), .p1_addr(rf_p1_addr), .p0(p0), .p1(p1),
 src_mux ISRCMUX(.clk(clk), .stall_ID_EX(stall_ID_EX), .stall_EX_DM(stall_EX_DM),
                 .src0sel_ID_EX(src0sel_ID_EX), .src1sel_ID_EX(src1sel_ID_EX), .p0(p0), .p1(p1),
                 .imm_ID_EX(instr_ID_EX), .pc_ID_EX(pc_ID_EX), .p0_EX_DM(p0_EX_DM),
-                .src0(src0), .src1(src1), .dst_EX_DM(dst_EX_DM), .dst_ext_EX_DM(dst_ext_EX_DM), .dst_DM_WB(rf_w_data_DM_WB),
-                .byp0_EX(byp0_EX), .byp0_DM(byp0_DM), .byp1_EX(byp1_EX), .byp1_DM(byp1_DM), .byp0_ext_EX(byp0_ext_EX), .byp1_ext_EX(byp1_ext_EX), .byp0_stack_pop(byp0_stack_pop), .byp1_stack_pop(byp1_stack_pop),);
+                .src0(src0), .src1(src1), .dst_EX_DM(dst_EX_DM), .dst_ext_EX_DM(dst_ext_EX_DM), .stack_EX_DM(stack_EX_DM), .dst_DM_WB(rf_w_data_DM_WB),
+                .byp0_EX(byp0_EX), .byp0_DM(byp0_DM), .byp1_EX(byp1_EX), .byp1_DM(byp1_DM), .byp0_ext_EX(byp0_ext_EX), .byp1_ext_EX(byp1_ext_EX), .byp0_stack_pop(byp0_stack_pop), .byp1_stack_pop(byp1_stack_pop));
        
 //////////////////////
 // Instantiate ALU //

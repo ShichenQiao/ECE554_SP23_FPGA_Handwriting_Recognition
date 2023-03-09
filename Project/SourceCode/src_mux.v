@@ -1,6 +1,6 @@
 module src_mux(clk,stall_ID_EX,stall_EX_DM,src0sel_ID_EX,src1sel_ID_EX,p0,p1,
-               imm_ID_EX,pc_ID_EX,p0_EX_DM,src0,src1,dst_EX_DM,dst_DM_WB, dst_ext_EX_DM,
-               byp0_EX,byp0_DM,byp1_EX,byp1_DM, byp0_ext_EX, byp1_ext_EX);
+               imm_ID_EX,pc_ID_EX,p0_EX_DM,src0,src1,dst_EX_DM,dst_DM_WB, dst_ext_EX_DM, stack_EX_DM,
+               byp0_EX,byp0_DM,byp1_EX,byp1_DM, byp0_ext_EX, byp1_ext_EX, byp0_stack_pop, byp1_stack_pop);
 
 input clk;
 input stall_ID_EX,stall_EX_DM;                  // stall signal

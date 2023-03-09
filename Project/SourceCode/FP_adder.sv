@@ -122,12 +122,12 @@ assign B2c = ~A_shft & (~|M_shft | (((|diff[8:5]) | (&diff[4:3])) | &{diff[4],di
 // 25-bit adder
 assign pre_sum = A2c + B2c;
 // two positive number addition results in negative OR
-// two negative number addition results in positive
+// two negative number addition results in positive OR
 assign internal_ofl = (~A2c[24] & ~B2c[24] & pre_sum[24]) |
 					  (A2c[24] & B2c[24] & ~pre_sum[24]);
 // OR denormalized exponent needs increment
 // increment common exponent
-assign exp_inc = internal_ofl | (EA0&EB0 & sum_man[23]) |
+assign exp_inc = internal_ofl | (EA0&EB0 & sum_man[23]) | (pre_sum == 25'h1000000) |
 				 ~(A2c[24]^B2c[24])&A2c[23]&B2c[23]&~pre_sum[23]&(~|pre_sum[22:0]);
 // decrement exponent by 1 when the common exponent
 // 00000001, no internal overflow, but new mantissa starts
@@ -185,8 +185,8 @@ assign exp_diff = {1'b0,common_E} - {4'b0,sum_shft2};
 // IF the 25-bit sum overflows, increment the exponent
 // otherwise decrement exponent by the number of
 // leading zero(s) of the 24-bit unsigned number sum_man
-assign norm_exp = &sum_shft2[4:3] ? 8'h00 :
-			(exp_inc ? common_E + 8'b1 :
+assign norm_exp = exp_inc ? common_E + 8'b1 :
+			(&sum_shft2[4:3] ? 8'h00 :
 			(exp_dec ? 8'h00 :
 			(exp_diff[8]|(~|exp_diff) ? 8'h00 :
 			(common_E - {3'b0,sum_shft2}))));

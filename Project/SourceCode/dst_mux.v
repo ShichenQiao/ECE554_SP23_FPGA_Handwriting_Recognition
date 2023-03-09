@@ -1,4 +1,4 @@
-module dst_mux(clk,dm_re_EX_DM, im_re_EX_DM, stack_EX_DM, dm_rd_data_EX_DM,pc_EX_DM,dst_EX_DM,dst_ext_EX_DM, rf_w_data_DM_WB, im_rd_data_EX_DM, jmp_imm_EX_DM,ext_alu_EX_DM, stack_EX_DM);
+module dst_mux(clk,dm_re_EX_DM, im_re_EX_DM, stack_EX_DM, dm_rd_data_EX_DM,stack_pop_EX_DM, pc_EX_DM,dst_EX_DM,dst_ext_EX_DM, rf_w_data_DM_WB, im_rd_data_EX_DM, jmp_imm_EX_DM,ext_alu_EX_DM);
 ////////////////////////////////////////////////////////////////////////
 // Simple 2:1 mux determining if ALU or DM is source for write to RF //
 //////////////////////////////////////////////////////////////////////
