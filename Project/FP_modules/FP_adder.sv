@@ -208,7 +208,7 @@ assign pos_ifnt = (A == FP_POS_INF & B != FP_NEG_INF) |
 assign neg_ifnt = (A == FP_NEG_INF & B != FP_POS_INF) |
 				  (B == FP_NEG_INF & A != FP_POS_INF) |
 				  (A == FP_NEG_MIN & B == FP_NEG_MIN) |
-				  (sign_out & (&norm_exp));;
+				  (sign_out & (&norm_exp));
 // when pos_inf + neg_inf, the answer is undefined and results in NaN
 assign NaN = (A == FP_POS_INF & B == FP_NEG_INF) |
 			 (B == FP_POS_INF & A == FP_NEG_INF) |
