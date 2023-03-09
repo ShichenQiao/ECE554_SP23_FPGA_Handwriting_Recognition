@@ -10,4 +10,8 @@ module weight_rom(clk,raddr,rdata);
     rdata <= mem[raddr];
   end
 
+  initial begin
+    $readmemh("../weights.hex", mem);
+  end
+
 endmodule
