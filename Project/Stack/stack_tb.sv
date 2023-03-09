@@ -49,8 +49,9 @@ module stack_tb();
       pop = 1'b1;
 
       @(posedge clk);
+      pop = 1'b0; // stop popping data when check
       if (rdata !== wdata) begin
-        $display("TEST 1 failed: push data %f != pop data %f", wdata, rdata);
+        $display("TEST 1 failed: push data %h != pop data %h", wdata, rdata);
         $stop();
       end
     end
@@ -77,13 +78,12 @@ module stack_tb();
     // Retrive the data from the stack
     for(int i = 1023; i >= 0; i--) begin
       @(posedge clk);
-      wdata = $random();
-      local_stack[i] = wdata;
       push = 1'b0;
       pop = 1'b1;
       @(posedge clk);
+      pop = 1'b0;
       if (rdata !== local_stack[i]) begin
-        $display("TEST 2 failed: push data %f != pop data %f", local_stack[i], rdata);
+        $display("TEST 2 failed: push data %h != pop data %h at iter %d", local_stack[i], rdata, i);
         $stop();
       end
     end
@@ -112,8 +112,9 @@ module stack_tb();
       pop = 1'b1;
 
       @(posedge clk);
+      pop = 1'b0;
       if (rdata !== wdata) begin
-        $display("TEST 3 failed: push data %f != pop data %f after underflow", wdata, rdata);
+        $display("TEST 3 failed: push data %h != pop data %h after underflow", wdata, rdata);
         $stop();
       end
     end
