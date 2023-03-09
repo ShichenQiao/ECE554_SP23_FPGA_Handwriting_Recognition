@@ -8,668 +8,693 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-dI:/ECE554/ECE554_SP23/Project/SourceCode/Quartus
+Z0 dI:/ECE554/ECE554_SP23/Project/SourceCode/Quartus
 valu
-Z0 !s110 1678341711
+Z1 !s110 1678393549
 !i10b 1
-!s100 4BI:6n^V<8BAB@AZ?3[`d0
-Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
-IASNTFQ^F1mX:>cUYS@c850
-Z2 VDg1SIo80bB@j0V0VzS_@n1
-Z3 dC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/Quartus
-w1678253129
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/alu.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/alu.v
-Z4 FC:\Users\Harry\OneDrive - UW-Madison\Course Materials\ECE 554\ECE554_SP23\Project\SourceCode\common_params.inc
-!i122 0
-L0 1 166
-Z5 OV;L;2020.1;71
+!s100 9S:]35WkMXBRXHONmj<?d0
+IBUbeR<B0]iK@:U:^SSId:2
+Z2 V`JN@9S9cnhjKRR_L]QIcM3
+R0
+Z3 w1678393435
+8I:/ECE554/ECE554_SP23/Project/SourceCode/alu.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/alu.v
+Z4 FI:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc
+L0 1
+Z5 OE;L;10.3c;59
 r1
 !s85 0
 31
-Z6 !s108 1678341711.000000
-!s107 C:\Users\Harry\OneDrive - UW-Madison\Course Materials\ECE 554\ECE554_SP23\Project\SourceCode\common_params.inc|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/alu.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/alu.v|
-!i113 1
-Z7 o-work work
-Z8 tCvgOpt 0
+!s108 1678393549.534000
+!s107 I:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc|I:/ECE554/ECE554_SP23/Project/SourceCode/alu.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/alu.v|
+!i113 0
+Z6 o-work work
 vbr_bool
-R0
-!i10b 1
-!s100 SHcz<j>=D3?]M@[a7o>Sz3
 R1
-I=k3a5`2Hdh9z7lHkVEoO]0
+!i10b 1
+!s100 JNiIk>:RK_]3Q87Fk;ndh1
+ICK@;<Y<52ok`g]YERYAFG2
 R2
+R0
 R3
-w1678252988
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/br_bool.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/br_bool.v
-!i122 1
-L0 1 75
+8I:/ECE554/ECE554_SP23/Project/SourceCode/br_bool.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/br_bool.v
+L0 1
 R5
 r1
 !s85 0
 31
+!s108 1678393549.850000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/br_bool.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/br_bool.v|
+!i113 0
 R6
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/br_bool.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/br_bool.v|
-!i113 1
-R7
-R8
 vcpu
-Z9 !s110 1678343729
+Z7 !s110 1678393550
 !i10b 1
-!s100 NW0GZdS1iDD=ligHD_Paz3
-R1
-Icia2B<CHc>oZaaeLaffQo3
+!s100 U@Yz8Q>fZ1D[fIBTeKdi@2
+I0i^76ldIY<3fDJeNNSIhF2
 R2
-R3
-w1678343724
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/cpu.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/cpu.v
-!i122 35
-L0 1 143
-R5
-r1
-!s85 0
-31
-Z10 !s108 1678343729.000000
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/cpu.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/cpu.v|
-!i113 1
-R7
-R8
-vcpu_tb
-!s110 1678342372
-!i10b 1
-!s100 5lOk=Vi]79[E9kEAL]bGF2
-R1
-IWOaG7C[cYjAoFFGe6B?4G2
-R2
-R3
-w1678342369
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/cpu_tb.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/cpu_tb.v
-!i122 30
-Z11 L0 1 21
-R5
-r1
-!s85 0
-31
-!s108 1678342372.000000
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/cpu_tb.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/cpu_tb.v|
-!i113 1
-R7
-R8
-vDM
 R0
-!i10b 1
-!s100 `@D8jXGIl9`d5GN2n38oc1
-R1
-ITcb`k5@eWi5d2BgA38JDN2
-R2
 R3
-w1678253267
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/data_mem.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/data_mem.v
-!i122 4
-L0 1 32
+8I:/ECE554/ECE554_SP23/Project/SourceCode/cpu.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/cpu.v
+L0 1
 R5
 r1
 !s85 0
 31
+!s108 1678393550.120000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/cpu.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/cpu.v|
+!i113 0
 R6
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/data_mem.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/data_mem.v|
-!i113 1
+vcpu_tb
 R7
-R8
+!i10b 1
+!s100 52225BRh1IAW?MIfiHidD3
+IKX4WlNd1Ff14PWRMU^ame1
+R2
+R0
+R3
+8I:/ECE554/ECE554_SP23/Project/SourceCode/cpu_tb.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/cpu_tb.v
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678393550.481000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/cpu_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/cpu_tb.v|
+!i113 0
+R6
+vDM
+R7
+!i10b 1
+!s100 lNMl9l7S6T0H17XgCfMm[1
+Ib6S`O?hm0LR6Z7AmlQNgO2
+R2
+R0
+R3
+8I:/ECE554/ECE554_SP23/Project/SourceCode/data_mem.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/data_mem.v
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678393550.780000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/data_mem.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/data_mem.v|
+!i113 0
+R6
 n@d@m
 vdst_mux
-!s110 1678342315
+Z8 !s110 1678393551
 !i10b 1
-!s100 ?76nMJoC_@n?45>_0l1GJ1
-R1
-IVLmhLH?BJkQ^C:IlXN3223
+!s100 [RV=hT^h`:JEGgFQ4]hGY1
+I9NSJZ0b2bkig?O]A;fT<S1
 R2
-R3
-w1678342307
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/dst_mux.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/dst_mux.v
-!i122 29
-L0 1 34
-R5
-r1
-!s85 0
-31
-!s108 1678342315.000000
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/dst_mux.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/dst_mux.v|
-!i113 1
-R7
-R8
-vdualPort32x32
-Z12 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
 R0
-!i10b 1
-!s100 07O]DlR^[dM>88Vk33EYM1
-R1
-I785jPa^M>PBJSHEK?QNV@3
-R2
-S1
 R3
-w1678253351
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv
-!i122 6
-R11
+8I:/ECE554/ECE554_SP23/Project/SourceCode/dst_mux.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/dst_mux.v
+L0 1
 R5
 r1
 !s85 0
 31
+!s108 1678393551.071000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/dst_mux.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/dst_mux.v|
+!i113 0
 R6
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv|
-!i113 1
-Z13 o-work work -sv
+vdualPort32x32
+Z9 DXx6 sv_std 3 std 0 22 <EOTafDcUY:cQeO^ICn]m3
 R8
+!i10b 1
+!s100 FDIP:Vkg;j`lB3hjo_g<H2
+IE`3V;0b=aeh7abe`obcN>2
+R2
+!s105 dualPort32x32_sv_unit
+S1
+R0
+R3
+8I:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678393551.374000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv|
+!i113 0
+Z10 o-work work -sv
 ndual@port32x32
 vextended_ALU
-R12
-Z14 !s110 1678342549
+R9
+R8
 !i10b 1
-!s100 BH@zjgnonWkW14GEBTEmQ3
-R1
-Ic:G1CSh<5NR83=g@?U@aj3
+!s100 25AS@GlcgLImFNSSXloBj3
+Ink1?XL6A;gEIC]5OzHnVC1
 R2
+!s105 extended_ALU_sv_unit
 S1
+R0
 R3
-Z15 w1678340684
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/extended_ALU.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/extended_ALU.sv
+8I:/ECE554/ECE554_SP23/Project/SourceCode/extended_ALU.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/extended_ALU.sv
 R4
-!i122 31
-L0 1 156
+L0 1
 R5
 r1
 !s85 0
 31
-Z16 !s108 1678342549.000000
-!s107 C:\Users\Harry\OneDrive - UW-Madison\Course Materials\ECE 554\ECE554_SP23\Project\SourceCode\common_params.inc|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/extended_ALU.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/extended_ALU.sv|
-!i113 1
-R13
-R8
+!s108 1678393551.766000
+!s107 I:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc|I:/ECE554/ECE554_SP23/Project/SourceCode/extended_ALU.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/extended_ALU.sv|
+!i113 0
+R10
 nextended_@a@l@u
 vfifo
-R12
+R9
+Z11 !s110 1678393552
+!i10b 1
+!s100 [GJi3igAD;9;KTdIH@kl[1
+In]fRcFRI3?I0GP<:1aMfg3
+R2
+!s105 fifo_sv_unit
+S1
 R0
-!i10b 1
-!s100 mOfGGm=]O^Wo11<jJlo4Y0
-R1
-Izc[3eKNZ:e7[kiQO0?nc[1
-R2
-S1
 R3
-w1678253397
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/fifo.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/fifo.sv
-!i122 8
-L0 2 56
+8I:/ECE554/ECE554_SP23/Project/SourceCode/fifo.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/fifo.sv
+L0 2
 R5
 r1
 !s85 0
 31
-R6
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/fifo.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/fifo.sv|
-!i113 1
-R13
-R8
+!s108 1678393552.102000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/fifo.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/fifo.sv|
+!i113 0
+R10
 vfloat_to_signed_int
-R12
-R14
+R9
+R11
 !i10b 1
-!s100 4Yg?V7=@3^V5XbLl]PHbk0
-R1
-I`Z]K95JJ>76h6V`gm1TED1
+!s100 TFYMK@eof<lJZ78Ze`AFY1
+I]UI2k@z`TP_3RgSE_iORZ3
 R2
+!s105 float_to_signed_int_sv_unit
 S1
+R0
 R3
-R15
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv
-!i122 32
-Z17 L0 1 22
+8I:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv
+L0 1
 R5
 r1
 !s85 0
 31
-R16
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv|
-!i113 1
-R13
-R8
+!s108 1678393552.463000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv|
+!i113 0
+R10
 vFP_adder
-R12
-R14
+R9
+R11
 !i10b 1
-!s100 X:h^XAi6bVOJY^dUmSU]S1
-R1
-I=72H1nDgG1]Nd2N:f^5MV3
+!s100 [GYUlZU@HGaCbd16D3:YB3
+IKjW4GSIo3Rf_YoOoeKiW50
 R2
+!s105 FP_adder_sv_unit
 S1
+R0
 R3
-R15
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/FP_adder.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/FP_adder.sv
-!i122 33
-L0 17 209
+8I:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv
+L0 17
 R5
 r1
 !s85 0
 31
-R16
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/FP_adder.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/FP_adder.sv|
-!i113 1
-R13
-R8
+!s108 1678393552.799000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv|
+!i113 0
+R10
 n@f@p_adder
 vFP_mul
-R12
-Z18 !s110 1678341712
+R9
+Z12 !s110 1678393553
 !i10b 1
-!s100 Rh>h1nf4NYeFl>7i2P<mH1
-R1
-Ii77Y2WV_Yf_=497MIXaN11
+!s100 cH>oOAJz`2<LL3U<n>_Zj2
+ITO?cE]2XQ8Oe:lD[I@^MG2
 R2
+!s105 FP_mul_sv_unit
 S1
-R3
-w1678252677
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/FP_mul.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/FP_mul.sv
-!i122 11
-L0 1 122
+R0
+w1678244869
+8I:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv
+L0 1
 R5
 r1
 !s85 0
 31
-Z19 !s108 1678341712.000000
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/FP_mul.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/FP_mul.sv|
-!i113 1
-R13
-R8
+!s108 1678393553.111000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv|
+!i113 0
+R10
 n@f@p_mul
 vid
-!s110 1678343479
+R12
 !i10b 1
-!s100 o1ifbzf3J4W^gF[QcBNTY0
-R1
-I5[L;<0`PjQ3N^L]bd^Q6T3
+!s100 25PP^0`=g`i]^XSMKBVPS3
+IN>mU:<:mXIiGh^LJL1eV<0
 R2
+R0
 R3
-w1678343472
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/id.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/id.v
+8I:/ECE554/ECE554_SP23/Project/SourceCode/id.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/id.v
 R4
-!i122 34
-L0 1 498
+L0 1
 R5
 r1
 !s85 0
 31
-!s108 1678343479.000000
-!s107 C:\Users\Harry\OneDrive - UW-Madison\Course Materials\ECE 554\ECE554_SP23\Project\SourceCode\common_params.inc|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/id.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/id.v|
-!i113 1
-R7
-R8
+!s108 1678393553.441000
+!s107 I:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc|I:/ECE554/ECE554_SP23/Project/SourceCode/id.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/id.v|
+!i113 0
+R6
 vIM
-R18
+R12
 !i10b 1
-!s100 UUkMQggn8blRX4<@mBUn<3
-R1
-IjeJWY=h4VSh5V]aHMn>zg3
+!s100 ;hElReHd6]@?E@dDXS3GW1
+I@N2W2Xae:bX3odWbEmFS`3
 R2
+R0
 R3
-w1678253704
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/instr_mem.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/instr_mem.v
-!i122 13
-R17
+8I:/ECE554/ECE554_SP23/Project/SourceCode/instr_mem.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/instr_mem.v
+L0 1
 R5
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/instr_mem.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/instr_mem.v|
-!i113 1
-R7
-R8
+!s108 1678393553.775000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/instr_mem.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/instr_mem.v|
+!i113 0
+R6
 n@i@m
+vimage_mem
+R9
+Z13 !s110 1678396051
+!i10b 1
+!s100 ;aG7GM2?2il>2fWZUeFo^0
+Iki2_RgP7REbPTz[gB;`m>2
+R2
+!s105 image_mem_sv_unit
+S1
+R0
+w1678394589
+8I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678396051.168000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv|
+!i113 0
+R10
+vImageRecog
+R9
+!s110 1678396297
+!i10b 1
+!s100 K_N7Y9`CPN:=RP7701NTY1
+I`[?VV]PCNho^:FH;fI31i1
+R2
+!s105 ImageRecog_sv_unit
+S1
+R0
+w1678396295
+8I:/ECE554/ECE554_SP23/Project/SourceCode/ImageRecog.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/ImageRecog.sv
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678396297.781000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/ImageRecog.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/ImageRecog.sv|
+!i113 0
+R10
+n@image@recog
 vint_mul_16by16
-R12
-R18
+R9
+Z14 !s110 1678393554
 !i10b 1
-!s100 COQ[?>CMdQ34RbK[:j<;?0
-R1
-I49Q>I:9hW?:YW^Q6j:Bof1
+!s100 oAIOB8nJiASIYBk=HSLlo2
+I@]T3Il5[B37?PIPBD:TAJ1
 R2
+!s105 int_mul_16by16_sv_unit
 S1
+R0
 R3
-w1678253736
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv
-!i122 14
-L0 1 18
+8I:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv
+L0 1
 R5
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv|
-!i113 1
-R13
-R8
+!s108 1678393554.064000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv|
+!i113 0
+R10
 vleft_shifter
-R12
-R18
+R9
+R14
 !i10b 1
-!s100 LEi<bXX1oX]24Tf0Si22f1
-R1
-IXU[_P4PM6lR03T2LZE0C?3
+!s100 ^1KNOY0ge8=CBjF8LJGBY3
+I>kBb4ADmCD=Z2Y:IWa:al3
 R2
+!s105 left_shifter_sv_unit
 S1
+R0
 R3
-w1678253755
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/left_shifter.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/left_shifter.sv
-!i122 15
-Z20 L0 2 15
+8I:/ECE554/ECE554_SP23/Project/SourceCode/left_shifter.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/left_shifter.sv
+L0 2
 R5
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/left_shifter.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/left_shifter.sv|
-!i113 1
-R13
-R8
+!s108 1678393554.377000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/left_shifter.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/left_shifter.sv|
+!i113 0
+R10
 vMiniLab1
-R12
-R18
+R9
+R14
 !i10b 1
-!s100 Cb5DkQIf]`@oz0Z>nS35j0
-R1
-IQ0[k_==HNd>mU4gAS:j]?1
+!s100 OH6F;iWORzlRA?FkeDhn01
+IMCLQMa:f@<:G9kGA_5EYJ2
 R2
+!s105 MiniLab1_sv_unit
 S1
-R3
-w1677650554
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/MiniLab1.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/MiniLab1.sv
-!i122 16
-L0 5 89
+R0
+w1677686145
+8I:/ECE554/ECE554_SP23/Project/SourceCode/MiniLab1.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/MiniLab1.sv
+L0 5
 R5
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/MiniLab1.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/MiniLab1.sv|
-!i113 1
-R13
-R8
+!s108 1678393554.689000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/MiniLab1.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/MiniLab1.sv|
+!i113 0
+R10
 n@mini@lab1
 vpc
-R18
+Z15 !s110 1678393555
 !i10b 1
-!s100 XVKW0hce^iJ@On[RHYFBM1
-R1
-IS::<NjL<mjIGCKZWN=oXZ3
+!s100 hb:^XBojQ`_iJc=Gg5`_Y1
+I;_CJdDiohiM3Z_1HoZJhM3
 R2
+R0
 R3
-w1678253782
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/prgm_cntr.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/prgm_cntr.v
-!i122 17
-L0 1 60
+8I:/ECE554/ECE554_SP23/Project/SourceCode/prgm_cntr.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/prgm_cntr.v
+L0 1
 R5
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/prgm_cntr.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/prgm_cntr.v|
-!i113 1
-R7
-R8
+!s108 1678393555.015000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/prgm_cntr.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/prgm_cntr.v|
+!i113 0
+R6
+vPLL
+R13
+!i10b 1
+!s100 _44f`jMi[9Ee[zXh5G8z?3
+IOPcfKkJe6VKi;g3h61Po[2
+R2
+R0
+w1678395765
+8I:/ECE554/ECE554_SP23/Project/SourceCode/PLL.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/PLL.v
+L0 8
+R5
+r1
+!s85 0
+31
+!s108 1678396051.782000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/PLL.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/PLL.v|
+!i113 0
+R6
+n@p@l@l
 vrf
-R18
+R15
 !i10b 1
-!s100 CSe?1DP`e98zkg<aZMPA61
-R1
-I5i`NoGgVBg15Lmg>m0SS12
+!s100 VJm=@;DJ[[:[VXO]aaMM?0
+I9dhiT_VhIoF31>37<D;I;3
 R2
+R0
 R3
-w1678253828
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/rf.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/rf.v
-!i122 18
-L0 1 53
+8I:/ECE554/ECE554_SP23/Project/SourceCode/rf.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/rf.v
+L0 1
 R5
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/rf.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/rf.v|
-!i113 1
-R7
-R8
+!s108 1678393555.331000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/rf.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/rf.v|
+!i113 0
+R6
 vright_shifter
-R12
-R18
-!i10b 1
-!s100 bNQAghl94U_;PHD738YIm0
-R1
-IX@6cz6VMQZ32:2WXIGh6k1
-R2
-S1
-R3
-w1678253844
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/right_shifter.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/right_shifter.sv
-!i122 19
-R20
-R5
-r1
-!s85 0
-31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/right_shifter.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/right_shifter.sv|
-!i113 1
-R13
-R8
-vrst_synch
-R18
-!i10b 1
-!s100 Fh6G9Mz<_m1ZF;7CPhc?V2
-R1
-IlV@@1IVBU7b>[bJTg1B:62
-R2
-R3
-w1678253854
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/rst_synch.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/rst_synch.v
-!i122 20
-L0 1 27
-R5
-r1
-!s85 0
-31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/rst_synch.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/rst_synch.v|
-!i113 1
-R7
-R8
-vsigned_int_to_float
-R12
-R18
-!i10b 1
-!s100 g_`4]f9Kde]55ITNXfGUT2
-R1
-IYXmVQ?0e>]mV4zMGD>oa32
-R2
-S1
-R3
-w1678253881
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv
-!i122 21
-L0 1 65
-R5
-r1
-!s85 0
-31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv|
-!i113 1
-R13
-R8
-vspart
-R12
-R18
-!i10b 1
-!s100 DHOnb91fmYEbD4OTBnj=i1
-R1
-Ij9WL`2nll2<>24Xa1YFDf0
-R2
-S1
-R3
-w1678254213
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/spart.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/spart.sv
-!i122 22
-L0 22 120
-R5
-r1
-!s85 0
-31
-R19
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/spart.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/spart.sv|
-!i113 1
-R13
-R8
-vsrc_mux
-Z21 !s110 1678341713
-!i10b 1
-!s100 DSkKZ>H;mA7l`06dL9:<E1
-R1
-I`91<Fl>ZDkX2U?FUce_Hf0
-R2
-R3
-w1678341612
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/src_mux.v
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/src_mux.v
-R4
-!i122 23
-L0 1 149
-R5
-r1
-!s85 0
-31
-Z22 !s108 1678341713.000000
-!s107 C:\Users\Harry\OneDrive - UW-Madison\Course Materials\ECE 554\ECE554_SP23\Project\SourceCode\common_params.inc|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/src_mux.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/src_mux.v|
-!i113 1
-R7
-R8
-vstack
-R12
 R9
+R15
 !i10b 1
-!s100 Y3TCNP3kRXVJKYK4:g[UB2
-R1
-Izf?0L?;TDPEk:6?OBnWgP2
+!s100 TMIed`LARlI_`PcA][fXf1
+I?74jZjmX?53`?L[V1ebGh3
 R2
+!s105 right_shifter_sv_unit
 S1
+R0
 R3
-w1678343717
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/stack.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/stack.sv
-!i122 36
-L0 3 39
+8I:/ECE554/ECE554_SP23/Project/SourceCode/right_shifter.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/right_shifter.sv
+L0 2
 R5
 r1
 !s85 0
 31
+!s108 1678393555.628000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/right_shifter.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/right_shifter.sv|
+!i113 0
 R10
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/stack.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/stack.sv|
-!i113 1
-R13
-R8
-vUART_rx
-R12
-R21
+vrst_synch
+Z16 !s110 1678393556
 !i10b 1
-!s100 El@FInBZ6k=JY3MMG<9nl2
-R1
-IIgG<InU7JZjH^UXZgCLho0
+!s100 X1o;4n<:J[ZLczK?;Cm?Q1
+Ig9N2e9H5aJOK<GKD3H>kd0
 R2
-S1
+R0
 R3
-w1678254314
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/UART_rx.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/UART_rx.sv
-!i122 24
-L0 1 100
+8I:/ECE554/ECE554_SP23/Project/SourceCode/rst_synch.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/rst_synch.v
+L0 1
 R5
 r1
 !s85 0
 31
-R22
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/UART_rx.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/UART_rx.sv|
-!i113 1
-R13
-R8
+!s108 1678393555.947000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/rst_synch.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/rst_synch.v|
+!i113 0
+R6
+vsigned_int_to_float
+R9
+R16
+!i10b 1
+!s100 7T@<AOnnN4CPhnKcDn<7A0
+I[d1IIIlnTl[g6iCW;8U[?0
+R2
+!s105 signed_int_to_float_sv_unit
+S1
+R0
+R3
+8I:/ECE554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678393556.253000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv|
+!i113 0
+R10
+vspart
+R9
+R16
+!i10b 1
+!s100 lWjFgd[8K3UMWeAzDI6]]1
+I7TgVoASdbj4b6S3Y<TWff0
+R2
+!s105 spart_sv_unit
+S1
+R0
+R3
+8I:/ECE554/ECE554_SP23/Project/SourceCode/spart.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/spart.sv
+L0 22
+R5
+r1
+!s85 0
+31
+!s108 1678393556.581000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/spart.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/spart.sv|
+!i113 0
+R10
+vsrc_mux
+Z17 !s110 1678393557
+!i10b 1
+!s100 PA7LzRc^H70OANZ2@2S[H1
+Ij9J5S9dN:lWg2]he@3zS_0
+R2
+R0
+R3
+8I:/ECE554/ECE554_SP23/Project/SourceCode/src_mux.v
+FI:/ECE554/ECE554_SP23/Project/SourceCode/src_mux.v
+R4
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678393556.919000
+!s107 I:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc|I:/ECE554/ECE554_SP23/Project/SourceCode/src_mux.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/src_mux.v|
+!i113 0
+R6
+vstack
+R9
+!s110 1678393558
+!i10b 1
+!s100 2R`J[NN_56_]H48I0E^Qi0
+I;Oaa__SPMW8PFoKe8ff1[3
+R2
+!s105 stack_sv_unit
+S1
+R0
+R3
+8I:/ECE554/ECE554_SP23/Project/SourceCode/stack.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/stack.sv
+L0 3
+R5
+r1
+!s85 0
+31
+!s108 1678393557.904000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/stack.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/stack.sv|
+!i113 0
+R10
+vUART_rx
+R9
+R17
+!i10b 1
+!s100 L9ac3E3NFhWHeTV7_=@^z2
+I5f_3Q:Kh[:I;F9kz[OS_D0
+R2
+!s105 UART_rx_sv_unit
+S1
+R0
+R3
+8I:/ECE554/ECE554_SP23/Project/SourceCode/UART_rx.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/UART_rx.sv
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678393557.238000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/UART_rx.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/UART_rx.sv|
+!i113 0
+R10
 n@u@a@r@t_rx
 vUART_tx
-R12
-R21
+R9
+R17
 !i10b 1
-!s100 2_WGQ<l]zQlcWc5n2cm@?1
-R1
-IzQ3bR^^k8;gEZnmC6MMb]2
+!s100 J8`;bJL5zY20QDKn@D02R1
+IM3bmiVjH?XN2VG;_lJdTh1
 R2
+!s105 UART_tx_sv_unit
 S1
+R0
 R3
-w1678254397
-8C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/UART_tx.sv
-FC:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/UART_tx.sv
-!i122 25
-L0 1 89
+8I:/ECE554/ECE554_SP23/Project/SourceCode/UART_tx.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/UART_tx.sv
+L0 1
 R5
 r1
 !s85 0
 31
-R22
-!s107 C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/UART_tx.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Harry/OneDrive - UW-Madison/Course Materials/ECE 554/ECE554_SP23/Project/SourceCode/UART_tx.sv|
-!i113 1
-R13
-R8
+!s108 1678393557.563000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/UART_tx.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/UART_tx.sv|
+!i113 0
+R10
 n@u@a@r@t_tx
+vweight_rom
+R9
+R13
+!i10b 1
+!s100 NO4AoS2HozSU9UahQM1L@1
+IGcni70Lh=GiQbc]I0i6AT2
+R2
+!s105 weight_rom_sv_unit
+S1
+R0
+w1678395140
+8I:/ECE554/ECE554_SP23/Project/SourceCode/weight_rom.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/weight_rom.sv
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1678396051.487000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/weight_rom.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/weight_rom.sv|
+!i113 0
+R10
