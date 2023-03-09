@@ -33,8 +33,9 @@ LLB R5, 784
 
 MUL_LOOP:
 # FP multiply
-LW R6, R1, 0
-LW R7, R2, 0
+LW R6, R2, 0
+LW R7, R1, 0		# weights are in FP format
+ITF R6, R6			# but image is in int (0 ~ 255)
 MULF R8, R6, R7
 SW R8, R3, 0		# store product to DM
 
