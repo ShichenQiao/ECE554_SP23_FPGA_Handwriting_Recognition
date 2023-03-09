@@ -108,7 +108,7 @@ extended_ALU iEXT_ALU(.clk(clk), .src0(src0), .src1(src1), .func(alu_func_ID_EX)
 /////////////////////////////////////
 // Instantiate STACK for PUSH/POP //
 ///////////////////////////////////
-stack iSTACK(.clk(clk), .rst_n(rst_n), .push(stack_push_ID_EX), .pop(stack_pop_ID_EX), .wdata(src1), .rdata(stack_EX_DM));       
+stack iSTACK(.clk(clk), .rst_n(rst_n), .push(stack_push_ID_EX), .pop(stack_pop_ID_EX), .wdata(src1), .stack_EX_DM(stack_EX_DM));       
 
 //////////////////////////////
 // Instantiate data memory //

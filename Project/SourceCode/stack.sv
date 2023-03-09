@@ -1,12 +1,13 @@
 // This is a 32x1024 stack for PUSH and POP instructions
 // Only one operation can be performed at a time
-module stack(clk, rst_n, push, pop, wdata,rdata);
+module stack(clk, rst_n, push, pop, wdata,stack_EX_DM);
   input clk;                  // system clock
   input rst_n;                // active low async reset
   input push;                 // write into stack
   input pop;                  // pop from stack
   input [31:0] wdata;         // data to write
-  output [31:0] rdata;        // read data output
+  output reg [31:0] stack_EX_DM; // flopped stack read result
+  reg [31:0] rdata;        // read data output
   
   reg [31:0] mem [1023:0];    // 32 by 1024 SRAM block
   
@@ -31,5 +32,10 @@ module stack(clk, rst_n, push, pop, wdata,rdata);
     else if (pop & ~empty)
       addr <= addr - 11'h001;
   end
-  
+
+  //////////////////////////
+	// Flop the ALU result //
+	////////////////////////
+	always @(posedge clk)
+		stack_EX_DM <= rdata;
 endmodule

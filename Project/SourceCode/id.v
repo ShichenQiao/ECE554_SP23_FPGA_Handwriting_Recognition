@@ -140,6 +140,7 @@ always @(posedge clk)
       im_re_EX_DM       <= im_re_ID_EX;
       jmp_imm_EX_DM     <= jmp_imm_ID_EX;
       ext_alu_EX_DM     <= ext_alu_ID_EX;
+      stack_pop_EX_DM   <= stack_pop_ID_EX;
     end
 
 
