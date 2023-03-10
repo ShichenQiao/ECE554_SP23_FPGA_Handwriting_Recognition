@@ -210,12 +210,12 @@ begin
 end
 
 //auto start when power on,
-assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
+assign auto_start = ((RST_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
 
     //Reset module
     Reset_Delay iRESET_DELAY(    
-        .iCLK(clk),
-        .iRST(rst_n),
+        .iCLK(ref_clk),
+        .iRST(RST_n),
         .oRST_0(DLY_RST_0),
         .oRST_1(DLY_RST_1),
         .oRST_2(DLY_RST_2),
@@ -256,7 +256,7 @@ assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
 
     //SDRam Read and Write as Frame Buffer
     Sdram_Control iSDRAM_CTRL(      // HOST Side    
-        .RESET_N(rst_n),
+        .RESET_N(RST_n),
         .CLK(sdram_ctrl_clk),
 
         //    FIFO Write Side 1
@@ -331,7 +331,7 @@ assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
 
     //D5M I2C control
     I2C_CCD_Config iI2C_CONFIG(   //Host Side
-        .iCLK(clk),
+        .iCLK(ref_clk),
         .iRST_N(DLY_RST_2),
         .iEXPOSURE_ADJ(KEY[1]),
         .iEXPOSURE_DEC_p(SW[0]),
