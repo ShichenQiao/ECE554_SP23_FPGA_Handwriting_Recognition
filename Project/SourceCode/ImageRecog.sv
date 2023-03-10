@@ -325,7 +325,7 @@ assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
         //    Control Signal
         .iCLK(VGA_CTRL_CLK),
         .iRST_N(DLY_RST_2),
-        .iZOOM_MODE_SW(SW[9])
+        .iZOOM_MODE_SW(SW[9]),
         .pix_addr(pix_addr)
     );
 

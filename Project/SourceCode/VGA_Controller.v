@@ -154,7 +154,7 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;		
-				pix_addr <= (H_Cont - 208 - X_START) + (V_cont-128-Y_START)*224;
+				pix_addr <= (H_Cont - 208 - X_START) + (V_Cont-128-Y_START)*224;
 		   end
 		else if ((H_Cont < 182 + X_START) | (H_Cont > 458 + X_START) | (V_Cont < 102 + Y_START) | (V_Cont > 378 + Y_START))
 		   begin 
