@@ -10,17 +10,36 @@
 # R20 -	9 - i
 # R21 -	current max
 # R22 -	current max index
+# R23 - SW status
+# R24 - SW1 mask
 # R27 -	0x00000030 ASCII number offset
-# R28 -	0x0000C004 address of MM UART transmission buffer
+# R28 -	0x0000C000 base address of peripherals
 # R29 - matrix index
 # R30 - result pointer, results will be in DM at addr = 1000 through 1009
+
+# Load R1 with 1
+LLB		R1, 1
+
+# Load R24 with 2 for SW1
+LLB		R24, 2
+
+# load R28 with 0x0000C000
+LLB		R28, 0xC000
+LHB		R28, 0x0000
+
+CLASSIFY:
+# Check switch values
+LW		R23, R28, 1
+AND		R23, R23, R24
+B		EQ, CLASSIFY			# wait until SW1 is ON to classify
+
+####################
+# RESTORE POINTERS #
+####################
 
 # Load R2 with 0x00020000
 LLB		R2, 0
 LHB		R2, 2
-
-# Load R1 with 0x00000001
-LLB		R1, 1
 
 # Load R29 with 10
 LLB		R29, 10
@@ -183,9 +202,6 @@ LLB		R30, 1000
 # CLASIFICATION OUTPUT STAGE #
 ##############################
 
-# load 0x0000C004 into R28
-LLB		R28, 0xC004
-LHB		R28, 0x0000
 # load 0x00000030 into R27
 LLB		R27, 0x0030
 # load negative infinity into R21
@@ -224,5 +240,6 @@ B		UNCOND, LOAD_NEXT
 # max found, print to SPART
 DONE:
 ADD		R22, R22, R27			# R5 <- R5 + 0x0030
-SW		R22, R28, 0				# print to SPART
-HLT
+SW		R22, R28, 4				# print to SPART
+
+B		UNCOND, CLASSIFY
