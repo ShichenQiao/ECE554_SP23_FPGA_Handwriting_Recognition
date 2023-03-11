@@ -1,3 +1,0 @@
-v1
-GXB_MERGING,PLL Output Counter,289209,sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i|general[2].gpll~PLL_OUTPUT_COUNTER,sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i|general[3].gpll~PLL_OUTPUT_COUNTER,
-GXB_MERGING,Clock enable block,27580,sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i|outclk_wire[2]~CLKENA0,sdram_pll:u6|sdram_pll_0002:sdram_pll_inst|altera_pll:altera_pll_i|outclk_wire[3]~CLKENA0,
