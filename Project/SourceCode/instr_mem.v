@@ -6,7 +6,7 @@ input rd_en;                            // asserted when instruction read desire
 
 output reg [31:0] instr;                // output of insturction memory
 
-reg [31:0]instr_mem[0:16383];           // 16K*32 instruction memory
+reg [31:0]instr_mem[0:255];           // 16K*32 instruction memory
 
 ///////////////////////////////////
 // Memory is flopped on negedge //

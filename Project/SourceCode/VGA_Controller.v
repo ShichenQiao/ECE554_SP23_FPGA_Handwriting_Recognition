@@ -60,7 +60,8 @@ module	VGA_Controller(	//	Host Side
 						iZOOM_MODE_SW,
 
 						// output current addr
-						pix_addr
+						uncmpr_x,
+						uncmpr_y
 							);
 
 //	Horizontal Parameter	( Pixel )
@@ -94,7 +95,8 @@ output	reg			oVGA_H_SYNC;
 output	reg			oVGA_V_SYNC;
 output	reg			oVGA_SYNC;
 output	reg			oVGA_BLANK;
-output  reg [15:0]  pix_addr;
+output  [7:0]  uncmpr_x; //Uncompressed X, send to compressor to process pixel
+output  [7:0]  uncmpr_y; //Uncompressed y, send to compressor to process pixel
 
 wire		[9:0]	mVGA_R;
 wire		[9:0]	mVGA_G;
@@ -131,7 +133,8 @@ assign	mVGA_G	=	(	H_Cont>=X_START 	&& H_Cont<X_START+H_SYNC_ACT &&
 assign	mVGA_B	=	(	H_Cont>=X_START 	&& H_Cont<X_START+H_SYNC_ACT &&
 						V_Cont>=Y_START+v_mask 	&& V_Cont<Y_START+V_SYNC_ACT )
 						?	iBlue	:	0;
-
+assign uncmpr_x = ((H_Cont >= 208 + X_START) & (H_Cont < 432 + X_START) & (V_Cont >= 128 + Y_START) & (V_Cont < 352 + Y_START))?(H_Cont - 208 - X_START):8'hFF;
+assign uncmpr_y = ((H_Cont >= 208 + X_START) & (H_Cont < 432 + X_START) & (V_Cont >= 128 + Y_START) & (V_Cont < 352 + Y_START))?(V_Cont-128-Y_START):8'hFF;
 always@(posedge iCLK or negedge iRST_N)
 	begin
 		if (!iRST_N)
@@ -143,7 +146,6 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= 0;
 				oVGA_H_SYNC <= 0;
 				oVGA_V_SYNC <= 0; 
-				pix_addr <= 16'hFFFF;
 			end
 		else if ((H_Cont >= 208 + X_START) & (H_Cont < 432 + X_START) & (V_Cont >= 128 + Y_START) & (V_Cont < 352 + Y_START))
 		   begin 
@@ -154,7 +156,6 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;		
-				pix_addr <= (H_Cont - 208 - X_START) + (V_Cont-128-Y_START)*224;
 		   end
 		else if ((H_Cont < 182 + X_START) | (H_Cont > 458 + X_START) | (V_Cont < 102 + Y_START) | (V_Cont > 378 + Y_START))
 		   begin 
@@ -165,7 +166,6 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;	
-				pix_addr <= 16'hFFFF;	
 		   end
 		else
 			begin
@@ -176,7 +176,6 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;	
-				pix_addr <= 16'hFFFF;			
 			end               
 	end
 

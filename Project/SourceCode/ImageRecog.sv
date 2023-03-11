@@ -50,8 +50,8 @@ module ImageRecog(
     output      D5M_XCLKIN,
 
     ////////////////////////// TX RX //////////////////////////////////////
-    input TX,
-    input RX
+    inout TX,
+    inout RX
 );
 
 //=======================================================
@@ -68,6 +68,7 @@ module ImageRecog(
     wire re, we;    // read enable and write enable from proc
     wire spart_cs_n;// active low chip select signal for spart
     wire clk;
+	 reg  compress_start;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -165,7 +166,8 @@ wire [9:0]  oVGA_R;//    VGA Red[9:0]
 wire [9:0]  oVGA_G;  //    VGA Green[9:0]
 wire [9:0]  oVGA_B;//    VGA Blue[9:0]
 
-wire [15:0] pix_addr; 
+wire [7:0] uncompress_addr_x;
+wire [7:0] uncompress_addr_y;
 
 //power on start
 wire auto_start;
@@ -192,6 +194,8 @@ end
 //auto start when power on,
 assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
 
+// image compress control
+assign compress_start = (!KEY[2] && uncompress_addr_x == 8'h0 && uncompress_addr_y == 8'h0);
 
 //////////////////////////////// //////////////////////////////
     PLL iPLL(
@@ -214,7 +218,7 @@ assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
     image_mem iIMAGE_MEM(
         .clk(clk),
         .we(1'b0),
-        .waddr(pix_addr),
+        .waddr(),
         .wdata(8'h0000),
         .raddr(addr[9:0]),
         .rdata(r_image)
@@ -334,7 +338,8 @@ assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
         .iCLK(VGA_CTRL_CLK),
         .iRST_N(DLY_RST_2),
         .iZOOM_MODE_SW(SW[9]),
-        .pix_addr(pix_addr)
+		  .uncmpr_x(uncompress_addr_x),
+		  .uncmpr_y(uncompress_addr_y)
     );
 
     //D5M I2C control
