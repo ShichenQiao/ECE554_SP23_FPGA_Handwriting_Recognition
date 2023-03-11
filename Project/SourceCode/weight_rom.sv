@@ -9,7 +9,7 @@ module weight_rom(clk,raddr,rdata);
   initial
     $readmemh("../weight.hex",rom);
 
-  always @(posedge clk) begin
+  always @(negedge clk) begin
     rdata <= rom[raddr];
   end
 
