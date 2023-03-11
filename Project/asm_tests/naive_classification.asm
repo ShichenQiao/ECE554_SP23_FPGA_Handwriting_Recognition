@@ -28,6 +28,10 @@ LLB R29, 10
 # Load R30 with 1000
 LLB R30, 1000
 
+#########################
+# MATRIX MULTIPLY STAGE #
+#########################
+
 MATRIX_LOOP:
 # Load R3 with 0x00010000
 LLB R3, 0
@@ -40,7 +44,6 @@ LLB R4, 0
 LLB R5, 784
 
 MUL_LOOP:
-# FP multiply
 LW R6, R3, 0
 LW R7, R2, 0			# weights are in FP format
 ITF R6, R6				# but image is in int (0 ~ 255)
@@ -174,6 +177,10 @@ B NEQ, MATRIX_LOOP
 
 # Load R30 with 1000 for the output stage
 LLB R30, 1000
+
+##############################
+# CLASIFICATION OUTPUT STAGE #
+##############################
 
 # load 0x0000C004 into R28
 LLB		R28, 0xC004
