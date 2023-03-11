@@ -44,11 +44,12 @@ LLB R4, 0
 LLB R5, 784
 
 MUL_LOOP:
+# FP multiply
 LW R6, R3, 0
-LW R7, R2, 0			# weights are in FP format
-ITF R6, R6				# but image is in int (0 ~ 255)
+LW R7, R2, 0				# weights are in FP format
+ITF R6, R6					# but image is in int (0 ~ 255)
 MULF R8, R6, R7
-SW R8, R4, 0			# store product to DM
+SW R8, R4, 0				# store product to DM
 
 # increment pointers
 ADD R2, R2, R1
