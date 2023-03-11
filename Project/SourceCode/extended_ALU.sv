@@ -71,7 +71,7 @@ module extended_ALU(clk, src1, src0, func, dst_EX_DM, ov, zr, neg);
 	assign ov = 1'b0;
 	
 	// assign zero flag according to if output is in normal format or FP format
-	assign zr = (func==MUL || func==UMUL || func==FTI) ? |OUT : |OUT[30:0];
+	assign zr = (func==MUL || func==UMUL || func==FTI) ? ~|OUT : ~|OUT[30:0];
 
 	// assign neg flag according to if output is signed or unsigned
 	assign neg = (func==UMUL) ? 1'b0 : OUT[31];
