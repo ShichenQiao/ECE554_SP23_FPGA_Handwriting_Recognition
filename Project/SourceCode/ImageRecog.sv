@@ -37,7 +37,7 @@ module ImageRecog(
     output      VGA_SYNC_N,
     output      VGA_VS,
 
-    //////////// GPIO_1, GPIO_1 connect to D5M - 5M Pixel Camera //////////
+    //////////// GPIO_0, GPIO_0 connect to D5M - 5M Pixel Camera //////////
     input             [11:0]        D5M_D,
     input       D5M_FVAL,
     input       D5M_LVAL,
@@ -47,7 +47,11 @@ module ImageRecog(
     inout       D5M_SDATA,
     input       D5M_STROBE,
     output      D5M_TRIGGER,
-    output      D5M_XCLKIN
+    output      D5M_XCLKIN,
+
+    ////////////////////////// TX RX //////////////////////////////////////
+    input TX,
+    input RX
 );
 
 //=======================================================
@@ -123,31 +127,7 @@ module ImageRecog(
         .RX(RX)
       );
 
-    PLL iPLL(
-        .refclk(ref_clk),
-        .rst(~RST_n),
-        .outclk_0(clk),             // 50M
-        .outclk_1(sdram_ctrl_clk),  // 100M
-        .outclk_2(DRAM_CLK),        // 100M with phase 7500ps shift
-        .outclk_3(D5M_XCLKIN),      //25M
-        .outclk_4(VGA_CLK),         //25M
-        .locked(pll_locked)
-    );
 
-    weight_rom iWEIGHT_ROM(
-        .clk(clk),
-        .raddr(addr[12:0]),
-        .rdata(r_weight)
-    );
-
-    image_mem iIMAGE_MEM(
-        .clk(clk),
-        .we(),
-        .waddr(pix_addr),
-        .wdata(),
-        .raddr(addr[9:0]),
-        .rdata(r_image)
-    );
 
 //////////////////////////// Camera Interfaces /////////////////////////////
 wire [15:0]  Read_DATA1;
@@ -196,13 +176,13 @@ assign  D5M_RESET_N  =    DLY_RST_1;
 
 assign  VGA_CTRL_CLK = VGA_CLK;
 
-//fetch the high 8 bits
+//fetch the high 8 bits   //Temporary fix
 assign  VGA_R = oVGA_R[9:2];
 assign  VGA_G = oVGA_G[9:2];
 assign  VGA_B = oVGA_B[9:2];
 
 //D5M read 
-always@(posedge D5M_PIXLCLK)
+always@(posedge D5M_PIXCLK)
 begin
     rCCD_DATA   <=    D5M_D;
     rCCD_LVAL   <=    D5M_LVAL;
@@ -210,12 +190,40 @@ begin
 end
 
 //auto start when power on,
-assign auto_start = ((RST_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
+assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
+
+
+//////////////////////////////// //////////////////////////////
+    PLL iPLL(
+        .refclk(ref_clk),
+        .rst(~RST_n),
+        .outclk_0(clk),             // 50M
+        .outclk_1(sdram_ctrl_clk),  // 100M
+        .outclk_2(DRAM_CLK),        // 100M with phase 7500ps shift
+        .outclk_3(D5M_XCLKIN),      //25M
+        .outclk_4(VGA_CLK),         //25M
+        .locked(pll_locked)
+    );
+
+    weight_rom iWEIGHT_ROM(
+        .clk(clk),
+        .raddr(addr[12:0]),
+        .rdata(r_weight)
+    );
+
+    image_mem iIMAGE_MEM(
+        .clk(clk),
+        .we(1'b0),
+        .waddr(pix_addr),
+        .wdata(8'h0000),
+        .raddr(addr[9:0]),
+        .rdata(r_image)
+    );
 
     //Reset module
     Reset_Delay iRESET_DELAY(    
-        .iCLK(ref_clk),
-        .iRST(RST_n),
+        .iCLK(clk),
+        .iRST(rst_n),
         .oRST_0(DLY_RST_0),
         .oRST_1(DLY_RST_1),
         .oRST_2(DLY_RST_2),
@@ -235,13 +243,13 @@ assign auto_start = ((RST_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
         .iLVAL(rCCD_LVAL),
         .iSTART(!KEY[3]|auto_start),
         .iEND(!KEY[2]),
-        .iCLK(~D5M_PIXLCLK),
+        .iCLK(~D5M_PIXCLK),
         .iRST(DLY_RST_2)
     );
 
     //D5M raw date convert to RGB data
     RAW2GRAY iRAW2GRAY(    
-        .iCLK(D5M_PIXLCLK),
+        .iCLK(D5M_PIXCLK),
         .iRST(DLY_RST_1),
         .iDATA(mCCD_DATA),
         .iDVAL(mCCD_DVAL),
@@ -256,7 +264,7 @@ assign auto_start = ((RST_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
 
     //SDRam Read and Write as Frame Buffer
     Sdram_Control iSDRAM_CTRL(      // HOST Side    
-        .RESET_N(RST_n),
+        .RESET_N(rst_n),
         .CLK(sdram_ctrl_clk),
 
         //    FIFO Write Side 1
@@ -266,7 +274,7 @@ assign auto_start = ((RST_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
         .WR1_MAX_ADDR(640*480),
         .WR1_LENGTH(8'h50),
         .WR1_LOAD(!DLY_RST_0),
-        .WR1_CLK(~D5M_PIXLCLK),
+        .WR1_CLK(~D5M_PIXCLK),
 
         //    FIFO Write Side 2 
         .WR2_DATA({1'b0,sCCD_G[6:2],sCCD_R[11:2]}),
@@ -275,7 +283,7 @@ assign auto_start = ((RST_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
         .WR2_MAX_ADDR(23'h100000+640*480),
         .WR2_LENGTH(8'h50),
         .WR2_LOAD(!DLY_RST_0),    
-        .WR2_CLK(~D5M_PIXLCLK),
+        .WR2_CLK(~D5M_PIXCLK),
         
         //    FIFO Read Side 1
         .RD1_DATA(Read_DATA1),
@@ -331,7 +339,7 @@ assign auto_start = ((RST_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
 
     //D5M I2C control
     I2C_CCD_Config iI2C_CONFIG(   //Host Side
-        .iCLK(ref_clk),
+        .iCLK(clk),
         .iRST_N(DLY_RST_2),
         .iEXPOSURE_ADJ(KEY[1]),
         .iEXPOSURE_DEC_p(SW[0]),
