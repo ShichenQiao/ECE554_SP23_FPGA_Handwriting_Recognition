@@ -53,7 +53,8 @@ module	VGA_Controller(	//	Host Side
 						oVGA_V_SYNC,
 						oVGA_SYNC,
 						oVGA_BLANK,
-
+						mem_R,
+						r_addr,
 						//	Control Signal
 						iCLK,
 						iRST_N,
@@ -86,6 +87,8 @@ parameter	Y_START		=	V_SYNC_CYC+V_SYNC_BACK;
 input		[9:0]	iRed;
 input		[9:0]	iGreen;
 input		[9:0]	iBlue;
+input    [7:0] mem_R;
+output   reg [9:0] r_addr;
 output	reg			oRequest;
 //	VGA Side
 output	reg	[9:0]	oVGA_R;
@@ -146,7 +149,19 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= 0;
 				oVGA_H_SYNC <= 0;
 				oVGA_V_SYNC <= 0; 
+				r_addr <= 0;
 			end
+		else if ((H_Cont >= 0 + X_START) & (H_Cont < 28 + X_START) & (V_Cont >= 0 + Y_START) & (V_Cont < 28 + Y_START))
+		   begin 
+				oVGA_R <= {mem_R,2'b00};
+				oVGA_G <= {mem_R,2'b00};
+                oVGA_B <= {mem_R,2'b00};
+				oVGA_BLANK <= mVGA_BLANK;
+				oVGA_SYNC <= mVGA_SYNC;
+				oVGA_H_SYNC <= mVGA_H_SYNC;
+				oVGA_V_SYNC <= mVGA_V_SYNC;	
+			   	r_addr <= (H_Cont - X_START) * 28 + (V_Cont - Y_START);
+		   end
 		else if ((H_Cont >= 208 + X_START) & (H_Cont < 432 + X_START) & (V_Cont >= 128 + Y_START) & (V_Cont < 352 + Y_START))
 		   begin 
 				oVGA_R <= mVGA_R;
@@ -155,7 +170,8 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_BLANK <= mVGA_BLANK;
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
-				oVGA_V_SYNC <= mVGA_V_SYNC;		
+				oVGA_V_SYNC <= mVGA_V_SYNC;	
+			r_addr <= 0;	
 		   end
 		else if ((H_Cont < 182 + X_START) | (H_Cont > 458 + X_START) | (V_Cont < 102 + Y_START) | (V_Cont > 378 + Y_START))
 		   begin 
@@ -166,6 +182,7 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;	
+				r_addr <= 0;
 		   end
 		else
 			begin
@@ -176,6 +193,7 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;	
+				r_addr <= 0;
 			end               
 	end
 
