@@ -209,8 +209,6 @@ LLB		R21, 0x0000
 LHB		R21, 0xFF80
 # initialize R22 to 0
 ADD		R22, R0, R0
-# load 1 into R1
-LLB		R1, 0x0001
 # load 0 into R5
 LLB		R5, 0x0000
 # load 9 into R17
@@ -239,7 +237,7 @@ B		UNCOND, LOAD_NEXT
 
 # max found, print to SPART
 DONE:
-ADD		R22, R22, R27			# R5 <- R5 + 0x0030
+ADD		R22, R22, R27			# R22 <- R22 + 0x0030
 SW		R22, R28, 4				# print to SPART
 
 B		UNCOND, CLASSIFY

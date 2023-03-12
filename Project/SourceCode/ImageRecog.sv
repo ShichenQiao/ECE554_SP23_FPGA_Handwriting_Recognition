@@ -68,7 +68,7 @@ module ImageRecog(
     wire re, we;    // read enable and write enable from proc
     wire spart_cs_n;// active low chip select signal for spart
     wire clk;
-	 reg  compress_start;
+	wire  compress_start;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -215,14 +215,29 @@ assign compress_start = (!KEY[2] && uncompress_addr_x == 8'h0 && uncompress_addr
         .rdata(r_weight)
     );
 
+wire [9:0] compress_addr;
+wire [7:0] pix_color_out;
+
     image_mem iIMAGE_MEM(
         .clk(clk),
-        .we(1'b0),
-        .waddr(),
-        .wdata(8'h0000),
+        .we(sram_wr),
+        .waddr(compress_addr),
+        .wdata(pix_color_out),
         .raddr(addr[9:0]),
         .rdata(r_image)
     );
+
+	image_compressor(
+		.clk(VGA_CLK),
+		.rst_n(rst_n),
+		.start(compress_start),
+		.pix_color_in(oVGA_R[9:2]),
+		.pix_haddr(uncompress_addr_x),
+		.pix_vaddr(uncompress_addr_y),
+		.pix_color_out(pix_color_out),
+		.compress_addr(compress_addr),
+		.sram_wr(sram_wr)
+	);
 
     //Reset module
     Reset_Delay iRESET_DELAY(    
