@@ -12,6 +12,7 @@
 # R22 -	current max index
 # R23 - SW status
 # R24 - SW1 mask
+# R25 - step size
 # R27 -	0x00000030 ASCII number offset
 # R28 -	0x0000C000 base address of peripherals
 # R29 - matrix index
@@ -143,17 +144,28 @@ ADD		R4, R4, R7
 SUB		R5, R5, R1
 B		NEQ, LV2_ADD
 
-# Load R4 with 147
-LLB		R4, 147
+# Load R25 with 49
+LLB		R25, 49
 
-LW		R6, R4, -147
-LW		R7, R4, -98
-LW		R8, R4, -49
+# Load R4 with 0
+LLB		R4, 0
+
+LW		R6, R4, 0
+ADD		R4, R4, R25
+LW		R7, R4, 0
+ADD		R4, R4, R25
+LW		R8, R4, 0
+ADD		R4, R4, R25
 LW		R9, R4, 0
-LW		R10, R4, 49
-LW		R11, R4, 147
-LW		R12, R4, 196
-LW		R13, R4, 245
+ADD		R4, R4, R25
+LW		R10, R4, 0
+ADD		R4, R4, R25
+LW		R11, R4, 0
+ADD		R4, R4, R25
+LW		R12, R4, 0
+ADD		R4, R4, R25
+LW		R13, R4, 0
+ADD		R4, R4, R25
 
 ADDF	R6, R6, R7
 ADDF	R8, R8, R9
@@ -165,17 +177,21 @@ ADDF	R10, R10, R12
 
 ADDF	R14, R6, R10
 
-# Load R4 with 392 + 147 = 539
-LLB		R4, 539
-
-LW		R6, R4, -147
-LW		R7, R4, -98
-LW		R8, R4, -49
+LW		R6, R4, 0
+ADD		R4, R4, R25
+LW		R7, R4, 0
+ADD		R4, R4, R25
+LW		R8, R4, 0
+ADD		R4, R4, R25
 LW		R9, R4, 0
-LW		R10, R4, 49
-LW		R11, R4, 147
-LW		R12, R4, 196
-LW		R13, R4, 245
+ADD		R4, R4, R25
+LW		R10, R4, 0
+ADD		R4, R4, R25
+LW		R11, R4, 0
+ADD		R4, R4, R25
+LW		R12, R4, 0
+ADD		R4, R4, R25
+LW		R13, R4, 0
 
 ADDF	R6, R6, R7
 ADDF	R8, R8, R9
