@@ -217,13 +217,13 @@ assign compress_start = (!KEY[2] && uncompress_addr_x == 8'h0 && uncompress_addr
 
 wire [9:0] compress_addr;
 wire [7:0] pix_color_out;
-wire [9:0] r_addr;
+
     image_mem iIMAGE_MEM(
         .clk(clk),
         .we(sram_wr),
         .waddr(compress_addr),
         .wdata(pix_color_out),
-        .raddr(r_addr),
+        .raddr(addr[9:0]),
         .rdata(r_image)
     );
 
@@ -337,8 +337,6 @@ wire [9:0] r_addr;
     //VGA DISPLAY
     VGA_Controller  iVGA_CONTROL(    //    Host Side
         .oRequest(Read),
-		  .mem_R(r_image),
-		  .r_addr(r_addr),
         .iRed(Read_DATA2[9:0]),
         .iGreen({Read_DATA1[14:10],Read_DATA2[14:10]}),
         .iBlue(Read_DATA1[9:0]),
