@@ -11,7 +11,7 @@ module image_mem(clk,we,waddr,wdata,raddr,rdata);
 
   always @(negedge clk) begin
     if (we)
-      mem[waddr] <= wdata;
+      mem[waddr] <= wdata < 50 ? 0 :wdata;
   rdata <= mem[raddr];
   end
 

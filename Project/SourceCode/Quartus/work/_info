@@ -318,15 +318,15 @@ R6
 n@i@m
 vimage_mem
 R9
-Z15 !s110 1679431481
+Z15 !s110 1679438577
 !i10b 1
-!s100 ^N5Ha??PDo8kO^kakG58R2
-IHDa]7bYlk;Y3ezfYo3lhL0
+!s100 EGm3bi]J38e>6_imUnkm23
+IJaLU_3EC22INH8JQKI4nF2
 R2
 !s105 image_mem_sv_unit
 S1
 R0
-w1678583761
+w1679438573
 8I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv
 FI:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv
 L0 1
@@ -334,7 +334,7 @@ R5
 r1
 !s85 0
 31
-!s108 1679431481.439000
+!s108 1679438576.960000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv|
 !i113 0
@@ -698,13 +698,13 @@ r1
 R11
 n@u@a@r@t_tx
 vVGA_Controller
-!s110 1679432667
+R15
 !i10b 1
-!s100 o3IZU]I][[oAVE]I9a]1<3
-IZ1^Q@YnmG<ZUed8iIC2Nn3
+!s100 <SL]l^TbA4[o9h8S<boKi3
+IYP3aH9Al4i70P5KSV`g]C0
 R2
 R0
-w1679432655
+w1679433806
 8I:/ECE554/ECE554_SP23/Project/SourceCode/VGA_Controller.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/VGA_Controller.v
 L0 43
@@ -712,7 +712,7 @@ R5
 r1
 !s85 0
 31
-!s108 1679432667.121000
+!s108 1679438577.315000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/VGA_Controller.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/VGA_Controller.v|
 !i113 0
@@ -720,7 +720,7 @@ R6
 n@v@g@a_@controller
 vweight_rom
 R9
-R15
+!s110 1679431481
 !i10b 1
 !s100 78fKjkOSmhgUN=L2COii33
 IWRZ]SP2?N]LTjT7kC0lLo1
