@@ -41,28 +41,30 @@
 // --------------------------------------------------------------------
 
 module	VGA_Controller(	//	Host Side
-						iRed,
-						iGreen,
-						iBlue,
-						oRequest,
-						//	VGA Side
-						oVGA_R,
-						oVGA_G,
-						oVGA_B,
-						oVGA_H_SYNC,
-						oVGA_V_SYNC,
-						oVGA_SYNC,
-						oVGA_BLANK,
+        iRed,
+        iGreen,
+        iBlue,
+        oRequest,
+        echo_pix,
+        echo_addr,
+        //	VGA Side
+        oVGA_R,
+        oVGA_G,
+        oVGA_B,
+        oVGA_H_SYNC,
+        oVGA_V_SYNC,
+        oVGA_SYNC,
+        oVGA_BLANK,
 
-						//	Control Signal
-						iCLK,
-						iRST_N,
-						iZOOM_MODE_SW,
+        //	Control Signal
+        iCLK,
+        iRST_N,
+        iZOOM_MODE_SW,
 
-						// output current addr
-						uncmpr_x,
-						uncmpr_y
-							);
+        // output current addr
+        uncmpr_x,
+        uncmpr_y
+        );
 
 //	Horizontal Parameter	( Pixel )
 parameter	H_SYNC_CYC	=	96;
@@ -87,6 +89,8 @@ input		[9:0]	iRed;
 input		[9:0]	iGreen;
 input		[9:0]	iBlue;
 output	reg			oRequest;
+input [7:0] echo_pix;
+output reg [9:0] echo_addr;
 //	VGA Side
 output	reg	[9:0]	oVGA_R;
 output	reg	[9:0]	oVGA_G;
@@ -146,7 +150,19 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= 0;
 				oVGA_H_SYNC <= 0;
 				oVGA_V_SYNC <= 0; 
+				echo_addr <= 0;
 			end
+		else if ((H_Cont >= 0 + X_START) & (H_Cont < 28 + X_START) & (V_Cont >= 0 + Y_START) & (V_Cont < 28 + Y_START))
+		   begin 
+				oVGA_R <= {echo_pix,2'b00};
+				oVGA_G <= {echo_pix,2'b00};
+                oVGA_B <= {echo_pix,2'b00};
+				oVGA_BLANK <= mVGA_BLANK;
+				oVGA_SYNC <= mVGA_SYNC;
+				oVGA_H_SYNC <= mVGA_H_SYNC;
+				oVGA_V_SYNC <= mVGA_V_SYNC;	
+			   	echo_addr <= (H_Cont - X_START) + (V_Cont - Y_START) * 28;
+		   end
 		else if ((H_Cont >= 208 + X_START) & (H_Cont < 432 + X_START) & (V_Cont >= 128 + Y_START) & (V_Cont < 352 + Y_START))
 		   begin 
 				oVGA_R <= mVGA_R;
@@ -155,7 +171,8 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_BLANK <= mVGA_BLANK;
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
-				oVGA_V_SYNC <= mVGA_V_SYNC;		
+				oVGA_V_SYNC <= mVGA_V_SYNC;	
+				echo_addr <= 0;	
 		   end
 		else if ((H_Cont < 182 + X_START) | (H_Cont > 458 + X_START) | (V_Cont < 102 + Y_START) | (V_Cont > 378 + Y_START))
 		   begin 
@@ -166,16 +183,18 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;	
+				echo_addr <= 0;
 		   end
 		else
 			begin
-				oVGA_R <= 0;
+				oVGA_R <= 255;
 				oVGA_G <= 0;
                 oVGA_B <= 0;
 				oVGA_BLANK <= mVGA_BLANK;
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;	
+				echo_addr <= 0;
 			end               
 	end
 
