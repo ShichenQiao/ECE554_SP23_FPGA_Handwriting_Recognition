@@ -68,12 +68,15 @@ module ImageRecog(
     wire re, we;    // read enable and write enable from proc
     wire spart_cs_n;// active low chip select signal for spart
     wire clk;
-	wire  compress_start;
+    wire compress_start;
+	 reg compress_req;  // Turn this on to request compressing the image, it will pull down once the compression is finished. Access it at address C008
+	 reg compress_proc; // This signal indicates the process of compressing the image. 1 indicates the compression started and is in process, 0 indicates that the compress is finished/idle.
 //=======================================================
 //  Structural coding
 //=======================================================
       // If no external memory mapped device is used, put 32'hDEAD on rdata
     assign rdata = ((addr == 32'h0000C001) & re) ? {22'h000000, SW} :                  // 32'hC001 maps to switches, only lower 10 bits are used since only 10 SWs
+	                (addr == 32'h0000C008 & re) ? {31'h00000000,compress_req} :         // 32'hC008 maps to compress control signal
                    (addr[31:2]==30'h00003001 & re) ? {24'h000000,spart_databus} :      // 16'hC004 - 16'hC007 maps to spart's bidirectional data bus
                    (addr[31:16]==16'h0001 & re) ? {24'h000000,r_image} :
                    (addr[31:17]==15'h0001 & re) ? r_weight :
@@ -92,6 +95,25 @@ module ImageRecog(
         else if (update_LED)
             LEDR <= wdata[9:0];  // data is 32 bit, but only have 10 LEDs, use lower bits
 
+    always @(negedge clk, negedge rst_n)
+	     if(!rst_n)
+		      compress_req <= 1'b0;
+		  else if (compress_proc & uncompress_addr_x == 783 && uncompress_addr_y == 783)
+		      compress_req <= 1'b0;
+		  else if (addr == 32'h0000C008 & we)
+		      compress_req <= wdata[0];
+
+    always @(negedge clk, negedge rst_n)
+	     if(!rst_n)
+		      compress_proc <= 1'b0;
+			else if (compress_start)
+			    compress_proc <= 1'b1;
+			else if (compress_proc & uncompress_addr_x == 783 && uncompress_addr_y == 783)
+			    compress_proc <=1'b0;
+				
+	assign compress_start = ((compress_req | !KEY[2]) && uncompress_addr_x == 8'h0 && uncompress_addr_y == 8'h0);
+
+			
 //=======================================================
 //  Initialize modules
 //=======================================================
@@ -194,8 +216,7 @@ end
 //auto start when power on,
 assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
 
-// image compress control
-assign compress_start = (!KEY[2] && uncompress_addr_x == 8'h0 && uncompress_addr_y == 8'h0);
+
 
 //////////////////////////////// //////////////////////////////
     PLL iPLL(
@@ -272,7 +293,7 @@ wire [7:0] echo_pix_color_out;
         .iFVAL(rCCD_FVAL),
         .iLVAL(rCCD_LVAL),
         .iSTART(!KEY[3]|auto_start),
-        .iEND(!KEY[2]),
+        .iEND(1'b0 | !KEY[2]), // never ends capturing the image.iEND(!KEY[2]),
         .iCLK(~D5M_PIXCLK),
         .iRST(DLY_RST_2)
     );

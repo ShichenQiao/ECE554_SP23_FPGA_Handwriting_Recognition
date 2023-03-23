@@ -10,7 +10,7 @@
 # R20 -	9 - i
 # R21 -	current max
 # R22 -	current max index
-# R23 - SW status
+# R23 - SW status / Snapshot status
 # R24 - SW1 mask
 # R25 - step size
 # R27 -	0x00000030 ASCII number offset
@@ -33,6 +33,13 @@ CLASSIFY:
 LW		R23, R28, 1
 AND		R23, R23, R24
 B		EQ, CLASSIFY			# wait until SW1 is ON to classify
+
+SW              R1, R28, 8         #send one snapshot request
+SNAPSHOT_WAIT:
+LW		R23, R28, 8        #get the snapshot request status
+SUB             R23, R23, R1       # check if it is one
+B               NEQ, SNAPSHOT_WAIT # if the status is still 1(meaning waiting for snapshot), then keep waiting
+
 
 ####################
 # RESTORE POINTERS #
