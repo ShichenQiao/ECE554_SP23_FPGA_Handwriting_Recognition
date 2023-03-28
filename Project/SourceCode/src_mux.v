@@ -69,7 +69,7 @@ always @(posedge clk)
 assign src0 = (src0sel_ID_EX == RF2SRC0) ? RF_p0 : 
               (src0sel_ID_EX == IMM_BR2SRC0) ? {{20{imm_ID_EX[11]}},imm_ID_EX[11:0]} :        // branch immediates
               (src0sel_ID_EX == IMM_JMP2SRC0) ? {{20{imm_ID_EX[11]}},imm_ID_EX[11:0]} :    // JMP immediates
-              {{24{imm_ID_EX[7]}},imm_ID_EX[7:0]};        // for address immediates for DM operations
+              {{24{imm_ID_EX[7]}},imm_ID_EX[7:0]};        // for address immediates for DM operations/ ADDI/ SUBI
 
 assign src1 = (src1sel_ID_EX == RF2SRC1) ? RF_p1 : 
               (src1sel_ID_EX == NPC2SRC1) ? pc_ID_EX :    // for JAL

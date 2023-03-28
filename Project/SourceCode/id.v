@@ -360,6 +360,21 @@ always @(instr_IM_ID) begin
       stack_pop = 1;
       rf_we = 1;
     end
+    ADDIi : begin
+      src0sel = IMM2SRC0;        // sign extended intermediate
+      rf_re1 = 1;
+      rf_we = 1;
+      clk_z = 1;
+      clk_nv = 1;
+    end
+    SUBIi : begin
+      src0sel = IMM2SRC0;        // sign extended intermediate
+      rf_re1 = 1;
+      rf_we = 1;
+      clk_z = 1;
+      clk_nv = 1;
+      alu_func = SUB;    
+    end
     MULi : begin
       rf_re0 = 1;
       rf_re1 = 1;
