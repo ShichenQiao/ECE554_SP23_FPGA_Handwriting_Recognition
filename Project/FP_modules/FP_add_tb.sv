@@ -21,7 +21,6 @@ module FP_add_tb();
 
 	import FP_special_values::*;
 
-	parameter WEIRD = 3;
 	logic [31:0] A;
 	logic [31:0] B;
 	logic [31:0] OUT;
@@ -87,12 +86,14 @@ module FP_add_tb();
 			end
 			else begin
 				err = (os - o) / os;
+				//$display("os: %f", os);
+				//$display("o: %f", o);
 				#1;
-				if ((err < 0 ? -err : err) > 0.002) begin
+				if ((err < 0 ? -err : err) > 0.0001) begin
 					#10;
 					$display("Random test failed:");
-					$display("a: %b", A);
-					$display("b: %b", B);
+					$display("a: %x", A);
+					$display("b: %x", B);
 					$display("should be: %b", sum);
 					$display("but got: %b", OUT);
 					$stop();
@@ -122,8 +123,8 @@ module FP_add_tb();
 		$display("ALL RANDOM TESTS WERE GOOD...");
 		$display("BUT MORE WEIRDOS ARE COMING ;)");
 		// 256 corner cases (16 special values plus themselves)
-		for(int i = 0; i < 14; i++) begin
-			for(int j = 0; j < 14; j++) begin
+		for(int i = 0; i < 16; i++) begin
+			for(int j = 0; j < 16; j++) begin
 				A = SPECIAL_VALS_ARR[i];
 				as = $bitstoshortreal(A);
 				B = SPECIAL_VALS_ARR[j];
@@ -161,11 +162,11 @@ module FP_add_tb();
 					end
 				end
 				else begin
-					$display("os: %f", os);
-					$display("o: %f", o);
+					//$display("os: %f", os);
+					//$display("o: %f", o);
 					err = (os - o) / os;
 					#1;
-					if ((err < 0 ? -err : err) > 0.005) begin
+					if ((err < 0 ? -err : err) > 0.0001) begin
 						#10;
 						$display("Weird test failed:");
 						$display("a: %b", A);
