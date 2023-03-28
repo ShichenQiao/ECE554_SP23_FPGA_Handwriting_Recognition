@@ -1,22 +1,26 @@
-# R1 - 1
-# R2 - pointer to weight matrix
-# R3 - pointer of image matrix
-# R4 - pointer to DM
-# R5 - loop index
-# R16 - reserved for result of matrix multiplication
-# R17 -	loop number 9 (i <= 9)
-# R18 -	current number
-# R19 -	current number - current max
-# R20 -	9 - i
-# R21 -	current max
-# R22 -	current max index
-# R23 - SW status / Snapshot status
-# R24 - SW1 mask
-# R25 - step size
-# R27 -	0x00000030 ASCII number offset
-# R28 -	0x0000C000 base address of peripherals
-# R29 - matrix index
-# R30 - result pointer, results will be in DM at addr = 1000 through 1009
+###########################################################
+#
+# 	R1 - 1
+# 	R2 - pointer to weight matrix
+# 	R3 - pointer of image matrix
+# 	R4 - pointer to DM
+# 	R5 - loop index
+# 	R16 - reserved for result of matrix multiplication
+# 	R17 - loop number 9 (i <= 9)
+# 	R18 - current number
+# 	R19 - current number - current max
+# 	R20 - 9 - i
+# 	R21 - current max
+# 	R22 - current max index
+# 	R23 - SW status / Snapshot status
+# 	R24 - SW1 mask
+# 	R25 - step size
+# 	R27 - 0x00000030 ASCII number offset
+# 	R28 - 0x0000C000 base address of peripherals
+# 	R29 - matrix index
+# 	R30 - result pointer, results will be in DM at addr = 1000 through 1009
+#
+###########################################################
 
 # Load R1 with 1
 LLB		R1, 1
@@ -32,14 +36,13 @@ CLASSIFY:
 # Check switch values
 LW		R23, R28, 1
 AND		R23, R23, R24
-B		EQ, CLASSIFY			# wait until SW1 is ON to classify
+B		EQ, CLASSIFY				# wait until SW1 is ON to classify
 
-SW              R1, R28, 8         #send one snapshot request
+SW		R1, R28, 8			# send one snapshot request
 SNAPSHOT_WAIT:
-LW		R23, R28, 8        #get the snapshot request status
-SUB             R23, R23, R1       # check if it is one
-B               NEQ, SNAPSHOT_WAIT # if the status is still 1(meaning waiting for snapshot), then keep waiting
-
+LW		R23, R28, 8					# get the snapshot request status
+SUB		R23, R23, R1		# check if it is one
+B		NEQ, SNAPSHOT_WAIT	# if the status is still 1(meaning waiting for snapshot), then keep waiting
 
 ####################
 # RESTORE POINTERS #
@@ -129,10 +132,7 @@ B		UNCOND, CLASSIFY
 
 
 
-
-
-
-##############################################
+###########################################################
 #
 #	A function call to a matrix calculation.
 #	This is NOT a tree-adder implementation.
@@ -153,7 +153,7 @@ B		UNCOND, CLASSIFY
 #	R7 - weight value
 #	R8 - multiplication result
 #
-################################################
+###########################################################
 MATRIX_MUL:
 # callee-save
 PUSH	R2
