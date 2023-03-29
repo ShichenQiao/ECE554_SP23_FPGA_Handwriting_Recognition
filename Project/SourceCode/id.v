@@ -110,8 +110,8 @@ always @(posedge clk)
       rf_we_ID_EX       <= rf_we & !load_use_hazard & !flush;
       rf_dst_addr_ID_EX <= rf_dst_addr;
       alu_func_ID_EX    <= alu_func;
-      stack_push_ID_EX  <= stack_push;
-      stack_pop_ID_EX   <= stack_pop;
+      stack_push_ID_EX  <= stack_push & !load_use_hazard & !flush;
+      stack_pop_ID_EX   <= stack_pop & !flush;
       src0sel_ID_EX     <= src0sel;
       src1sel_ID_EX     <= src1sel;
       dm_re_ID_EX       <= dm_re & !load_use_hazard & !flush;
