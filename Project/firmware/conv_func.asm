@@ -69,11 +69,39 @@ PUSH	R8
 #          (side_length*5+0)~(side_length*5+4)] 
 
 # provided variables
+# side_length_input (input side_length)
+# channel_length (repeat the convolution calculation for same image with different kernels)
+# addr_kernel (start address of kernel)
+# addr_image (start address of image)
+# addr_output (start addres of output address)
 
 # internal variables
-# x_result ( start as 0. increase by one one a pixel is calcuated. set to 0 when reach side_length)
-# y_result ( start as 0. increase by one when x_result reaches side_length)
+# side_length_output (will set to side_length_input - 4 to reflect the output side_length)
+# x_result ( start as 0, increase by one one a pixel is calcuated. set to 0 when reach side_length_output)
+# y_result ( start as 0, increase by one when x_result reaches side_length_output )
 # addr_result (start as 0, increase by one when a pixel is calcuated)
+# pix_sum (start_ sum of result at a result_pix)
+# pix_mult (mult result of a weight and a input_pix)
+# addr_kernel_weight (address of a kernel_weight, start as 0, increment by 1 after each multiplication, reset to 0 after completing one pixel)
+
+SUBI side_length_output, side_length_input, 4
+
+# set x_result, y_result before process one image/filter
+ADD x_result, R0, R0
+ADD y_result, R0, R0
+
+
+# set kernel_weight address to 0
+ADD addr_kernel_weight, R0, R0
+
+
+# get weight0-4
+LW weight0, addr_kernel_weight,0
+LW weight1, addr_kernel_weight,1
+LW weight2, addr_kernel_weight,2
+LW weight3, addr_kernel_weight,3
+LW weight4, addr_kernel_weight,4
+
 
 # restore saved registers
 POP	R8

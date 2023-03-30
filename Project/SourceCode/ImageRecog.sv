@@ -98,7 +98,7 @@ module ImageRecog(
     always @(negedge clk, negedge rst_n)
 	     if(!rst_n)
 		      compress_req <= 1'b0;
-		  else if (compress_proc & uncompress_addr_x == 783 && uncompress_addr_y == 783)
+		  else if (compress_proc & uncompress_addr_x == 223 && uncompress_addr_y == 223)
 		      compress_req <= 1'b0;
 		  else if (addr == 32'h0000C008 & we)
 		      compress_req <= wdata[0];
@@ -108,7 +108,7 @@ module ImageRecog(
 		      compress_proc <= 1'b0;
 			else if (compress_start)
 			    compress_proc <= 1'b1;
-			else if (compress_proc & uncompress_addr_x == 783 && uncompress_addr_y == 783)
+			else if (compress_proc & uncompress_addr_x == 223 && uncompress_addr_y == 223)
 			    compress_proc <=1'b0;
 				
 	assign compress_start = ((compress_req | !KEY[2]) && uncompress_addr_x == 8'h0 && uncompress_addr_y == 8'h0);
