@@ -192,7 +192,10 @@ POP		R5
 # additions
 SEQ_ADD:
 LW		R8, R4, 0
-ADD		R29, R29, R8
+ADDF	R29, R29, R8
+
+# increment pointer
+ADD		R4, R4, R1
 
 # loop back when not finished
 SUB		R5, R5, R1
