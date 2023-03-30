@@ -1,5 +1,6 @@
 ###########################################################
 # MAIN:
+#   R0 - hard-wired 0
 # 	R1 - 1
 # 	R2 - pointer to weight matrix
 # 	R3 - pointer of image matrix
@@ -39,9 +40,9 @@ LW		R26, R28, 8					# get the snapshot request status
 SUB		R26, R26, R1				# check if it is one
 B		NEQ, SNAPSHOT_WAIT			# if the status is still 1(meaning waiting for snapshot), then keep waiting
 
-####################
-# RESTORE POINTERS #
-####################
+##########################
+# SETUP/RESTORE POINTERS #
+##########################
 
 # Load R2 with 0x00020000
 LLB		R2, 0
@@ -84,44 +85,7 @@ LLB		R30, 1000
 ##############################
 # CLASIFICATION OUTPUT STAGE #
 ##############################
-
-# load 0x00000030 into R27
-LLB		R27, 0x0030
-# load negative infinity into R24
-LLB		R24, 0x0000
-LHB		R24, 0xFF80
-# initialize R25 to 0
-ADD		R25, R0, R0
-# load 0 into R5
-LLB		R5, 0x0000
-# load 9 into R20
-LLB		R20, 0x0009
-
-# load next number
-LOAD_NEXT:
-SUB		R23, R20, R5
-B		LT, DONE
-LW		R21, R30, 0
-SUBF	R22, R21, R24			# result in POS_INF at the first time
-B		GT, NEW_MAX
-ADD		R5, R5, R1				# increment loop index
-ADD		R30, R30, R1			# increment address
-B		UNCOND, LOAD_NEXT
-
-# when current number > current max
-# current max <- current number
-# current max index <- loop index
-NEW_MAX:
-ADD		R24, R21, R0
-ADD		R25, R5, R0
-ADD		R5, R5, R1				# increment loop index
-ADD		R30, R30, R1			# increment address
-B		UNCOND, LOAD_NEXT
-
-# max found, print to SPART
-DONE:
-ADD		R25, R25, R27			# R25 <- R25 + 0x0030
-SW		R25, R28, 4				# print to SPART
+JAL		OUTPUT_LAYER
 
 B		UNCOND, CLASSIFY
 
@@ -142,6 +106,7 @@ B		UNCOND, CLASSIFY
 #	R29 - result of matrix calculation	
 #
 #	Reg Usage:
+#	R0 - hard-wired 0
 #	R1 - 1
 #	R4 - intermediate mult result store address
 #	R6 - image pixel value
@@ -209,5 +174,84 @@ POP		R5
 POP		R4
 POP		R3
 POP		R2
+
+JR		R31
+
+
+
+###########################################################
+# OUTPUT_LAYER:
+#	A function call to find max score in the output layer
+#
+#	Params:
+#	R30 - base pointer to the output layer
+#
+#	Return:
+#	R25 - index of the neuron in the output layer with the highest score
+#
+#	Reg Usage:
+#	R1 - 1
+#
+###########################################################
+OUTPUT_LAYER:
+# callee-save
+PUSH	R5
+PUSH	R20
+PUSH	R21
+PUSH	R22
+PUSH	R23
+PUSH	R24
+PUSH	R27
+PUSH	R28
+PUSH	R30
+
+# load 0x00000030 into R27
+LLB            R27, 0x0030
+# load negative infinity into R24
+LLB		R24, 0x0000
+LHB		R24, 0xFF80
+# initialize R25 to 0
+ADD		R25, R0, R0
+# load 0 into R5
+LLB		R5, 0x0000
+# load 9 into R20
+LLB		R20, 0x0009
+
+# load next number
+LOAD_NEXT:
+SUB		R23, R20, R5
+B		LT, DONE
+LW		R21, R30, 0
+SUBF	R22, R21, R24			# result in POS_INF at the first time
+B		GT, NEW_MAX
+ADD		R5, R5, R1				# increment loop index
+ADD		R30, R30, R1			# increment address
+B		UNCOND, LOAD_NEXT
+
+# when current number > current max
+# current max <- current number
+# current max index <- loop index
+NEW_MAX:
+ADD		R24, R21, R0
+ADD		R25, R5, R0
+ADD		R5, R5, R1				# increment loop index
+ADD		R30, R30, R1			# increment address
+B		UNCOND, LOAD_NEXT
+
+# max found, print to SPART
+DONE:
+ADD		R25, R25, R27			# R25 <- R25 + 0x0030
+SW		R25, R28, 4				# print to SPART
+
+# restore saved registers
+POP		R30
+POP		R28
+POP		R27
+POP		R24
+POP		R23
+POP		R22
+POP		R21
+POP		R20
+POP		R5
 
 JR		R31
