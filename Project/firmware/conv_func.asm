@@ -6,8 +6,9 @@
 #	Params:
 #	R2 - pointer to kernel matrix
 #	R3 - pointer of image matrix
-#       R4 - out address (Data memory)
-#	R5 - out channel length
+#       R4 - input iamge side length
+#       R5 - out address (Data memory)
+#	R6 - out channel length
 #       
 #
 #	Return:
@@ -31,50 +32,48 @@ PUSH	R6
 PUSH	R7
 PUSH	R8
 
-# save R5 for later use
-PUSH	R5
+# to get the result_pix[0]:
+# mult the image_pix with kernel
+# pixels are at:
+#         [(side_length*0+0)~(side_length*0+4),
+#          (side_length*1+0)~(side_length*1+4),
+#          (side_length*2+0)~(side_length*2+4),
+#          (side_length*3+0)~(side_length*3+4),
+#          (side_length*4+0)~(side_length*4+4)] 
 
-LW R6, R2, 0
-LW R7, R3, 0
+# to get the result_pix[1]:
+# mult the image_pix with kernel
+# pixels are at:
+#         [(side_length*0+0+1)~(side_length*0+4+1),
+#          (side_length*1+0+1)~(side_length*1+4+1),
+#          (side_length*2+0+1)~(side_length*2+4+1),
+#          (side_length*3+0+1)~(side_length*3+4+1),
+#          (side_length*4+0+1)~(side_length*4+4+1)] 
 
+# to get the result_pix[27]:
+# mult the image_pix with kernel
+# pixels are at:
+#         [(side_length*0+0+27)~(side_length*0+4+27),
+#          (side_length*1+0+27)~(side_length*1+4+27),
+#          (side_length*2+0+27)~(side_length*2+4+27),
+#          (side_length*3+0+27)~(side_length*3+4+27),
+#          (side_length*4+0+27)~(side_length*4+4+27)] 
 
+# to get the result_pix[28]:
+# mult the image_pix with kernel
+# pixels are at:
+#         [(side_length*1+0)~(side_length*1+4),
+#          (side_length*2+0)~(side_length*2+4),
+#          (side_length*3+0)~(side_length*3+4),
+#          (side_length*4+0)~(side_length*4+4),
+#          (side_length*5+0)~(side_length*5+4)] 
 
+# provided variables
 
-# R4 <- 0x00000000
-ADD		R4, R0, R0
-
-# multiplications
-MUL_LOOP:
-LW		R6, R3, 0
-LW		R7, R2, 0
-ITF		R6, R6
-MULF	R8, R6, R7
-SW		R8, R4, 0
-
-# increment pointers
-ADD		R2, R2, R1
-ADD		R3, R3, R1
-ADD		R4, R4, R1
-
-# loop back when not finished
-SUB		R5, R5, R1
-B		NEQ, MUL_LOOP
-
-# R4 <- 0x00000000
-ADD		R4, R0, R0
-# R30 <- 0x00000000
-ADD		R30, R0, R0
-# restore R5
-POP		R5
-
-# additions
-SEQ_ADD:
-LW		R8, R4, 0
-ADD		R30, R30, R8
-
-# loop back when not finished
-SUB		R5, R5, R1
-B		NEQ, SEQ_ADD
+# internal variables
+# x_result ( start as 0. increase by one one a pixel is calcuated. set to 0 when reach side_length)
+# y_result ( start as 0. increase by one when x_result reaches side_length)
+# addr_result (start as 0, increase by one when a pixel is calcuated)
 
 # restore saved registers
 POP	R8
