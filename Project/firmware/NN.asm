@@ -65,6 +65,10 @@ LLB		R29, 1568
 INPUT_LAYER_LOOP:
 # Call matrix multiplication and store result to DM
 JAL		MATRIX_MUL
+ADDF	R28, R28, R0
+B		GTE, BYPASS_RELU
+LLB		R28, 0
+BYPASS_RELU:
 SW		R28, R29, 0
 ADD		R29, R29, R1
 ADD		R2, R2, R4
