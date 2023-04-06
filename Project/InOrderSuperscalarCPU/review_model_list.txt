@@ -1,0 +1,20 @@
+pc - how does pc increment? What is the dependency?
+IM - Done modifying module, still need top level layout
+id - decode two instructions at same time and determine dependency to decide pc increment and delay
+
+rf - need to allow two write and four read, hardcode the writeEN logic for each register file if necessary
+   - when two writes write into same addr, use the later one
+   - when read value from previous cycle, bypass
+   - if two fetched instructions have dependency, then only the first read matters because the second one will be stalled anyway
+   - finished implementing bypass logic. still need to make sure the write part works
+src_mux - dependency issue
+
+EXECUTE:
+alu - need double instantiate, each alu reserved for each instruction
+extended_ALU - need double instantiate, each alu reserved for each instruction
+stack - has single instantiate, allow multiple push in same cycle? Need to verify synthesis and logic
+
+DM - double read, double write
+IM - Done LWI, has single IM, allow multiple read
+dst_mux - write two values back
+br_bool - look at both instruction, if branch and no dependency between the two instructions, jump
