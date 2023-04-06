@@ -12,8 +12,8 @@
 #	R8 - polled pixel
 #	R9 - polled pixel
 #	R10 - polled pixel
-#	R11 - image y width
-#	R12 - image x width
+#	R11 - image y index
+#	R12 - image x index
 #	R13 - max from 4 pixels
 #
 ###########################################################
@@ -28,12 +28,12 @@ PUSH	R12
 PUSH	R13
 
 # outer loop - loop for number of channels
-OUTER:
-ADD		R11, R3, R0
+OUTER:						# new image
+ADD		R11, R3, R0			# reset image y index
 
 # inner y loop - loop for image width/2
-INNERX:
-ADD		R12, R3, R0
+INNERX:						# new line
+ADD		R12, R3, R0			# reset image x index
 
 # inner x loop - loop for image width/2
 INNERY:
