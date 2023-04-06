@@ -1,5 +1,5 @@
 ###########################################################
-# Max_pol_2x2: will do callee-saves
+# Avg_pol_2x2: will do callee-saves
 # args:
 #	R3 - image width
 #	R4 - layer starting address
@@ -8,6 +8,7 @@
 #
 # usage:
 #	R0 - 0
+#	R2 - 0.25F
 #	R7 - polled pixel
 #	R8 - polled pixel
 #	R9 - polled pixel
@@ -19,6 +20,7 @@
 ###########################################################
 
 # callee-saves
+PUSH	R2
 PUSH	R7
 PUSH	R8
 PUSH	R9
@@ -26,6 +28,9 @@ PUSH	R10
 PUSH	R11
 PUSH	R12
 PUSH	R13
+# R2 <- 0.25F
+LLB		R2, 0x0000
+LHB		R2, 0x3E80
 
 # outer loop - loop for number of channels
 OUTER:
@@ -47,21 +52,13 @@ LW		R10, R4, 29
 # increment R4 by 2
 ADDI	R4, R4, 2
 
-# find max - store max into R13
+# find avg - store avg into R13
 ADDF	R13, R0, R7
-SUBF	R7, R13, R8
-B		GT, next1
-ADDF	R13, R0, R8
-next1:
-SUBF	R8, R13, R9
-B		GT, next2
-ADDF	R13, R0, R9
-next2:
-SUBF	R9, R13, R10
-B		GT, next3
-ADDF	R13, R0, R10
-next3:
-# store max into DM pointed by R6
+ADDF	R13, R13, R8
+ADDF	R13, R13, R9
+ADDF	R13, R13, R10
+MULF	R13, R13, R2
+# store avg into DM pointed by R6
 SW		R13, R6, 0
 # increment R6 to point to next
 ADDI	R6, R6, 1
@@ -87,3 +84,4 @@ POP		R10
 POP		R9
 POP		R8
 POP		R7
+POP		R2
