@@ -32,26 +32,22 @@ LW		R6, R30, 8					# get the snapshot request status
 SUB		R6, R6, R1					# check if it is one
 B		NEQ, SNAPSHOT_WAIT			# if the status is still 1(meaning waiting for snapshot), then keep waiting
 
-##########################
-# SETUP/RESTORE POINTERS #
-##########################
-
-# Load R2 with 0x00020000
-LLB		R2, 0
-LHB		R2, 2
-
-# Load R3 with 0x00010000
-LLB		R3, 0
-LHB		R3, 1
-
 ###############
 # INPUT LAYER #
 ###############
 
-# Load R4 with 784 for the input layer
+# Load R2 with 0x00020000, input weight of the input layer is stored in weight rom
+LLB		R2, 0
+LHB		R2, 2
+
+# Load R3 with 0x00010000, input image of the input layer is stored in image mem
+LLB		R3, 0
+LHB		R3, 1
+
+# Load R4 with 784, input dimension of the input layer is 784
 LLB		R4, 784
 
-# Load R5 with 64 for the middle layer
+# Load R5 with 64, output dimension of the input layer is 64
 LLB		R5, 64
 
 # Load R29 with 784 to store middle layer input at DM addr 784 through 847
@@ -68,20 +64,20 @@ ADD		R2, R2, R4
 SUB		R5, R5, R1
 B		NEQ, INPUT_LAYER_LOOP
 
-# Load R29 with 784 for the middle layer
-LLB		R29, 784
-
 ################
 # MIDDLE LAYER #
 ################
 
-# Load R4 with 64 for the middle layer
+# Load R3 with 784 for the middle layer, input image of the middle layer is stored in DM 784 through 847
+LLB		R3, 784
+
+# Load R4 with 64, input dimension of the middle layer is 64
 LLB		R4, 64
 
-# Load R5 with 10 for the output layer
+# Load R5 with 10, output dimension of the middle layer is 10
 LLB		R5, 10
 
-# Load R29 with 1000 to store output scores at DM addr 1000 through 1009
+# Load R29 with 1000 to store output scores at DM 1000 through 1009
 LLB		R29, 1000
 
 MIDDLE_LAYER_LOOP:
@@ -95,12 +91,13 @@ ADD		R2, R2, R4
 SUB		R5, R5, R1
 B		NEQ, MIDDLE_LAYER_LOOP
 
-# Load R29 with 1000 for the output layer
-LLB		R29, 1000
-
 ################
 # OUTPUT LAYER #
 ################
+
+# Load R29 with 1000, input image of the output layer is stored in DM 1000 through 1009
+LLB		R29, 1000
+
 JAL		OUTPUT_LAYER
 
 B		UNCOND, CLASSIFY
