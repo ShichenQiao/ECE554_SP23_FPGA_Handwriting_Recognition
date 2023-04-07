@@ -1,0 +1,22 @@
+I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack.sv {1 {vlog -work work -vopt -sv -stats=none I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack.sv
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module stack
+
+Top level modules:
+	stack
+
+} {} {}} I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/ram_2p.v {1 {vlog -work work -vopt -stats=none I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/ram_2p.v
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module ram_2p
+
+Top level modules:
+	ram_2p
+
+} {} {}} I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack_tb.sv {1 {vlog -work work -vopt -sv -stats=none I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack_tb.sv
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module stack_tb
+
+Top level modules:
+	stack_tb
+
+} {} {}}

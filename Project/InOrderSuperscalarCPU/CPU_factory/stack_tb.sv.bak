@@ -140,12 +140,12 @@ module stack_tb();
       pop1 = 1'b0; // stop popping data when check
       if (random_branch) begin
         if (rdata1 !== wdata) begin
-          $display("TEST 0-2 failed when pop at port 1: push data %h != pop data %h", wdata, rdata1);
+          $display("TEST 0-2 failed when pop at port 1: push data %h != pop data %h", wdata1, rdata1);
           $stop();
         end
       end else
         if (rdata0 !== wdata) begin
-          $display("TEST 0-2 failed when pop at port 0: push data %h != pop data %h", wdata, rdata0);
+          $display("TEST 0-2 failed when pop at port 0: push data %h != pop data %h", wdata0, rdata0);
           $stop();
         end
     end
