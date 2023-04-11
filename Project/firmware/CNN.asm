@@ -1,7 +1,7 @@
 ###########################################################
 # MAIN:
 #   R0 - hard-wired 0
-# 	R1 - 1
+# 	R1 - snapshot trigger
 # 	R2 - pointer to weight ROM
 # 	R3 - pointer of image MEM
 # 	R4 - input matrix size
@@ -59,7 +59,7 @@ CLASSIFY:
 SW		R1, R30, 8					# send one snapshot request
 SNAPSHOT_WAIT:
 LW		R6, R30, 8					# get the snapshot request status
-SUB		R6, R6, R1					# check if it is one
+SUBI	R6, R6, 1					# check if it is one
 B		NEQ, SNAPSHOT_WAIT			# if the status is still 1(meaning waiting for snapshot), then keep waiting
 
 ###############
@@ -118,11 +118,11 @@ B		GTE, BYPASS_RELU3
 LLB		R28, 0
 BYPASS_RELU3:
 SW		R28, R29, 0
-ADD		R29, R29, R1
+ADDI	R29, R29, 1
 ADD		R2, R2, R4
 
 # loop back when not finished
-SUB		R5, R5, R1
+SUBI	R5, R5, 1
 B		NEQ, NN1_LOOP
 
 ################
@@ -149,11 +149,11 @@ B		GTE, BYPASS_RELU4
 LLB		R28, 0
 BYPASS_RELU4:
 SW		R28, R29, 0
-ADD		R29, R29, R1
+ADDI	R29, R29, 1
 ADD		R2, R2, R4
 
 # loop back when not finished
-SUB		R5, R5, R1
+SUBI	R5, R5, 1
 B		NEQ, NN2_LOOP
 
 ###############
@@ -176,11 +176,11 @@ NN3_LOOP:
 # Call matrix multiplication and store result to DM
 JAL		MATRIX_MUL
 SW		R28, R29, 0
-ADD		R29, R29, R1
+ADDI	R29, R29, 1
 ADD		R2, R2, R4
 
 # loop back when not finished
-SUB		R5, R5, R1
+SUBI	R5, R5, 1
 B		NEQ, NN3_LOOP
 
 ################
@@ -210,7 +210,6 @@ B		UNCOND, CLASSIFY
 #
 #	Reg Usage:
 #	R0 - hard-wired 0
-#	R1 - 1
 #	R5 - DM pointer
 #	R6 - temp reg holding value being converted
 #	R31 - reserved for JAL/JR
@@ -232,11 +231,11 @@ ITF		R6, R6
 SW		R6, R5, 0
 
 # increment pointers
-ADD		R3, R3, R1
-ADD		R5, R5, R1
+ADDI	R3, R3, 1
+ADDI	R5, R5, 1
 
 # loop back when not finished
-SUB		R4, R4, R1
+SUBI	R4, R4, 1
 B		NEQ, PRE_LOOP
 
 POP		R6
@@ -264,7 +263,6 @@ JR		R31
 #
 #	Reg Usage:
 #	R0 - hard-wired 0
-#	R1 - 1
 #	R5 - intermediate mult result store address
 #	R6 - image pixel value
 #	R7 - weight value
@@ -296,18 +294,18 @@ MULF	R8, R6, R7
 SW		R8, R5, 0
 
 # increment pointers
-ADD		R2, R2, R1
-ADD		R3, R3, R1
-ADD		R5, R5, R1
+ADDI	R2, R2, 1
+ADDI	R3, R3, 1
+ADDI	R5, R5, 1
 
 # loop back when not finished
-SUB		R4, R4, R1
+SUBI	R4, R4, 1
 B		NEQ, MUL_LOOP
 
 # load R5 with 6950, pointing to work zone at DM 6950 ~ 7973
 LLB		R5, 6950
 # R28 <- 0x00000000
-ADD		R28, R0, R0
+LLB		R28, 0
 # restore R4
 POP		R4
 
@@ -317,10 +315,10 @@ LW		R8, R5, 0
 ADDF	R28, R28, R8
 
 # increment pointer
-ADD		R5, R5, R1
+ADDI	R5, R5, 1
 
 # loop back when not finished
-SUB		R4, R4, R1
+SUBI	R4, R4, 1
 B		NEQ, SEQ_ADD
 
 # restore saved registers
@@ -348,7 +346,6 @@ JR		R31
 #
 #	Reg Usage:
 #	R0 - hard-wired 0
-#	R1 - 1
 #	R2 - loop index i
 #	R3 - loop terminate condition = 9
 #	R4 - current number
@@ -379,7 +376,7 @@ LLB		R9, 0x0030
 LLB		R7, 0x0000
 LHB		R7, 0xFF80
 # initialize R8 to 0
-ADD		R8, R0, R0
+LLB		R8, 0
 # load 0 into R2
 LLB		R2, 0x0000
 # load 9 into R3
@@ -390,10 +387,10 @@ LOAD_NEXT:
 SUB		R6, R3, R2
 B		LT, DONE
 LW		R4, R29, 0
-SUBF	R5, R4, R7				# result in POS_INF at the first time
+SUBF	R5, R4, R7					# result in POS_INF at the first time
 B		GT, NEW_MAX
-ADD		R2, R2, R1				# increment loop index
-ADD		R29, R29, R1			# increment address
+ADDI	R2, R2, 1					# increment loop index
+ADDI	R29, R29, 1					# increment address
 B		UNCOND, LOAD_NEXT
 
 # when current number > current max
@@ -402,14 +399,14 @@ B		UNCOND, LOAD_NEXT
 NEW_MAX:
 ADD		R7, R4, R0
 ADD		R8, R2, R0
-ADD		R2, R2, R1				# increment loop index
-ADD		R29, R29, R1			# increment address
+ADDI	R2, R2, 1					# increment loop index
+ADDI	R29, R29, 1					# increment address
 B		UNCOND, LOAD_NEXT
 
 # max found, print to SPART
 DONE:
-ADD		R8, R8, R9				# R8 <- R8 + 0x0030
-SW		R8, R30, 4				# print to SPART
+ADD		R8, R8, R9					# R8 <- R8 + 0x0030
+SW		R8, R30, 4					# print to SPART
 
 # restore saved registers
 POP		R29
