@@ -1,5 +1,5 @@
 ##############################################
-#
+# CONV:
 #	A function call to a conv layer
 #       5x5 kernel, 1 stride
 #
@@ -10,7 +10,6 @@
 #       R5 - addr_kernel (start address of kernel)
 #       R6 - addr_image (start address of image)
 #       R7 - addr_output (start addres of output address, increase by one when a pixel is calcuated)
-#       
 #
 #	Return:
 #	None
