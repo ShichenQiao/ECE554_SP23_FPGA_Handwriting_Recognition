@@ -85,7 +85,7 @@ JAL		PRE_PROCESS
 LLB		R2, 0
 LHB		R2, 2
 
-# Load R3 with 0, input image is stored in DM 0 ~ 1023
+# Load R3 with 0, input image is stored in DM 0 through 1023
 LLB		R3, 0
 
 # Load R4 with 32 since the pre-processed image is 32 by 32
@@ -106,15 +106,29 @@ JAL		CONV
 # First Average Pooling Layer #
 ###############################
 
+# Load R3 with 1024, input image of this layer is stored in DM 1024 through 5727
+LLB		R3, 1024
+
+# Load R4 with 28 since the pre-processed image is 28 by 28
+LLB		R4, 28
+
+# Input channel length of this layer is 6
+LLB		R6, 6
+
+# Store outputs to DM 5728 through 6903
+LLB		R29, 5728
+
+JAL		AVG_POOL
 
 ############################
 # Second Convolution Layer #
 ############################
+
 # Load R2 with 0x00020096, starting address of kernels for this layer
 LLB		R2, 0x96
 LHB		R2, 2
 
-# Load R3 with 5728, input image of this layer is stored in DM 5728 ~ 6903
+# Load R3 with 5728, input image of this layer is stored in DM 5728 through 6903
 LLB		R3, 5728
 
 # Load R4 with 14 since the input image is 14 by 14
@@ -135,7 +149,19 @@ JAL		CONV
 # Second Average Pooling Layer #
 ################################
 
+# Load R3 with 0, input image of this layer is stored in DM 0 through 1599
+LLB		R3, 0
 
+# Load R4 with 10 since the pre-processed image is 10 by 10
+LLB		R4, 10
+
+# Input channel length of this layer is 16
+LLB		R6, 16
+
+# Store outputs to DM 1600 through 1999
+LLB		R29, 1600
+
+JAL		AVG_POOL
 
 #################
 # 400 -> 120 NN #
