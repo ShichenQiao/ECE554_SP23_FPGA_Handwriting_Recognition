@@ -75,9 +75,9 @@ LLB		R4, 1024
 
 JAL		PRE_PROCESS
 
-###############
-# Input Layer #
-###############
+###########################
+# First Convolution Layer #
+###########################
 
 # Load R2 with 0x00020000, input weight of the input layer is stored in weight rom
 LLB		R2, 0
@@ -86,11 +86,19 @@ LHB		R2, 2
 # Load R3 with 0, input image of the input layer is stored in DM 0 ~ 1023
 LLB		R3, 0
 
+###############################
+# First Average Pooling Layer #
+###############################
 
 
+############################
+# Second Convolution Layer #
+############################
 
 
-
+################################
+# Second Average Pooling Layer #
+################################
 
 
 
@@ -114,9 +122,9 @@ NN1_LOOP:
 # Call matrix multiplication and store result to DM
 JAL		MATRIX_MUL
 ADDF	R28, R28, R0
-B		GTE, BYPASS_RELU3
+B		GTE, BYPASS_RELU_NN1
 LLB		R28, 0
-BYPASS_RELU3:
+BYPASS_RELU_NN1:
 SW		R28, R29, 0
 ADDI	R29, R29, 1
 ADD		R2, R2, R4
@@ -145,9 +153,9 @@ NN2_LOOP:
 # Call matrix multiplication and store result to DM
 JAL		MATRIX_MUL
 ADDF	R28, R28, R0
-B		GTE, BYPASS_RELU4
+B		GTE, BYPASS_RELU_NN2
 LLB		R28, 0
-BYPASS_RELU4:
+BYPASS_RELU_NN2:
 SW		R28, R29, 0
 ADDI	R29, R29, 1
 ADD		R2, R2, R4
