@@ -6,7 +6,9 @@
 # 	R3 - pointer of image MEM
 # 	R4 - input matrix size
 # 	R5 - output matrix size
-# 	R6 - Snapshot status
+#	R6 - convolution input channel length
+#	R7 - convolution output channel length
+# 	R27 - Snapshot status
 # 	R28 - reserved for result of matrix multiplication
 # 	R29 - DM pointer to output matrix
 # 	R30 - 0x0000C000 base address of peripherals
@@ -58,8 +60,8 @@ LHB		R30, 0x0000
 CLASSIFY:
 SW		R1, R30, 8					# send one snapshot request
 SNAPSHOT_WAIT:
-LW		R6, R30, 8					# get the snapshot request status
-SUBI	R6, R6, 1					# check if it is one
+LW		R27, R30, 8					# get the snapshot request status
+SUBI	R27, R27, 1					# check if it is one
 B		NEQ, SNAPSHOT_WAIT			# if the status is still 1(meaning waiting for snapshot), then keep waiting
 
 ###############
@@ -79,12 +81,26 @@ JAL		PRE_PROCESS
 # First Convolution Layer #
 ###########################
 
-# Load R2 with 0x00020000, input weight of the input layer is stored in weight rom
+# Load R2 with 0x00020000, starting address of kernels for this layer
 LLB		R2, 0
 LHB		R2, 2
 
-# Load R3 with 0, input image of the input layer is stored in DM 0 ~ 1023
+# Load R3 with 0, input image is stored in DM 0 ~ 1023
 LLB		R3, 0
+
+# Load R4 with 32 since the pre-processed image is 32 by 32
+LLB		R4, 32
+
+# Input channel length of this layer is 1
+LLB		R6, 1
+
+# Output channel length of this layer is 6
+LLB		R7, 6
+
+# Store outputs to DM 1024 through 5727
+LLB		R29, 1024
+
+JAL		CONV
 
 ###############################
 # First Average Pooling Layer #
@@ -94,7 +110,26 @@ LLB		R3, 0
 ############################
 # Second Convolution Layer #
 ############################
+# Load R2 with 0x00020096, starting address of kernels for this layer
+LLB		R2, 0x96
+LHB		R2, 2
 
+# Load R3 with 5728, input image of this layer is stored in DM 5728 ~ 6903
+LLB		R3, 5728
+
+# Load R4 with 14 since the input image is 14 by 14
+LLB		R4, 14
+
+# Input channel length of this layer is 6
+LLB		R6, 6
+
+# Output channel length of this layer is 16
+LLB		R7, 16
+
+# Store outputs to DM 0 through 1599
+LLB		R29, 1599
+
+JAL		CONV
 
 ################################
 # Second Average Pooling Layer #
@@ -547,14 +582,14 @@ B UNCOND, PIX_PROC      # work on the next pix
 
 DONE_ONE_CHANNEL:
 SUBI R7, R7, 1
-B EQ, DONE
+B EQ, DONE_CONV
 #update the kernel and reprocess the entire image
 ADDI R2, R2, 25
 ADD R8, R0, R0
 ADD R9, R0, R0
 B UNCOND, PIX_PROC
 
-DONE:
+DONE_CONV:
 # restore all registers and return
 POP R29
 POP R24
