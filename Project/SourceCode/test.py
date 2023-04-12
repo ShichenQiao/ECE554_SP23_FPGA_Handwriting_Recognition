@@ -3,20 +3,26 @@ import sys
 import fileinput
 import copy
 arg_n = len(sys.argv)
-if(arg_n < 2):
-    print("Error! Test script usage: 'python3 test.py <num_of_tests>'")
+if(arg_n >= 2):
+    print("Error! Test script usage: 'python3 test.py' with no extra arguments.")
 else:
     # read in total file number
     test_pass = True
-    test_num = int(sys.argv[1])
+    base_path = './test'
+    file_ls = [f for f in os.listdir(base_path) if os.path.isfile(os.path.join(base_path, f))]
+    filtered_file_ls = []
+    for i in file_ls:
+        if i.endswith('.asm'):
+            filtered_file_ls.append(i[:-4])
     os.chdir('test')
     cmd = "pwd"
     os.system(cmd)
+    test_num = len(filtered_file_ls)
     # parse all the asm files in test folder
     for i in range(test_num):
-        cmd = "rm test"+str(i)+".hex -f"
+        cmd = "rm "+filtered_file_ls[i]+".hex -f"
         os.system(cmd)
-        cmd = "perl asmbl_32.pl test"+str(i)+".asm > test"+str(i)+".hex"
+        cmd = "perl asmbl_32.pl "+filtered_file_ls[i]+".asm > "+filtered_file_ls[i]+".hex"
         os.system(cmd)
     # back to source code folder
     os.chdir('../')
@@ -32,7 +38,7 @@ else:
             instrmem = file.read()
         first_index = instrmem.index("\"")
         hex_len = instrmem[first_index+1:].index("\"")
-        new_instrmem = instrmem.replace(instrmem[first_index+1:first_index+hex_len+1], ".//test//test"+str(i)+".hex")
+        new_instrmem = instrmem.replace(instrmem[first_index+1:first_index+hex_len+1], ".//test//"+filtered_file_ls[i]+".hex")
         # remove instr_mem.v and re-write it
         cmd = "rm instr_mem.v -f"
         os.system(cmd)
@@ -52,7 +58,7 @@ else:
             cmd = "rm test.output -f"
             os.system(cmd)
         else:
-            print("Test failed at test" + str(i) + ".hex, please check your code/test. Result is in test.output")
+            print("Test failed at " + filtered_file_ls[i] + ".hex, please check your code/test. Result is in test.output")
             test_pass = False
             break
     if(test_pass):
