@@ -38,7 +38,7 @@ assign pwren_a = ~(same_addr&we0&we1) & (we0&~re0);
 // Thanks Intel.
 eightKRAM_2p baKRAM(.address_a(addr0),
 					.address_b(addr1),
-					.clock(clk),
+					.clock(~clk),
 					.data_a(wrt_data0),
 					.data_b(wrt_data1),
 					.wren_a(pwren_a),
@@ -46,8 +46,4 @@ eightKRAM_2p baKRAM(.address_a(addr0),
 					.q_a(rd_data0),
 					.q_b(raw_q_b));
 					
-assign 
-					
-
-
 endmodule
