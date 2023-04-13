@@ -336,6 +336,7 @@ JR		R31
 #
 #	Internal Reg Usage:
 #       R4 - side_length_output, same reg as input (will set to side_length_input - 4 to reflect the output side_length)
+#		R5 - Set to R4 - 1 for branch purposes
 #       R8 - x_result, x location of output iamges ( start as 0, increase by one one a pixel is calcuated. set to 0 when reach side_length_output)
 #       R9 - y_result, y location of output iamges ( start as 0, increase by one when x_result reaches side_length_output )
 #       R10 - pix_sum (sum of result at a result_pix)
@@ -364,6 +365,7 @@ CONV:
 PUSH	R2
 PUSH	R3
 PUSH	R4
+PUSH	R5
 PUSH	R6
 PUSH	R7
 PUSH	R8
@@ -390,6 +392,7 @@ MUL		R21, R4, R4
 
 # set side_length_putput to be (side_length_input - kernel_size + 1)
 SUBI	R4, R4, 4
+SUBI	R5, R4, 1
 
 # set x_result, y_result before process one image/filter
 ADD		R8, R0, R0
@@ -594,9 +597,9 @@ LLB		R10, 0
 BYPASS_RELU_CONV:
 SW		R10, R29, 0
 ADDI	R29, R29, 1
-SUB		R23, R8, R4
+SUB		R23, R8, R5
 B		NEQ, NOT_SWITCH_LINE                      #if the x does not reach the end of the line, do not increment line
-SUB		R23, R9, R4
+SUB		R23, R9, R5
 B		EQ, DONE_ONE_CHANNEL                  # if x_result reaches the end and y_result reaches the end, all pixels are computed for one channel
 ADD		R8, R0, R0         # reset x to 0 and increment y
 ADDI	R9, R9, 1
@@ -637,6 +640,7 @@ POP		R9
 POP		R8
 POP		R7
 POP		R6
+POP		R5
 POP		R4
 POP		R3
 POP		R2
@@ -694,18 +698,21 @@ OUTER:						# new image
 ADD		R11, R4, R0			# reset image y index
 
 # inner y loop - loop for image width/2
-INNERX:						# new line
+INNERY:						# new line
 ADD		R12, R4, R0			# reset image x index
 
 # inner x loop - loop for image width/2
-INNERY:
+INNERX:
 
 # load 4 pixels pointed by R3
 # into R7 to R10
 LW		R7, R3, 0
 LW		R8, R3, 1
-LW		R9, R3, 28
-LW		R10, R3, 29
+PUSH	R3
+ADD		R3, R3, R4
+LW		R9, R3, 0
+LW		R10, R3, 1
+POP		R3
 # increment R3 by 2
 ADDI	R3, R3, 2
 
@@ -720,10 +727,11 @@ SW		R13, R29, 0
 # increment R29 to point to next
 ADDI	R29, R29, 1
 # end inner x loop, decrement R12 by 2
-# also increment R3 by 30 so it points to the second next line
-ADDI	R3, R3, 30
 SUBI	R12, R12, 2
 B		NEQ, INNERX
+
+# increment R3 by image width so it points to the second next line
+ADD		R3, R3, R4
 
 # end inner y loop, decrement R11 by 2
 SUBI	R11, R11, 2
