@@ -335,7 +335,7 @@ JR		R31
 #	None
 #
 #	Internal Reg Usage:
-#       R4 - side_length_output, same reg as input (will set to side_length_input - 4 to reflect the output side_length)
+#       ****R4 - side_length_output, same reg as input (will set to side_length_input - 4 to reflect the output side_length)
 #		R5 - Set to R4 - 1 for branch purposes
 #       R8 - x_result, x location of output iamges ( start as 0, increase by one one a pixel is calcuated. set to 0 when reach side_length_output)
 #       R9 - y_result, y location of output iamges ( start as 0, increase by one when x_result reaches side_length_output )
@@ -346,6 +346,7 @@ JR		R31
 #       R22 - base (a temp base location for pixel load)
 #       R23 - temp (intermediate for base address calculation
 #       R24 - channel_id (a downcounter for keep track of the channel id in process)
+#       R25 - side_length_output, same reg as input (will set to side_length_input - 4 to reflect the output side_length)
 #
 ################################################
 # major mechanism for pix calcualtion
@@ -354,11 +355,11 @@ JR		R31
 #                                                                                                                                             #
 # mult the image_pix with kernel                                                                                                              #
 # image_pixs are at:                                                                                                                          #
-#  addr_image[(side_length_output*(y+0)+x+channel_id*image_length)~(side_length_output*(y+0)+x+4+channel_id*image_length),                    #
-#             (side_length_output*(y+1)+x+channel_id*image_length)~(side_length_output*(y+1)+x+4+channel_id*image_length),                    #
-#             (side_length_output*(y+2)+x+channel_id*image_length)~(side_length_output*(y+2)+x+4+channel_id*image_length),                    #
-#             (side_length_output*(y+3)+x+channel_id*image_length)~(side_length_output*(y+3)+x+4+channel_id*image_length),                    #
-#             (side_length_output*(y+4)+x+channel_id*image_length)~(side_length_output*(y+4)+x+4+channel_id*image_length)]                    #
+#  addr_image[(side_length_input*(y+0)+x+channel_id*image_length)~(side_length_input*(y+0)+x+4+channel_id*image_length),                    #
+#             (side_length_input*(y+1)+x+channel_id*image_length)~(side_length_input*(y+1)+x+4+channel_id*image_length),                    #
+#             (side_length_input*(y+2)+x+channel_id*image_length)~(side_length_input*(y+2)+x+4+channel_id*image_length),                    #
+#             (side_length_input*(y+3)+x+channel_id*image_length)~(side_length_input*(y+3)+x+4+channel_id*image_length),                    #
+#             (side_length_input*(y+4)+x+channel_id*image_length)~(side_length_input*(y+4)+x+4+channel_id*image_length)]                    #
 ###############################################################################################################################################
 CONV:
 # callee-save
@@ -385,14 +386,15 @@ PUSH	R21
 PUSH	R22
 PUSH	R23
 PUSH	R24
+PUSH	R25
 PUSH	R29
 
 # set image_length to be (side_length_input * side_length_input)
 MUL		R21, R4, R4
 
-# set side_length_putput to be (side_length_input - kernel_size + 1)
-SUBI	R4, R4, 4
-SUBI	R5, R4, 1
+# set side_length_output to be (side_length_input - kernel_size + 1)
+SUBI	R25, R4, 4
+SUBI	R5, R25, 1
 
 # set x_result, y_result before process one image/filter
 ADD		R8, R0, R0
@@ -414,7 +416,7 @@ LW		R15, R2,4
 # get pix0-4 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX0_4:
-# base = addr_image[(y+0) * side_length_output + x + channel_id*image_length]
+# base = addr_image[(y+0) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 0                              
 MUL		R22, R22, R4
 ADD		R22, R22, R8
@@ -452,7 +454,7 @@ LW		R15, R2,9
 # get pix5-9 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX5_9:
-# base = addr_image[(y+1) * side_length_output + x + channel_id*image_length]
+# base = addr_image[(y+1) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 1                              
 MUL		R22, R22, R4
 ADD		R22, R22, R8
@@ -489,7 +491,7 @@ LW		R15, R2,14
 # get pix10-14 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX10_14:
-# base = addr_image[(y+2) * side_length_output + x + channel_id*image_length]
+# base = addr_image[(y+2) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 2                              
 MUL		R22, R22, R4
 ADD		R22, R22, R8
@@ -526,7 +528,7 @@ LW		R15, R2,19
 # get pix15-19 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX15_19:
-# base = addr_image[(y+3) * side_length_output + x + channel_id*image_length]
+# base = addr_image[(y+3) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 3                              
 MUL		R22, R22, R4
 ADD		R22, R22, R8
@@ -563,7 +565,7 @@ LW		R15, R2,24
 # get pix20-24 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX20_24:
-# base = addr_image[(y+4) * side_length_output + x + channel_id*image_length]
+# base = addr_image[(y+4) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 4                              
 MUL		R22, R22, R4
 ADD		R22, R22, R8
@@ -621,6 +623,7 @@ B		UNCOND, PIX_PROC
 DONE_CONV:
 # restore all registers and return
 POP		R29
+POP		R25
 POP		R24
 POP		R23
 POP		R22
