@@ -167,11 +167,11 @@ always @(posedge clk, negedge rst_n)
     end
   else
     begin
-      byp0_EX <= (rf_dst_addr_ID_EX==rf_p0_addr) ? (rf_we_ID_EX & |rf_p0_addr & !ext_alu_ID_EX) : 1'b0;
+      byp0_EX <= (rf_dst_addr_ID_EX==rf_p0_addr) ? (rf_we_ID_EX & |rf_p0_addr & !ext_alu_ID_EX & !stack_pop_ID_EX) : 1'b0;
       byp0_ext_EX <= (rf_dst_addr_ID_EX==rf_p0_addr) ? (rf_we_ID_EX & |rf_p0_addr & ext_alu_ID_EX) : 1'b0;
       byp0_stack_pop <= (rf_dst_addr_ID_EX==rf_p0_addr) ? (rf_we_ID_EX & |rf_p0_addr & stack_pop_ID_EX) : 1'b0;
       byp0_DM <= (rf_dst_addr_EX_DM==rf_p0_addr) ? (rf_we_EX_DM & |rf_p0_addr) : 1'b0;
-      byp1_EX <= (rf_dst_addr_ID_EX==rf_p1_addr) ? (rf_we_ID_EX & |rf_p1_addr & !ext_alu_ID_EX) : 1'b0;
+      byp1_EX <= (rf_dst_addr_ID_EX==rf_p1_addr) ? (rf_we_ID_EX & |rf_p1_addr & !ext_alu_ID_EX & !stack_pop_ID_EX) : 1'b0;
       byp1_ext_EX <= (rf_dst_addr_ID_EX==rf_p1_addr) ? (rf_we_ID_EX & |rf_p1_addr & ext_alu_ID_EX) : 1'b0;
       byp1_stack_pop <= (rf_dst_addr_ID_EX==rf_p1_addr) ? (rf_we_ID_EX & |rf_p1_addr & stack_pop_ID_EX) : 1'b0;
       byp1_DM <= (rf_dst_addr_EX_DM==rf_p1_addr) ? (rf_we_EX_DM & |rf_p1_addr) : 1'b0;
