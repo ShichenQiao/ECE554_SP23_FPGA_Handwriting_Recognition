@@ -41,7 +41,7 @@
 #	2000 ~ 2119 - Output of first full NN layer
 #	2120 ~ 2203 - Output of first full NN layer
 #	(reusage end)
-#	6950 ~ 7973 - Workzone for matrix multiplications
+#	7000 ~ 7399 - Workzone for matrix multiplications
 #	8000 ~ 8009 - Final Scores of the 10 classes
 #
 ###########################################################
@@ -798,8 +798,8 @@ PUSH	R8
 # save R4 for later use
 PUSH	R4
 
-# load R5 with 6950, pointing to work zone at DM 6950 ~ 7973
-LLB		R5, 6950
+# load R5 with 7000, pointing to work zone at DM 7000 ~ 7399
+LLB		R5, 7000
 
 # multiplications
 MUL_LOOP:
@@ -817,8 +817,8 @@ ADDI	R5, R5, 1
 SUBI	R4, R4, 1
 B		NEQ, MUL_LOOP
 
-# load R5 with 6950, pointing to work zone at DM 6950 ~ 7973
-LLB		R5, 6950
+# load R5 with 7000, pointing to work zone at DM 7000 ~ 7399
+LLB		R5, 7000
 # R28 <- 0x00000000
 LLB		R28, 0
 # restore R4
