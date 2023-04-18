@@ -39,7 +39,7 @@
 #	0 ~ 1599 - Output of second convolution layer
 #	1600 ~ 1999 - Output of second pooling layer
 #	2000 ~ 2119 - Output of first full NN layer
-#	2120 ~ 2203 - Output of first full NN layer
+#	2120 ~ 2203 - Output of second full NN layer
 #	(reusage end)
 #	7000 ~ 7399 - Workzone for matrix multiplications
 #	8000 ~ 8009 - Final Scores of the 10 classes
@@ -141,7 +141,7 @@ LLB		R6, 6
 LLB		R7, 16
 
 # Store outputs to DM 0 through 1599
-LLB		R29, 1599
+LLB		R29, 0
 
 JAL		CONV
 
@@ -166,6 +166,10 @@ JAL		AVG_POOL
 #################
 # 400 -> 120 NN #
 #################
+
+# Load R2 with 0x000209F6, starting address of kernels for this layer
+LLB		R2, 0x09F6
+LHB		R2, 2
 
 # Load R3 with 1600, input image of this layer is stored in DM 1600 through 1999
 LLB		R3, 1600
@@ -347,6 +351,7 @@ JR		R31
 #       R23 - temp (intermediate for base address calculation
 #       R24 - channel_id (a downcounter for keep track of the channel id in process)
 #       R25 - side_length_output, same reg as input (will set to side_length_input - 4 to reflect the output side_length)
+#       R26 - static copy of param out_channel_length
 #
 ################################################
 # major mechanism for pix calcualtion
@@ -387,7 +392,11 @@ PUSH	R22
 PUSH	R23
 PUSH	R24
 PUSH	R25
+PUSH	R26
 PUSH	R29
+
+# make a static copy of param out_channel_length
+ADD     R26, R0, R7
 
 # set image_length to be (side_length_input * side_length_input)
 MUL		R21, R4, R4
@@ -406,16 +415,19 @@ PIX_PROC:
 # reset pix_sum 
 ADD		R10, R0, R0
 
-# get weight0-4
-LW		R11, R2,0
-LW		R12, R2,1
-LW		R13, R2,2
-LW		R14, R2,3
-LW		R15, R2,4
-
-# get pix0-4 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX0_4:
+LLB     R23, 25
+MUL     R23, R23, R24
+ADD		R22, R2, R23
+# get weight0-4
+LW		R11, R22, 0
+LW		R12, R22, 1
+LW		R13, R22, 2
+LW		R14, R22, 3
+LW		R15, R22, 4
+
+# get pix0-4 from all input channels, add process five values from each channel at a time
 # base = addr_image[(y+0) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 0                              
 MUL		R22, R22, R4
@@ -443,17 +455,19 @@ ADDF	R10, R10, R20       #unavoidable dependency
 SUBI	R24, R24, 1
 B		GTE, PIX0_4             # if there are more channels to process, process them. 
 
-
-# get weight5-9
-LW		R11, R2,5
-LW		R12, R2,6
-LW		R13, R2,7
-LW		R14, R2,8
-LW		R15, R2,9
-
-# get pix5-9 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX5_9:
+LLB     R23, 25
+MUL     R23, R23, R24
+ADD		R22, R2, R23
+# get weight5-9
+LW		R11, R22, 5
+LW		R12, R22, 6
+LW		R13, R22, 7
+LW		R14, R22, 8
+LW		R15, R22, 9
+
+# get pix5-9 from all input channels, add process five values from each channel at a time
 # base = addr_image[(y+1) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 1                              
 MUL		R22, R22, R4
@@ -481,16 +495,19 @@ ADDF	R10, R10, R20       #unavoidable dependency
 SUBI	R24, R24, 1
 B		GTE, PIX5_9             # if there are more channels to process, process them. 
 
-# get weight10-14
-LW		R11, R2,10
-LW		R12, R2,11
-LW		R13, R2,12
-LW		R14, R2,13
-LW		R15, R2,14
-
-# get pix10-14 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX10_14:
+LLB     R23, 25
+MUL     R23, R23, R24
+ADD		R22, R2, R23
+# get weight10-14
+LW		R11, R22, 10
+LW		R12, R22, 11
+LW		R13, R22, 12
+LW		R14, R22, 13
+LW		R15, R22, 14
+
+# get pix10-14 from all input channels, add process five values from each channel at a time
 # base = addr_image[(y+2) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 2                              
 MUL		R22, R22, R4
@@ -518,16 +535,19 @@ ADDF	R10, R10, R20       #unavoidable dependency
 SUBI	R24, R24, 1
 B		GTE, PIX10_14             # if there are more channels to process, process them. 
 
-# get weight15-19
-LW		R11, R2,15
-LW		R12, R2,16
-LW		R13, R2,17
-LW		R14, R2,18
-LW		R15, R2,19
-
-# get pix15-19 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX15_19:
+LLB     R23, 25
+MUL     R23, R23, R24
+ADD		R22, R2, R23
+# get weight15-19
+LW		R11, R22, 15
+LW		R12, R22, 16
+LW		R13, R22, 17
+LW		R14, R22, 18
+LW		R15, R22, 19
+
+# get pix15-19 from all input channels, add process five values from each channel at a time
 # base = addr_image[(y+3) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 3                              
 MUL		R22, R22, R4
@@ -555,16 +575,19 @@ ADDF	R10, R10, R20       #unavoidable dependency
 SUBI	R24, R24, 1
 B		GTE, PIX15_19             # if there are more channels to process, process them. 
 
-# get weight20-24
-LW		R11, R2,20
-LW		R12, R2,21
-LW		R13, R2,22
-LW		R14, R2,23
-LW		R15, R2,24
-
-# get pix20-24 from all input channels, add process five values from each channel at a time
 SUBI	R24, R6, 1               # get zero-based channel-id, used as a down counter
 PIX20_24:
+LLB     R23, 25
+MUL     R23, R23, R24
+ADD		R22, R2, R23
+# get weight20-24
+LW		R11, R22, 20
+LW		R12, R22, 21
+LW		R13, R22, 22
+LW		R14, R22, 23
+LW		R15, R22, 24
+
+# get pix20-24 from all input channels, add process five values from each channel at a time
 # base = addr_image[(y+4) * side_length_input + x + channel_id*image_length]
 ADDI	R22, R9, 4                              
 MUL		R22, R22, R4
@@ -615,7 +638,9 @@ DONE_ONE_CHANNEL:
 SUBI	R7, R7, 1
 B		EQ, DONE_CONV
 #update the kernel and reprocess the entire image
-ADDI	R2, R2, 25
+LLB     R23, 25
+MUL     R23, R23, R6
+ADD		R2, R2, R23
 ADD		R8, R0, R0
 ADD		R9, R0, R0
 B		UNCOND, PIX_PROC
@@ -623,6 +648,7 @@ B		UNCOND, PIX_PROC
 DONE_CONV:
 # restore all registers and return
 POP		R29
+POP		R26
 POP		R25
 POP		R24
 POP		R23

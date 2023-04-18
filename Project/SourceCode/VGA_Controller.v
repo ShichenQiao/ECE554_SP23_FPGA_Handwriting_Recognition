@@ -152,7 +152,7 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_V_SYNC <= 0; 
 				echo_addr <= 0;
 			end
-		else if ((H_Cont >= 0 + X_START) & (H_Cont < 28 + X_START) & (V_Cont >= 0 + Y_START) & (V_Cont < 28 + Y_START))
+		else if ((H_Cont >= 0 + X_START) & (H_Cont < 32 + X_START) & (V_Cont >= 0 + Y_START) & (V_Cont < 32 + Y_START))
 		   begin 
 				oVGA_R <= {echo_pix,2'b00};
 				oVGA_G <= {echo_pix,2'b00};
@@ -161,7 +161,7 @@ always@(posedge iCLK or negedge iRST_N)
 				oVGA_SYNC <= mVGA_SYNC;
 				oVGA_H_SYNC <= mVGA_H_SYNC;
 				oVGA_V_SYNC <= mVGA_V_SYNC;	
-			   	echo_addr <= (H_Cont - X_START) + (V_Cont - Y_START) * 28;
+			   	echo_addr <= (H_Cont - X_START) + (V_Cont - Y_START) * 32;
 		   end
 		else if ((H_Cont >= 208 + X_START) & (H_Cont < 432 + X_START) & (V_Cont >= 128 + Y_START) & (V_Cont < 352 + Y_START))
 		   begin 

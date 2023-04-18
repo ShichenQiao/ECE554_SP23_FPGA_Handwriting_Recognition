@@ -138,7 +138,7 @@ module ImageRecog(
     );
 */
 
-    weight_nn_rom iWEIGHT_ROM(
+    weight_cnn_rom iWEIGHT_ROM(
         .clk(clk),
         .raddr(addr[15:0]),
         .rdata(r_weight)

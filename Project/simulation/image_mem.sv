@@ -7,10 +7,10 @@ module image_mem(clk,we,waddr,wdata,raddr,rdata);
   input [9:0] raddr;
   output reg [7:0] rdata;
   
-  reg [7:0]mem[0:783];   //The current video mem is 7bit x (28x28), grayscale for each pixel
+  reg [7:0]mem[0:1023];
 
   initial
-    $readmemh("../fixed_image.hex",mem);
+    $readmemh("../fixed_image_cnn.hex",mem);
 
   always @(negedge clk) begin
     if (we)

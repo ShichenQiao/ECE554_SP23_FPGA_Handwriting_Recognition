@@ -230,7 +230,7 @@ assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
         .locked(pll_locked)
     );
 
-    weight_nn_rom iWEIGHT_ROM(
+    weight_cnn_rom iWEIGHT_ROM(
         .clk(clk),
         .raddr(addr[15:0]),
         .rdata(r_weight)
@@ -259,7 +259,7 @@ wire [7:0] echo_pix_color_out;
         .rdata(echo_pix_color_out)
     );
 
-	image_compressor(
+	image_compressor_x(			// _x for CNN
 		.clk(VGA_CLK),
 		.rst_n(rst_n),
 		.start(compress_start),
@@ -267,7 +267,7 @@ wire [7:0] echo_pix_color_out;
 		.pix_haddr(uncompress_addr_x),
 		.pix_vaddr(uncompress_addr_y),
 		.pix_color_out(pix_color_out),
-		.compress_addr(compress_addr),
+		.compress_addrx(compress_addr),
 		.sram_wr(sram_wr)
 	);
 
