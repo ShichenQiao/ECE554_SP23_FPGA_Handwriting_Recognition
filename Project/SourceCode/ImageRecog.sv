@@ -230,7 +230,7 @@ assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
         .locked(pll_locked)
     );
 
-    weight_nn_rom iWEIGHT_ROM(
+    weight_cnn_rom iWEIGHT_ROM(
         .clk(clk),
         .raddr(addr[15:0]),
         .rdata(r_weight)
