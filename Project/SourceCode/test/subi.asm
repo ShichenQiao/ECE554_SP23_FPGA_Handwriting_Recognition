@@ -59,37 +59,39 @@ B		LTE, L_FAIL		# branch to fail routine if negative flag is set and zero flag i
 ##Test that SUBi sets negative flag ##
 ######################################
 ## should set negative
-LLB R1, 0xffd5		# R1 contains 0xffffffd5
-SUBI R1, R1, 0x01	# R3 should be 0xffffffd4
-B GTE, L_FAIL		# branch to fail if negative flag is not set
-B GT, L_FAIL		# branch to fail if negative flag is not set and zero flag is set
+LLB		R1, 0xffd5		# R1 contains 0xffffffd5
+SUBI	R1, R1, 0x01	# R3 should be 0xffffffd4
+B		GTE, L_FAIL		# branch to fail if negative flag is not set
+B		GT, L_FAIL		# branch to fail if negative flag is not set and zero flag is set
 
 ###########################################
 ##Test that SUBi does not set carry flag ##
 ###########################################
 ## should not set overflow
-LLB R1, 0x6655		# R1 contains 0x00006655
-SUBI R1, R1, 0x11	# R3 should be 0x00006644
-B OVFL, L_FAIL		# branch to fail routine if overflow
+LLB		R1, 0x6655		# R1 contains 0x00006655
+SUBI	R1, R1, 0x11	# R3 should be 0x00006644
+B		OVFL, L_FAIL	# branch to fail routine if overflow
 
 ##################################
 ##Test that SUBi sets carry flag ##
 ##################################
 ## should set overflow
-LLB R1, 0x0000		# R1 contains 0x00000000
-LHB	R1, 0x8000		# R1 contains 0x80000000
-SUBI R1, R1, 0x01	# R1 should be 0x80000000
-B OVFL, L_PASS		# branch to pass routine if overflow
-B UNCOND, L_FAIL	# branch to fail routine
+LLB		R1, 0x0000		# R1 contains 0x00000000
+LHB		R1, 0x8000		# R1 contains 0x80000000
+SUBI	R1, R1, 0x01	# R1 should be 0x80000000
+B		OVFL, L_PASS	# branch to pass routine if overflow
+B		UNCOND, L_FAIL	# branch to fail routine
 
 #########################
 ##Pass routine at 0xAD ##
 #########################
 MEM 0x00AD
-L_PASS:B UNCOND, L_PASS
+L_PASS:
+B		UNCOND, L_PASS
 
 #########################
 ##Fail routine at 0xDD ##
 #########################
 MEM 0x00DD
-L_FAIL: B UNCOND, L_FAIL
+L_FAIL:
+B		UNCOND, L_FAIL
