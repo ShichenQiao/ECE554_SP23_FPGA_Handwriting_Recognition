@@ -259,7 +259,7 @@ wire [7:0] echo_pix_color_out;
         .rdata(echo_pix_color_out)
     );
 
-	image_compressor(
+	image_compressor_x(			// _x for CNN
 		.clk(VGA_CLK),
 		.rst_n(rst_n),
 		.start(compress_start),
@@ -267,7 +267,7 @@ wire [7:0] echo_pix_color_out;
 		.pix_haddr(uncompress_addr_x),
 		.pix_vaddr(uncompress_addr_y),
 		.pix_color_out(pix_color_out),
-		.compress_addr(compress_addr),
+		.compress_addrx(compress_addr),
 		.sram_wr(sram_wr)
 	);
 
