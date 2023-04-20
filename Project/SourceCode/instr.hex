@@ -450,7 +450,7 @@
 @01c1 A01D1D01  // ADDI R29, R29, 1
 @01c2 67000FF3  // B            UNCOND, LOAD_NEXT
 @01c3 A80A0809  // SUBI R10, R8, 9
-@01c4 63000001  // B            LT, IS_DIGIT
+@01c4 65000001  // B            LTE, IS_DIGIT
 @01c5 A0090907  // ADDI R9, R9, 7
 @01c6 00080809  // ADD          R8, R8, R9
 @01c7 48081E04  // SW           R8, R30, 4

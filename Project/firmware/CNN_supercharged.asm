@@ -950,7 +950,7 @@ B		UNCOND, LOAD_NEXT
 # max found, print to SPART
 DONE:
 SUBI	R10, R8, 9					# check if max is a digit
-B		LT, IS_DIGIT
+B		LTE, IS_DIGIT
 ADDI	R9, R9, 7					# skip : through @ if max is a letter
 IS_DIGIT:
 ADD		R8, R8, R9					# convert index to ASCII
