@@ -5,7 +5,7 @@ module weight_cnn_rom(clk,raddr,rdata);
   input [15:0] raddr;
   output reg [31:0] rdata;
   
-  reg [31:0]rom[0:61469];   // CNN kernels and weights
+  reg [31:0]rom[0:63653];   // CNN kernels and weights
 
   initial
     $readmemh("../weightcnn.hex",rom);
