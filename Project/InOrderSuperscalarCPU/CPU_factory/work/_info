@@ -6,6 +6,8 @@ R0
 R0
 R0
 R0
+R0
+R0
 !s11f vlog 2021.2 2021.04, Apr 14 2021
 13
 !s112 1.1
@@ -13,84 +15,95 @@ R0
 !i10e 25
 !i10f 100
 cModel Technology
-dC:/intelFPGA_lite/21.1
+Z1 dC:/intelFPGA_lite/21.1
 T_opt
-!s110 1680819281
-VB[fI5OF>YiJ8ED07B4Zhn2
-04 8 4 work stack_tb fast 0
-=8-6c2b59cd0e48-642f4450-6f-1454
-!s124 OEM10U3 
+!s110 1682020935
+Vh=gdjL3oi_@I1H7DVmm[73
+Z2 04 8 4 work stack_tb fast 0
+=1-6c2b59cd0e48-64419a46-c6-b44
+Z3 !s124 OEM10U3 
 o-quiet -auto_acc_if_foreign -work work -L C:/intelFPGA_lite/21.1/questa_fse/intel/verilog/altera_mf +acc
-Z1 tCvgOpt 0
+Z4 tCvgOpt 0
 n@_opt
-OL;O;2021.2;73
+Z5 OL;O;2021.2;73
+T_opt1
+!s110 1682020815
+VoXemY4jQdolkYVa[XYHQe2
+R2
+=1-6c2b59cd0e48-644199ce-198-6e0
+R3
+o-quiet -auto_acc_if_foreign -work work -L C:/intelFPGA_lite/21.1/questa_fse/intel/verilog/altera_mf
+R4
+n@_opt1
+R5
+R1
 vram_2p
-!s110 1680815292
+!s110 1682020726
 !i10b 1
 !s100 `hDWWD9mMe7[BIXF1R>WB1
 Ib<nnRobnln4kjl0`=Q]oR2
-Z2 dI:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory
-w1680812422
+Z6 dI:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory
+Z7 w1680826316
 8I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/ram_2p.v
 FI:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/ram_2p.v
-!i122 3
+!i122 0
 L0 40 90
-Z3 VDg1SIo80bB@j0V0VzS_@n1
-Z4 OL;L;2021.2;73
+Z8 VDg1SIo80bB@j0V0VzS_@n1
+Z9 OL;L;2021.2;73
 r1
 !s85 0
 31
-!s108 1680815292.000000
+Z10 !s108 1682020726.000000
 !s107 I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/ram_2p.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/ram_2p.v|
 !i113 0
 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R1
+R4
 vstack
-Z5 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-!s110 1680818967
+Z11 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z12 !s110 1682020727
 !i10b 1
-!s100 Tnh1BAUfUM_[aGmgDcPQ=1
-I]g_W=fD70OAbG9^DII2mY2
+!s100 E[43PgLiPXgLkUIaoilV22
+I?fm=Yi;HZ8c_]4^1f[1eH1
 S1
-R2
-w1680818953
+R6
+w1681860104
 8I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack.sv
 FI:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack.sv
-!i122 7
+!i122 1
 L0 5 95
-R3
-R4
+R8
+R9
 r1
 !s85 0
 31
-!s108 1680818967.000000
+R10
 !s107 I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack.sv|
 !i113 0
-Z6 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R1
+Z13 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R4
 vstack_tb
-R5
-!s110 1680819276
+R11
+R12
 !i10b 1
 !s100 UX6<8K7JZ@8M=8>MSWY2G2
 I>_YzbLRP[1VcofXb9439h0
 S1
-R2
-w1680819272
+R6
+R7
 8I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack_tb.sv
 FI:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack_tb.sv
-!i122 8
+!i122 2
 L0 16 281
-R3
-R4
+R8
+R9
 r1
 !s85 0
 31
-!s108 1680819275.000000
+!s108 1682020727.000000
 !s107 I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack_tb.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/InOrderSuperscalarCPU/CPU_factory/stack_tb.sv|
 !i113 0
-R6
-R1
+R13
+R4

@@ -58,10 +58,10 @@ module stack(clk, rst_n, push0, push1, pop0, pop1, wdata0, wdata1,stack0_EX_DM, 
 */
 
   // addr control logic
-  always @(negedge clk, negedge rst_n) begin
+  always @(posedge clk, negedge rst_n) begin
     if (!rst_n)
       addr <= 11'h000;
-    else if ((push0 & pop1) | (push1 & pop0))
+    else if ((push0 & pop1) | (pop0 & push1))
       addr <= addr;
     else if (push0 & push1 & ~near_full & ~full)
       addr <= addr + 11'h002;
@@ -78,7 +78,7 @@ module stack(clk, rst_n, push0, push1, pop0, pop1, wdata0, wdata1,stack0_EX_DM, 
   ////////////////////////
   always @(posedge clk) begin
     stack0_EX_DM <= rdata0;
-    stack1_EX_DM <= (push0 & pop1) ? rdata0 : rdata1;
+    stack1_EX_DM <= (push0 & pop1) ? wdata0 : rdata1;
   end
 
   // address_a always serves the first/single instruction

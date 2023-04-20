@@ -32,12 +32,18 @@
 # to get the result_pix[y][x] at channel_id: (y is the vetical location of output pixel, x is the horizontal location of output pixel)        #
 #                                                                                                                                             #
 # mult the image_pix with kernel                                                                                                              #
+# kernels are at :                                                                                                                            #
+#  addr_kernel[(channel_id*25+0)~(channel_id*25+9),                                                                                           #
+#              (channel_id*25+5)~(channel_id*25+10),                                                                                          #
+#              (channel_id*25+10)~(channel_id*25+14),                                                                                         #
+#              (channel_id*25+15)~(channel_id*25+19),                                                                                         #
+#              (channel_id*25+20)~(channel_id*25+24)]                                                                                         #
 # image_pixs are at:                                                                                                                          #
-#  addr_image[(side_length_output*(y+0)+x+channel_id*image_length)~(side_length_output*(y+0)+x+4+channel_id*image_length),                    #
-#             (side_length_output*(y+1)+x+channel_id*image_length)~(side_length_output*(y+1)+x+4+channel_id*image_length),                    #
-#             (side_length_output*(y+2)+x+channel_id*image_length)~(side_length_output*(y+2)+x+4+channel_id*image_length),                    #
-#             (side_length_output*(y+3)+x+channel_id*image_length)~(side_length_output*(y+3)+x+4+channel_id*image_length),                    #
-#             (side_length_output*(y+4)+x+channel_id*image_length)~(side_length_output*(y+4)+x+4+channel_id*image_length)]                    #
+#  addr_image[(side_length_input*(y+0)+x+channel_id*image_length)~(side_length_input*(y+0)+x+4+channel_id*image_length),                    #
+#             (side_length_input*(y+1)+x+channel_id*image_length)~(side_length_input*(y+1)+x+4+channel_id*image_length),                    #
+#             (side_length_input*(y+2)+x+channel_id*image_length)~(side_length_input*(y+2)+x+4+channel_id*image_length),                    #
+#             (side_length_input*(y+3)+x+channel_id*image_length)~(side_length_input*(y+3)+x+4+channel_id*image_length),                    #
+#             (side_length_input*(y+4)+x+channel_id*image_length)~(side_length_input*(y+4)+x+4+channel_id*image_length)]                    #
 ###############################################################################################################################################
 
 CONV:
@@ -69,7 +75,7 @@ PUSH R23
 # set image_length to be (side_length_input * side_length_input)
 MULT image_length, side_length_input, side_length_input
 
-# set side_length_putput to be (side_length_input - kernel_size + 1)
+# set side_length_output to be (side_length_input - kernel_size + 1)
 SUBI side_length_output, side_length_input, 4
 
 # set x_result, y_result before process one image/filter
@@ -93,7 +99,7 @@ LW weight4, addr_kernel,4
 SUBI channel_id, in_channel_length, 1               # get zero-based channel-id, used as a down counter
 PIX0_4:
 # base = addr_image[(y+0) * side_length_output + x + channel_id*image_length]
-ADDI base, y_result, 0                              
+ADDI base, y_result, 0
 MULT base, base, side_length_output
 ADD base, base, x_result
 MULT temp, channel_id, image_length
@@ -119,17 +125,19 @@ ADDF pix_sum, pix_sum, pix4       #unavoidable dependency
 SUBI channel_id, channel_id, 1
 B GTE, PIX0_4             # if there are more channels to process, process them. 
 
-
-# get weight5-9
-LW weight0, addr_kernel,5
-LW weight1, addr_kernel,6
-LW weight2, addr_kernel,7
-LW weight3, addr_kernel,8
-LW weight4, addr_kernel,9
-
-# get pix5-9 from all input channels, add process five values from each channel at a time
 SUBI channel_id, in_channel_length, 1               # get zero-based channel-id, used as a down counter
 PIX5_9:
+MUL temp, kernel_id, 25
+ADD base, addr_kernel, temp
+# get weight5-9
+LW weight0, base,5
+LW weight1, base,6
+LW weight2, base,7
+LW weight3, base,8
+LW weight4, base,9
+
+# get pix5-9 from all input channels, add process five values from each channel at a time
+
 # base = addr_image[(y+1) * side_length_output + x + channel_id*image_length]
 ADDI base, y_result, 1                              
 MULT base, base, side_length_output

@@ -93,6 +93,6 @@ module stack(clk, rst_n, push0, push1, pop0, pop1, wdata0, wdata1,stack0_EX_DM, 
   /////////////////////////////////////////
   // Instantiate 2 port ram with M10K IP //
   /////////////////////////////////////////
-  ram_2p STACK_MEM(.clock(clk), .address_a(address_a), .address_b(address_b), .data_a(wdata0), .data_b(wdata1), .wren_a(wren_a), .wren_b(wren_b), .q_a(rdata0), .q_b(rdata1));
+  ram_2p STACK_MEM(.clock(~clk), .address_a(address_a), .address_b(address_b), .data_a(wdata0), .data_b(wdata1), .wren_a(wren_a), .wren_b(wren_b), .q_a(rdata0), .q_b(rdata1));
 
 endmodule
