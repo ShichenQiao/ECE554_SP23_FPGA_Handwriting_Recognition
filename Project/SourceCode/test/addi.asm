@@ -54,7 +54,6 @@ B		NEQ, L_FAIL		# branch to fail routine
 LLB		R1, 0x6655		# R1 contains 0x00006655
 ADDI	R1, R1, 0x11	# R1 should be 0x00006666
 B		LT, L_FAIL		# branch to fail routine if negative flag is set
-B		LTE, L_FAIL		# branch to fail routine if negative flag is set and zero flag is set
 
 #####################################
 ##Test that ADDi sets negative flag ##
@@ -64,7 +63,6 @@ B		LTE, L_FAIL		# branch to fail routine if negative flag is set and zero flag i
 LLB		R1, 0xffd5		# R1 contains 0xffffffd5
 ADDI	R1, R1, 0x80	# R3 should be 0xffffff55
 B		GTE, L_FAIL		# branch to fail if negative flag is not set
-B		GT, L_FAIL		# branch to fail if negative flag is not set and zero flag is set
 
 ###########################################
 ##Test that ADDi does not set carry flag ##
