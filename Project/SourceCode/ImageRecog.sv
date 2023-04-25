@@ -70,7 +70,6 @@ module ImageRecog(
     wire clk;
     wire compress_start;
     reg  compress_req;             // Turn this on to request compressing the image, it will pull down once the compression is finished. Access it at address C008
-    reg  compress_proc;            // This signal indicates the process of compressing the image. 1 indicates the compression started and is in process, 0 indicates that the compress is finished/idle.
     wire [9:0] compress_addr;
     wire [7:0] pix_color_out;
     wire [9:0] echo_addr;
@@ -166,30 +165,22 @@ module ImageRecog(
 
     //auto start when power on,
     assign auto_start = ((rst_n)&&(DLY_RST_3)&&(!DLY_RST_4))? 1'b1:1'b0;
-
-    // Compressor snapshot request system
-    always @(negedge clk, negedge rst_n)
-         if(!rst_n)
-              compress_req <= 1'b0;
-          else if (compress_proc && uncompress_addr_x == 223 && uncompress_addr_y == 223)
-              compress_req <= 1'b0;
-          else if (addr == 32'h0000C008 & we)
-              compress_req <= wdata[0];
-
-    always @(negedge clk, negedge rst_n)
-         if(!rst_n)
-              compress_proc <= 1'b0;
-            else if (compress_start)
-                compress_proc <= 1'b1;
-            else if (compress_proc && uncompress_addr_x == 223 && uncompress_addr_y == 223)
-                compress_proc <=1'b0;
-                
-    assign compress_start = ((compress_req | !KEY[2]) && uncompress_addr_x == 8'h0 && uncompress_addr_y == 8'h0);
-
             
 //=======================================================
 //  Initialize modules
 //=======================================================
+
+    // controls the timing for compressing image
+    compress_request_system CMP_SYS(
+        .clk(clk), 
+        .rst_n(rst_n), 
+        .uncompress_addr_x(uncompress_addr_x), 
+        .uncompress_addr_y(uncompress_addr_y), 
+        .we(addr == 32'h0000C008 & we), 
+        .compress_wdata(wdata[0]), 
+        .pause(KEY[2]), 
+        .compress_req(compress_req), 
+        .compress_start(compress_start));
 
     // Phase Locked Loop that controls all signals
     PLL iPLL(
@@ -382,14 +373,14 @@ module ImageRecog(
         .oVGA_B(oVGA_B),
         .oVGA_H_SYNC(VGA_HS),
         .oVGA_V_SYNC(VGA_VS),
-        .oVGA_SYNC(VGA_SYNC_N),
+         .oVGA_SYNC(VGA_SYNC_N),
         .oVGA_BLANK(VGA_BLANK_N),
         //    Control Signal
         .iCLK(VGA_CTRL_CLK),
         .iRST_N(DLY_RST_2),
         .iZOOM_MODE_SW(SW[9]),
-          .uncmpr_x(uncompress_addr_x),
-          .uncmpr_y(uncompress_addr_y)
+        .uncmpr_x(uncompress_addr_x),
+        .uncmpr_y(uncompress_addr_y)
     );
 
     //D5M I2C control

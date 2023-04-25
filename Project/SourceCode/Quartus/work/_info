@@ -19,59 +19,85 @@ n@_opt
 OE;O;10.3c;59
 R0
 valu
-Z1 V`JN@9S9cnhjKRR_L]QIcM3
-r1
-!s85 0
-31
+!s110 1682456130
 !i10b 1
 !s100 l6UnP]nh7TfS78HOUkeWP0
 IHWl`Pc:J762Ekf>inZE<A0
+Z1 V`JN@9S9cnhjKRR_L]QIcM3
 R0
-Z2 w1680041276
+Z2 w1680043141
 8I:/ECE554/ECE554_SP23/Project/SourceCode/alu.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/alu.v
 Z3 FI:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc
 L0 1
 Z4 OE;L;10.3c;59
-!s108 1680042455.273000
+r1
+!s85 0
+31
+!s108 1682456130.153000
 !s107 I:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc|I:/ECE554/ECE554_SP23/Project/SourceCode/alu.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/alu.v|
 !i113 0
 Z5 o-work work
 vbr_bool
-R1
-r1
-!s85 0
-31
+!s110 1682456131
 !i10b 1
 !s100 JNiIk>:RK_]3Q87Fk;ndh1
 ICK@;<Y<52ok`g]YERYAFG2
+R1
 R0
 Z6 w1678397035
 8I:/ECE554/ECE554_SP23/Project/SourceCode/br_bool.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/br_bool.v
 L0 1
 R4
-!s108 1680042455.597000
+r1
+!s85 0
+31
+!s108 1682456131.678000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/br_bool.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/br_bool.v|
 !i113 0
 R5
-vcpu
+vcompress_request_system
+Z7 DXx6 sv_std 3 std 0 22 <EOTafDcUY:cQeO^ICn]m3
+!s110 1682457561
+!i10b 1
+!s100 A<DlC@2Q1i=P=PDJcga7U0
+I:^oIE[2BU0lkYABlzjfK?1
 R1
+!s105 compress_request_system_sv_unit
+S1
+R0
+w1682457363
+8I:/ECE554/ECE554_SP23/Project/SourceCode/compress_request_system.sv
+FI:/ECE554/ECE554_SP23/Project/SourceCode/compress_request_system.sv
+L0 1
+R4
 r1
 !s85 0
 31
+!s108 1682457560.907000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/compress_request_system.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/compress_request_system.sv|
+!i113 0
+Z8 o-work work -sv
+vcpu
+!s110 1682456132
 !i10b 1
 !s100 U@Yz8Q>fZ1D[fIBTeKdi@2
 I0i^76ldIY<3fDJeNNSIhF2
+R1
 R0
 R6
 8I:/ECE554/ECE554_SP23/Project/SourceCode/cpu.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/cpu.v
 L0 1
 R4
-!s108 1680042455.882000
+r1
+!s85 0
+31
+!s108 1682456132.018000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/cpu.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/cpu.v|
 !i113 0
@@ -96,53 +122,53 @@ R4
 !i113 0
 R5
 vDM
-R1
-r1
-!s85 0
-31
+Z9 !s110 1682456135
 !i10b 1
-!s100 11_cE=iUYcZ4FoUCPG64W1
-I;DYS^QgI>14^R`2nUlg7c0
+!s100 n9Io0AKFhcM8jQ_]oZGS[0
+ID@7SAL];mJi@`2Tb?VBWj2
+R1
 R0
-Z7 w1678573336
+Z10 w1682026423
 8I:/ECE554/ECE554_SP23/Project/SourceCode/data_mem.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/data_mem.v
 L0 1
 R4
-!s108 1680042456.470000
+r1
+!s85 0
+31
+!s108 1682456135.309000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/data_mem.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/data_mem.v|
 !i113 0
 R5
 n@d@m
 vdst_mux
-R1
-r1
-!s85 0
-31
+R9
 !i10b 1
 !s100 [RV=hT^h`:JEGgFQ4]hGY1
 I9NSJZ0b2bkig?O]A;fT<S1
+R1
 R0
 R6
 8I:/ECE554/ECE554_SP23/Project/SourceCode/dst_mux.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/dst_mux.v
 L0 1
 R4
-!s108 1680042456.754000
+r1
+!s85 0
+31
+!s108 1682456135.595000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/dst_mux.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/dst_mux.v|
 !i113 0
 R5
 vdualPort32x32
-Z8 DXx6 sv_std 3 std 0 22 <EOTafDcUY:cQeO^ICn]m3
-R1
-r1
-!s85 0
-31
+R7
+Z11 !s110 1682456136
 !i10b 1
 !s100 FDIP:Vkg;j`lB3hjo_g<H2
 IE`3V;0b=aeh7abe`obcN>2
+R1
 !s105 dualPort32x32_sv_unit
 S1
 R0
@@ -151,21 +177,22 @@ R6
 FI:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv
 L0 1
 R4
-!s108 1680042457.058000
-!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv|
-!i113 0
-Z9 o-work work -sv
-ndual@port32x32
-vextended_ALU
-R8
-R1
 r1
 !s85 0
 31
+!s108 1682456135.902000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/dualPort32x32.sv|
+!i113 0
+R8
+ndual@port32x32
+vextended_ALU
+R7
+R11
 !i10b 1
 !s100 Y1608=I>YkO5L9Of?2bGA3
 I8e06>mAZbX^974WX:ciOe0
+R1
 !s105 extended_ALU_sv_unit
 S1
 R0
@@ -175,15 +202,18 @@ FI:/ECE554/ECE554_SP23/Project/SourceCode/extended_ALU.sv
 R3
 L0 1
 R4
-!s108 1680042457.389000
+r1
+!s85 0
+31
+!s108 1682456136.275000
 !s107 I:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc|I:/ECE554/ECE554_SP23/Project/SourceCode/extended_ALU.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/extended_ALU.sv|
 !i113 0
-R9
+R8
 nextended_@a@l@u
 vfifo
-R8
-!s110 1680042457
+R7
+R11
 !i10b 1
 !s100 [GJi3igAD;9;KTdIH@kl[1
 In]fRcFRI3?I0GP<:1aMfg3
@@ -199,20 +229,18 @@ R4
 r1
 !s85 0
 31
-!s108 1680042457.733000
+!s108 1682456136.628000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/fifo.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/fifo.sv|
 !i113 0
-R9
-vfloat_to_signed_int
 R8
-R1
-r1
-!s85 0
-31
+vfloat_to_signed_int
+R7
+Z12 !s110 1682456137
 !i10b 1
 !s100 TFYMK@eof<lJZ78Ze`AFY1
 I]UI2k@z`TP_3RgSE_iORZ3
+R1
 !s105 float_to_signed_int_sv_unit
 S1
 R0
@@ -221,43 +249,45 @@ R6
 FI:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv
 L0 1
 R4
-!s108 1680042458.046000
-!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv|
-!i113 0
-R9
-vFP_adder
-R8
-R1
 r1
 !s85 0
 31
+!s108 1682456137.057000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/float_to_signed_int.sv|
+!i113 0
+R8
+vFP_adder
+R7
+R12
 !i10b 1
 !s100 RC56?CSTi7nd`XhDcM0DN1
 IDO1hNmEOPaNQCKGBMLF`G0
+R1
 !s105 FP_adder_sv_unit
 S1
 R0
-Z10 w1678408217
+Z13 w1678408217
 8I:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv
 FI:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv
 L0 17
 R4
-!s108 1680042458.379000
-!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv|
-!i113 0
-R9
-n@f@p_adder
-vFP_mul
-R8
-R1
 r1
 !s85 0
 31
+!s108 1682456137.399000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/FP_adder.sv|
+!i113 0
+R8
+n@f@p_adder
+vFP_mul
+R7
+R12
 !i10b 1
 !s100 cH>oOAJz`2<LL3U<n>_Zj2
 ITO?cE]2XQ8Oe:lD[I@^MG2
+R1
 !s105 FP_mul_sv_unit
 S1
 R0
@@ -266,63 +296,68 @@ w1678248469
 FI:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv
 L0 1
 R4
-!s108 1680042458.705000
-!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv|
-!i113 0
-R9
-n@f@p_mul
-vid
-R1
 r1
 !s85 0
 31
+!s108 1682456137.818000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/FP_mul.sv|
+!i113 0
+R8
+n@f@p_mul
+vid
+Z14 !s110 1682456138
 !i10b 1
-!s100 C8dkNU[h]41il0dnnR8E=0
-Ik2QZKFb8gmP05n46c]Tm21
+!s100 JK4CRl7zUEF_MXTZ12zeL2
+IQn]aIoUH:7RVh]AfCNBnO3
+R1
 R0
-w1680041496
+R10
 8I:/ECE554/ECE554_SP23/Project/SourceCode/id.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/id.v
 R3
 L0 1
 R4
-!s108 1680042459.047000
+r1
+!s85 0
+31
+!s108 1682456138.146000
 !s107 I:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc|I:/ECE554/ECE554_SP23/Project/SourceCode/id.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/id.v|
 !i113 0
 R5
 vIM
-R1
-r1
-!s85 0
-31
+R14
 !i10b 1
-!s100 NOBQ<5AAnl[Oe^nlO9?[_0
-InOfAf>i`h6BM@B2AJmH4:0
+!s100 JJem8nJbiJBcCFWoG<d[M1
+IR5nUS_zgidPYd0;PCeOhf2
+R1
 R0
-R7
+R10
 8I:/ECE554/ECE554_SP23/Project/SourceCode/instr_mem.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/instr_mem.v
 L0 1
 R4
-!s108 1680042459.395000
+r1
+!s85 0
+31
+!s108 1682456138.618000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/instr_mem.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/instr_mem.v|
 !i113 0
 R5
 n@i@m
 vimage_mem
-R8
-Z11 !s110 1680042464
+R7
+Z15 !s110 1682456144
 !i10b 1
-!s100 EGm3bi]J38e>6_imUnkm23
-IJaLU_3EC22INH8JQKI4nF2
+!s100 V;<loWLlchJW3Dk]`DKW=0
+IQMKGW2bXLIVHPVbCR>]jM3
 R1
 !s105 image_mem_sv_unit
 S1
 R0
-w1679438573
+R10
 8I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv
 FI:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv
 L0 1
@@ -330,22 +365,22 @@ R4
 r1
 !s85 0
 31
-!s108 1680042464.136000
+!s108 1682456144.448000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/image_mem.sv|
 !i113 0
-R9
-vImageRecog
 R8
-!s110 1679431737
+vImageRecog
+R7
+!s110 1682457560
 !i10b 1
-!s100 DT?WE3n2d2nTDT;Qem8I^1
-IZhM?Fjh^CCES6:<_F[h;^1
+!s100 OgO90k<d1IX`VV8ZKh>0=1
+IZlfAjGh8hodi`Kf4k6NU_2
 R1
 !s105 ImageRecog_sv_unit
 S1
 R0
-w1679431698
+w1682457444
 8I:/ECE554/ECE554_SP23/Project/SourceCode/ImageRecog.sv
 FI:/ECE554/ECE554_SP23/Project/SourceCode/ImageRecog.sv
 L0 1
@@ -353,21 +388,19 @@ R4
 r1
 !s85 0
 31
-!s108 1679431737.678000
+!s108 1682457560.160000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/ImageRecog.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/ImageRecog.sv|
 !i113 0
-R9
+R8
 n@image@recog
 vint_mul_16by16
-R8
-R1
-r1
-!s85 0
-31
+R7
+Z16 !s110 1682456139
 !i10b 1
 !s100 oAIOB8nJiASIYBk=HSLlo2
 I@]T3Il5[B37?PIPBD:TAJ1
+R1
 !s105 int_mul_16by16_sv_unit
 S1
 R0
@@ -376,20 +409,21 @@ R6
 FI:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv
 L0 1
 R4
-!s108 1680042459.716000
-!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv|
-!i113 0
-R9
-vleft_shifter
-R8
-R1
 r1
 !s85 0
 31
+!s108 1682456139.153000
+!s107 I:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/int_mul_16by16.sv|
+!i113 0
+R8
+vleft_shifter
+R7
+R16
 !i10b 1
 !s100 ^1KNOY0ge8=CBjF8LJGBY3
 I>kBb4ADmCD=Z2Y:IWa:al3
+R1
 !s105 left_shifter_sv_unit
 S1
 R0
@@ -398,13 +432,16 @@ R6
 FI:/ECE554/ECE554_SP23/Project/SourceCode/left_shifter.sv
 L0 2
 R4
-!s108 1680042460.160000
+r1
+!s85 0
+31
+!s108 1682456139.537000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/left_shifter.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/left_shifter.sv|
 !i113 0
-R9
-vMiniLab1
 R8
+vMiniLab1
+R7
 !s110 1678551810
 !i10b 1
 !s100 OH6F;iWORzlRA?FkeDhn01
@@ -425,29 +462,30 @@ r1
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/MiniLab1.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/MiniLab1.sv|
 !i113 0
-R9
+R8
 n@mini@lab1
 vpc
-R1
-r1
-!s85 0
-31
+R16
 !i10b 1
 !s100 hb:^XBojQ`_iJc=Gg5`_Y1
 I;_CJdDiohiM3Z_1HoZJhM3
+R1
 R0
 R6
 8I:/ECE554/ECE554_SP23/Project/SourceCode/prgm_cntr.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/prgm_cntr.v
 L0 1
 R4
-!s108 1680042460.528000
+r1
+!s85 0
+31
+!s108 1682456139.864000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/prgm_cntr.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/prgm_cntr.v|
 !i113 0
 R5
 vPLL
-R11
+Z17 !s110 1682456145
 !i10b 1
 !s100 _44f`jMi[9Ee[zXh5G8z?3
 IOPcfKkJe6VKi;g3h61Po[2
@@ -461,40 +499,39 @@ R4
 r1
 !s85 0
 31
-!s108 1680042464.849000
+!s108 1682456145.124000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/PLL.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/PLL.v|
 !i113 0
 R5
 n@p@l@l
 vrf
-R1
-r1
-!s85 0
-31
+!s110 1682456140
 !i10b 1
 !s100 VJm=@;DJ[[:[VXO]aaMM?0
 I9dhiT_VhIoF31>37<D;I;3
+R1
 R0
 R6
 8I:/ECE554/ECE554_SP23/Project/SourceCode/rf.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/rf.v
 L0 1
 R4
-!s108 1680042460.831000
+r1
+!s85 0
+31
+!s108 1682456140.189000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/rf.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/rf.v|
 !i113 0
 R5
 vright_shifter
-R8
-R1
-r1
-!s85 0
-31
+R7
+Z18 !s110 1682456141
 !i10b 1
 !s100 TMIed`LARlI_`PcA][fXf1
 I?74jZjmX?53`?L[V1ebGh3
+R1
 !s105 right_shifter_sv_unit
 S1
 R0
@@ -503,13 +540,16 @@ R6
 FI:/ECE554/ECE554_SP23/Project/SourceCode/right_shifter.sv
 L0 2
 R4
-!s108 1680042461.129000
+r1
+!s85 0
+31
+!s108 1682456141.253000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/right_shifter.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/right_shifter.sv|
 !i113 0
-R9
+R8
 vrst_synch
-!s110 1680042461
+R18
 !i10b 1
 !s100 X1o;4n<:J[ZLczK?;Cm?Q1
 Ig9N2e9H5aJOK<GKD3H>kd0
@@ -523,19 +563,19 @@ R4
 r1
 !s85 0
 31
-!s108 1680042461.479000
+!s108 1682456141.578000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/rst_synch.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/rst_synch.v|
 !i113 0
 R5
 vSdram_Control
-Z12 !s110 1680042465
+R17
 !i10b 1
 !s100 MN8Z:7Z]T[GL0B[gaCH4S2
 I;RE4aZIclIl3>?[g`OS^10
 R1
 R0
-R10
+R13
 8I:/ECE554/ECE554_SP23/Project/SourceCode/Sdram_Control/Sdram_Control.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/Sdram_Control/Sdram_Control.v
 FI:\ECE554\ECE554_SP23\Project\SourceCode\Sdram_Control\Sdram_Params.h
@@ -544,21 +584,19 @@ R4
 r1
 !s85 0
 31
-!s108 1680042465.466000
+!s108 1682456145.467000
 !s107 I:\ECE554\ECE554_SP23\Project\SourceCode\Sdram_Control\Sdram_Params.h|I:/ECE554/ECE554_SP23/Project/SourceCode/Sdram_Control/Sdram_Control.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/Sdram_Control/Sdram_Control.v|
 !i113 0
 R5
 n@sdram_@control
 vsigned_int_to_float
-R8
-R1
-r1
-!s85 0
-31
+R7
+Z19 !s110 1682456142
 !i10b 1
 !s100 7T@<AOnnN4CPhnKcDn<7A0
 I[d1IIIlnTl[g6iCW;8U[?0
+R1
 !s105 signed_int_to_float_sv_unit
 S1
 R0
@@ -567,14 +605,17 @@ R6
 FI:/ECE554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv
 L0 1
 R4
-!s108 1680042461.819000
+r1
+!s85 0
+31
+!s108 1682456141.896000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/signed_int_to_float.sv|
 !i113 0
-R9
-vspart
 R8
-Z13 !s110 1680042462
+vspart
+R7
+R19
 !i10b 1
 !s100 lWjFgd[8K3UMWeAzDI6]]1
 I7TgVoASdbj4b6S3Y<TWff0
@@ -590,40 +631,39 @@ R4
 r1
 !s85 0
 31
-!s108 1680042462.148000
+!s108 1682456142.376000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/spart.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/spart.sv|
 !i113 0
-R9
+R8
 vsrc_mux
-R1
-r1
-!s85 0
-31
+R19
 !i10b 1
 !s100 9N2MTo7]MB;8bI?hCi9G?0
 Ic>S_Z?[=FV8GGKdOgYfIU1
+R1
 R0
-w1680041818
+R2
 8I:/ECE554/ECE554_SP23/Project/SourceCode/src_mux.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/src_mux.v
 R3
 L0 1
 R4
-!s108 1680042462.500000
+r1
+!s85 0
+31
+!s108 1682456142.713000
 !s107 I:\ECE554\ECE554_SP23\Project\SourceCode\common_params.inc|I:/ECE554/ECE554_SP23/Project/SourceCode/src_mux.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/src_mux.v|
 !i113 0
 R5
 vstack
-R8
-R1
-r1
-!s85 0
-31
+R7
+Z20 !s110 1682456143
 !i10b 1
 !s100 2R`J[NN_56_]H48I0E^Qi0
 I;Oaa__SPMW8PFoKe8ff1[3
+R1
 !s105 stack_sv_unit
 S1
 R0
@@ -632,14 +672,17 @@ R6
 FI:/ECE554/ECE554_SP23/Project/SourceCode/stack.sv
 L0 3
 R4
-!s108 1680042463.490000
+r1
+!s85 0
+31
+!s108 1682456143.710000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/stack.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/stack.sv|
 !i113 0
-R9
-vUART_rx
 R8
-R13
+vUART_rx
+R7
+R20
 !i10b 1
 !s100 L9ac3E3NFhWHeTV7_=@^z2
 I5f_3Q:Kh[:I;F9kz[OS_D0
@@ -655,15 +698,15 @@ R4
 r1
 !s85 0
 31
-!s108 1680042462.827000
+!s108 1682456143.031000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/UART_rx.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/UART_rx.sv|
 !i113 0
-R9
+R8
 n@u@a@r@t_rx
 vUART_tx
-R8
-!s110 1680042463
+R7
+R20
 !i10b 1
 !s100 J8`;bJL5zY20QDKn@D02R1
 IM3bmiVjH?XN2VG;_lJdTh1
@@ -679,20 +722,20 @@ R4
 r1
 !s85 0
 31
-!s108 1680042463.161000
+!s108 1682456143.363000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/UART_tx.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/UART_tx.sv|
 !i113 0
-R9
+R8
 n@u@a@r@t_tx
 vVGA_Controller
-R12
+R17
 !i10b 1
-!s100 <SL]l^TbA4[o9h8S<boKi3
-IYP3aH9Al4i70P5KSV`g]C0
+!s100 jc5_im3>IkG]lhG^`SfC[2
+I<WM:GQO`CCCQDMoGH_YJj2
 R1
 R0
-w1679433806
+R10
 8I:/ECE554/ECE554_SP23/Project/SourceCode/VGA_Controller.v
 FI:/ECE554/ECE554_SP23/Project/SourceCode/VGA_Controller.v
 L0 43
@@ -700,15 +743,15 @@ R4
 r1
 !s85 0
 31
-!s108 1680042465.828000
+!s108 1682456145.862000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/VGA_Controller.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/VGA_Controller.v|
 !i113 0
 R5
 n@v@g@a_@controller
 vweight_rom
-R8
-R11
+R7
+R15
 !i10b 1
 !s100 78fKjkOSmhgUN=L2COii33
 IWRZ]SP2?N]LTjT7kC0lLo1
@@ -724,8 +767,8 @@ R4
 r1
 !s85 0
 31
-!s108 1680042464.499000
+!s108 1682456144.791000
 !s107 I:/ECE554/ECE554_SP23/Project/SourceCode/weight_rom.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ECE554/ECE554_SP23/Project/SourceCode/weight_rom.sv|
 !i113 0
-R9
+R8
