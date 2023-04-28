@@ -48,8 +48,8 @@ module extended_ALU(clk, src1, src0, func, dst_EX_DM, ov, zr, neg);
 	);
 
 	int_mul_16by16 iimul(
-		.A(src1),
-		.B(src0),
+		.A(src1[15:0]),
+		.B(src0[15:0]),
 		.sign(~func[0]),			// 0 ==> MUL 1 ==> UMUL
 		.OUT(iimul_OUT)
 	);
