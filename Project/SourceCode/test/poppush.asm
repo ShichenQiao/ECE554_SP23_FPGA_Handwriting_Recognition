@@ -6,8 +6,8 @@ LHB		R1, 0x1234		# R1 contains 0x12345678
 LLB		R2, 0x5678
 LHB		R2, 0x1234		# R2 contains 0x12345678
 PUSH	R1
-ADDI	R1, 0x78
-SUBI	R1, 0xCD		# alter R1 content
+ADDI	R1, R1, 0x78
+SUBI	R1, R1, 0xCD		# alter R1 content
 POP		R1
 SUB		R3, R1, R2		# R3 should be 0
 B		NEQ, L_FAIL
