@@ -49,7 +49,8 @@ B		GTE, L_FAIL		# branch to fail if negative flag is not set
 ###################
 LLB		R1, 0x8000
 MUL		R2, R1, R1		# -32768 * -32768 = 1073741824
-LLB		R3, 0x4000
+LLB		R3, 0x0000
+LHB		R3, 0x4000
 SUB		R2, R2, R3
 B		NEQ, L_FAIL
 
