@@ -4,7 +4,7 @@
 ## subtracting two positive numbers
 ## with correct output
 LLB		R1, 0x6666		# R1 contains 0x00006666
-ADDI	R1, R1, 0x11	# R1 should be 0x00006655
+SUBI	R1, R1, 0x11	# R1 should be 0x00006655
 LLB		R4, 0x6655		# R4 contains 0x00006655 
 SUB		R4, R1, R4		# compare R3 to known right answer
 B		NEQ, L_FAIL		# branch to fail routine
@@ -45,6 +45,14 @@ SUBI	R1, R1, 0x80	# R1 should be 0x00000000
 LLB		R4, 0x0000		# R4 contains 0x00000000
 SUB		R4, R1, R4		# compare R3 to known right answer
 B		NEQ, L_FAIL		# branch to fail routine
+
+##############################################
+##Test that SUBi does not set negative flag ##
+##############################################
+## should not set negative flag
+LLB		R1, 0x6655		# R1 contains 0x00006655
+SUBI	R1, R1, 0x11	# R1 should be 0x00006644
+B		LT, L_FAIL		# branch to fail routine if negative flag is set
 
 ##############################################
 ##Test that SUBi does not set negative flag ##

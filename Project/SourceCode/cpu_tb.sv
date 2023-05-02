@@ -12,8 +12,7 @@ initial begin
   clk = 0;
   rst_n = 0;
   #2 rst_n = 1;
-  
-  #300;
+    #300;
   if(iCPU.iPC.pc <= 176 && iCPU.iPC.pc >= 173) begin
 	$display("tests passed!");
 	$finish();
@@ -22,6 +21,7 @@ initial begin
 	$error("tests failed!");
 	$finish();
   end
+
 end
   
 always
