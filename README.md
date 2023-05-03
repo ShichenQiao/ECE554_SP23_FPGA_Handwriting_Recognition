@@ -10,6 +10,13 @@
 **Project Demo:</br>**
 https://youtu.be/7T7qIo2IxYQ
 
+**Hardware Requirements:</br>**
+&emsp; -Altera DE1 Development and Education Board: https://www.terasic.com.tw/cgi-bin/page/archive.pl?No=83</br>
+&emsp; -TerasIC TRDB-D5M Camera: https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=68&No=281</br>
+&emsp; -USB to 6-Wire UART Cable</br>
+&emsp; -VGA Cable and Monitor (640 by 480)</br>
+
+
 **Summary</br>**
 Machine Learning (ML) has been a skyrocketing field in Computer Science in recent years. As computer hardware engineers, we are enthusiastic about hardware implementations of popular software ML architectures to optimize their performance, reliability, and resource usage.</br></br>
 Our project involved designing a real-time device for recognizing handwritten letters and digits using an Altera DE1 FPGA Kit. We implemented and validated three different ML architectures: linear classification, a 784-64-10 fully connected neural network (NN), and a LeNet-5 CNN with ReLU activation layers and 36 classes. The training processes were done in Python scripts, and the resulting kernels and weights were stored in hex files and loaded into the FPGA's SRAM units. We wrote assembly code for our custom 32-bit floating-point instruction set architecture (ISA) to perform classification and developed a 5-stage MIPS processor in SystemVerilog to manage image processing, matrix multiplications, and user interfaces. We followed various engineering standards, including IEEE-754 32-bit Floating Point Standard, Video Graphics Array (VGA) display protocol, Universal Asynchronous Receiver-Transmitter (UART) protocol, and Inter-Integrated Circuit (I2C) protocols to achieve our project goals.</br></br>
